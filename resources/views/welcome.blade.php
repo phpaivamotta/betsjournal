@@ -34,10 +34,10 @@
         {{-- Regular screen navigation links --}}
         <div class="hidden sm:block mr-3">
             @auth
-                <a href="{{ url('/dashboard') }}" class="text-md">Dashboard</a>
+                <a href="{{ url('/dashboard') }}" class="text-sm">Dashboard</a>
             @else
-                <a href="{{ route('login') }}" class="text-md">Log in</a>
-                <a href="{{ route('register') }}" class="ml-4 text-md">Register</a>
+                <a href="{{ route('login') }}" class="text-sm">Log in</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm">Register</a>
             @endauth
         </div>
 
