@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// landing page
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('bets', [BetController::class, 'index'])->name('bets');
+    // show all bets
+    Route::get('bets', [BetController::class, 'index'])
+        ->name('bets');
 
-    Route::get('new-bet', [BetController::class, 'create'])->name('new-bet');
+    // log a new bet
+    Route::get('bets/create', [BetController::class, 'create'])
+        ->name('new-bet');
+    Route::post('bets', [BetController::class, 'store']);
 
-    Route::get('stats', [BetController::class, 'stats'])->name('stats');
+    // edit a bet
+    Route::get('bets/{bet}/edit', [BetController::class, 'edit'])
+        ->name('edit-bet');
+    Route::patch('bets/{bet}', [BetController::class, 'update']);
+
+    // delete a bet
+    Route::get('bets/{bet}/delete', [BetController::class, 'delete'])
+        ->name('delete-bet');
+    Route::delete('bets/{bet}', [BetController::class, 'destroy']);
+
+    // view all bets stats
+    Route::get('stats', [BetController::class, 'stats'])
+        ->name('stats');
 });
 
 require __DIR__ . '/auth.php';
