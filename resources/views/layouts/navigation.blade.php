@@ -30,8 +30,20 @@
                 <!-- Navigation Links -->
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
+                        <x-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
+                            {{ __('Bets') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                            {{ __('New Bet') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
+                            {{ __('Stats') }}
                         </x-nav-link>
                     </div>
                 @endauth
@@ -98,8 +110,16 @@
     @auth
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
+                    {{ __('Bets') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                    {{ __('New Bet') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
+                    {{ __('Stats') }}
                 </x-responsive-nav-link>
             </div>
 
