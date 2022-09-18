@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('bets', [BetController::class, 'index'])->name('bets');
 
-Route::view('test', 'test');
+    Route::get('new-bet', [BetController::class, 'create'])->name('new-bet');
 
-require __DIR__.'/auth.php';
+    Route::get('stats', [BetController::class, 'stats'])->name('stats');
+});
+
+require __DIR__ . '/auth.php';
