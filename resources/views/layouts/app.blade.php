@@ -50,7 +50,7 @@
         <footer class="relative mt-auto h-16 bg-blue-900">
             <div class="absolute bottom-4 w-full text-center">
                 <p class="text-xs text-white">
-                    © 2022 Betsjournal. All rights reserved.
+                    © 2022 <strong>Bets</strong>journal. All rights reserved.
                 </p>
             </div>
         </footer>
