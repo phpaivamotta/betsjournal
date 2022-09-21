@@ -47,8 +47,8 @@
         </main>
 
         {{-- Footer --}}
-        <footer class="relative mt-auto h-14 bg-blue-900">
-            <div class="absolute bottom-1 w-full text-center">
+        <footer class="relative mt-auto h-16 bg-blue-900">
+            <div class="absolute bottom-4 w-full text-center">
                 <p class="text-xs text-white">
                     © 2022 Betsjournal. All rights reserved.
                 </p>
