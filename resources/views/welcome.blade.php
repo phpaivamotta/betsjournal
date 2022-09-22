@@ -109,7 +109,7 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:ml-10">
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fspreadsheet-on-computer-screen-flat-icon-financial-accounting-report-vector-id1025661672%3Fk%3D6%26m%3D1025661672%26s%3D612x612%26w%3D0%26h%3Ds2pr-oWJzDKFSMxo0h9jKM-cfvH4C3Nu1qSVgQrXIiE%3D&f=1&nofb=1"
+            <img src="https://cdn.pixabay.com/photo/2016/10/30/21/56/mac-1784459__480.png"
                 alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
