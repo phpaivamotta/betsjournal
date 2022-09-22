@@ -128,18 +128,6 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
-                {{-- <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
-                    {{ __('Bets') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
-                    {{ __('New Bet') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
-                    {{ __('Stats') }}
-                </x-responsive-nav-link> --}}
-
                 <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
                     {{ __('Value Bets') }}
                 </x-responsive-nav-link>

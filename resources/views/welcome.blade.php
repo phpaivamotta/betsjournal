@@ -100,7 +100,7 @@
 
             {{-- Value bets link --}}
             <p class="mt-6">
-                <a href="{{ route('login') }}"
+                <a href="{{ route('value-bets') }}"
                     class="block md:inline-block text-center font-bold py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
                     See value bets
                 </a>
