@@ -26,11 +26,11 @@
         </div>
     </div>
 
-    {{-- first container div/learn about betsjournal --}}
-    <div class="md:grid md:grid-cols-10 max-w-7xl mx-auto p-8">
+    {{-- first container div/intro to betsjournal --}}
+    <div class="md:flex md:items-center max-w-7xl mx-auto p-8">
 
         {{-- description div --}}
-        <div class="col-span-3 col-start-2">
+        <div class="md:w-2/3">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
                 Know where you stand.
             </h2>
@@ -43,43 +43,74 @@
                 free!
             </p>
 
-            {{-- <p class="mt-6">
-                <a href="{{ route('login') }}"
-                    class="block md:inline-block text-center py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
-                    <strong>Learn about Bets</strong>journal
-                </a>
-            </p> --}}
         </div>
 
         {{-- image div --}}
-        <div class="col-span-3 col-start-7">
+        <div class="md:w-1/3 md:ml-10">
             <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fspreadsheet-on-computer-screen-flat-icon-financial-accounting-report-vector-id1025661672%3Fk%3D6%26m%3D1025661672%26s%3D612x612%26w%3D0%26h%3Ds2pr-oWJzDKFSMxo0h9jKM-cfvH4C3Nu1qSVgQrXIiE%3D&f=1&nofb=1"
-                alt="spread-sheet-illustration" class="mt-6 md:mt-0 rounded m-auto md:m-0">
+                alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
 
     {{-- second container div/learn about betsjournal --}}
-    <div class="bg-gray-300 md:grid md:grid-cols-10 max-w-7xl mx-auto p-8">
+    <div class="bg-gray-300 md:flex md:items-center max-w-7xl mx-auto p-8">
 
         {{-- description div --}}
-        <div class="col-span-3 col-start-2">
+        <div class="md:w-2/3">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
-                Know where you stand.
+                Get statistical analysis on your bets.
             </h2>
 
             <p class="text-md">
-                A big part of successful betting is keeping track of your profits and losses. This is where betsjournal
-                comes in. We make it easy to record your bets anywhere, any time. We also make it easy for you to see
-                your betting statistics by breaking-down your data for your, so that you can easily track your
-                betting tactics. All you have to do is register and start using our features! Everything is absolutely
-                free!
+                Let us analyze your betting data for you! You don't need to touch MS Excel or Google Sheets to have the
+                most important information on your bets. We calculate your hit-rate, implied break-even odds and actual
+                average betting odds so that you can have better insight. We also provide charts for easy visualization
+                of your betting stats.
+            </p>
+
+            {{-- About website link --}}
+            <p class="mt-6">
+                <a href="{{ route('login') }}"
+                    class="block md:inline-block text-center font-bold py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
+                    Learn more
+                </a>
             </p>
         </div>
 
         {{-- image div --}}
-        <div class="col-span-3 col-start-7">
+        <div class="md:w-1/3 md:mr-10 md:order-first">
+            <img src="https://cdn.pixabay.com/photo/2020/08/03/10/00/graph-5459708_1280.png"
+                alt="statistical-analysis-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
+        </div>
+    </div>
+
+    {{-- third container div/value bets --}}
+    <div class="md:flex md:items-center max-w-7xl mx-auto p-8">
+
+        {{-- description div --}}
+        <div class="md:w-2/3">
+            <h2 class="font-bold text-2xl sm:text-3xl mb-2">
+                Value bets.
+            </h2>
+
+            <p class="text-md">
+                The best way make money in the betting world is to make sure you get the best odds! With our value bets
+                tool, you can take advantage of bookie mistakes and profit off of their higher odds.
+            </p>
+
+            {{-- Value bets link --}}
+            <p class="mt-6">
+                <a href="{{ route('login') }}"
+                    class="block md:inline-block text-center font-bold py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
+                    See value bets
+                </a>
+            </p>
+        </div>
+
+        {{-- image div --}}
+        <div class="md:w-1/3 md:ml-10">
             <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fspreadsheet-on-computer-screen-flat-icon-financial-accounting-report-vector-id1025661672%3Fk%3D6%26m%3D1025661672%26s%3D612x612%26w%3D0%26h%3Ds2pr-oWJzDKFSMxo0h9jKM-cfvH4C3Nu1qSVgQrXIiE%3D&f=1&nofb=1"
-                alt="spread-sheet-illustration" class="mt-6 md:mt-0 rounded m-auto md:m-0">
+                alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
 
