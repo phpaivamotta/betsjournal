@@ -15,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 // landing page
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
 // about page
-Route::get('about', function() {
-    return view('about');
-})->name('about');
+Route::view('about', 'about')->name('about');
+
+// value bets page
+Route::get('value-bets', function () {
+    return view('value-bets');
+})->name('value-bets');
 
 Route::middleware(['auth'])->group(function () {
     // show all bets

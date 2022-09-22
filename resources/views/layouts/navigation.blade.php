@@ -34,25 +34,11 @@
                     </x-nav-link>
                 </div>
 
-                @auth
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
-                            {{ __('Bets') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
-                            {{ __('New Bet') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
-                            {{ __('Stats') }}
-                        </x-nav-link>
-                    </div>
-                @endauth
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                        {{ __('Value Bets') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -77,22 +63,44 @@
 
                         <x-slot name="content">
                             <!-- Authentication -->
+                            <x-dropdown-link :href="route('bets')" :active="request()->routeIs('bets')">
+                                {{ __('Bets') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                                {{ __('New Bet') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('stats')" :active="request()->routeIs('stats')">
+                                {{ __('Stats') }}
+                            </x-dropdown-link>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')" :active="request()->routeIs('logout')"
                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                    this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
+                                
                             </form>
                         </x-slot>
                     </x-dropdown>
                 </div>
             @else
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <a href="{{ route('login') }}" class="text-sm">Log In</a>
-                    <a href="{{ route('register') }}" class="ml-4 text-sm">Register</a>
+                <div class="flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Log In') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Register') }}
+                        </x-nav-link>
+                    </div>
                 </div>
             @endauth
 
@@ -115,7 +123,7 @@
     <!-- Responsive Navigation Menu -->
     @auth
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
+            <div class="py-2 space-y-1">
                 <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                     {{ __('About') }}
                 </x-responsive-nav-link>
@@ -130,6 +138,10 @@
 
                 <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
                     {{ __('Stats') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                    {{ __('Value Bets') }}
                 </x-responsive-nav-link>
             </div>
 
@@ -157,12 +169,18 @@
     @else
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <!-- Responsive Settings Options -->
-            <div class="border-t border-gray-200">
-                <div class="py-1">
-                    <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                        {{ __('About') }}
-                    </x-responsive-nav-link>
+            <div class="py-2">
+                <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                    {{ __('About') }}
+                </x-responsive-nav-link>
 
+                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                    {{ __('Value Bets') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <div class="border-t pt-1 border-gray-200">
+                <div class="py-1">
                     <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-responsive-nav-link>

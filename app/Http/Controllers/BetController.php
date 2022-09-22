@@ -8,22 +8,22 @@ class BetController extends Controller
 {
     public function index()
     {
-        return view('bets.index');
+        return view('user-bets.index');
     }
 
     public function stats()
     {
-        return view('bets.stats');
+        return view('user-bets.stats');
     }
 
     public function create()
     {
-        return view('bets.create');
+        return view('user-bets.create');
     }
 
     public function store()
     {
-
+        
     }
 
     public function edit()
