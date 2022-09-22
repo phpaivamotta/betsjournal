@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// about page
+Route::get('about', function() {
+    return view('about');
+})->name('about');
+
 Route::middleware(['auth'])->group(function () {
     // show all bets
     Route::get('bets', [BetController::class, 'index'])

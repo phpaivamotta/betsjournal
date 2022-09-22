@@ -28,6 +28,12 @@
                 </div>
 
                 <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                </div>
+
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
@@ -110,6 +116,10 @@
     @auth
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                    {{ __('About') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
                     {{ __('Bets') }}
                 </x-responsive-nav-link>
@@ -149,6 +159,10 @@
             <!-- Responsive Settings Options -->
             <div class="border-t border-gray-200">
                 <div class="py-1">
+                    <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                        {{ __('About') }}
+                    </x-responsive-nav-link>
+
                     <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-responsive-nav-link>

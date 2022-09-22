@@ -70,7 +70,7 @@
 
             {{-- About website link --}}
             <p class="mt-6">
-                <a href="{{ route('login') }}"
+                <a href="{{ route('about') }}"
                     class="block md:inline-block text-center font-bold py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
                     Learn more
                 </a>
