@@ -83,7 +83,7 @@
                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
-                                
+
                             </form>
                         </x-slot>
                     </x-dropdown>
@@ -128,6 +128,30 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
+                {{-- <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
+                    {{ __('Bets') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                    {{ __('New Bet') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
+                    {{ __('Stats') }}
+                </x-responsive-nav-link> --}}
+
+                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                    {{ __('Value Bets') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <!-- Responsive Settings Options -->
+            <div class="pt-3 pb-1 border-t border-gray-200">
+                <div class="px-4 pb-1">
+                    <div class="text-xs text-white">{{ Auth::user()->name }}</div>
+                    <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
+                </div>
+
                 <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
                     {{ __('Bets') }}
                 </x-responsive-nav-link>
@@ -139,18 +163,6 @@
                 <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
                     {{ __('Stats') }}
                 </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
-                    {{ __('Value Bets') }}
-                </x-responsive-nav-link>
-            </div>
-
-            <!-- Responsive Settings Options -->
-            <div class="pt-3 pb-1 border-t border-gray-200">
-                <div class="px-4">
-                    <div class="text-xs text-white">{{ Auth::user()->name }}</div>
-                    <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
-                </div>
 
                 <div>
                     <!-- Authentication -->

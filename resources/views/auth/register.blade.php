@@ -1,4 +1,10 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-sm text-white leading-tight">
+            {{ __('Register') }}
+        </h2>
+    </x-slot>
+
     <x-auth-card>
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
