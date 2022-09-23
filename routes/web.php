@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// routes for all users
 // landing page
 Route::view('/', 'welcome')->name('home');
 
@@ -21,33 +22,36 @@ Route::view('/', 'welcome')->name('home');
 Route::view('about', 'about')->name('about');
 
 // value bets page
-Route::get('value-bets', function () {
-    return view('value-bets');
-})->name('value-bets');
+Route::view('value-bets', 'value-bets')->name('value-bets');
 
+// routes for registered users
 Route::middleware(['auth'])->group(function () {
-    // show all bets
+    // index all bets
     Route::get('bets', [BetController::class, 'index'])
-        ->name('bets');
+        ->name('bets.index');
 
-    // log a new bet
+    // create a new bet
     Route::get('bets/create', [BetController::class, 'create'])
-        ->name('new-bet');
-    Route::post('bets', [BetController::class, 'store']);
+        ->name('bets.create');
+
+    Route::post('bets', [BetController::class, 'store'])
+        ->name('bets.store');
 
     // edit a bet
     Route::get('bets/{bet}/edit', [BetController::class, 'edit'])
-        ->name('edit-bet');
-    Route::patch('bets/{bet}', [BetController::class, 'update']);
+        ->name('bets.edit');
+
+    Route::patch('bets/{bet}', [BetController::class, 'update'])
+        ->name('bets.update');
 
     // delete a bet
-    Route::get('bets/{bet}/delete', [BetController::class, 'delete'])
-        ->name('delete-bet');
-    Route::delete('bets/{bet}', [BetController::class, 'destroy']);
+    Route::delete('bets/{bet}', [BetController::class, 'destroy'])
+        ->name('bets.destroy');
 
     // view all bets stats
+    // THIS ACTION SHOULD PROBABLY BE CHANGED
     Route::get('stats', [BetController::class, 'stats'])
-        ->name('stats');
+        ->name('bets.stats');
 });
 
 require __DIR__ . '/auth.php';

@@ -11,11 +11,6 @@ class BetController extends Controller
         return view('user-bets.index');
     }
 
-    public function stats()
-    {
-        return view('user-bets.stats');
-    }
-
     public function create()
     {
         return view('user-bets.create');
@@ -36,13 +31,13 @@ class BetController extends Controller
 
     }
 
-    public function delete()
+    public function destroy()
     {
 
     }
 
-    public function destroy()
+    public function stats()
     {
-
+        return view('user-bets.stats');
     }
 }

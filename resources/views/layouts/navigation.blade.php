@@ -19,7 +19,8 @@
                             </g>
                         </svg>
 
-                        <div class="">
+                        {{-- website/brand name --}}
+                        <div>
                             <h3 class="ml-1.5 sm:pt-0 text-md">
                                 <strong>Bets</strong>journal
                             </h3>
@@ -27,13 +28,16 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                {{-- larger screen links for all visitors (registered or not) --}}
+
+                {{-- about page link --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-nav-link>
                 </div>
 
+                {{-- value bets page link --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
                         {{ __('Value Bets') }}
@@ -41,10 +45,12 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
+            {{-- larger screen registered user dropdown --}}
             @auth
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-dropdown align="right" width="48">
+
+                        {{-- username button to dropdown --}}
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 focus:outline-none focus:text-gray-400 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -61,20 +67,25 @@
                             </button>
                         </x-slot>
 
+                        {{-- dropdown links --}}
                         <x-slot name="content">
-                            <!-- Authentication -->
-                            <x-dropdown-link :href="route('bets')" :active="request()->routeIs('bets')">
+
+                            {{-- bets index --}}
+                            <x-dropdown-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                                 {{ __('Bets') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                            {{-- bets create --}}
+                            <x-dropdown-link :href="route('bets.create')" :active="request()->routeIs('bets.create')">
                                 {{ __('New Bet') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('stats')" :active="request()->routeIs('stats')">
+                            {{-- bets stats --}}
+                            <x-dropdown-link :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
                                 {{ __('Stats') }}
                             </x-dropdown-link>
 
+                            {{-- logout --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -89,19 +100,24 @@
                     </x-dropdown>
                 </div>
             @else
+
+                {{-- larger screen un-registered user links --}}
                 <div class="flex">
+                    {{-- login --}}
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Log In') }}
                         </x-nav-link>
                     </div>
 
+                    {{-- register --}}
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                             {{ __('Register') }}
                         </x-nav-link>
                     </div>
                 </div>
+
             @endauth
 
             <!-- Hamburger -->
@@ -120,40 +136,49 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
+    <!-- Responsive/Mobile Navigation Menu -->
     @auth
+
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+
             <div class="py-2 space-y-1">
+                {{-- about page link --}}
                 <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
+                {{-- value bets page link --}}
                 <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
                     {{ __('Value Bets') }}
                 </x-responsive-nav-link>
             </div>
 
-            <!-- Responsive Settings Options -->
+            {{-- mobile screen registered user dropdown --}}
             <div class="pt-3 pb-1 border-t border-gray-200">
+
+                {{-- user info --}}
                 <div class="px-4 pb-1">
                     <div class="text-xs text-white">{{ Auth::user()->name }}</div>
                     <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
                 </div>
 
-                <x-responsive-nav-link :href="route('bets')" :active="request()->routeIs('bets')">
+                {{-- bets index --}}
+                <x-responsive-nav-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                     {{ __('Bets') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('new-bet')" :active="request()->routeIs('new-bet')">
+                {{-- bets create --}}
+                <x-responsive-nav-link :href="route('bets.create')" :active="request()->routeIs('bets.create')">
                     {{ __('New Bet') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('stats')" :active="request()->routeIs('stats')">
+                {{-- bets stats --}}
+                <x-responsive-nav-link :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
                     {{ __('Stats') }}
                 </x-responsive-nav-link>
 
                 <div>
-                    <!-- Authentication -->
+                    {{-- logout --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
@@ -167,24 +192,33 @@
             </div>
         </div>
     @else
+
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <!-- Responsive Settings Options -->
             <div class="py-2">
+
+                {{-- about page link --}}
                 <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
+                {{-- value bets page link --}}
                 <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
                     {{ __('Value Bets') }}
                 </x-responsive-nav-link>
+
             </div>
 
+            {{-- mobile screen un-registered user links --}}
             <div class="border-t pt-1 border-gray-200">
                 <div class="py-1">
+
+                    {{-- log in --}}
                     <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-responsive-nav-link>
 
+                    {{-- register --}}
                     <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
                         {{ __('Register') }}
                     </x-responsive-nav-link>

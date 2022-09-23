@@ -16,7 +16,7 @@
                     <p class="text-gray-200 text-sm sm:text-lg mb-6">
                         Easily stay on top of your bets from anywhere to gain better insight into your stategy.
                     </p>
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('register') }}"
                         class="inline-block px-5 py-2 sm:px-7 sm:py-3 border-2 border-white text-white font-medium text-xs sm:text-sm leading-snug uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                         data-mdb-ripple="true" data-mdb-ripple-color="light">
                         Get started
