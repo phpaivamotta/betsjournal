@@ -9,5 +9,5 @@ class Bet extends Model
 {
     use HasFactory;
 
-    
+    protected $guarded = [];
 }
