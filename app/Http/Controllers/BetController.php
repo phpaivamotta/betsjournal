@@ -2,23 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bet;
 use Illuminate\Http\Request;
 
 class BetController extends Controller
 {
     public function index()
     {
-        return view('user-bets.index');
+        return view('bets.index', [
+            'bets' => Bet::all()
+        ]);
     }
 
     public function create()
     {
-        return view('user-bets.create');
+        return view('bets.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        // validate
+        // persist
+        // redirect
+
+        // $attributes = $request->validate([
+        //     'match' => ['required', 'string'],
+        //     'bet_size' => ['required'],
+        //     'odds' => ['required'],
+        // ]);
+
+        // $attributes['user_id'] = auth()->id();
+
+        Bet::create($request->all());
         
+        // Bet::create($attributes);
+
+        return redirect('/bets');
     }
 
     public function edit()
@@ -28,7 +47,7 @@ class BetController extends Controller
 
     public function update()
     {
-
+    
     }
 
     public function destroy()
@@ -38,6 +57,6 @@ class BetController extends Controller
 
     public function stats()
     {
-        return view('user-bets.stats');
+        return view('bets.stats');
     }
 }
