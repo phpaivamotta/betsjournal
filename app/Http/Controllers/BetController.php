@@ -22,21 +22,28 @@ class BetController extends Controller
     public function store(Request $request)
     {
         // validate
+        $attributes = $request->validate([
+            'match' => ['required', 'string', 'max:255'],
+            'bet_size' => ['required', 'numeric', 'min:0'],
+            'odds' => ['required', 'numeric'],
+
+            'sport' => ['nullable', 'string', 'max:255'],
+            'match_date' => ['nullable', 'date'],
+            'match_time' => ['nullable', 'date_format:H:i:s'],
+            'bookie' => ['nullable', 'string', 'max:255'],
+            'bet_type' => ['nullable', 'string', 'max:255'],
+            'bet_description' => ['nullable', 'string', 'max:255'],
+            'bet_pick' => ['nullable', 'string', 'max:255'],
+            'result' => ['nullable', 'boolean']
+        ]);
+
+        // get user id from auth instead of request
+        $attributes['user_id'] = auth()->id();
+
         // persist
+        Bet::create($attributes);
+
         // redirect
-
-        // $attributes = $request->validate([
-        //     'match' => ['required', 'string'],
-        //     'bet_size' => ['required'],
-        //     'odds' => ['required'],
-        // ]);
-
-        // $attributes['user_id'] = auth()->id();
-
-        Bet::create($request->all());
-        
-        // Bet::create($attributes);
-
         return redirect('/bets');
     }
 

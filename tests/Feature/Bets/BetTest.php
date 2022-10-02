@@ -14,10 +14,7 @@ class BetTest extends TestCase
 
     public function test_projects_can_be_created()
     {
-        // so that error can be more easily visualized
-        $this->withoutExceptionHandling();
-
-        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is in array format instead of object
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
         $attributes = Bet::factory()->raw();
 
         // find the user created by the factory so that it can be used below to post data to an auth route
@@ -35,5 +32,44 @@ class BetTest extends TestCase
             $attributes['bet_size'],
             $attributes['odds']
         ]);
+    }
+
+    public function test_bet_requires_a_match()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the match with an empty string
+        $attributes = Bet::factory()->raw(['match' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match');
+    }
+
+    public function test_bet_requires_a_bet_size()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the match with an empty string
+        $attributes = Bet::factory()->raw(['bet_size' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('bet_size');
+    }
+
+    public function test_bet_requires_odds()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the match with an empty string
+        $attributes = Bet::factory()->raw(['odds' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odds');
     }
 }
