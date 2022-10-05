@@ -24,8 +24,9 @@ return new class extends Migration
             $table->string('bet_type')->nullable();
             $table->string('bet_description')->nullable();
             $table->string('bet_pick')->nullable();
-            $table->decimal('bet_size');
-            $table->float('odds');
+            $table->unsignedDecimal('bet_size');
+            $table->decimal('decimal_odd', 8, 3);
+            $table->decimal('american_odd', 8, 3);
             $table->boolean('result')->nullable();
             $table->timestamps();
         });

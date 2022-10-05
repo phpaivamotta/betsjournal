@@ -28,7 +28,8 @@ class BetFactory extends Factory
             'bet_description' => fake()->sentence(),
             'bet_pick' => fake()->word(),
             'bet_size' => fake()->randomFloat(2, 100, 300),
-            'odds' => fake()->randomFloat(2, 2, 10),
+            'decimal_odd' => fake()->randomFloat(3, 2, 10),
+            'american_odd' => fake()->randomFloat(3, -500, 500),
             'result' => fake()->boolean(),
         ];
     }

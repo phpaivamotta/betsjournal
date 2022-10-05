@@ -12,25 +12,44 @@ class BetTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    public function test_projects_can_be_created()
+    public function test_bets_can_be_created()
     {
+        $this->withoutExceptionHandling();
         // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        $attributes = Bet::factory()->raw();
+        // $attributes = Bet::factory()->raw();
+
+        // faking the form request that will be postested to the route
+        $attributes = Bet::factory()->raw(['odd' => 2.20]);
+
+        $indexDecimalOdd = array_search('decimal_odd', $attributes);
+        unset($attributes[$indexDecimalOdd]);
+
+        $indexAmericanOdd = array_search('american_odd', $attributes);
+        unset($attributes[$indexAmericanOdd]);
 
         // find the user created by the factory so that it can be used below to post data to an auth route
         $user = User::find($attributes['user_id']);
 
+        // force user to have a matching bet type than what is being implemented below
+        $user->odd_type = 'decimal';
+
         // acting as a user (i.e. auth), post to the bets route and make sure redirected
         $this->actingAs($user)->post('/bets', $attributes)->assertRedirect('/bets');
+
+        $attributes['decimal_odd'] = 2.20;
+        $attributes['american_odd'] = 120;
+        unset($attributes['odd']);
 
         // DB confirmation
         $this->assertDatabaseHas('bets', $attributes);
 
-        // Confirm view has non-nullable attributes 
+        // Confirm view has non-nullable attributes
+        $odd_type = $user->odd_type;
+
         $this->get('/bets')->assertSee([
             $attributes['match'],
             $attributes['bet_size'],
-            $attributes['odds']
+            $attributes[$odd_type . '_odd']
         ]);
     }
 
@@ -60,16 +79,42 @@ class BetTest extends TestCase
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('bet_size');
     }
 
-    public function test_bet_requires_odds()
+    public function test_bet_requires_decimal_odd()
     {
         // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
         // make sure to override the match with an empty string
-        $attributes = Bet::factory()->raw(['odds' => '']);
+        $attributes = Bet::factory()->raw(['decimal_odd' => '']);
 
         // find the user created by the factory so that it can be used below to post data to an auth route
         $user = User::find($attributes['user_id']);
 
         // post to route and confirm session has error
-        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odds');
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('decimal_odd');
+    }
+
+    public function test_bet_requires_american_odds()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the match with an empty string
+        $attributes = Bet::factory()->raw(['american_odds' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('american_odds');
+    }
+
+    public function test_bet_requires_odds_type()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the match with an empty string
+        $attributes = Bet::factory()->raw(['odds_type' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odds_type');
     }
 }
