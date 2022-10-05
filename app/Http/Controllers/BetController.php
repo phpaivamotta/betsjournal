@@ -22,11 +22,6 @@ class BetController extends Controller
 
     public function store(Request $request)
     {
-        // check if user preference for odd is american or decimal
-        // grab odd from request, validate accordingly
-        // convert to other odd type
-        // put both in attributes array
-
         // validate
         $attributes = $request->validate([
             'match' => ['required', 'string', 'max:255'],
