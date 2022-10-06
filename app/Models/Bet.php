@@ -12,19 +12,12 @@ class Bet extends Model
 
     protected $guarded = [];
 
+    // array of attributes that are optional to display (both in DB and index view)
+    public static $optional_attributes = ['bookie', 'sport', 'match_date', 'match_time', 'bet_type', 'bet_pick', 'bet_description'];
+
     private function decimalToAmerican()
     {
-
     }
-
-    // private function americanToDecimal()
-    // {
-    //     if ($this->odds > 0) {
-    //         return ($this->odds / 100) + 1;
-    //     } else {
-    //         return (100 / abs($this->odds)) + 1;
-    //     }
-    // }
 
     public function payoff()
     {

@@ -5,20 +5,7 @@
         </h2>
     </x-slot>
 
-    {{-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @foreach ($bets as $bet)
-                        <h2>{{ $bet->match }}</h2>
-                        <p>{{ $bet->bet_size }}</p>
-                        <p>{{ $bet->odds }}</p>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
+    {{-- bet card --}}
     <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4">
         @forelse ($bets as $bet)
             <div class="p-4 xborder-2 xborder-blue-500 rounded-lg shadow-lg">
@@ -49,11 +36,59 @@
                     @endif
                 </p>
 
-                {{-- bet payoff --}}
-                <p>
-                    <span class="text-sm font-bold">Payoff:</span>
-                    <span class="text-xs">${{ $bet->payoff() }}</span>
-                </p>
+                {{-- disply result if there is one --}}
+                @if (isset($bet->result))
+                    {{-- if win --}}
+                    @if ($bet->result)
+                        <p>
+                            <span class="text-sm font-bold">Result: </span>
+                            <span class="text-xs">Win</span>
+                        </p>
+
+                        {{-- bet payoff --}}
+                        <p>
+                            <span class="text-sm font-bold">Payoff:</span>
+                            <span class="text-xs">${{ $bet->payoff() }}</span>
+                        </p>
+
+                        {{-- if loss --}}
+                    @else
+                        <p>
+                            <span class="text-sm font-bold">Result: </span>
+                            <span class="text-xs">Loss</span>
+                        </p>
+
+                        {{-- bet payoff --}}
+                        <p>
+                            <span class="text-sm font-bold">Payoff:</span>
+                            <span class="text-xs">$0</span>
+                        </p>
+                    @endif
+
+                    {{-- if there is no result yet --}}
+                @else
+                    <p>
+                        <span class="text-sm font-bold">Result: </span>
+                        <span class="text-xs">N/A</span>
+                    </p>
+
+                    {{-- potential bet payoff --}}
+                    <p>
+                        <span class="text-sm font-bold">Potential Payoff:</span>
+                        <span class="text-xs text-gray-500">${{ $bet->payoff() }}</span>
+                    </p>
+                @endif
+
+                {{-- optional attributes --}}
+                @foreach ($optional_attributes as $optional)
+                    @if (isset($bet->$optional))
+                        <p>
+                            <span class="text-sm font-bold">{{ ucwords(str_replace('_', ' ', $optional)) }}</span>
+                            <span class="text-xs">{{ $bet->$optional }}</span>
+                        </p>
+                    @endif
+                @endforeach
+
             </div>
         @empty
             <p>You haven't logged any bets yet.</p>

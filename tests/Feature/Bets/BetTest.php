@@ -91,4 +91,85 @@ class BetTest extends TestCase
         // post to route and confirm session has error
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odd');
     }
+
+    public function test_sport_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->sport);
+    }
+
+    public function test_match_date_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->match_date);
+    }
+
+    public function test_match_time_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->match_time);
+    }
+
+    public function test_bookie_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->bookie);
+    }
+
+    public function test_bet_type_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->bet_type);
+    }
+
+    public function test_bet_description_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->bet_description);
+    }
+
+    public function test_bet_pick_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->bet_pick);
+    }
+
+    public function test_match_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->match);
+    }
+
+    public function test_bet_size_can_be_seen()
+    {
+        $bet = Bet::factory()->create();
+
+        $user = User::find($bet->user_id);
+
+        $this->actingAs($user)->get('/bets')->assertSee($bet->bet_size);
+    }
 }
