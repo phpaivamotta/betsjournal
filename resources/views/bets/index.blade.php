@@ -5,12 +5,36 @@
         </h2>
     </x-slot>
 
-    {{-- bet card --}}
-    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4">
+    <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4">
+
+        <div class="flex items-center">
+            {{-- new bet link --}}
+            <a href="/bets/create"
+                class="inline-flex items-center text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
+                <p class="text-sm mr-2">
+                    New Bet
+                </p>
+
+                <p>
+                    +
+                </p>
+            </a>
+
+            {{-- stats link --}}
+            <a href="/stats"
+                class="ml-4 text-white font-semibold rounded-lg bg-blue-900 px-2 py-2.5 hover:opacity-75">
+                <p class="text-sm">
+                    Stats
+                </p>
+            </a>
+        </div>
+
         @forelse ($bets as $bet)
-            <div class="p-4 xborder-2 xborder-blue-500 rounded-lg shadow-lg">
+            {{-- bet card --}}
+            <div
+                class="p-4 border border-gray-300 rounded-lg shadow-md hover:shadow-lg shadow-gray-600 hover:shadow-gray-600">
                 {{-- match --}}
-                <h2 class="text-blue-900 text-xl font-bold">
+                <h2 class="text-blue-900 text-xl text-center mb-4 font-bold">
                     {{ $bet->match }}
                 </h2>
 
@@ -83,7 +107,7 @@
                 @foreach ($optional_attributes as $optional)
                     @if (isset($bet->$optional))
                         <p>
-                            <span class="text-sm font-bold">{{ ucwords(str_replace('_', ' ', $optional)) }}</span>
+                            <span class="text-sm font-bold">{{ ucwords(str_replace('_', ' ', $optional)) }}: </span>
                             <span class="text-xs">{{ $bet->$optional }}</span>
                         </p>
                     @endif
