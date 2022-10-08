@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4">
+    <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4 bg-gray-100">
 
         <div class="flex items-center">
             {{-- new bet link --}}
@@ -32,9 +32,9 @@
         @forelse ($bets as $bet)
             {{-- bet card --}}
             <div
-                class="p-4 border border-gray-300 rounded-lg shadow-md hover:shadow-lg shadow-gray-600 hover:shadow-gray-600">
+                class="p-4 rounded-lg shadow-md hover:shadow-lg bg-white">
                 {{-- match --}}
-                <h2 class="text-blue-900 text-xl text-center mb-4 font-bold">
+                <h2 class="text-blue-900 text-xl mb-4 font-bold">
                     {{ $bet->match }}
                 </h2>
 
@@ -44,9 +44,9 @@
                     <span class="text-xs">${{ $bet->bet_size }}</span>
                 </p>
 
-                {{-- bet odds --}}
+                {{-- bet odd --}}
                 <p>
-                    <span class="text-sm font-bold">Odds:</span>
+                    <span class="text-sm font-bold">Odd:</span>
                     @if (auth()->user()->odd_type === 'american')
                         <span class="text-xs">
                             @if ($bet->american_odd > 0)

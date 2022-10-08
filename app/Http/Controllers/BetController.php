@@ -11,7 +11,7 @@ class BetController extends Controller
     public function index()
     {
         return view('bets.index', [
-            'bets' => Bet::where('user_id', '=', auth()->id())->get(),
+            'bets' => Bet::where('user_id', '=', auth()->id())->latest()->get(),
             'optional_attributes' => Bet::$optional_attributes
         ]);
     }
@@ -30,7 +30,7 @@ class BetController extends Controller
 
             'sport' => ['nullable', 'string', 'max:255'],
             'match_date' => ['nullable', 'date'],
-            'match_time' => ['nullable', 'date_format:H:i:s'],
+            'match_time' => ['nullable', 'date_format:H:i'],
             'bookie' => ['nullable', 'string', 'max:255'],
             'bet_type' => ['nullable', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
