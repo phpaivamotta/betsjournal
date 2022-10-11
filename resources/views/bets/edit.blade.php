@@ -37,7 +37,7 @@
                 <x-input-label for="bookie" :value="__('Bookie')" />
 
                 <x-text-input id="bookie" class="block mt-1 w-full" type="text" name="bookie" :value="old('bookie', $bet->bookie)"
-                    autofocus />
+                    />
             </div>
 
             <!-- bet size -->
@@ -45,7 +45,7 @@
                 <x-input-label for="bet_size" :value="__('Bet Size*')" />
 
                 <x-text-input id="bet_size" class="block mt-1 w-full" type="number" step="0.01" name="bet_size"
-                    :value="old('bet_size', $bet->bet_size)" required autofocus />
+                    :value="old('bet_size', $bet->bet_size)" required />
             </div>
 
             <!-- odd -->
@@ -56,7 +56,7 @@
                     type="number" step="0.001" name="odd" :value="old(
                         'odd',
                         auth()->user()->odd_type === 'american' ? $bet->american_odd : $bet->decimal_odd,
-                    )" required autofocus />
+                    )" required />
             </div>
 
             <!-- bet type -->
@@ -64,7 +64,7 @@
                 <x-input-label for="bet_type" :value="__('Bet Type')" />
 
                 <x-text-input id="bet_type" class="block mt-1 w-full" type="text" name="bet_type" :value="old('bet_type', $bet->bet_type)"
-                    autofocus />
+                    />
             </div>
 
             <!-- bet pick -->
@@ -72,7 +72,7 @@
                 <x-input-label for="bet_pick" :value="__('Bet Pick')" />
 
                 <x-text-input id="bet_pick" class="block mt-1 w-full" type="text" name="bet_pick" :value="old('bet_pick', $bet->bet_pick)"
-                    autofocus />
+                    />
             </div>
 
             <!-- sport -->
@@ -80,7 +80,7 @@
                 <x-input-label for="sport" :value="__('Sport')" />
 
                 <x-text-input id="sport" class="block mt-1 w-full" type="text" name="sport" :value="old('sport', $bet->sport)"
-                    autofocus />
+                    />
             </div>
 
             {{-- date --}}
@@ -106,7 +106,7 @@
                 <x-input-label for="bet_description" :value="__('Description')" />
 
                 <x-text-input id="bet_description" class="block mt-1 w-full" type="text" name="bet_description"
-                    :value="old('bet_description', $bet->bet_description)" autofocus />
+                    :value="old('bet_description', $bet->bet_description)" />
             </div>
 
             <div class="flex justify-end mt-4">
