@@ -54,7 +54,6 @@ class BetController extends Controller
             $attributes['american_odd'] = $american_odd_array['odd'];
 
             $attributes['decimal_odd'] = self::americanToDecimal($attributes['american_odd']);
-
         } elseif ($user_odd_type === 'decimal') {
 
             // validate method returns an array ['odd' => $odd]
@@ -107,12 +106,61 @@ class BetController extends Controller
         }
     }
 
-    public function edit()
+    public function edit(Bet $bet)
     {
+        return view('bets.edit', ['bet' => $bet]);
     }
 
-    public function update()
+    public function update(Request $request, Bet $bet)
     {
+        // ddd($request['match_time']);
+        // validate
+        $attributes = $request->validate([
+            'match' => ['required', 'string', 'max:255'],
+            'bet_size' => ['required', 'numeric', 'min:0'],
+
+            'sport' => ['nullable', 'string', 'max:255'],
+            'match_date' => ['nullable', 'date'],
+            'match_time' => ['nullable', 'date_format:H:i'],
+            'bookie' => ['nullable', 'string', 'max:255'],
+            'bet_type' => ['nullable', 'string', 'max:255'],
+            'bet_description' => ['nullable', 'string', 'max:255'],
+            'bet_pick' => ['nullable', 'string', 'max:255'],
+            'result' => ['nullable', 'boolean']
+        ]);
+
+        // get user prefence for odd type (american or decimal),
+        // validate accordingly then store it into attributes array as respective odd_type value (american_odd) or (decimal_odd)
+        // convert american to decimal or vice-versa depending on user odd_type preference
+        $user_odd_type = auth()->user()->odd_type;
+
+        if ($user_odd_type === 'american') {
+
+            // validate method returns an array ['odd' => $odd]
+            $american_odd_array = $request->validate([
+                'odd' => ['required', 'numeric']
+            ]);
+
+            // so it is unpacked here
+            $attributes['american_odd'] = $american_odd_array['odd'];
+
+            $attributes['decimal_odd'] = self::americanToDecimal($attributes['american_odd']);
+        } elseif ($user_odd_type === 'decimal') {
+
+            // validate method returns an array ['odd' => $odd]
+            $decimal_odd_array = $request->validate([
+                'odd' => ['required', 'numeric', 'min:1']
+            ]);
+
+            // so it is unpacked here
+            $attributes['decimal_odd'] = $decimal_odd_array['odd'];
+
+            $attributes['american_odd'] = self::decimalToAmerican($attributes['decimal_odd']);
+        }
+
+        $bet->update($attributes);
+
+        return redirect()->route('bets.index');
     }
 
     public function destroy()
