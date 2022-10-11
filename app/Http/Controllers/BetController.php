@@ -11,7 +11,7 @@ class BetController extends Controller
     public function index()
     {
         return view('bets.index', [
-            'bets' => Bet::where('user_id', '=', auth()->id())->latest()->paginate(40),
+            'bets' => Bet::where('user_id', '=', auth()->id() )->latest()->paginate(20),
             'optional_attributes' => Bet::$optional_attributes
         ]);
     }

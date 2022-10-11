@@ -136,6 +136,9 @@
         @empty
             <p>You haven't logged any bets yet.</p>
         @endforelse
+
+        {{-- pagination --}}
+        {{ $bets->links() }}
     </div>
 
 </x-app-layout>
