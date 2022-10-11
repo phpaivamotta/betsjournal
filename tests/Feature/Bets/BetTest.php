@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class BetTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, RefreshDatabase;
 
     public function test_bets_can_be_created()
     {
@@ -48,7 +48,8 @@ class BetTest extends TestCase
         $this->get('/bets')->assertSee([
             $attributes['match'],
             $attributes['bet_size'],
-            $attributes[$odd_type . '_odd']
+            $attributes[$odd_type . '_odd'],
+            "You've created a new bet!"
         ]);
     }
 
@@ -198,11 +199,13 @@ class BetTest extends TestCase
         // patch modified bet array to bets.edit
         $this->actingAs($user)->patch('bets/'.$bet->id, $bet_array)->assertRedirect('/bets');
 
+        // manually set decimal and american odds values, as would be set inside controller
         $bet_array['decimal_odd'] = 2.20;
         $bet_array['american_odd'] = 120;
         unset($bet_array['odd']);
 
-        // assert database has changes
         $this->assertDatabaseHas('bets', $bet_array);
+
+        $this->get('/bets')->assertSee("You've updated a bet!");
     }
 }
