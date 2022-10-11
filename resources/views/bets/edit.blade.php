@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <x-auth-card class="mb-4">
+    <x-auth-card>
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
