@@ -74,7 +74,7 @@ class BetController extends Controller
         Bet::create($attributes);
 
         // redirect
-        return redirect('/bets');
+        return redirect('/bets')->with('success', "You've created a new bet!");
     }
 
 
@@ -160,7 +160,7 @@ class BetController extends Controller
 
         $bet->update($attributes);
 
-        return redirect()->route('bets.index');
+        return redirect('/bets')->with('success', "You've updated a bet!");
     }
 
     public function destroy()

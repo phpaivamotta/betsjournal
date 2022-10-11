@@ -28,6 +28,9 @@
             </a>
         </div>
 
+        {{-- success flash message --}}
+        <x-flash />
+
         @forelse ($bets as $bet)
             {{-- bet card --}}
             <div class="flex items-start justify-between p-4 rounded-lg shadow-md hover:shadow-lg bg-white">
