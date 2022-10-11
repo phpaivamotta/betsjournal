@@ -10,11 +10,10 @@ use Tests\TestCase;
 
 class BetTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
 
     public function test_bets_can_be_created()
     {
-        $this->withoutExceptionHandling();
         // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
         // $attributes = Bet::factory()->raw();
 
@@ -171,5 +170,39 @@ class BetTest extends TestCase
         $user = User::find($bet->user_id);
 
         $this->actingAs($user)->get('/bets')->assertSee($bet->bet_size);
+    }
+
+    public function test_bets_can_be_edited()
+    {
+        $this->withoutExceptionHandling();
+
+        // create bet
+        $bet = Bet::factory()->create();
+
+        // transform bet from object to array so that it can be posted to route
+        $bet_array = $bet->toArray();
+
+        // edit specific attribute (match in this case)
+        $bet_array['match'] = "Flamengo vs. Barcelona";
+
+        // add odd to request attributes
+        $bet_array['odd'] = 2.2;
+
+        // get user
+        $user = User::find($bet->user_id);
+
+        // force user to have a matching bet type than what is being implemented below
+        $user->odd_type = 'decimal';
+        $user->save();
+
+        // patch modified bet array to bets.edit
+        $this->actingAs($user)->patch('bets/'.$bet->id, $bet_array)->assertRedirect('/bets');
+
+        $bet_array['decimal_odd'] = 2.20;
+        $bet_array['american_odd'] = 120;
+        unset($bet_array['odd']);
+
+        // assert database has changes
+        $this->assertDatabaseHas('bets', $bet_array);
     }
 }

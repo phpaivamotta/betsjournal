@@ -22,7 +22,7 @@ class BetFactory extends Factory
             'sport' => fake()->word(),
             'match' => fake()->sentence(),
             'match_date' => fake()->date(),
-            'match_time' => fake()->time(),
+            'match_time' => fake()->time('H:i'),
             'bookie' => fake()->word(),
             'bet_type' => fake()->word(),
             'bet_description' => fake()->sentence(),
