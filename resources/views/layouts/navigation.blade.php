@@ -70,6 +70,11 @@
                         {{-- dropdown links --}}
                         <x-slot name="content">
 
+                            {{-- user profile --}}
+                            <x-dropdown-link :href="route('edit-profile')" :active="request()->routeIs('edit-profile')">
+                                {{ __('Edit Profile') }}
+                            </x-dropdown-link>
+
                             {{-- bets index --}}
                             <x-dropdown-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                                 {{ __('Bets') }}
