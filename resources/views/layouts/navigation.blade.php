@@ -70,6 +70,11 @@
                         {{-- dropdown links --}}
                         <x-slot name="content">
 
+                            {{-- user profile --}}
+                            <x-dropdown-link :href="route('edit-profile')" :active="request()->routeIs('edit-profile')">
+                                {{ __('Edit Profile') }}
+                            </x-dropdown-link>
+
                             {{-- bets index --}}
                             <x-dropdown-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                                 {{ __('Bets') }}
@@ -100,7 +105,6 @@
                     </x-dropdown>
                 </div>
             @else
-
                 {{-- larger screen un-registered user links --}}
                 <div class="flex">
                     {{-- login --}}
@@ -157,11 +161,11 @@
             <div class="pt-3 pb-1 border-t border-gray-200">
 
                 {{-- user info --}}
-                <div class="px-4 pb-1">
-                    <div class="text-xs text-white">{{ Auth::user()->name }}</div>
+                <x-responsive-nav-link :href="route('edit-profile')" :active="request()->routeIs('edit-profile')">
+                    <div class="text-xs">{{ Auth::user()->name }}</div>
                     <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
-                </div>
-
+                </x-responsive-nav-link>
+                
                 {{-- bets index --}}
                 <x-responsive-nav-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                     {{ __('Bets') }}
@@ -192,7 +196,6 @@
             </div>
         </div>
     @else
-
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <!-- Responsive Settings Options -->
             <div class="py-2">

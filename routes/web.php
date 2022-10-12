@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,10 @@ Route::middleware(['auth'])->group(function () {
     // THIS ACTION SHOULD PROBABLY BE CHANGED
     Route::get('stats', [BetController::class, 'stats'])
         ->name('bets.stats');
+
+    // edit profile
+    Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
+    Route::patch('update-profile', [ProfileController::class, 'update'])->name('update-profile');
 });
 
 require __DIR__ . '/auth.php';
