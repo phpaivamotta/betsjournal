@@ -160,7 +160,7 @@ class BetController extends Controller
 
         $bet->update($attributes);
 
-        return redirect('/bets')->with('success', "You've updated a bet!");
+        return redirect('/bets')->with('success', "Bet updated!");
     }
 
     public function destroy()

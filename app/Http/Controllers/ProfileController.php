@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        
+
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -42,6 +42,6 @@ class ProfileController extends Controller
 
         auth()->user()->update($attributes);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Profile updated!');
     }
 }

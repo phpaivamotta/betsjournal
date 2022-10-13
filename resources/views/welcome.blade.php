@@ -1,5 +1,8 @@
 <x-app-layout>
 
+    {{-- success flash message --}}
+    <x-flash />
+    
     {{-- hero section --}}
     <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80"
         style="
