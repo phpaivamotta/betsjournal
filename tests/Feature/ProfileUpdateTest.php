@@ -32,7 +32,8 @@ class ProfileUpdateTest extends TestCase
 
         $attributes = [
             'name' => 'myname',
-            'email' => 'myemail@email.com'
+            'email' => 'myemail@email.com',
+            'odd_type' => 'american'
         ];
 
         $this->actingAs($user)->patch('update-profile', $attributes);

@@ -34,7 +34,7 @@
                 <x-input-label for="password" :value="__('Password')" />
 
                 <x-text-input id="password" class="block mt-1 w-full" type="password" name="password"
-                    autocomplete="new-password" />
+                    autocomplete="new-password" placeholder="type new password..." />
             </div>
 
             <!-- Confirm Password -->
@@ -45,6 +45,18 @@
                     name="password_confirmation" />
             </div>
 
+            <!-- Odd Type -->
+            <div class="flex items-center mt-4">
+
+                <input class="mr-1" type="radio" name="odd_type" id="american"
+                    {{ old('odd_type', auth()->user()->odd_type) == 'american' ? 'checked' : '' }} value="american">
+                <x-input-label for="american" :value="__('American')" />
+
+                <input class="ml-4 mr-1" type="radio" name="odd_type" id="decimal"
+                    {{ old('odd_type', auth()->user()->odd_type) == 'decimal' ? 'checked' : '' }} value="decimal">
+                <x-input-label for="decimal" :value="__('Decimal')" />
+
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-primary-button class="ml-4">

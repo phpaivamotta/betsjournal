@@ -19,18 +19,26 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        if (! is_null($request['password'])) {
-            $request->validate([
-                'password' => ['confirmed', Rules\Password::defaults()],
-            ]);
-
-            $attributes['password'] = Hash::make($request->password);
-        }
-
+        
         $attributes = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore(auth()->user()->id)],
+            'email' => [
+                'required', 'string', 'email', 'max:255',
+                Rule::unique('users', 'email')->ignore(auth()->user()->id)
+            ],
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'odd_type' => ['required', 'string']
         ]);
+
+        $request->whenFilled('password', function ($password) use(&$attributes) {
+
+            $attributes['password'] = Hash::make($password);
+
+        }, function () use(&$attributes) {
+
+            unset($attributes['password']);
+
+        });
 
         auth()->user()->update($attributes);
 
