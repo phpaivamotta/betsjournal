@@ -163,8 +163,11 @@ class BetController extends Controller
         return redirect('/bets')->with('success', "Bet updated!");
     }
 
-    public function destroy()
+    public function destroy(Bet $bet)
     {
+        $bet->delete();
+
+        return redirect('/bets')->with('success', 'Bet deleted!');
     }
 
     public function stats()
