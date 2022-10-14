@@ -8,14 +8,6 @@ use Illuminate\Http\Request;
 
 class BetController extends Controller
 {
-    public function index()
-    {
-        return view('bets.index', [
-            'bets' => Bet::where('user_id', '=', auth()->id() )->latest()->paginate(20),
-            'optional_attributes' => Bet::$optional_attributes
-        ]);
-    }
-
     public function create()
     {
         return view('bets.create');
@@ -116,7 +108,7 @@ class BetController extends Controller
         // ddd($request['match_time']);
         // validate
         $attributes = $request->validate([
-            'match' => ['required', 'string', 'max:255'],
+            'match' => ['required', 'string', 'max:100'],
             'bet_size' => ['required', 'numeric', 'min:0'],
 
             'sport' => ['nullable', 'string', 'max:255'],
@@ -163,8 +155,11 @@ class BetController extends Controller
         return redirect('/bets')->with('success', "Bet updated!");
     }
 
-    public function destroy()
+    public function destroy(Bet $bet)
     {
+        $bet->delete();
+
+        return redirect('/bets')->with('success', 'Bet deleted!');
     }
 
     public function stats()

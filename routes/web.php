@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\BetIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,8 @@ Route::view('value-bets', 'value-bets')->name('value-bets');
 
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
-    // index all bets
-    Route::get('bets', [BetController::class, 'index'])
+    // index all bets (LIVEWIRE!!)
+    Route::get('bets', BetIndex::class)
         ->name('bets.index');
 
     // create a new bet

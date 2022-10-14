@@ -26,6 +26,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     {{-- tailwind through vite is useless --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body class="antialiased">
@@ -50,12 +52,15 @@
         <footer class="relative mt-auto h-16 bg-blue-900">
             <div class="absolute bottom-4 w-full text-center">
                 <p class="text-xs text-white">
-                    © 2022 <strong>Bets</strong>journal. All rights reserved.
+                    © {{ now()->year }} <strong>Bets</strong>journal. All rights reserved.
                 </p>
             </div>
         </footer>
 
+
     </div>
+
+    @livewireScripts
 </body>
 
 </html>
