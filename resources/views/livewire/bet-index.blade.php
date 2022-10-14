@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
             {{ __('Bets') }}
@@ -9,19 +9,14 @@
 
         <div class="flex items-center">
             {{-- new bet link --}}
-            <a href="/bets/create"
-                class="inline-flex items-center text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
-                <p class="text-sm mr-2">
+            <a href="/bets/create" class="text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
+                <p class="text-sm">
                     New Bet
-                </p>
-
-                <p>
-                    +
                 </p>
             </a>
 
             {{-- stats link --}}
-            <a href="/stats" class="ml-4 text-white font-semibold rounded-lg bg-blue-900 px-2 py-2.5 hover:opacity-75">
+            <a href="/stats" class="ml-4 text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
                 <p class="text-sm">
                     Stats
                 </p>
@@ -109,7 +104,8 @@
                     @foreach ($optional_attributes as $optional)
                         @if (isset($bet->$optional))
                             <p>
-                                <span class="text-sm font-bold">{{ ucwords(str_replace('_', ' ', $optional)) }}: </span>
+                                <span class="text-sm font-bold">{{ ucwords(str_replace('_', ' ', $optional)) }}:
+                                </span>
                                 <span class="text-xs">{{ $bet->$optional }}</span>
                             </p>
                         @endif
@@ -132,25 +128,34 @@
                     </a>
 
                     {{-- delete icon --}}
-                    <form method="POST" action="/bets/{{ $bet->id }}">
-                        @csrf
-                        @method('DELETE')
+                    <button wire:click="confirmDelete({{ $bet->id }})" class="mt-4" type="button">
+                        <svg class="w-4 "viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="#d76565" fill-rule="evenodd">
+                                <g id="icon-shape">
+                                    <path
+                                        d="M2,2 L18,2 L18,4 L2,4 L2,2 Z M8,0 L12,0 L14,2 L6,2 L8,0 Z M3,6 L17,6 L16,20 L4,20 L3,6 Z M8,8 L9,8 L9,18 L8,18 L8,8 Z M11,8 L12,8 L12,18 L11,18 L11,8 Z"
+                                        id="Combined-Shape"></path>
 
-                        <button class="mt-4" type="submit">
-                            <svg class="w-4 "viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="#d76565" fill-rule="evenodd">
-                                    <g id="icon-shape">
-                                        <path
-                                            d="M2,2 L18,2 L18,4 L2,4 L2,2 Z M8,0 L12,0 L14,2 L6,2 L8,0 Z M3,6 L17,6 L16,20 L4,20 L3,6 Z M8,8 L9,8 L9,18 L8,18 L8,8 Z M11,8 L12,8 L12,18 L11,18 L11,8 Z"
-                                            id="Combined-Shape"></path>
-
-                                    </g>
                                 </g>
-                            </svg>
-                        </button>
+                            </g>
+                        </svg>
+                    </button>
 
-                    </form>
+                    {{-- delete icon TEST --}}
+                    {{-- <button wire:click="$set('showEditModal', true)" class="mt-4" type="button">
+                        <svg class="w-4 "viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="#d76565" fill-rule="evenodd">
+                                <g id="icon-shape">
+                                    <path
+                                        d="M2,2 L18,2 L18,4 L2,4 L2,2 Z M8,0 L12,0 L14,2 L6,2 L8,0 Z M3,6 L17,6 L16,20 L4,20 L3,6 Z M8,8 L9,8 L9,18 L8,18 L8,8 Z M11,8 L12,8 L12,18 L11,18 L11,8 Z"
+                                        id="Combined-Shape"></path>
+
+                                </g>
+                            </g>
+                        </svg>
+                    </button> --}}
 
                 </div>
 
@@ -163,4 +168,57 @@
         {{ $bets->links() }}
     </div>
 
-</x-app-layout>
+
+    {{-- delete bet modal --}}
+    <form wire:submit.prevent="deleteBet">
+        <x-delete-modal wire:model.defer="showDeleteModal">
+
+            <x-slot name="title">
+                Are you sure?
+            </x-slot>
+
+            <x-slot name="message">
+                <p>
+                    Do you really wish to delete this bet?
+                </p>
+                <p class="font-bold mt-1">
+                    {{ $currentBet->match }}
+                </p>
+            </x-slot>
+
+            <x-slot name="buttons">
+                <x-primary-button wire:click="$set('showDeleteModal', false)" type="button">
+                    Cancel
+                </x-primary-button>
+
+                <x-primary-button class="bg-red-900 hover:bg-red-800 ml-1">
+                    Delete
+                </x-primary-button>
+            </x-slot>
+        </x-delete-modal>
+    </form>
+
+    {{-- <x-delete-modal wire:model.defer="showEditModal">
+
+        <x-slot name="title">
+            Edit Bet
+        </x-slot>
+
+        <x-slot name="message">
+            Edit your bet!
+        </x-slot>
+
+        <x-slot name="buttons">
+            <x-primary-button wire:click="$set('showEditModal', false)" type="button">
+                Cancel
+            </x-primary-button>
+
+            <x-primary-button wire:click="update" class="bg-red-900 hover:bg-red-800 ml-1">
+                Update
+            </x-primary-button>
+        </x-slot>
+
+    </x-delete-modal> --}}
+
+
+</div>

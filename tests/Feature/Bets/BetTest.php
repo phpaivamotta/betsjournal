@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Bets;
 
 use App\Models\Bet;
 use App\Models\User;
@@ -175,8 +175,6 @@ class BetTest extends TestCase
 
     public function test_bets_can_be_edited()
     {
-        $this->withoutExceptionHandling();
-
         // create bet
         $bet = Bet::factory()->create();
 
@@ -206,6 +204,6 @@ class BetTest extends TestCase
 
         $this->assertDatabaseHas('bets', $bet_array);
 
-        $this->get('/bets')->assertSee("You've updated a bet!");
+        $this->get('/bets')->assertSee("Bet updated!");
     }
 }
