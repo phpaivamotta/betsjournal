@@ -39,6 +39,8 @@ class BetIndex extends Component
         $this->currentBet->delete();
 
         $this->showDeleteModal = false;
+
+        session()->flash('success', 'Bet deleted!');
     }
 
     // public function update()
