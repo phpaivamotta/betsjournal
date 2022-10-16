@@ -2,15 +2,24 @@
 
 namespace Tests\Feature\Bets;
 
+use App\Http\Livewire\BetIndex;
 use App\Models\Bet;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class BetTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
+
+    public function test_bet_index_livewire_component_exists()
+    {
+        $response = $this->actingAs(User::factory()->create())->get('/bets');
+
+        $response->assertStatus(200);
+    }
 
     public function test_bets_can_be_created()
     {
@@ -205,5 +214,18 @@ class BetTest extends TestCase
         $this->assertDatabaseHas('bets', $bet_array);
 
         $this->get('/bets')->assertSee("Bet updated!");
+    }
+
+    public function test_user_can_delete_bet()
+    {
+        $this->actingAs(User::factory()->create());
+
+        $bet = Bet::factory()->create();
+
+        Livewire::test(BetIndex::class)
+            ->call('confirmDelete', $bet->id)
+            ->assertSee('Are you sure?')
+            ->call('deleteBet')
+            ->assertSee('Bet deleted!');
     }
 }
