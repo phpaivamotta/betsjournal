@@ -28,15 +28,15 @@ class Bet extends Model
 
         })->where(function ($query) use($win_checkbox, $loss_checkbox, $na_checkbox) {
 
-            $query->when($win_checkbox, function ($query, $win_checkbox) {
+            $query->when($win_checkbox, function ($query) {
 
                 $query->where('result', true);
 
-            })->when($loss_checkbox, function ($query, $loss_checkbox) {
+            })->when($loss_checkbox, function ($query) {
                 
                 $query->orWhere('result', false);
 
-            })->when($na_checkbox, function ($query, $na_checkbox) {
+            })->when($na_checkbox, function ($query) {
                 
                 $query->orWhere('result', null);
 
