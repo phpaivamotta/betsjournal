@@ -13,6 +13,15 @@ class BetIndex extends Component
     public $showDeleteModal = false;
     // public $showEditModal = false;
     public Bet $currentBet;
+    public $search = '';
+    public $win_checkbox;
+    public $loss_checkbox;
+    public $na_checkbox;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function mount()
     {
@@ -22,7 +31,7 @@ class BetIndex extends Component
     public function render()
     {
         return view('livewire.bet-index', [
-            'bets' => Bet::where('user_id', '=', auth()->id() )->latest()->paginate(20),
+            'bets' => Bet::where('user_id', '=', auth()->id() )->filter($this->search, $this->win_checkbox, $this->loss_checkbox, $this->na_checkbox)->latest()->paginate(20),
             'optional_attributes' => Bet::$optional_attributes
         ]);
     }
