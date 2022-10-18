@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Bet extends Model
 {
@@ -17,29 +15,35 @@ class Bet extends Model
     // array of attributes that are optional to display (both in DB and index view)
     public static $optional_attributes = ['bookie', 'sport', 'match_date', 'match_time', 'bet_type', 'bet_pick', 'bet_description'];
 
-    /**
-     * Set match_time format to H:i so that it is consistent with input time
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    // protected function matchTime(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($value) => Carbon::createFromFormat('H:i:s', $value)->format('H:i'),
-    //     );
-    // }
+    public function scopeFilter($query, string $search, ?bool $win_checkbox, ?bool $loss_checkbox, ?bool $na_checkbox)
+    {
+        $query->where(function ($query) use($search) {
 
-    /**
-     * Set match_time format to H:i so that it is consistent with input time
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    // protected function matchDate(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($value) => Carbon::createFromFormat('Y-m-d', $value)->format('m-d-Y'),
-    //     );
-    // }
+            $query->where('match', 'like', '%' . $search . '%')
+                ->orWhere('bookie', 'like', '%' . $search . '%')
+                ->orWhere('sport', 'like', '%' . $search . '%')
+                ->orWhere('bet_type', 'like', '%' . $search . '%')
+                ->orWhere('bet_pick', 'like', '%' . $search . '%')
+                ->orWhere('bet_description', 'like', '%' . $search . '%');
+
+        })->where(function ($query) use($win_checkbox, $loss_checkbox, $na_checkbox) {
+
+            $query->when($win_checkbox, function ($query) {
+
+                $query->where('result', true);
+
+            })->when($loss_checkbox, function ($query) {
+                
+                $query->orWhere('result', false);
+
+            })->when($na_checkbox, function ($query) {
+                
+                $query->orWhere('result', null);
+
+            });
+
+        });
+    }
 
     public function payoff()
     {

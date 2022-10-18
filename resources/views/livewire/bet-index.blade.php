@@ -5,22 +5,62 @@
         </h2>
     </x-slot>
 
+
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4 bg-gray-100">
 
-        <div class="flex items-center">
-            {{-- new bet link --}}
-            <a href="/bets/create" class="text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
-                <p class="text-sm">
-                    New Bet
-                </p>
-            </a>
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <div class="flex items-center mb-4 sm:mb-0">
+                {{-- new bet link --}}
+                <a href="/bets/create"
+                    class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                    <p class="text-sm">
+                        New Bet
+                    </p>
+                </a>
 
-            {{-- stats link --}}
-            <a href="/stats" class="ml-4 text-white font-semibold rounded-lg bg-blue-900 p-2 hover:opacity-75">
-                <p class="text-sm">
-                    Stats
-                </p>
-            </a>
+                {{-- stats link --}}
+                <a href="/stats"
+                    class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                    <p class="text-sm">
+                        Stats
+                    </p>
+                </a>
+            </div>
+
+            {{-- search bar --}}
+            <div class="flex sm:justify-center">
+                <div class="mb-1 xl:w-96 w-full">
+                    <div class="input-group relative flex items-stretch w-full rounded">
+                        <input wire:model="search" type="search" name="search"
+                            class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                        <span
+                            class="input-group-text hidden sm:flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded"
+                            id="basic-addon2">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"
+                                class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="currentColor"
+                                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+                                </path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end sm:mr-4">
+            <input wire:model="win_checkbox" type="checkbox" name="win" id="win"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="win" class="ml-1 mr-4 text-sm text-gray-600">Win</label>
+
+            <input wire:model="loss_checkbox" type="checkbox" name="loss" id="loss"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="loss" class="ml-1 mr-4 text-sm text-gray-600">Loss</label>
+
+            <input wire:model="na_checkbox" type="checkbox" name="na" id="na"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
         </div>
 
         {{-- success flash message --}}
@@ -117,11 +157,11 @@
                     <a href="/bets/{{ $bet->id }}/edit">
                         <svg class="w-4" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="#9b9b9b" fill-rule="evenodd">
-                                <g id="icon-shape">
+                            <g stroke="none" stroke-width="1" fill="#9b9b9b" fill-rule="evenodd">
+                                <g>
                                     <path
-                                        d="M12.2928932,3.70710678 L0,16 L0,20 L4,20 L16.2928932,7.70710678 L12.2928932,3.70710678 Z M13.7071068,2.29289322 L16,0 L20,4 L17.7071068,6.29289322 L13.7071068,2.29289322 Z"
-                                        id="Combined-Shape"></path>
+                                        d="M12.2928932,3.70710678 L0,16 L0,20 L4,20 L16.2928932,7.70710678 L12.2928932,3.70710678 Z M13.7071068,2.29289322 L16,0 L20,4 L17.7071068,6.29289322 L13.7071068,2.29289322 Z">
+                                    </path>
                                 </g>
                             </g>
                         </svg>
@@ -131,12 +171,11 @@
                     <button wire:click="confirmDelete({{ $bet->id }})" class="mt-4" type="button">
                         <svg class="w-4 "viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="#d76565" fill-rule="evenodd">
-                                <g id="icon-shape">
+                            <g stroke="none" stroke-width="1" fill="#d76565" fill-rule="evenodd">
+                                <g>
                                     <path
-                                        d="M2,2 L18,2 L18,4 L2,4 L2,2 Z M8,0 L12,0 L14,2 L6,2 L8,0 Z M3,6 L17,6 L16,20 L4,20 L3,6 Z M8,8 L9,8 L9,18 L8,18 L8,8 Z M11,8 L12,8 L12,18 L11,18 L11,8 Z"
-                                        id="Combined-Shape"></path>
-
+                                        d="M2,2 L18,2 L18,4 L2,4 L2,2 Z M8,0 L12,0 L14,2 L6,2 L8,0 Z M3,6 L17,6 L16,20 L4,20 L3,6 Z M8,8 L9,8 L9,18 L8,18 L8,8 Z M11,8 L12,8 L12,18 L11,18 L11,8 Z">
+                                    </path>
                                 </g>
                             </g>
                         </svg>

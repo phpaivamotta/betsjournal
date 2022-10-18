@@ -48,12 +48,13 @@
             <!-- Odd Type -->
             <div class="flex items-center mt-4">
 
-                <input class="mr-1" type="radio" name="odd_type" id="american"
-                    {{ old('odd_type', auth()->user()->odd_type) == 'american' ? 'checked' : '' }} value="american">
+                <input class="mr-1" type="radio" name="odd_type" id="american" @checked(old('odd_type', auth()->user()->odd_type) === 'american')
+                    value="american">
+
                 <x-input-label for="american" :value="__('American')" />
 
-                <input class="ml-4 mr-1" type="radio" name="odd_type" id="decimal"
-                    {{ old('odd_type', auth()->user()->odd_type) == 'decimal' ? 'checked' : '' }} value="decimal">
+                <input class="ml-4 mr-1" type="radio" name="odd_type" id="decimal" @checked(old('odd_type', auth()->user()->odd_type) === 'decimal')
+                    value="decimal">
                 <x-input-label for="decimal" :value="__('Decimal')" />
 
             </div>
