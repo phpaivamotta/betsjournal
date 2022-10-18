@@ -14,18 +14,15 @@ class BetTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
-    public function test_bet_index_livewire_component_exists()
+    public function test_the_component_can_render()
     {
-        $response = $this->actingAs(User::factory()->create())->get('/bets');
-
-        $response->assertStatus(200);
+        $component = Livewire::test(BetIndex::class);
+ 
+        $component->assertStatus(200);
     }
 
     public function test_bets_can_be_created()
     {
-        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        // $attributes = Bet::factory()->raw();
-
         // faking the form request that will be postested to the route
         $attributes = Bet::factory()->raw(['odd' => 2.20]);
 
@@ -204,7 +201,7 @@ class BetTest extends TestCase
         $user->save();
 
         // patch modified bet array to bets.edit
-        $this->actingAs($user)->patch('bets/'.$bet->id, $bet_array)->assertRedirect('/bets');
+        $this->actingAs($user)->patch('bets/' . $bet->id, $bet_array)->assertRedirect('/bets');
 
         // manually set decimal and american odds values, as would be set inside controller
         $bet_array['decimal_odd'] = 2.20;
@@ -227,5 +224,144 @@ class BetTest extends TestCase
             ->assertSee('Are you sure?')
             ->call('deleteBet')
             ->assertSee('Bet deleted!');
+    }
+
+    public function test_win_checkbox_filter_works()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $bet_win = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 1
+        ]);
+
+        $bet_loss = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 0
+        ]);
+
+        $bet_na = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => null
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
+            ->set('win_checkbox', true)
+            ->assertDontSee([$bet_loss->match, $bet_na->match])
+            ->assertSee($bet_win->match);
+    }
+
+    public function test_loss_checkbox_filter_works()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $bet_win = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 1
+        ]);
+
+        $bet_loss = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 0
+        ]);
+
+        $bet_na = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => null
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
+            ->set('loss_checkbox', true)
+            ->assertDontSee([$bet_win->match, $bet_na->match])
+            ->assertSee($bet_loss->match);
+    }
+
+    public function test_na_checkbox_filter_works()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $bet_win = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 1
+        ]);
+
+        $bet_loss = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 0
+        ]);
+
+        $bet_na = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => null
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
+            ->set('na_checkbox', true)
+            ->assertDontSee([$bet_win->match, $bet_loss->match])
+            ->assertSee($bet_na->match);
+    }
+
+    public function test_search_filter_works()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $bet = Bet::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee($bet->match)
+            ->set('search', 'gibberish')
+            ->assertDontSee($bet->match)
+            ->set('search', $bet->match)
+            ->assertSee($bet->match);
+    }
+
+    public function test_filters_can_be_combined()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $bet_win = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 1
+        ]);
+
+        $bet_loss = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 0
+        ]);
+
+        $bet_na = Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => null
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
+            ->set('win_checkbox', true)
+            ->assertDontSee([$bet_loss->match, $bet_na->match])
+            ->assertSee($bet_win->match)
+            ->set('loss_checkbox', true)
+            ->assertDontSee([$bet_na->match])
+            ->assertSee([$bet_win->match, $bet_loss->match])
+            ->set('search', $bet_na->match)
+            ->assertDontSee($bet_na->match)
+            ->set('na_checkbox', true)
+            ->assertSee($bet_na->match)
+            ->set('search', '')
+            ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match]);
     }
 }
