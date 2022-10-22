@@ -26,6 +26,9 @@ Route::view('about', 'about')->name('about');
 // value bets page
 Route::view('value-bets', 'value-bets')->name('value-bets');
 
+// odd converter page
+Route::view('odd-converter', 'odd-converter')->name('odd-converter');
+
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
     // index all bets (LIVEWIRE!!)
