@@ -43,6 +43,13 @@
                         {{ __('Value Bets') }}
                     </x-nav-link>
                 </div>
+
+                {{-- odd converter page link --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                        {{ __('Odd Converter') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             {{-- larger screen registered user dropdown --}}
@@ -154,6 +161,11 @@
                 {{-- value bets page link --}}
                 <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
                     {{ __('Value Bets') }}
+                </x-responsive-nav-link>
+
+                {{-- odd converter page link --}}
+                <x-responsive-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                    {{ __('Odd Converter') }}
                 </x-responsive-nav-link>
             </div>
 
