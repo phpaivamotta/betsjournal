@@ -33,7 +33,11 @@
 
         <x-primary-button type="button" class="mt-4" id="btn">Convert</x-primary-button>
 
-        <span class="bg-gray-400 block font-semibold mt-4 p-2 rounded-sm text-center text-white" id="converted_odd" style="display: none"></span>
+        <span class="bg-gray-400 block font-semibold mt-4 p-2 rounded-sm text-center text-white" id="converted_odd"
+            style="display: none"></span>
+
+        <span class="bg-gray-400 block font-semibold mt-4 p-2 rounded-sm text-center text-white"
+            id="implied_probability" style="display: none"></span>
 
     </x-auth-card>
 
@@ -41,6 +45,7 @@
     <script>
         const button = document.getElementById('btn')
         const convertedOdd = document.getElementById('converted_odd')
+        const impliedProbability = document.getElementById('implied_probability')
 
         button.addEventListener('click', () => {
             const odd = document.getElementById('odd').value
@@ -48,33 +53,54 @@
 
             if (toOddType[0].checked) {
 
-                convertedOdd.innerHTML = decimalToAmerican(odd).toFixed(3)
+                if (odd < 1) {
+                    convertedOdd.innerHTML = 'N/A'
+                    impliedProbability.innerHTML = 'N/A'
+                } else if (odd == 1) {
+                    convertedOdd.innerHTML = 'N/A'
+                    impliedProbability.innerHTML = '100%'
+                } else {
+                    if (odd >= 2) {
+                        convertedOdd.innerHTML = 'American: +' + decimalToAmerican(odd).toFixed(3)
+                    } else {
+                        convertedOdd.innerHTML = 'American: ' + decimalToAmerican(odd).toFixed(3)
+                    }
+
+                    impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(odd).toFixed(2) +
+                        '%'
+                }
 
             } else if (toOddType[1].checked) {
 
-                convertedOdd.innerHTML = americanToDecimal(odd).toFixed(3)
+                const decimalOdd = americanToDecimal(odd).toFixed(3)
+                convertedOdd.innerHTML = 'Decimal: ' + decimalOdd
+                impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(decimalOdd).toFixed(
+                    2) + '%'
 
             }
 
             convertedOdd.style.display = "block"
+            impliedProbability.style.display = "block"
         })
 
         function americanToDecimal(odd) {
             if (odd > 0) {
                 return (odd / 100) + 1
             } else {
-                return (100 / abs(odd)) + 1
+                return (100 / Math.abs(odd)) + 1
             }
         }
 
         function decimalToAmerican(odd) {
-            if (odd <= 1){
-                return convertedOdd.innerHTML = 'N/A'
-            } else if (odd >= 2) {
+            if (odd >= 2) {
                 return (odd - 1) * 100
             } else {
                 return -100 / (odd - 1)
             }
+        }
+
+        function toImpliedProbability(odd) {
+            return (1 / odd) * 100
         }
     </script>
 </x-app-layout>
