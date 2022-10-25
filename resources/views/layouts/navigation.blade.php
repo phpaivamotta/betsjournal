@@ -37,10 +37,10 @@
                     </x-nav-link>
                 </div>
 
-                {{-- value bets page link --}}
+                {{-- Odds Comparison page link --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
-                        {{ __('Value Bets') }}
+                    <x-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                        {{ __('Odds Comparison') }}
                     </x-nav-link>
                 </div>
 
@@ -158,9 +158,9 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
-                {{-- value bets page link --}}
-                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
-                    {{ __('Value Bets') }}
+                {{-- Odds Comparison page link --}}
+                <x-responsive-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                    {{ __('Odds Comparison') }}
                 </x-responsive-nav-link>
 
                 {{-- odd converter page link --}}
@@ -217,9 +217,9 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
-                {{-- value bets page link --}}
-                <x-responsive-nav-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
-                    {{ __('Value Bets') }}
+                {{-- Odds Comparison page link --}}
+                <x-responsive-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                    {{ __('Odds Comparison') }}
                 </x-responsive-nav-link>
 
             </div>

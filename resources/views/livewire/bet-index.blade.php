@@ -68,7 +68,19 @@
 
         @forelse ($bets as $bet)
             {{-- bet card --}}
-            <div class="flex items-start justify-between p-4 rounded-lg shadow-md hover:shadow-lg bg-white">
+            @php
+                $class = "flex items-start justify-between p-4 rounded-lg shadow-md hover:shadow-lg";
+                
+                if ($bet->result === null) {
+                    $class = $class . " bg-white";
+                } else if ($bet->result) {
+                    $class = $class . " bg-gradient-to-r from-emerald-600 to-cyan-600";
+                } else if (! $bet->result) {
+                    $class = $class . " bg-gradient-to-r  from-red-400 to-orange-300";
+                }
+            @endphp
+
+            <div class="{{ $class }}">
                 <div>
                     {{-- match --}}
                     <h2 class="text-blue-900 text-xl mb-4 font-bold">

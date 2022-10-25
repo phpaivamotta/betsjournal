@@ -10,7 +10,7 @@ class ValueBetsTest extends TestCase
 {
     public function test_value_bets_screen_can_be_rendered()
     {
-        $response = $this->get('/value-bets');
+        $response = $this->get('/odds-comparison');
 
         $response->assertStatus(200);
     }

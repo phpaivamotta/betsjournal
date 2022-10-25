@@ -24,7 +24,7 @@ Route::view('/', 'welcome')->name('home');
 Route::view('about', 'about')->name('about');
 
 // value bets page
-Route::view('value-bets', 'value-bets')->name('value-bets');
+Route::view('odds-comparison', 'odds-comparison')->name('odds-comparison');
 
 // odd converter page
 Route::view('odd-converter', 'odd-converter')->name('odd-converter');
