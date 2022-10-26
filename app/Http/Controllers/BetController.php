@@ -156,6 +156,55 @@ class BetController extends Controller
 
     public function stats()
     {
-        return view('bets.stats');
+        $avgDecimalOdds = Bet::where('user_id', auth()->user()->id)->avg('decimal_odd');
+
+        return view('bets.stats', [
+            'totalBets' => Bet::where('user_id', auth()->user()->id)
+                ->count(),
+
+            'totalWinBets' => Bet::where('user_id', auth()->user()->id)
+                ->where('result', 1)->count(),
+
+            'totalLossBets' => Bet::where('user_id', auth()->user()->id)
+                ->where('result', 0)->count(),
+
+            'totalNaBets' => Bet::where('user_id', auth()->user()->id)
+                ->where('result', null)->count(),
+
+            'averageOdds' => auth()->user()->odd_type === 'decimal' ? number_format($avgDecimalOdds, 3) : number_format(self::decimalToAmerican($avgDecimalOdds), 3),
+
+            'impliedProbability' => number_format(100 * (1 / $avgDecimalOdds), 2),
+
+            'totalGains' =>  Bet::where('user_id', auth()->user()->id)
+                ->where('result', 1)
+                ->get()
+                ->map(fn ($bet) => $bet->payoff())
+                ->sum(),
+
+            'totalLosses' =>  Bet::where('user_id', auth()->user()->id)
+                ->where('result', 0)
+                ->pluck('bet_size')
+                ->sum(),
+
+            'biggestBet' => Bet::where('user_id', auth()->user()->id)
+                ->max('bet_size'),
+
+            'biggestPayoff' => Bet::where('user_id', auth()->user()->id)
+                ->get()
+                ->map(fn ($bet) => $bet->payoff())
+                ->max(),
+
+            'biggestLoss' => Bet::where('user_id', auth()->user()->id)
+                ->where('result', 0)
+                ->max('bet_size'),
+
+            'betResults' => Bet::where('user_id', auth()->user()->id)
+                ->get()
+                ->groupBy('result')
+                ->map( fn ($betResults) => $betResults->count() )
+                ->values()
+                ->toArray()
+
+        ]);
     }
 }
