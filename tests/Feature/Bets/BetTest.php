@@ -249,7 +249,7 @@ class BetTest extends TestCase
 
         Livewire::test(BetIndex::class)
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
-            ->set('win_checkbox', true)
+            ->set('win', true)
             ->assertDontSee([$bet_loss->match, $bet_na->match])
             ->assertSee($bet_win->match);
     }
@@ -277,7 +277,7 @@ class BetTest extends TestCase
 
         Livewire::test(BetIndex::class)
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
-            ->set('loss_checkbox', true)
+            ->set('loss', true)
             ->assertDontSee([$bet_win->match, $bet_na->match])
             ->assertSee($bet_loss->match);
     }
@@ -305,7 +305,7 @@ class BetTest extends TestCase
 
         Livewire::test(BetIndex::class)
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
-            ->set('na_checkbox', true)
+            ->set('na', true)
             ->assertDontSee([$bet_win->match, $bet_loss->match])
             ->assertSee($bet_na->match);
     }
@@ -351,15 +351,15 @@ class BetTest extends TestCase
 
         Livewire::test(BetIndex::class)
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match])
-            ->set('win_checkbox', true)
+            ->set('win', true)
             ->assertDontSee([$bet_loss->match, $bet_na->match])
             ->assertSee($bet_win->match)
-            ->set('loss_checkbox', true)
+            ->set('loss', true)
             ->assertDontSee([$bet_na->match])
             ->assertSee([$bet_win->match, $bet_loss->match])
             ->set('search', $bet_na->match)
             ->assertDontSee($bet_na->match)
-            ->set('na_checkbox', true)
+            ->set('na', true)
             ->assertSee($bet_na->match)
             ->set('search', '')
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match]);

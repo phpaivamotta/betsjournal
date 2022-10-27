@@ -105,6 +105,8 @@ class BetController extends Controller
 
     public function update(Request $request, Bet $bet)
     {
+        // ddd($request);
+
         // validate
         $attributes = $request->validate([
             'match' => ['required', 'string', 'max:100'],

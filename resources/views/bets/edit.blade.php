@@ -24,12 +24,16 @@
             <!-- result -->
             <div class="flex items-center mt-4">
                 <input class="mr-1" type="radio" name="result" id="win"
-                    {{ old('result', $bet->result) == true ? 'checked' : '' }} value=1>
+                    {{ old('result', $bet->result) === 1 ? 'checked' : '' }} value=1>
                 <x-input-label for="win" :value="__('Win')" />
 
                 <input class="ml-4 mr-1" type="radio" name="result" id="loss"
-                    {{ old('result', $bet->result) == false ? 'checked' : '' }} value=0>
+                    {{ old('result', $bet->result) === 0 ? 'checked' : '' }} value=0>
                 <x-input-label for="loss" :value="__('Loss')" />
+
+                <input class="ml-4 mr-1" type="radio" name="result" id="na"
+                    {{ old('result', $bet->result) === null ? 'checked' : '' }} value=''>
+                <x-input-label for="na" :value="__('N/A')" />
             </div>
 
             <!-- bookie -->
