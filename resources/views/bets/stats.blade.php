@@ -5,21 +5,8 @@
         </h2>
     </x-slot>
 
-    {{-- total number of bets --}}
-    {{-- total number of losses --}}
-    {{-- total number of wins --}}
-    {{-- total number of NAs --}}
+    {{-- {{ dd(get_defined_vars()) }} --}}
 
-    {{-- average odd !DONE! --}}
-    {{-- implied probability of all odds !DONE! --}}
-    {{-- total gains/total losses --}}
-    {{-- net profit --}}
-    {{-- biggest bet --}}
-    {{-- biggest payoff --}}
-    {{-- biggest loss --}}
-
-    {{-- bar chart P/L --}}
-    {{-- percent pie chart win/loss/draw --}}
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
         <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 sm:gap-10">
@@ -65,9 +52,11 @@
 
         </div>
 
-        <div class="max-w-lg mx-auto mt-6">
-            <canvas id="myChart"></canvas>
-        </div>
+        @if ($totalBets)
+            <div class="max-w-lg mx-auto mt-6">
+                <canvas id="myChart"></canvas>
+            </div>
+        @endif
 
     </div>
 

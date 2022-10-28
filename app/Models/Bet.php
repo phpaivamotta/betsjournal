@@ -15,7 +15,7 @@ class Bet extends Model
     // array of attributes that are optional to display (both in DB and index view)
     public static $optional_attributes = ['bookie', 'sport', 'match_date', 'match_time', 'bet_type', 'bet_pick', 'bet_description'];
 
-    public function scopeFilter($query, string $search, ?bool $win_checkbox, ?bool $loss_checkbox, ?bool $na_checkbox)
+    public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
     {
         $query->where(function ($query) use($search) {
 
@@ -26,17 +26,17 @@ class Bet extends Model
                 ->orWhere('bet_pick', 'like', '%' . $search . '%')
                 ->orWhere('bet_description', 'like', '%' . $search . '%');
 
-        })->where(function ($query) use($win_checkbox, $loss_checkbox, $na_checkbox) {
+        })->where(function ($query) use($win, $loss, $na) {
 
-            $query->when($win_checkbox, function ($query) {
+            $query->when($win, function ($query) {
 
                 $query->where('result', true);
 
-            })->when($loss_checkbox, function ($query) {
+            })->when($loss, function ($query) {
                 
                 $query->orWhere('result', false);
 
-            })->when($na_checkbox, function ($query) {
+            })->when($na, function ($query) {
                 
                 $query->orWhere('result', null);
 

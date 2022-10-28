@@ -105,6 +105,8 @@ class BetController extends Controller
 
     public function update(Request $request, Bet $bet)
     {
+        // ddd($request);
+
         // validate
         $attributes = $request->validate([
             'match' => ['required', 'string', 'max:100'],
@@ -157,6 +159,7 @@ class BetController extends Controller
     public function stats()
     {
         $avgDecimalOdds = Bet::where('user_id', auth()->user()->id)->avg('decimal_odd');
+        $avgAmericanOdds = Bet::where('user_id', auth()->user()->id)->avg('american_odd');
 
         return view('bets.stats', [
             'totalBets' => Bet::where('user_id', auth()->user()->id)
@@ -171,9 +174,10 @@ class BetController extends Controller
             'totalNaBets' => Bet::where('user_id', auth()->user()->id)
                 ->where('result', null)->count(),
 
-            'averageOdds' => auth()->user()->odd_type === 'decimal' ? number_format($avgDecimalOdds, 3) : number_format(self::decimalToAmerican($avgDecimalOdds), 3),
+            'averageOdds' => auth()->user()->odd_type === 'decimal' ? number_format($avgDecimalOdds, 3) : number_format($avgAmericanOdds, 3),
 
-            'impliedProbability' => number_format(100 * (1 / $avgDecimalOdds), 2),
+            'impliedProbability' => $avgDecimalOdds ? number_format(100 * (1 / $avgDecimalOdds), 2)
+                                                    : null,
 
             'totalGains' =>  Bet::where('user_id', auth()->user()->id)
                 ->where('result', 1)
@@ -190,6 +194,7 @@ class BetController extends Controller
                 ->max('bet_size'),
 
             'biggestPayoff' => Bet::where('user_id', auth()->user()->id)
+                ->where('result', 1)
                 ->get()
                 ->map(fn ($bet) => $bet->payoff())
                 ->max(),
