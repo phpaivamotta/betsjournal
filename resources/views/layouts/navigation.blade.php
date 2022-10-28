@@ -59,8 +59,8 @@
 
                         {{-- username button to dropdown --}}
                         <x-slot name="trigger">
-                            <button
-                                class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 focus:outline-none focus:text-gray-400 focus:border-gray-300 transition duration-150 ease-in-out">
+                            <button :class="{ 'outline-none text-gray-400 border-gray-300': open }"
+                                class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 transition duration-150 ease-in-out">
                                 <div>{{ Auth::user()->name }}</div>
 
                                 <div class="ml-1">
@@ -82,20 +82,44 @@
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
 
-                            {{-- bets index --}}
-                            <x-dropdown-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
-                                {{ __('Bets') }}
-                            </x-dropdown-link>
+                            {{--  --}}
+                            <div x-data="{ open: false }">
 
-                            {{-- bets create --}}
-                            <x-dropdown-link :href="route('bets.create')" :active="request()->routeIs('bets.create')">
-                                {{ __('New Bet') }}
-                            </x-dropdown-link>
+                                {{-- bets index --}}
+                                <button @click="open = ! open"
+                                    class="flex items-center w-full pl-4 pr-2 py-2 text-sm leading-5 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out text-black">
 
-                            {{-- bets stats --}}
-                            <x-dropdown-link :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
-                                {{ __('Stats') }}
-                            </x-dropdown-link>
+                                    <p>Bets</p>
+
+                                    {{-- arrow --}}
+                                    <svg class="fill-current transform -rotate-90 h-4 w-4" :class="{ 'rotate-0': open }"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+
+                                </button>
+
+                                <div x-show="open" style="display: none">
+                                    {{-- bets index --}}
+                                    <x-dropdown-link class="px-8" :href="route('bets.index')" :active="request()->routeIs('bets.index')">
+                                        {{ __('All') }}
+                                    </x-dropdown-link>
+
+                                    {{-- bets create --}}
+                                    <x-dropdown-link class="px-8" :href="route('bets.create')" :active="request()->routeIs('bets.create')">
+                                        {{ __('New') }}
+                                    </x-dropdown-link>
+
+                                    {{-- bets stats --}}
+                                    <x-dropdown-link class="px-8" :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
+                                        {{ __('Stats') }}
+                                    </x-dropdown-link>
+                                </div>
+
+                            </div>
+                            {{--  --}}
 
                             {{-- logout --}}
                             <form method="POST" action="{{ route('logout') }}">
@@ -149,8 +173,9 @@
 
     <!-- Responsive/Mobile Navigation Menu -->
     @auth
+        {{-- :class="{ 'block': open, 'hidden': !open }" class="hidden " --}}
 
-        <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+        <div x-show="open" x-transition.opacity.duration.200ms class="sm:hidden" style="display: none">
 
             <div class="py-2 space-y-1">
                 {{-- about page link --}}
@@ -178,20 +203,43 @@
                     <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
                 </x-responsive-nav-link>
 
-                {{-- bets index --}}
-                <x-responsive-nav-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
-                    {{ __('Bets') }}
-                </x-responsive-nav-link>
+                <div x-data="{ open: false }">
 
-                {{-- bets create --}}
-                <x-responsive-nav-link :href="route('bets.create')" :active="request()->routeIs('bets.create')">
-                    {{ __('New Bet') }}
-                </x-responsive-nav-link>
+                    {{-- bets index --}}
+                    <div @click="open = ! open" class="flex items-center">
 
-                {{-- bets stats --}}
-                <x-responsive-nav-link :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
-                    {{ __('Stats') }}
-                </x-responsive-nav-link>
+                        <p
+                            class="block pl-3 pr-1 py-1 border-l-4 border-transparent text-xs text-white transition duration-150 ease-in-out">
+                            Bets</p>
+
+                        {{-- arrow --}}
+                        <svg class="fill-current transform -rotate-90 h-4 w-4" :class="{ 'rotate-0': open }"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                    </div>
+
+                    <div x-show="open" style="display: none">
+                        {{-- bets index --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('bets.index')" :active="request()->routeIs('bets.index')">
+                            {{ __('All') }}
+                        </x-responsive-nav-link>
+
+                        {{-- bets create --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('bets.create')" :active="request()->routeIs('bets.create')">
+                            {{ __('New') }}
+                        </x-responsive-nav-link>
+
+                        {{-- bets stats --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('bets.stats')" :active="request()->routeIs('bets.stats')">
+                            {{ __('Stats') }}
+                        </x-responsive-nav-link>
+                    </div>
+
+                </div>
 
                 <div>
                     {{-- logout --}}

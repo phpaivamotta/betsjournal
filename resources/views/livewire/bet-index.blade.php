@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
-            {{ __('Bets') }}
+            {{ __('Bets / All') }}
         </h2>
     </x-slot>
 
@@ -242,7 +242,7 @@
                     Cancel
                 </x-primary-button>
 
-                <x-primary-button class="bg-red-900 hover:bg-red-800 ml-1">
+                <x-primary-button class="bg-red-900 hover:bg-red-800 ml-2">
                     Delete
                 </x-primary-button>
             </x-slot>

@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
-            {{ __('Stats') }}
+            {{ __('Bets / Stats') }}
         </h2>
     </x-slot>
-
-    {{-- {{ dd(get_defined_vars()) }} --}}
 
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 

@@ -20,7 +20,7 @@
                 {{ $message }}
             </main>
 
-            <footer>
+            <footer class="flex justify-end">
                 {{ $buttons }}
             </footer>
         </div>

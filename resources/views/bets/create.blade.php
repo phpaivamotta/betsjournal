@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
-            {{ __('New Bet') }}
+            {{ __('Bets / New') }}
         </h2>
     </x-slot>
 
