@@ -177,7 +177,7 @@
                     <div class="text-xs">{{ Auth::user()->name }}</div>
                     <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
                 </x-responsive-nav-link>
-                
+
                 {{-- bets index --}}
                 <x-responsive-nav-link :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                     {{ __('Bets') }}
@@ -220,6 +220,11 @@
                 {{-- Odds Comparison page link --}}
                 <x-responsive-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                     {{ __('Odds Comparison') }}
+                </x-responsive-nav-link>
+
+                {{-- odd converter page link --}}
+                <x-responsive-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                    {{ __('Odd Converter') }}
                 </x-responsive-nav-link>
 
             </div>
