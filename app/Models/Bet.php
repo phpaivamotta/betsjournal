@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use NumberFormatter;
 
 class Bet extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    // array of attributes that are optional to display (both in DB and index view)
-    public static $optional_attributes = ['bookie', 'sport', 'match_date', 'match_time', 'bet_type', 'bet_pick', 'bet_description'];
 
     public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
     {
@@ -47,7 +45,15 @@ class Bet extends Model
 
     public function payoff()
     {
-        return round($this->decimal_odd * $this->bet_size, 2);
+        return $this->decimal_odd * $this->bet_size;
+    }
+
+    public function impliedProbability()
+    {
+        $impliedProbability = (1 / $this->decimal_odd);
+
+        return (new NumberFormatter('en_US', NumberFormatter::PERCENT))
+            ->format($impliedProbability);
     }
 
     public function user()

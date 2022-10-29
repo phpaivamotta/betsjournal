@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
+use \Carbon\Carbon;
 
 class BetTest extends TestCase
 {
@@ -113,7 +114,7 @@ class BetTest extends TestCase
 
         $user = User::find($bet->user_id);
 
-        $this->actingAs($user)->get('/bets')->assertSee($bet->match_date);
+        $this->actingAs($user)->get('/bets')->assertSee(Carbon::create($bet->match_date)->toFormattedDateString());
     }
 
     public function test_match_time_can_be_seen()
@@ -122,7 +123,7 @@ class BetTest extends TestCase
 
         $user = User::find($bet->user_id);
 
-        $this->actingAs($user)->get('/bets')->assertSee($bet->match_time);
+        $this->actingAs($user)->get('/bets')->assertSee(Carbon::create($bet->match_time)->format('h:i A'));
     }
 
     public function test_bookie_can_be_seen()
@@ -158,7 +159,7 @@ class BetTest extends TestCase
 
         $user = User::find($bet->user_id);
 
-        $this->actingAs($user)->get('/bets')->assertSee($bet->bet_pick);
+        $this->actingAs($user)->get('/bets')->assertSee( ucwords($bet->bet_pick) );
     }
 
     public function test_match_can_be_seen()

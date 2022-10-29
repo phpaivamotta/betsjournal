@@ -46,8 +46,7 @@ class BetIndex extends Component
     public function render()
     {
         return view('livewire.bet-index', [
-            'bets' => Bet::where('user_id', '=', auth()->id() )->filter($this->search, $this->win, $this->loss, $this->na)->latest()->paginate(20),
-            'optional_attributes' => Bet::$optional_attributes
+            'bets' => Bet::where('user_id', '=', auth()->id() )->filter($this->search, $this->win, $this->loss, $this->na)->latest()->paginate(20)
         ]);
     }
 
