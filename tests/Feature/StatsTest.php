@@ -183,4 +183,37 @@ class StatsTest extends TestCase
 
         $this->actingAs($user)->get('/stats')->assertViewHas('betResults', $betResults);
     }
+
+    public function test_net_profit()
+    {
+        $user = User::factory()->create();
+
+        $bets = Bet::factory(15)->create(['user_id' => $user->id]);
+
+        $profitArray = [];
+
+        foreach($bets as $bet) {
+            if($bet->result === 1){
+                $profitArray[] = $bet->payoff();
+            } else if ($bet->result === 0){
+                $profitArray[] = -((float) $bet->bet_size);
+            }
+        }
+
+        $netProfitArr = [];
+
+        for($i = 0; $i < count($profitArray); $i++) {
+            if($i > 0) {
+                $netProfitArr[($i + 1)] = $netProfitArr[$i] + $profitArray[$i]; 
+            } else {
+                $netProfitArr[($i + 1)] = $profitArray[$i]; 
+            }
+        }
+
+        $netProfitArr = array_map(function($profit) {
+            return round($profit, 2);
+        }, $netProfitArr); 
+
+        $this->actingAs($user)->get('/stats')->assertSee('netProfit', $netProfitArr);
+    }
 }

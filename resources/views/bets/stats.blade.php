@@ -64,8 +64,6 @@
 
     </div>
 
-    {{-- @dd(json_encode(array_values($netProfit))) --}}
-
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>

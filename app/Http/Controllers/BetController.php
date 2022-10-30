@@ -161,11 +161,7 @@ class BetController extends Controller
         $avgDecimalOdds = $bets->avg('decimal_odd');
         $avgAmericanOdds = $bets->avg('american_odd');
 
-        // foreach bet 
-        // if bet result is win, store payoff in profitArray
-        // else if result is loss, store bet_size in profitArray
-        // then loop through profit array and calculate cumulative sum up until current index and store it in netProfitArray
-
+        // calculate net profit as the number of bets increases
         $profitArray = [];
 
         foreach($bets as $bet) {
