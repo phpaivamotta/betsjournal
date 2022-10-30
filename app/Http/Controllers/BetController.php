@@ -20,13 +20,13 @@ class BetController extends Controller
             'match' => ['required', 'string', 'max:255'],
             'bet_size' => ['required', 'numeric', 'min:0'],
 
-            'sport' => ['nullable', 'string', 'max:255'],
-            'match_date' => ['nullable', 'date'],
-            'match_time' => ['nullable', 'date_format:H:i'],
-            'bookie' => ['nullable', 'string', 'max:255'],
-            'bet_type' => ['nullable', 'string', 'max:255'],
+            'sport' => ['required', 'string', 'max:255'],
+            'match_date' => ['required', 'date'],
+            'match_time' => ['required', 'date_format:H:i'],
+            'bookie' => ['required', 'string', 'max:255'],
+            'bet_type' => ['required', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
-            'bet_pick' => ['nullable', 'string', 'max:255'],
+            'bet_pick' => ['required', 'string', 'max:255'],
             'result' => ['nullable', 'boolean']
         ]);
 
@@ -105,20 +105,18 @@ class BetController extends Controller
 
     public function update(Request $request, Bet $bet)
     {
-        // ddd($request);
-
         // validate
         $attributes = $request->validate([
             'match' => ['required', 'string', 'max:100'],
             'bet_size' => ['required', 'numeric', 'min:0'],
 
-            'sport' => ['nullable', 'string', 'max:255'],
-            'match_date' => ['nullable', 'date'],
-            'match_time' => ['nullable', 'date_format:H:i'],
-            'bookie' => ['nullable', 'string', 'max:255'],
-            'bet_type' => ['nullable', 'string', 'max:255'],
+            'sport' => ['required', 'string', 'max:255'],
+            'match_date' => ['required', 'date'],
+            'match_time' => ['required', 'date_format:H:i'],
+            'bookie' => ['required', 'string', 'max:255'],
+            'bet_type' => ['required', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
-            'bet_pick' => ['nullable', 'string', 'max:255'],
+            'bet_pick' => ['required', 'string', 'max:255'],
             'result' => ['nullable', 'boolean']
         ]);
 

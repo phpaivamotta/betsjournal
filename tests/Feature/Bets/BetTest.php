@@ -73,10 +73,23 @@ class BetTest extends TestCase
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match');
     }
 
+    public function test_bet_requires_a_bookie()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the bookie with an empty string
+        $attributes = Bet::factory()->raw(['bookie' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('bookie');
+    }
+
     public function test_bet_requires_a_bet_size()
     {
         // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        // make sure to override the match with an empty string
+        // make sure to override the bet_size with an empty string
         $attributes = Bet::factory()->raw(['bet_size' => '']);
 
         // find the user created by the factory so that it can be used below to post data to an auth route
@@ -89,7 +102,7 @@ class BetTest extends TestCase
     public function test_bet_form_post_requires_odd()
     {
         // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        // make sure to override the match with an empty string
+        // make sure to override the odd with an empty string
         $attributes = Bet::factory()->raw(['odd' => '']);
 
         // find the user created by the factory so that it can be used below to post data to an auth route
@@ -97,6 +110,71 @@ class BetTest extends TestCase
 
         // post to route and confirm session has error
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odd');
+    }
+
+    public function test_bet_requires_a_bet_type()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the bet_type with an empty string
+        $attributes = Bet::factory()->raw(['bet_type' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('bet_type');
+    }
+
+    public function test_bet_requires_a_bet_pick()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the bet_pick with an empty string
+        $attributes = Bet::factory()->raw(['bet_pick' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('bet_pick');
+    }
+
+    public function test_bet_requires_a_sport()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the sport with an empty string
+        $attributes = Bet::factory()->raw(['sport' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('sport');
+    }
+
+    public function test_bet_requires_a_match_date()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the date with an empty string
+        $attributes = Bet::factory()->raw(['match_date' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match_date');
+    }
+
+    public function test_bet_requires_a_match_time()
+    {
+        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
+        // make sure to override the date with an empty string
+        $attributes = Bet::factory()->raw(['match_time' => '']);
+
+        // find the user created by the factory so that it can be used below to post data to an auth route
+        $user = User::find($attributes['user_id']);
+
+        // post to route and confirm session has error
+        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match_time');
     }
 
     public function test_sport_can_be_seen()
