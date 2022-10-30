@@ -156,8 +156,39 @@ class BetController extends Controller
 
     public function stats()
     {
-        $avgDecimalOdds = Bet::where('user_id', auth()->user()->id)->avg('decimal_odd');
-        $avgAmericanOdds = Bet::where('user_id', auth()->user()->id)->avg('american_odd');
+        $bets = Bet::where('user_id', auth()->user()->id)->get();
+
+        $avgDecimalOdds = $bets->avg('decimal_odd');
+        $avgAmericanOdds = $bets->avg('american_odd');
+
+        // foreach bet 
+        // if bet result is win, store payoff in profitArray
+        // else if result is loss, store bet_size in profitArray
+        // then loop through profit array and calculate cumulative sum up until current index and store it in netProfitArray
+
+        $profitArray = [];
+
+        foreach($bets as $bet) {
+            if($bet->result === 1){
+                $profitArray[] = $bet->payoff();
+            } else if ($bet->result === 0){
+                $profitArray[] = -((float) $bet->bet_size);
+            }
+        }
+
+        $netProfitArr = [];
+
+        for($i = 0; $i < count($profitArray); $i++) {
+            if($i > 0) {
+                $netProfitArr[($i + 1)] = $netProfitArr[$i] + $profitArray[$i]; 
+            } else {
+                $netProfitArr[($i + 1)] = $profitArray[$i]; 
+            }
+        }
+
+        $netProfitArr = array_map(function($profit) {
+            return round($profit, 2);
+        }, $netProfitArr);
 
         return view('bets.stats', [
             'totalBets' => Bet::where('user_id', auth()->user()->id)
@@ -206,7 +237,9 @@ class BetController extends Controller
                 ->groupBy('result')
                 ->map( fn ($betResults) => $betResults->count() )
                 ->values()
-                ->toArray()
+                ->toArray(),
+
+            'netProfit' => $netProfitArr
 
         ]);
     }

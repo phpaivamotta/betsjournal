@@ -51,31 +51,40 @@
         </div>
 
         @if ($totalBets)
-            <div class="max-w-lg mx-auto mt-6">
-                <canvas id="myChart"></canvas>
+            <div>
+                <div class="max-w-sm mx-auto mt-6 w-full">
+                    <canvas id="resultChart"></canvas>
+                </div>
+
+                <div class="max-w-2xl mx-auto mt-8 w-full">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         @endif
 
     </div>
 
+    {{-- @dd(json_encode(array_values($netProfit))) --}}
+
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            var xValues = ["Losses", "Wins", "N/A"];
-            var yValues = {{ json_encode($betResults) }};
+            // Results chart 
+            var resultLabels = ["Losses", "Wins", "N/A"];
+            var resultData = {{ json_encode($betResults) }};
             var barColors = [
                 "red",
                 "green",
                 "gray"
             ];
 
-            new Chart("myChart", {
+            new Chart("resultChart", {
                 type: "pie",
                 data: {
-                    labels: xValues,
+                    labels: resultLabels,
                     datasets: [{
                         backgroundColor: barColors,
-                        data: yValues
+                        data: resultData
                     }]
                 },
                 options: {
@@ -83,6 +92,45 @@
                         title: {
                             display: true,
                             text: "Results"
+                        }
+                    }
+                }
+            });
+
+            // Net profit chart
+            var xValues = {{ json_encode(array_keys($netProfit)) }};
+            var yValues = {{ json_encode(array_values($netProfit)) }};
+
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: "rgb(30 58 138)",
+                        borderColor: "rgb(30 58 138)",
+                        data: yValues
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {display: false},
+                        title: {
+                            display: true,
+                            text: "Net Profit"
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Total Number of Bets'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Net Profit (USD)'
+                            }
                         }
                     }
                 }

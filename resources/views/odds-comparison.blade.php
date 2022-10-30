@@ -22,7 +22,7 @@
                     accent_color: "#00B1FF",
                     font: "Roboto",
                     logos: "true",
-                    limit: "10",
+                    limit: "15",
                     popular: "false",
                     sports: "",
                     leagues: "",

@@ -11,7 +11,7 @@
         {{-- top section --}}
         <div class="sm:flex sm:items-center sm:justify-between">
             <div class="flex items-center mb-4 sm:mb-0">
-                
+
                 {{-- new bet link --}}
                 <a href="/bets/create"
                     class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
@@ -71,8 +71,7 @@
 
         {{-- display bets --}}
         @forelse ($bets as $bet)
-
-            <x-bet-card :bet="$bet"/>
+            <x-bet-card :bet="$bet" />
 
         @empty
             <p>You haven't logged any bets yet.</p>
@@ -134,5 +133,12 @@
 
     </x-delete-modal> --}}
 
-
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+        tippy('#oddTooltip', {
+            content: 'Change odds type in Edit Profile',
+            trigger: 'mouseenter click',
+        });
+    </script>
 </div>
