@@ -52,12 +52,12 @@
 
         @if ($totalBets)
             <div>
-                <div class="max-w-sm mx-auto mt-6 w-full">
+                <div class="max-w-md mx-auto mt-6 w-full">
                     <canvas id="resultChart"></canvas>
                 </div>
 
                 <div class="max-w-2xl mx-auto mt-8 w-full">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="netProfit" style="width: 100%; height: 100%; width: 400px; height: 290px;"></canvas>
                 </div>
             </div>
         @endif
@@ -101,7 +101,7 @@
             var xValues = {{ json_encode(array_keys($netProfit)) }};
             var yValues = {{ json_encode(array_values($netProfit)) }};
 
-            new Chart("myChart", {
+            new Chart("netProfit", {
                 type: "line",
                 data: {
                     labels: xValues,
