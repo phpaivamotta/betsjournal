@@ -2,7 +2,7 @@
 
     {{-- success flash message --}}
     <x-flash />
-    
+
     {{-- hero section --}}
     <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80"
         style="
@@ -66,9 +66,7 @@
 
             <p class="text-md">
                 Let us analyze your betting data for you! You don't need to touch MS Excel or Google Sheets to have the
-                most important information on your bets. We calculate your hit-rate, implied break-even odds and actual
-                average betting odds so that you can have better insight. We also provide charts for easy visualization
-                of your betting stats.
+                most important information on your bets. We calculate your hit-rate, implied odds, average betting odds (and much more!) so that you can have better insights. We also provide charts for easy visualization!
             </p>
 
             {{-- About website link --}}
@@ -93,19 +91,22 @@
         {{-- description div --}}
         <div class="md:w-2/3">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
-                Value bets.
+                Odds Comparison.
             </h2>
 
             <p class="text-md">
-                The best way make money in the betting world is to make sure you get the best odds! With our value bets
-                tool, you can take advantage of bookie mistakes and profit off of their higher odds.
+                Before tracking your bets, you need to place them with a bookmaker first.
+                You can look for the best odds for any sport or league using our Odds Comparison tool. This tool, which
+                is powered by <i>Oddspedia</i>, lets you compare the odds for several different bookmakers. After
+                finding the best odds, just click the bookmaker's link and place your bets! Then record them using
+                <strong>Bets</strong>journal, of course!
             </p>
 
             {{-- Value bets link --}}
             <p class="mt-6">
                 <a href="{{ route('odds-comparison') }}"
                     class="block md:inline-block text-center font-bold py-2 px-4 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
-                    See value bets
+                    Odds Comparison
                 </a>
             </p>
         </div>
