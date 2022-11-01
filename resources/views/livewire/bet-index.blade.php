@@ -71,13 +71,11 @@
 
         {{-- display bets --}}
         @forelse ($bets as $bet)
-
             <x-bet-card :bet="$bet" />
 
         @empty
 
             <p>You haven't logged any bets yet.</p>
-            
         @endforelse
 
         {{-- pagination --}}
@@ -136,14 +134,12 @@
 
     </x-delete-modal> --}}
 
-    @push('scripts')
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <script src="https://unpkg.com/tippy.js@6"></script>
-        <script>
-            tippy('.trippy-tippy', {
-                content: 'Change odds type in Edit Profile',
-                trigger: 'mouseenter click',
-            });
-        </script>
-    @endpush
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+        tippy('.trippy-tippy', {
+            content: 'Change odds type in Edit Profile',
+            trigger: 'mouseenter click',
+        });
+    </script>
 </div>

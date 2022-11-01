@@ -137,7 +137,11 @@
 
             <!-- description -->
             <div class="mt-4">
-                <x-input-label for="bet_description" :value="__('Description (optional)')" />
+                <div class="flex items-center gap-2">
+                    <x-input-label for="bet_description" :value="__('Description (optional)')" />
+                    
+                    <x-tooltip id="descriptionTooltip"/>
+                </div>
 
                 <x-text-input id="bet_description" class="block mt-1 w-full" type="text" name="bet_description"
                     :value="old('bet_description', $bet->bet_description)" />
@@ -161,6 +165,11 @@
 
         tippy('#betTypeTooltip', {
             content: 'e.g., Single, Double, Treble',
+            trigger: 'mouseenter click',
+        });
+
+        tippy('#descriptionTooltip', {
+            content: 'Record any notes about this bet',
             trigger: 'mouseenter click',
         });
     </script>
