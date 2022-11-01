@@ -133,12 +133,14 @@
 
     </x-delete-modal> --}}
 
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-    <script>
-        tippy('#oddTooltip', {
-            content: 'Change odds type in Edit Profile',
-            trigger: 'mouseenter click',
-        });
-    </script>
+    @push('scripts')
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <script>
+            tippy('.trippy-tippy', {
+                content: 'Change odds type in Edit Profile',
+                trigger: 'mouseenter click',
+            });
+        </script>
+    @endpush
 </div>

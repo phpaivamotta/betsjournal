@@ -7,7 +7,7 @@
     <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80"
         style="
         background-position: 50%;
-        background-image: url('https://cdn.pixabay.com/photo/2016/11/29/07/10/hand-1868015_1280.jpg');
+        background-image: url({{ asset('img/hero.jpg') }});
       ">
         <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
             style="background-color: rgba(48, 13, 203, 0.171)">
@@ -50,7 +50,7 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:ml-10">
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fspreadsheet-on-computer-screen-flat-icon-financial-accounting-report-vector-id1025661672%3Fk%3D6%26m%3D1025661672%26s%3D612x612%26w%3D0%26h%3Ds2pr-oWJzDKFSMxo0h9jKM-cfvH4C3Nu1qSVgQrXIiE%3D&f=1&nofb=1"
+            <img src="{{ asset('img/computer-spreadsheet.jpg') }}"
                 alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
@@ -80,7 +80,7 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:mr-10 md:order-first">
-            <img src="https://cdn.pixabay.com/photo/2020/08/03/10/00/graph-5459708_1280.png"
+            <img src="{{ asset('img/loose-graphs.png') }}"
                 alt="statistical-analysis-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
@@ -113,7 +113,7 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:ml-10">
-            <img src="https://cdn.pixabay.com/photo/2016/10/30/21/56/mac-1784459__480.png"
+            <img src="{{ asset('img/computer-stock-up.webp') }}"
                 alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
