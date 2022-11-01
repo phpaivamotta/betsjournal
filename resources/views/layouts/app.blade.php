@@ -50,11 +50,19 @@
         </main>
 
         {{-- Footer --}}
-        <footer class="relative mt-auto h-16 bg-blue-900">
+        <footer class="relative mt-auto h-24 bg-blue-900">
             <div class="absolute bottom-4 w-full text-center">
-                <p class="text-xs text-white">
+                <p class="mb-3 text-xs text-white">
                     © {{ now()->year }} <strong>Bets</strong>journal. All rights reserved.
                 </p>
+
+                <div class="flex items-center justify-center">
+                    <p class="text-[8px] text-white">Data powered by </p>
+
+                    <a href="https://oddspedia.com" target="_blank">
+                        <img class="" src="{{ asset('img/logo-oddspedia.svg') }}" alt="Oddspedia Logo">
+                    </a>
+                </div>
             </div>
         </footer>
 
