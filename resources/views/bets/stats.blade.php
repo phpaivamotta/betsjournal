@@ -50,14 +50,23 @@
 
         </div>
 
+        {{-- charts --}}
         @if ($totalBets)
             <div>
+                {{-- results chart --}}
                 <div class="max-w-md mx-auto mt-6 w-full">
                     <canvas id="resultChart"></canvas>
                 </div>
 
+                {{-- net profit chart --}}
                 <div class="max-w-2xl mx-auto mt-8 w-full">
                     <canvas id="netProfit" style="width: 100%; height: 100%; width: 400px; height: 290px;"></canvas>
+                </div>
+
+                {{-- Odds/results stacked bar chart --}}
+                <div class="max-w-2xl mx-auto mt-8 w-full">
+                    <canvas id="oddsResultsDist"
+                        style="width: 100%; height: 100%; width: 400px; height: 340px;"></canvas>
                 </div>
             </div>
         @endif
@@ -68,11 +77,11 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Results chart 
-            var resultLabels = ["Losses", "Wins", "N/A"];
+            var resultLabels = ["Wins", "Losses", "N/A"];
             var resultData = {{ json_encode($betResults) }};
             var barColors = [
-                "red",
                 "green",
+                "red",
                 "gray"
             ];
 
@@ -96,22 +105,24 @@
             });
 
             // Net profit chart
-            var xValues = {{ json_encode(array_keys($netProfit)) }};
-            var yValues = {{ json_encode(array_values($netProfit)) }};
+            var cumBets = {{ json_encode(array_keys($netProfit)) }};
+            var netProfitArr = {{ json_encode(array_values($netProfit)) }};
 
             new Chart("netProfit", {
                 type: "line",
                 data: {
-                    labels: xValues,
+                    labels: cumBets,
                     datasets: [{
                         backgroundColor: "rgb(30 58 138)",
                         borderColor: "rgb(30 58 138)",
-                        data: yValues
+                        data: netProfitArr
                     }]
                 },
                 options: {
                     plugins: {
-                        legend: {display: false},
+                        legend: {
+                            display: false
+                        },
                         title: {
                             display: true,
                             text: "Net Profit"
@@ -129,6 +140,73 @@
                                 display: true,
                                 text: 'Net Profit (USD)'
                             }
+                        }
+                    }
+                }
+            });
+
+            // Odds/results stacked bar chart
+
+            // percentage range
+            const labels = [
+                '0 - 10',
+                '10 - 20',
+                '20 - 30',
+                '30 - 40',
+                '40 - 50',
+                '50 - 60',
+                '60 - 70',
+                '70 - 80',
+                '80 - 90',
+                '90 - 100',
+            ]
+
+            const data = {
+                labels: labels,
+
+                datasets: [{
+                        label: 'Losses',
+                        data: {{ json_encode( isset($resultCountProbRange['losses']) ? $resultCountProbRange['losses'] : array_fill(0, 10, 0) ) }},
+                        backgroundColor: "red",
+                    },
+                    {
+                        label: 'Wins',
+                        data: {{ json_encode( isset($resultCountProbRange['wins']) ? $resultCountProbRange['wins'] : array_fill(0, 10, 0) ) }},
+                        backgroundColor: "green",
+                    },
+                    {
+                        label: 'N/A',
+                        data: {{ json_encode( isset($resultCountProbRange['na']) ? $resultCountProbRange['na'] : array_fill(0, 10, 0) ) }},
+                        backgroundColor: "gray",
+                    },
+                ]
+            };
+
+            new Chart("oddsResultsDist", {
+                type: 'bar',
+                data: data,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Implied Probability of Bet Results'
+                        },
+                    },
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Implied Probability %'
+                            },
+                            stacked: true,
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Bets'
+                            },
+                            stacked: true
                         }
                     }
                 }

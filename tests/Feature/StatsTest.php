@@ -192,6 +192,7 @@ class StatsTest extends TestCase
 
         $profitArray = [];
 
+        // get loss or payoff for every bet
         foreach($bets as $bet) {
             if($bet->result === 1){
                 $profitArray[] = $bet->payoff();
@@ -202,6 +203,10 @@ class StatsTest extends TestCase
 
         $netProfitArr = [];
 
+        // find the cumulative sum of bets 
+        // e.g., if bet1 = $100, bet2 = $50, and bet3 = -$30
+        // then the $netProfitArr = [1 => 100, 2 => (100 + 50), 3 => (100 + 50 -30)]
+        // which gives an array with the total profit at a given bet number
         for($i = 0; $i < count($profitArray); $i++) {
             if($i > 0) {
                 $netProfitArr[($i + 1)] = $netProfitArr[$i] + $profitArray[$i]; 

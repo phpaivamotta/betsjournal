@@ -39,7 +39,7 @@ class BetController extends Controller
 
             // validate method returns an array ['odd' => $odd]
             $american_odd_array = $request->validate([
-                'odd' => ['required', 'numeric']
+                'odd' => ['required', 'numeric', 'min:-10000', 'max:100000']
             ]);
 
             // so it is unpacked here
@@ -50,7 +50,7 @@ class BetController extends Controller
 
             // validate method returns an array ['odd' => $odd]
             $decimal_odd_array = $request->validate([
-                'odd' => ['required', 'numeric', 'min:1']
+                'odd' => ['required', 'numeric', 'min:1.001', 'max:1001']
             ]);
 
             // so it is unpacked here
@@ -129,7 +129,7 @@ class BetController extends Controller
 
             // validate method returns an array ['odd' => $odd]
             $american_odd_array = $request->validate([
-                'odd' => ['required', 'numeric']
+                'odd' => ['required', 'numeric', 'min:-10000', 'max:100000']
             ]);
 
             // so it is unpacked here
@@ -140,7 +140,7 @@ class BetController extends Controller
 
             // validate method returns an array ['odd' => $odd]
             $decimal_odd_array = $request->validate([
-                'odd' => ['required', 'numeric', 'min:1']
+                'odd' => ['required', 'numeric', 'min:1.001', 'max:1001']
             ]);
 
             // so it is unpacked here
@@ -164,27 +164,79 @@ class BetController extends Controller
         // calculate net profit as the number of bets increases
         $profitArray = [];
 
-        foreach($bets as $bet) {
-            if($bet->result === 1){
+        foreach ($bets as $bet) {
+            if ($bet->result === 1) {
                 $profitArray[] = $bet->payoff();
-            } else if ($bet->result === 0){
-                $profitArray[] = -((float) $bet->bet_size);
+            } else if ($bet->result === 0) {
+                $profitArray[] = - ((float) $bet->bet_size);
             }
         }
 
         $netProfitArr = [];
 
-        for($i = 0; $i < count($profitArray); $i++) {
-            if($i > 0) {
-                $netProfitArr[($i + 1)] = $netProfitArr[$i] + $profitArray[$i]; 
+        for ($i = 0; $i < count($profitArray); $i++) {
+            if ($i > 0) {
+                $netProfitArr[($i + 1)] = $netProfitArr[$i] + $profitArray[$i];
             } else {
-                $netProfitArr[($i + 1)] = $profitArray[$i]; 
+                $netProfitArr[($i + 1)] = $profitArray[$i];
             }
         }
 
-        $netProfitArr = array_map(function($profit) {
+        $netProfitArr = array_map(function ($profit) {
             return round($profit, 2);
         }, $netProfitArr);
+
+        // calculate result count distribution in the prob. range
+
+        // group bet results
+        $resultGroups = Bet::where('user_id', auth()->user()->id)
+            ->get()
+            ->groupBy('result')
+            ->map(
+                fn ($resultBin) => $resultBin
+                    ->map(
+                        fn ($bet) => floor(((float) rtrim($bet->impliedProbability(), "%")) / 10)
+                    )->countBy()
+            );
+
+        // ddd($resultGroups);
+
+        // this is the order in which the bet results are returned in $resultGroups
+        $resultOrder = [
+            'wins',
+            'losses',
+            'na'
+        ];
+
+        $dataArr = [];
+        $count = 0;
+        foreach ($resultGroups as $resultGroup) {
+
+            $oneResultArr = [];
+
+            for ($i = 0; $i <= 10; $i++) {
+                // 10 is a special case because impliedProbability() rounds results close to 99% up
+                // by default
+                if ($i === 10) {
+                    if (isset($resultGroup[$i])) {
+                        $oneResultArr[$i - 1] += $resultGroup[$i];
+                    } else {
+                        $oneResultArr[$i - 1] += 0;
+                    }
+                } else {
+                    if (isset($resultGroup[$i])) {
+                        $oneResultArr[$i] = $resultGroup[$i];
+                    } else {
+                        $oneResultArr[$i] = 0;
+                    }
+                }
+            }
+
+            $dataArr[$resultOrder[$count]] = $oneResultArr;
+            $count++;
+        }
+
+        // ddd($dataArr);
 
         return view('bets.stats', [
             'totalBets' => Bet::where('user_id', auth()->user()->id)
@@ -202,7 +254,7 @@ class BetController extends Controller
             'averageOdds' => auth()->user()->odd_type === 'decimal' ? number_format($avgDecimalOdds, 3) : number_format($avgAmericanOdds, 3),
 
             'impliedProbability' => $avgDecimalOdds ? number_format(100 * (1 / $avgDecimalOdds), 2)
-                                                    : null,
+                : null,
 
             'totalGains' =>  Bet::where('user_id', auth()->user()->id)
                 ->where('result', 1)
@@ -231,11 +283,13 @@ class BetController extends Controller
             'betResults' => Bet::where('user_id', auth()->user()->id)
                 ->get()
                 ->groupBy('result')
-                ->map( fn ($betResults) => $betResults->count() )
+                ->map(fn ($betResults) => $betResults->count())
                 ->values()
                 ->toArray(),
 
-            'netProfit' => $netProfitArr
+            'netProfit' => $netProfitArr,
+
+            'resultCountProbRange' => $dataArr
 
         ]);
     }
