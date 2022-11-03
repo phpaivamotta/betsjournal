@@ -8,7 +8,7 @@
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
         <div class="mb-6 w-full space-y-2">
-            <h3 class="font-bold text-lg">Run down</h3>
+            <h3 class="font-bold text-lg">Rundown</h3>
 
             <p class="text-sm">
                 To get started recording your bets, just
