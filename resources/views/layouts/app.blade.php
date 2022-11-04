@@ -17,15 +17,10 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
-
-        svg {
-            /* border: 1px solid #aaa; */
-        }
     </style>
 
     <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- tailwind through vite is useless --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles

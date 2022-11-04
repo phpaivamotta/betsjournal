@@ -71,11 +71,13 @@
 
         {{-- display bets --}}
         @forelse ($bets as $bet)
+
             <x-bet-card :bet="$bet" />
 
         @empty
 
             <p>You haven't logged any bets yet.</p>
+
         @endforelse
 
         {{-- pagination --}}
@@ -112,28 +114,7 @@
         </x-delete-modal>
     </form>
 
-    {{-- <x-delete-modal wire:model.defer="showEditModal">
-
-        <x-slot name="title">
-            Edit Bet
-        </x-slot>
-
-        <x-slot name="message">
-            Edit your bet!
-        </x-slot>
-
-        <x-slot name="buttons">
-            <x-primary-button wire:click="$set('showEditModal', false)" type="button">
-                Cancel
-            </x-primary-button>
-
-            <x-primary-button wire:click="update" class="bg-red-900 hover:bg-red-800 ml-1">
-                Update
-            </x-primary-button>
-        </x-slot>
-
-    </x-delete-modal> --}}
-
+    {{-- tooltip --}}
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script>

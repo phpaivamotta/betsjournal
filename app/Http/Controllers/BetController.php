@@ -186,6 +186,7 @@ class BetController extends Controller
             return round($profit, 2);
         }, $netProfitArr);
 
+
         // calculate result count distribution in the prob. range
 
         // group bet results
@@ -197,9 +198,13 @@ class BetController extends Controller
                     ->map(
                         fn ($bet) => floor(((float) rtrim($bet->impliedProbability(), "%")) / 10)
                     )->countBy()
-            );
+            )->toArray();
 
-        // ddd($resultGroups);
+        $resultOptions = [
+            'wins' => isset($resultGroups[1]) ? $resultGroups[1] : null,
+            'losses' => isset($resultGroups[0]) ? $resultGroups[0] : null,
+            'na' => isset($resultGroups[null]) ? $resultGroups[null] : null
+        ];
 
         // this is the order in which the bet results are returned in $resultGroups
         $resultOrder = [
@@ -210,7 +215,7 @@ class BetController extends Controller
 
         $dataArr = [];
         $count = 0;
-        foreach ($resultGroups as $resultGroup) {
+        foreach ($resultOptions as $resultGroup) {
 
             $oneResultArr = [];
 
@@ -236,7 +241,18 @@ class BetController extends Controller
             $count++;
         }
 
-        // ddd($dataArr);
+        // calculate win/loss/na
+        $betResults = Bet::where('user_id', auth()->user()->id)
+            ->get()
+            ->groupBy('result')
+            ->map(fn ($betResults) => $betResults->count())
+            ->toArray();
+
+        $betResultsSort = [
+            isset($betResults[1]) ? $betResults[1] : 0,
+            isset($betResults[0]) ? $betResults[0] : 0,
+            isset($betResults[null]) ? $betResults[null] : 0
+        ];
 
         return view('bets.stats', [
             'totalBets' => Bet::where('user_id', auth()->user()->id)
@@ -280,12 +296,8 @@ class BetController extends Controller
                 ->where('result', 0)
                 ->max('bet_size'),
 
-            'betResults' => Bet::where('user_id', auth()->user()->id)
-                ->get()
-                ->groupBy('result')
-                ->map(fn ($betResults) => $betResults->count())
-                ->values()
-                ->toArray(),
+            // charts
+            'betResultsSort' => $betResultsSort,
 
             'netProfit' => $netProfitArr,
 

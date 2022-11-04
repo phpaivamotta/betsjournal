@@ -50,7 +50,7 @@
 
         </div>
 
-        {{-- charts --}}
+        {{-- charts html --}}
         @if ($totalBets)
             <div>
                 {{-- results chart --}}
@@ -73,12 +73,14 @@
 
     </div>
 
+
+    {{-- charts js --}}
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Results chart 
             var resultLabels = ["Wins", "Losses", "N/A"];
-            var resultData = {{ json_encode($betResults) }};
+            var resultData = {{ json_encode($betResultsSort) }};
             var barColors = [
                 "green",
                 "red",
@@ -132,7 +134,7 @@
                         x: {
                             title: {
                                 display: true,
-                                text: 'Total Number of Bets'
+                                text: 'Total Number of Resolved Bets'
                             }
                         },
                         y: {
@@ -144,6 +146,7 @@
                     }
                 }
             });
+
 
             // Odds/results stacked bar chart
 
@@ -166,17 +169,17 @@
 
                 datasets: [{
                         label: 'Losses',
-                        data: {{ json_encode( isset($resultCountProbRange['losses']) ? $resultCountProbRange['losses'] : array_fill(0, 10, 0) ) }},
+                        data: {{ json_encode( $resultCountProbRange['losses'] ) }},
                         backgroundColor: "red",
                     },
                     {
                         label: 'Wins',
-                        data: {{ json_encode( isset($resultCountProbRange['wins']) ? $resultCountProbRange['wins'] : array_fill(0, 10, 0) ) }},
+                        data: {{ json_encode( $resultCountProbRange['wins'] ) }},
                         backgroundColor: "green",
                     },
                     {
                         label: 'N/A',
-                        data: {{ json_encode( isset($resultCountProbRange['na']) ? $resultCountProbRange['na'] : array_fill(0, 10, 0) ) }},
+                        data: {{ json_encode( $resultCountProbRange['na'] ) }},
                         backgroundColor: "gray",
                     },
                 ]

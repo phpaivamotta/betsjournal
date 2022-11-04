@@ -54,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('bets.destroy');
 
     // view all bets stats
-    // THIS ACTION SHOULD PROBABLY BE CHANGED
     Route::get('stats', [BetController::class, 'stats'])
         ->name('bets.stats');
 

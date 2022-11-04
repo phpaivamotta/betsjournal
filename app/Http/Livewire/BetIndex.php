@@ -11,7 +11,6 @@ class BetIndex extends Component
     use WithPagination;
 
     public $showDeleteModal = false;
-    // public $showEditModal = false;
     public Bet $currentBet;
     public $search = '';
     public $win;
@@ -65,9 +64,4 @@ class BetIndex extends Component
 
         session()->flash('success', 'Bet deleted!');
     }
-
-    // public function update()
-    // {
-    //     ddd('update bet');
-    // }
 }
