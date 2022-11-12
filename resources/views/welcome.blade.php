@@ -41,7 +41,7 @@
             <p class="text-md">
                 A big part of successful betting is keeping track of your profits and losses. This is where betsjournal
                 comes in. We make it easy to record your bets anywhere, any time. We also make it easy for you to see
-                your betting statistics by breaking-down your data for your, so that you can easily track your
+                your betting statistics by breaking-down your data for you, so that you can easily track your
                 betting tactics. All you have to do is register and start using our features! Everything is absolutely
                 free!
             </p>
