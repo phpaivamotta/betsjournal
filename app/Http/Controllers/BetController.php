@@ -166,7 +166,7 @@ class BetController extends Controller
 
         foreach ($bets as $bet) {
             if ($bet->result === 1) {
-                $profitArray[] = $bet->payoff();
+                $profitArray[] = $bet->payoff() - $bet->bet_size;
             } else if ($bet->result === 0) {
                 $profitArray[] = - ((float) $bet->bet_size);
             }
@@ -275,7 +275,7 @@ class BetController extends Controller
             'totalGains' =>  Bet::where('user_id', auth()->user()->id)
                 ->where('result', 1)
                 ->get()
-                ->map(fn ($bet) => $bet->payoff())
+                ->map(fn ($bet) => $bet->payoff() - $bet->bet_size)
                 ->sum(),
 
             'totalLosses' =>  Bet::where('user_id', auth()->user()->id)
