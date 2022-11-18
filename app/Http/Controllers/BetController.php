@@ -156,7 +156,7 @@ class BetController extends Controller
 
     public function stats()
     {
-        $bets = Bet::where('user_id', auth()->user()->id)->get();
+        $bets = Bet::where('user_id', auth()->user()->id)->orderBy('match_date')->get();
 
         $avgDecimalOdds = $bets->avg('decimal_odd');
         $avgAmericanOdds = $bets->avg('american_odd');
