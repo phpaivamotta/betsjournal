@@ -7,6 +7,28 @@
 
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
+        {{-- bet links --}}
+        <div class="sm:flex sm:items-center sm:justify-between mb-14 mt-1">
+            <div class="flex items-center mb-4 sm:mb-0">
+
+                {{-- new bet link --}}
+                <a href="{{ route('bets.create') }}"
+                    class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                    <p class="text-sm">
+                        New Bet
+                    </p>
+                </a>
+
+                {{-- stats link --}}
+                <a href="{{ route('bets.index') }}"
+                    class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                    <p class="text-sm">
+                        All
+                    </p>
+                </a>
+            </div>
+        </div>
+
         <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 sm:gap-10">
 
             {{-- total bets --}}
@@ -169,17 +191,17 @@
 
                 datasets: [{
                         label: 'Losses',
-                        data: {{ json_encode( $resultCountProbRange['losses'] ) }},
+                        data: {{ json_encode($resultCountProbRange['losses']) }},
                         backgroundColor: "red",
                     },
                     {
                         label: 'Wins',
-                        data: {{ json_encode( $resultCountProbRange['wins'] ) }},
+                        data: {{ json_encode($resultCountProbRange['wins']) }},
                         backgroundColor: "green",
                     },
                     {
                         label: 'N/A',
-                        data: {{ json_encode( $resultCountProbRange['na'] ) }},
+                        data: {{ json_encode($resultCountProbRange['na']) }},
                         backgroundColor: "gray",
                     },
                 ]

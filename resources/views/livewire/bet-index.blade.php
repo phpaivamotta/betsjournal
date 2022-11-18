@@ -8,12 +8,12 @@
 
     <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 space-y-4 bg-gray-100">
 
-        {{-- top section --}}
+        {{-- bet links --}}
         <div class="sm:flex sm:items-center sm:justify-between">
             <div class="flex items-center mb-4 sm:mb-0">
 
                 {{-- new bet link --}}
-                <a href="/bets/create"
+                <a href="{{ route('bets.create') }}"
                     class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
                     <p class="text-sm">
                         New Bet
@@ -21,7 +21,7 @@
                 </a>
 
                 {{-- stats link --}}
-                <a href="/stats"
+                <a href="{{ route('bets.stats') }}"
                     class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
                     <p class="text-sm">
                         Stats
