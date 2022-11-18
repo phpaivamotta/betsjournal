@@ -6,6 +6,29 @@
     </x-slot>
 
     <x-auth-card class="mb-4">
+
+        {{-- bet links --}}
+        <div class="mb-10 mt-1">
+            <div class="flex items-center mb-4">
+
+                {{-- new bet link --}}
+                <a href="{{ route('bets.index') }}"
+                    class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2">
+                    <p class="text-sm">
+                        All
+                    </p>
+                </a>
+
+                {{-- stats link --}}
+                <a href="{{ route('bets.stats') }}"
+                    class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2">
+                    <p class="text-sm">
+                        Stats
+                    </p>
+                </a>
+            </div>
+        </div>
+
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
@@ -53,7 +76,7 @@
                 <div class="flex items-center gap-2">
                     <x-input-label for="odd" :value="__('Odd')" />
 
-                    <x-tooltip id="oddTooltip"/>
+                    <x-tooltip id="oddTooltip" />
                 </div>
 
                 <x-text-input id="odd" placeholder="{{ auth()->user()->odd_type }}" class="block mt-1 w-full"
@@ -65,7 +88,7 @@
                 <div class="flex items-center gap-2">
                     <x-input-label for="bet_type" :value="__('Bet Type')" />
 
-                    <x-tooltip id="betTypeTooltip"/>
+                    <x-tooltip id="betTypeTooltip" />
                 </div>
 
                 <x-text-input id="bet_type" class="block mt-1 w-full" type="text" name="bet_type" :value="old('bet_type')"
@@ -111,7 +134,7 @@
                 <div class="flex items-center gap-2">
                     <x-input-label for="bet_description" :value="__('Description (optional)')" />
 
-                    <x-tooltip id="descriptionTooltip"/>
+                    <x-tooltip id="descriptionTooltip" />
                 </div>
 
                 <x-text-input id="bet_description" class="block mt-1 w-full" type="text" name="bet_description"
