@@ -55,7 +55,8 @@
                     <p class="text-xs text-white">Data powered by </p>
 
                     <a href="https://oddspedia.com" target="_blank">
-                        <img src="{{ asset('img/logo-oddspedia.svg') }}" alt="Oddspedia Logo">
+                        {{-- <img src="{{ asset('img/logo-oddspedia.svg') }}" alt="Oddspedia Logo"> --}}
+                        Oddspedia
                     </a>
                 </div>
             </div>
