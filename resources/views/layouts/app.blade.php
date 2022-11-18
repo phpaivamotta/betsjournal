@@ -52,7 +52,7 @@
                 </p>
 
                 <div class="flex items-center justify-center">
-                    <p class="text-lg text-white">Data powered by </p>
+                    <p class="text-xs text-white">Data powered by </p>
 
                     <a href="https://oddspedia.com" target="_blank">
                         <img class="" src="{{ asset('img/logo-oddspedia.svg') }}" alt="Oddspedia Logo">
