@@ -114,7 +114,7 @@ class StatsTest extends TestCase
 
         $totalPayoffs = $bets->map(function ($bet) {
             if ($bet->result) {
-                return $bet->payoff();
+                return $bet->payoff() - $bet->bet_size;
             }
         })->sum();
 
