@@ -1,3 +1,3 @@
-# Bets Journal
+# Betsjournal
 
 www.betsjournal.io
