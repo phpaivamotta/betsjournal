@@ -37,19 +37,43 @@
                     </x-nav-link>
                 </div>
 
-                {{-- Odds Comparison page link --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
-                        {{ __('Odds Comparison') }}
-                    </x-nav-link>
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <x-dropdown align="right" width="48">
+
+                        {{-- username button to dropdown --}}
+                        <x-slot name="trigger">
+                            <button :class="{ 'outline-none text-gray-400 border-gray-300': open }"
+                                class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 transition duration-150 ease-in-out pt-0.5">
+                                <div>Betting Tools</div>
+
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+
+                        {{-- dropdown links --}}
+                        <x-slot name="content">
+
+                            {{-- odds comparison --}}
+                            <x-dropdown-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                                {{ __('Odds Comparison') }}
+                            </x-dropdown-link>
+
+                            {{-- odd converter --}}
+                            <x-dropdown-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                                {{ __('Odd Converter') }}
+                            </x-dropdown-link>
+
+                        </x-slot>
+                    </x-dropdown>
                 </div>
 
-                {{-- odd converter page link --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
-                        {{ __('Odd Converter') }}
-                    </x-nav-link>
-                </div>
             </div>
 
             {{-- larger screen registered user dropdown --}}
@@ -60,7 +84,7 @@
                         {{-- username button to dropdown --}}
                         <x-slot name="trigger">
                             <button :class="{ 'outline-none text-gray-400 border-gray-300': open }"
-                                class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 transition duration-150 ease-in-out">
+                                class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 transition duration-150 ease-in-out pt-0.5">
                                 <div>{{ Auth::user()->name }}</div>
 
                                 <div class="ml-1">
@@ -183,15 +207,41 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
-                {{-- Odds Comparison page link --}}
-                <x-responsive-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
-                    {{ __('Odds Comparison') }}
-                </x-responsive-nav-link>
+                <div x-data="{ open: false }">
 
-                {{-- odd converter page link --}}
-                <x-responsive-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
-                    {{ __('Odd Converter') }}
-                </x-responsive-nav-link>
+                    {{-- bets index --}}
+                    <div @click="open = ! open" class="flex items-center">
+
+                        <p
+                            class="block pl-3 pr-1 py-1 border-l-4 border-transparent text-xs text-white transition duration-150 ease-in-out">
+                            Betting Tools</p>
+
+                        {{-- arrow --}}
+                        <svg class="fill-current transform -rotate-90 h-4 w-4" :class="{ 'rotate-0': open }"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                    </div>
+
+                    <div x-show="open" style="display: none">
+
+                        {{-- Odds Comparison page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                            {{ __('Odds Comparison') }}
+                        </x-responsive-nav-link>
+
+                        {{-- odd converter page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                            {{ __('Odd Converter') }}
+                        </x-responsive-nav-link>
+
+                    </div>
+
+                </div>
+
             </div>
 
             {{-- mobile screen registered user dropdown --}}
