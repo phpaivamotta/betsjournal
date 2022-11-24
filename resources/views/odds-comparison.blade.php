@@ -7,7 +7,7 @@
 
     <div class="max-w-5xl mx-auto py-4 sm:px-6 lg:px-8 bg-gray-100">
 
-        <div id="oddspedia-widget-odds-comparison-popular-false-sports-false-leagues-false">
+        <div class="-mb-20 -mt-4" id="oddspedia-widget-odds-comparison-popular-false-sports-false-leagues-false">
             <script>
                 window.oddspediaWidgetOddsComparisonPopularSportsLeagues = {
                     api_token: "6a80a6deba0271ff740e80493fab24d9d5570aec2ef24766c3ae173b8fff",
