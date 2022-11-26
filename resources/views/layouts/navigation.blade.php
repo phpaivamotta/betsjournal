@@ -197,8 +197,6 @@
 
     <!-- Responsive/Mobile Navigation Menu -->
     @auth
-        {{-- :class="{ 'block': open, 'hidden': !open }" class="hidden " --}}
-
         <div x-show="open" x-transition.opacity.duration.200ms class="sm:hidden" style="display: none">
 
             <div class="py-2 space-y-1">
@@ -273,7 +271,7 @@
                     </div>
 
                     <div x-show="open" style="display: none">
-                        {{-- bets index --}}
+                        {{-- betting tools --}}
                         <x-responsive-nav-link class="pl-6" :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                             {{ __('All') }}
                         </x-responsive-nav-link>
@@ -315,15 +313,40 @@
                     {{ __('About') }}
                 </x-responsive-nav-link>
 
-                {{-- Odds Comparison page link --}}
-                <x-responsive-nav-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
-                    {{ __('Odds Comparison') }}
-                </x-responsive-nav-link>
+                <div x-data="{ open: false }">
 
-                {{-- odd converter page link --}}
-                <x-responsive-nav-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
-                    {{ __('Odd Converter') }}
-                </x-responsive-nav-link>
+                    {{-- betting tools --}}
+                    <div @click="open = ! open" class="flex items-center">
+
+                        <p
+                            class="block pl-3 pr-1 py-1 border-l-4 border-transparent text-xs text-white transition duration-150 ease-in-out">
+                            Betting Tools</p>
+
+                        {{-- arrow --}}
+                        <svg class="fill-current transform -rotate-90 h-4 w-4" :class="{ 'rotate-0': open }"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                    </div>
+
+                    <div x-show="open" style="display: none">
+
+                        {{-- Odds Comparison page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
+                            {{ __('Odds Comparison') }}
+                        </x-responsive-nav-link>
+
+                        {{-- odd converter page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
+                            {{ __('Odd Converter') }}
+                        </x-responsive-nav-link>
+
+                    </div>
+
+                </div>
 
             </div>
 
