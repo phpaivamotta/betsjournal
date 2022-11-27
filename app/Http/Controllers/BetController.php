@@ -169,7 +169,7 @@ class BetController extends Controller
 
         foreach ($bets as $bet) {
             if ($bet->result === 1) {
-                $profitArray[] = $bet->payoff() - $bet->bet_size;
+                $profitArray[] = $bet->payout() - $bet->bet_size;
             } else if ($bet->result === 0) {
                 $profitArray[] = - ((float) $bet->bet_size);
             }
@@ -278,7 +278,7 @@ class BetController extends Controller
             'totalGains' =>  Bet::where('user_id', auth()->user()->id)
                 ->where('result', 1)
                 ->get()
-                ->map(fn ($bet) => $bet->payoff() - $bet->bet_size)
+                ->map(fn ($bet) => $bet->payout() - $bet->bet_size)
                 ->sum(),
 
             'totalLosses' =>  Bet::where('user_id', auth()->user()->id)
@@ -289,10 +289,10 @@ class BetController extends Controller
             'biggestBet' => Bet::where('user_id', auth()->user()->id)
                 ->max('bet_size'),
 
-            'biggestPayoff' => Bet::where('user_id', auth()->user()->id)
+            'biggestPayout' => Bet::where('user_id', auth()->user()->id)
                 ->where('result', 1)
                 ->get()
-                ->map(fn ($bet) => $bet->payoff())
+                ->map(fn ($bet) => $bet->payout())
                 ->max(),
 
             'biggestLoss' => Bet::where('user_id', auth()->user()->id)

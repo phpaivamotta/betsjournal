@@ -157,24 +157,24 @@
             @if (isset($bet->result))
                 {{-- if win --}}
                 @if ($bet->result)
-                    {{-- bet payoff --}}
+                    {{-- bet payout --}}
                     <div>
                         <p>
-                            <span class="text-xs">Payoff:</span>
+                            <span class="text-xs">Payout:</span>
                         </p>
 
                         <p>
                             <span
-                                class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payoff(), 'USD') }}</span>
+                                class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
                         </p>
                     </div>
 
                     {{-- if loss --}}
                 @else
-                    {{-- bet payoff --}}
+                    {{-- bet payout --}}
                     <div>
                         <p>
-                            <span class="text-xs">Payoff:</span>
+                            <span class="text-xs">Payout:</span>
                         </p>
                         <p>
                             <span class="text-md font-semibold">$0</span>
@@ -184,14 +184,14 @@
 
                 {{-- if there is no result yet --}}
             @else
-                {{-- potential bet payoff --}}
+                {{-- potential bet payout --}}
                 <div>
                     <p>
-                        <span class="text-xs">Potential Payoff:</span>
+                        <span class="text-xs">Potential Payout:</span>
                     </p>
                     <p>
                         <span
-                            class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payoff(), 'USD') }}</span>
+                            class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
                     </p>
                 </div>
             @endif

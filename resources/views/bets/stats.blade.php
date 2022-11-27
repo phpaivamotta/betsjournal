@@ -64,8 +64,8 @@
             {{-- biggest bet --}}
             <x-stat-card name='Biggest Bet' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($biggestBet, 'USD')" />
 
-            {{-- biggest payoff --}}
-            <x-stat-card name='Biggest Payoff' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($biggestPayoff, 'USD')" />
+            {{-- biggest payout --}}
+            <x-stat-card name='Biggest Payout' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($biggestPayout, 'USD')" />
 
             {{-- biggest loss --}}
             <x-stat-card name='Biggest Loss' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($biggestLoss, 'USD')" />
