@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-    {{-- @dd((config('services.oddspedia.token'))) --}}
-
     <div class="max-w-5xl mx-auto py-4 sm:px-6 lg:px-8 bg-gray-100">
 
         <div class="-mb-20 -mt-4" id="oddspedia-widget-odds-comparison-popular-false-sports-false-leagues-false">
