@@ -41,6 +41,14 @@
             </p>
         </div>
 
+        <div class="mb-6 w-full">
+            <h3 class="font-bold text-lg">Payout Calculator</h3>
+
+            <p class="text-sm">
+                If you want to quickly calculate the potential payout of a bet, you can use our <a href="{{ route('payout-calculator') }}"><span class="text-blue-500">Payout Calculator</span></a> tool to check the expected payout and profit. 
+            </p>
+        </div>
+
         <h3 class="font-bold text-lg">Bets</h3>
 
         <div class="mb-6 w-full">

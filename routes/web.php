@@ -29,6 +29,9 @@ Route::view('odds-comparison', 'odds-comparison')->name('odds-comparison');
 // odd converter page
 Route::view('odd-converter', 'odd-converter')->name('odd-converter');
 
+// payout calculator
+Route::view('payout-calculator', 'payout-calculator')->name('payout-calculator');
+
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
     // index all bets (LIVEWIRE!!)
