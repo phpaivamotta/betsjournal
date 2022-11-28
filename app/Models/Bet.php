@@ -43,7 +43,7 @@ class Bet extends Model
         });
     }
 
-    public function payoff()
+    public function payout()
     {
         return $this->decimal_odd * $this->bet_size;
     }

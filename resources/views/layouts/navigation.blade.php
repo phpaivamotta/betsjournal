@@ -70,6 +70,11 @@
                                 {{ __('Odd Converter') }}
                             </x-dropdown-link>
 
+                            {{-- payout calculator --}}
+                            <x-dropdown-link :href="route('payout-calculator')" :active="request()->routeIs('payout-calculator')">
+                                {{ __('Payout Calculator') }}
+                            </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -236,6 +241,11 @@
                             {{ __('Odd Converter') }}
                         </x-responsive-nav-link>
 
+                        {{-- payout calculator --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('payout-calculator')" :active="request()->routeIs('payout-calculator')">
+                            {{ __('Payout Calculator') }}
+                        </x-responsive-nav-link>
+
                     </div>
 
                 </div>
@@ -342,6 +352,11 @@
                         {{-- odd converter page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
                             {{ __('Odd Converter') }}
+                        </x-responsive-nav-link>
+
+                        {{-- odd payout calculator --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('payout-calculator')" :active="request()->routeIs('payout-calculator')">
+                            {{ __('Payout Calculator') }}
                         </x-responsive-nav-link>
 
                     </div>

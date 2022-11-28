@@ -112,13 +112,13 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
-        $totalPayoffs = $bets->map(function ($bet) {
+        $totalPayouts = $bets->map(function ($bet) {
             if ($bet->result) {
-                return $bet->payoff() - $bet->bet_size;
+                return $bet->payout() - $bet->bet_size;
             }
         })->sum();
 
-        $this->actingAs($user)->get('/stats')->assertViewHas('totalGains', $totalPayoffs);
+        $this->actingAs($user)->get('/stats')->assertViewHas('totalGains', $totalPayouts);
     }
 
     public function test_total_losses()
@@ -143,19 +143,19 @@ class StatsTest extends TestCase
         $this->actingAs($user)->get('/stats')->assertViewHas('biggestBet', $biggestBet);
     }
 
-    public function test_biggest_payoff()
+    public function test_biggest_payout()
     {
         $user = User::factory()->create();
 
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
-        $biggestPayoff = $bets->map(function ($bet) {
+        $biggestPayout = $bets->map(function ($bet) {
             if ($bet->result === true) {
-                return $bet->payoff();
+                return $bet->payout();
             }
         })->max();
 
-        $this->actingAs($user)->get('/stats')->assertViewHas('biggestPayoff', $biggestPayoff);
+        $this->actingAs($user)->get('/stats')->assertViewHas('biggestPayout', $biggestPayout);
     }
 
     public function test_biggest_loss()
@@ -196,10 +196,10 @@ class StatsTest extends TestCase
 
         $profitArray = [];
 
-        // get loss or payoff for every bet
+        // get loss or payout for every bet
         foreach ($bets as $bet) {
             if ($bet->result === 1) {
-                $profitArray[] = $bet->payoff();
+                $profitArray[] = $bet->payout();
             } else if ($bet->result === 0) {
                 $profitArray[] = - ((float) $bet->bet_size);
             }
