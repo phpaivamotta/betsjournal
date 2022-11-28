@@ -34,6 +34,15 @@
         </div>
 
         <div class="mb-6 w-full">
+            <h3 class="font-bold text-lg">World Cup 2022</h3>
+
+            <p class="text-sm">
+                Our <a href="{{ route('world-cup') }}"><span class="text-blue-500">World Cup</span></a> tool makes use of Oddspedia's special world cup widget/API.
+                This tool allows you to get insights into the matches of this world cup! From game stats to weather and odds data given by several different bookies for a given match.
+            </p>
+        </div>
+
+        <div class="mb-6 w-full">
             <h3 class="font-bold text-lg">Odd Converter</h3>
 
             <p class="text-sm">
