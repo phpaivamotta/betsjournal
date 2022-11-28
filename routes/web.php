@@ -23,8 +23,11 @@ Route::view('/', 'welcome')->name('home');
 // about page
 Route::view('about', 'about')->name('about');
 
-// value bets page
+// odds comparison page
 Route::view('odds-comparison', 'odds-comparison')->name('odds-comparison');
+
+// world cup page
+Route::view('world-cup', 'world-cup')->name('world-cup');
 
 // odd converter page
 Route::view('odd-converter', 'odd-converter')->name('odd-converter');

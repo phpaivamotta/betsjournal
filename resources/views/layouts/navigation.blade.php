@@ -65,6 +65,11 @@
                                 {{ __('Odds Comparison') }}
                             </x-dropdown-link>
 
+                            {{-- world cup --}}
+                            <x-dropdown-link :href="route('world-cup')" :active="request()->routeIs('world-cup')">
+                                {{ __('World Cup') }}
+                            </x-dropdown-link>
+
                             {{-- odd converter --}}
                             <x-dropdown-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
                                 {{ __('Odd Converter') }}
@@ -231,9 +236,14 @@
 
                     <div x-show="open" style="display: none">
 
-                        {{-- Odds Comparison page link --}}
+                        {{-- odds comparison page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                             {{ __('Odds Comparison') }}
+                        </x-responsive-nav-link>
+
+                        {{-- world cup page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('world-cup')" :active="request()->routeIs('world-cup')">
+                            {{ __('World Cup') }}
                         </x-responsive-nav-link>
 
                         {{-- odd converter page link --}}
@@ -344,9 +354,14 @@
 
                     <div x-show="open" style="display: none">
 
-                        {{-- Odds Comparison page link --}}
+                        {{-- odds comparison page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                             {{ __('Odds Comparison') }}
+                        </x-responsive-nav-link>
+
+                        {{-- world cup page link --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('world-cup')" :active="request()->routeIs('world-cup')">
+                            {{ __('World Cup') }}
                         </x-responsive-nav-link>
 
                         {{-- odd converter page link --}}
