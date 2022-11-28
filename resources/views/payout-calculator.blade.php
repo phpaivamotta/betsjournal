@@ -13,12 +13,8 @@
             Calculate the payout from a bet.
         </p>
 
-        <p class="font-medium text-sm mt-5 mb-1">
-            Odd Format:
-        </p>
-
         <!-- Odd Type -->
-        <div class="flex items-center">
+        <div class="flex items-center mt-5">
 
             <input class="mr-1" type="radio" name="odd_type" id="american" value="american" required>
             <x-input-label for="american" :value="__('American')" />
@@ -28,7 +24,7 @@
 
         </div>
 
-        {{-- checkbox error --}}
+        {{-- oddtype error --}}
         <span class="block mt-1 text-red-500 text-xs" id="odd_type_error" style="display: none;"></span>
 
 
@@ -53,13 +49,18 @@
 
         <x-primary-button type="button" class="mt-4" id="btn">Convert</x-primary-button>
 
-        <span class="bg-gray-400 block font-semibold mt-4 p-2 rounded-sm text-center text-white" id="payout"
+        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200" id="payout"
             style="display: none"></span>
 
-        <span class="bg-gray-400 block font-semibold mt-4 p-2 rounded-sm text-center text-white" id="profit"
+        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200" id="profit"
             style="display: none"></span>
 
-        <p class="border-gray-200 border-t-2 mt-6 pt-4 text-gray-700 text-sm">
+        {{-- betting tool info --}}
+        <p class="text-lg border-gray-200 border-t-2 mt-6 pt-4">
+            Tool Info
+        </p>
+
+        <p class="mt-3 text-gray-700 text-sm">
             Being able to calculate the returns for any single bet is an essential part of betting.
             This might be one of the simplest calculations done in betting, nut it is nonetheless essential. Our <span
                 class="italic">Payout Calculator</span> makes this calculation even simpler!
@@ -80,11 +81,13 @@
             profit is of 130 dollars.
         </p>
 
+        {{-- formulas --}}
         <p class="text-gray-700 text-sm mt-5">
             The following formulas can be used to calculate the payout.
         </p>
 
-        <p class="text-gray-700 text-sm mt-3 font-semibold">
+        {{-- decimal --}}
+        <p class="text-gray-700 text-sm mt-5 font-semibold">
             Formula for decimal odds:
         </p>
 
@@ -92,12 +95,13 @@
             Payout &nbsp; = &nbsp; Stake &nbsp; x &nbsp; Odd
         </p>
 
-        <p class="text-gray-700 text-sm mt-3 font-semibold">
+        {{-- american --}}
+        <p class="text-gray-700 text-sm mt-5 font-semibold">
             Formula for american odds:
         </p>
 
         <p class="text-gray-700 text-sm mt-1">
-            Favorite (-):
+            For negative odds:
         </p>
 
         <p class="bg-gray-700 py-4 rounded-sm text-center text-gray-200 text-sm mt-3">
@@ -105,13 +109,14 @@
         </p>
 
         <p class="text-gray-700 text-sm mt-3">
-            Underdog (+):
+            For positive odds:
         </p>
 
         <p class="bg-gray-700 py-4 rounded-sm text-center text-gray-200 text-sm mt-3">
             Payout &nbsp; = &nbsp; Stake &nbsp; x &nbsp; (Odd / 100) &nbsp; + &nbsp; Stake
         </p>
 
+        {{-- profit --}}
         <p class="text-gray-700 text-sm mt-5">
             Once the payout is known, the profit can be easily calculated by subtracting stake from it.
         </p>
@@ -133,7 +138,7 @@
         const payout = document.getElementById('payout')
         const profit = document.getElementById('profit')
         const oddTypeError = document.getElementById('odd_type_error')
-        const oddError = document.getElementById('odd_error')
+        const oddError = document.getElementById('odd_error')   
         const stakeError = document.getElementById('stake_error')
 
         button.addEventListener('click', () => {
