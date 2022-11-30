@@ -80,6 +80,11 @@
                                 {{ __('Payout Calculator') }}
                             </x-dropdown-link>
 
+                            {{-- margin calculator --}}
+                            <x-dropdown-link :href="route('margin-calculator')" :active="request()->routeIs('margin-calculator')">
+                                {{ __('Margin Calculator') }}
+                            </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -256,6 +261,11 @@
                             {{ __('Payout Calculator') }}
                         </x-responsive-nav-link>
 
+                        {{-- margin calculator --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('margin-calculator')" :active="request()->routeIs('margin-calculator')">
+                            {{ __('Margin Calculator') }}
+                        </x-responsive-nav-link>
+
                     </div>
 
                 </div>
@@ -372,6 +382,11 @@
                         {{-- odd payout calculator --}}
                         <x-responsive-nav-link class="pl-6" :href="route('payout-calculator')" :active="request()->routeIs('payout-calculator')">
                             {{ __('Payout Calculator') }}
+                        </x-responsive-nav-link>
+
+                        {{-- margin calculator --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('margin-calculator')" :active="request()->routeIs('margin-calculator')">
+                            {{ __('Margin Calculator') }}
                         </x-responsive-nav-link>
 
                     </div>

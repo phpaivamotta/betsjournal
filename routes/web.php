@@ -23,17 +23,21 @@ Route::view('/', 'welcome')->name('home');
 // about page
 Route::view('about', 'about')->name('about');
 
+// betting tools
 // odds comparison page
-Route::view('odds-comparison', 'odds-comparison')->name('odds-comparison');
+Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
 
 // world cup page
-Route::view('world-cup', 'world-cup')->name('world-cup');
+Route::view('world-cup', 'betting-tools/world-cup')->name('world-cup');
 
 // odd converter page
-Route::view('odd-converter', 'odd-converter')->name('odd-converter');
+Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
 
 // payout calculator
-Route::view('payout-calculator', 'payout-calculator')->name('payout-calculator');
+Route::view('payout-calculator', 'betting-tools/payout-calculator')->name('payout-calculator');
+
+// margin calculator
+Route::view('margin-calculator', 'betting-tools/margin-calculator')->name('margin-calculator');
 
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
