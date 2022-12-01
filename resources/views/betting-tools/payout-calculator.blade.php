@@ -51,7 +51,7 @@
 
         </div>
 
-        <x-primary-button type="button" class="mt-4" id="btn">Convert</x-primary-button>
+        <x-primary-button type="button" class="mt-4" id="btn">Calculate</x-primary-button>
 
         <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200"
             id="payout" style="display: none"></span>
