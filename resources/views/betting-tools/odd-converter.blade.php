@@ -13,8 +13,12 @@
             Convert odds type/format from either american to decimal or from decimal to american.
         </p>
 
-        <!-- Odd Type -->
-        <div class="flex items-center mt-5">
+        <!-- Odd Format -->
+        <p class="mt-5 mb-1 font-medium text-sm">
+            Odd Format:
+        </p>
+
+        <div class="flex items-center">
 
             <input class="mr-1" type="radio" name="to_odd_type" id="to_american" value="to_american">
             <x-input-label for="to_american" :value="__('To American')" />
@@ -46,9 +50,11 @@
             id="implied_probability" style="display: none"></span>
 
         {{-- betting tool info --}}
-        <p class="text-lg border-gray-200 border-t-2 mt-6 pt-4">
-            Tool Info
-        </p>
+        <div class="flex items-center space-x-2 text-lg border-gray-200 border-t-2 mt-6 pt-4">
+            <x-info-svg />
+
+            <p>Tool Info</p>
+        </div>
 
         <p class="mt-3 text-gray-700 text-sm">
             Being able to convert odds from decimal to american or vice-versa can be very helpful. The odds format you
@@ -117,75 +123,75 @@
         const oddError = document.getElementById('odd_error')
 
         button.addEventListener('click', () => {
-                // get inputs
-                const odd = document.getElementById('odd').value
-                const toOddType = document.getElementsByName('to_odd_type')
+            // get inputs
+            const odd = document.getElementById('odd').value
+            const toOddType = document.getElementsByName('to_odd_type')
 
-                // reset error fields
-                toOddTypeError.innerHTML = ''
-                oddError.innerHTML = ''
+            // reset error fields
+            toOddTypeError.innerHTML = ''
+            oddError.innerHTML = ''
 
-                // reset and hide payout and profit fields
-                convertedOdd.innerHTML = ''
-                convertedOdd.style.display = "none"
-                impliedProbability.innerHTML = ''
-                impliedProbability.style.display = "none"
+            // reset and hide payout and profit fields
+            convertedOdd.innerHTML = ''
+            convertedOdd.style.display = "none"
+            impliedProbability.innerHTML = ''
+            impliedProbability.style.display = "none"
 
-                // check if any input field is empty
-                let emptyField = false
+            // check if any input field is empty
+            let emptyField = false
 
-                if (!toOddType[0].checked && !toOddType[1].checked) {
+            if (!toOddType[0].checked && !toOddType[1].checked) {
 
-                    toOddTypeError.innerHTML = 'The to odd type field is required'
-                    toOddTypeError.style.display = "block"
-                    emptyField = true
+                toOddTypeError.innerHTML = 'The to odd type field is required'
+                toOddTypeError.style.display = "block"
+                emptyField = true
 
-                }
+            }
 
-                if (!odd) {
+            if (!odd) {
 
-                    oddError.innerHTML = 'The odd field is required'
-                    oddError.style.display = "block"
-                    emptyField = true
+                oddError.innerHTML = 'The odd field is required'
+                oddError.style.display = "block"
+                emptyField = true
 
-                }
+            }
 
-                if (!emptyField) {
+            if (!emptyField) {
 
-                    if (toOddType[0].checked) {
+                if (toOddType[0].checked) {
 
-                        if (odd < 1) {
-                            convertedOdd.innerHTML = 'N/A'
-                            impliedProbability.innerHTML = 'N/A'
-                        } else if (odd == 1) {
-                            convertedOdd.innerHTML = 'N/A'
-                            impliedProbability.innerHTML = '100%'
+                    if (odd < 1) {
+                        convertedOdd.innerHTML = 'N/A'
+                        impliedProbability.innerHTML = 'N/A'
+                    } else if (odd == 1) {
+                        convertedOdd.innerHTML = 'N/A'
+                        impliedProbability.innerHTML = '100%'
+                    } else {
+                        if (odd >= 2) {
+                            convertedOdd.innerHTML = 'American: +' + decimalToAmerican(odd).toFixed(3)
                         } else {
-                            if (odd >= 2) {
-                                convertedOdd.innerHTML = 'American: +' + decimalToAmerican(odd).toFixed(3)
-                            } else {
-                                convertedOdd.innerHTML = 'American: ' + decimalToAmerican(odd).toFixed(3)
-                            }
-
-                            impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(odd).toFixed(
-                                    2) +
-                                '%'
+                            convertedOdd.innerHTML = 'American: ' + decimalToAmerican(odd).toFixed(3)
                         }
 
-                    } else if (toOddType[1].checked) {
-
-                        const decimalOdd = americanToDecimal(odd).toFixed(3)
-                        convertedOdd.innerHTML = 'Decimal: ' + decimalOdd
-                        impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(decimalOdd)
-                            .toFixed(
-                                2) + '%'
-
+                        impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(odd).toFixed(
+                                2) +
+                            '%'
                     }
 
-                    convertedOdd.style.display = "block"
-                    impliedProbability.style.display = "block"
+                } else if (toOddType[1].checked) {
+
+                    const decimalOdd = americanToDecimal(odd).toFixed(3)
+                    convertedOdd.innerHTML = 'Decimal: ' + decimalOdd
+                    impliedProbability.innerHTML = 'Implied Probability: ' + toImpliedProbability(decimalOdd)
+                        .toFixed(
+                            2) + '%'
+
                 }
-            })
+
+                convertedOdd.style.display = "block"
+                impliedProbability.style.display = "block"
+            }
+        })
 
         function americanToDecimal(odd) {
             if (odd > 0) {

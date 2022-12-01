@@ -13,8 +13,12 @@
             Calculate the payout from a bet.
         </p>
 
-        <!-- Odd Type -->
-        <div class="flex items-center mt-5">
+        <!-- Odd Format -->
+        <p class="mt-5 mb-1 font-medium text-sm">
+            Odd Format:
+        </p>
+
+        <div class="flex items-center">
 
             <input class="mr-1" type="radio" name="odd_type" id="american" value="american" required>
             <x-input-label for="american" :value="__('American')" />
@@ -49,20 +53,22 @@
 
         <x-primary-button type="button" class="mt-4" id="btn">Convert</x-primary-button>
 
-        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200" id="payout"
-            style="display: none"></span>
+        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200"
+            id="payout" style="display: none"></span>
 
-        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200" id="profit"
-            style="display: none"></span>
+        <span class="bg-gray-700 block font-semibold text-sm mt-4 p-2 rounded-sm text-center text-gray-200"
+            id="profit" style="display: none"></span>
 
         {{-- betting tool info --}}
-        <p class="text-lg border-gray-200 border-t-2 mt-6 pt-4">
-            Tool Info
-        </p>
+        <div class="flex items-center space-x-2 text-lg border-gray-200 border-t-2 mt-6 pt-4">
+            <x-info-svg />
+
+            <p>Tool Info</p>
+        </div>
 
         <p class="mt-3 text-gray-700 text-sm">
             Being able to calculate the returns for any single bet is an essential part of betting.
-            This might be one of the simplest calculations done in betting, nut it is nonetheless essential. Our <span
+            This might be one of the simplest calculations done in betting, but it is nonetheless essential. Our <span
                 class="italic">Payout Calculator</span> makes this calculation even simpler!
         </p>
 
@@ -138,7 +144,7 @@
         const payout = document.getElementById('payout')
         const profit = document.getElementById('profit')
         const oddTypeError = document.getElementById('odd_type_error')
-        const oddError = document.getElementById('odd_error')   
+        const oddError = document.getElementById('odd_error')
         const stakeError = document.getElementById('stake_error')
 
         button.addEventListener('click', () => {
