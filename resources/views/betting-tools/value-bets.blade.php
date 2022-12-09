@@ -106,20 +106,23 @@
                         <p>{{ $match['sport'] }}</p>
                         <p>{{ $match['dateTime'] }}</p>
                         <p>{{ $bookie }}</p>
-                        
+
                         @if (isset($valueBet['awayOdds']))
                             <p>Home: {{ $valueBet['awayOdds']['moneyline'] }}</p>
-                            <p>{{ $valueBet['awayOdds']['overvalue'] }}</p>
+                            <p>Overvalue: {{ $valueBet['awayOdds']['overvalue'] }}</p>
+                            <p>#Bookies analyzed: {{ $match['homeAvg']['numBookies'] }}</p>
                         @endif
 
                         @if (isset($valueBet['homeOdds']))
                             <p>Away: {{ $valueBet['homeOdds']['moneyline'] }}</p>
-                            <p>{{ $valueBet['homeOdds']['overvalue'] }}</p>
+                            <p>Overvalue: {{ $valueBet['homeOdds']['overvalue'] }}</p>
+                            <p>#Bookies analyzed: {{ $match['awayAvg']['numBookies'] }}</p>
                         @endif
 
                         @if (isset($valueBet['drawOdds']))
                             <p>Draw: {{ $valueBet['drawOdds']['moneyline'] }}</p>
-                            <p>{{ $valueBet['drawOdds']['overvalue'] }}</p>
+                            <p>Overvalue: {{ $valueBet['drawOdds']['overvalue'] }}</p>
+                            <p>#Bookies analyzed: {{ $match['drawAvg']['numBookies'] }}</p>
                         @endif
                     </div>
                 @endforeach

@@ -227,18 +227,18 @@ Route::post('value-bets', function (Request $request) {
         $avgOddsTest['away'] = $awayTeam;
 
         $avgOddsTest['homeAvg'] = [
-            'homeAverageOdds' => $homeTeamAverageOdds,
-            'homeNumBookies' => $homeTeamNumBookies
+            'averageOdds' => $homeTeamAverageOdds,
+            'numBookies' => $homeTeamNumBookies
         ];
 
         $avgOddsTest['awayAvg'] = [
-            'awayAverageOdds' => $awayTeamAverageOdds,
-            'awayNumBookies' => $awayTeamNumBookies
+            'averageOdds' => $awayTeamAverageOdds,
+            'numBookies' => $awayTeamNumBookies
         ];
 
         $avgOddsTest['drawAvg'] = [
-            'drawAverageOdds' => $drawAverageOdds,
-            'drawNumBookies' => $drawNumBookies
+            'averageOdds' => $drawAverageOdds,
+            'numBookies' => $drawNumBookies
         ];
 
         $oddStats = [];
