@@ -54,15 +54,15 @@
         {{-- filters --}}
         <div class="flex justify-end sm:mr-4">
             <input wire:model="win" type="checkbox" name="win" id="win"
-                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             <label for="win" class="ml-1 mr-4 text-sm text-gray-600">Win</label>
 
             <input wire:model="loss" type="checkbox" name="loss" id="loss"
-                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             <label for="loss" class="ml-1 mr-4 text-sm text-gray-600">Loss</label>
 
             <input wire:model="na" type="checkbox" name="na" id="na"
-                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
         </div>
 
@@ -71,13 +71,11 @@
 
         {{-- display bets --}}
         @forelse ($bets as $bet)
-
             <x-bet-card :bet="$bet" />
 
         @empty
 
             <p>You haven't logged any bets yet.</p>
-
         @endforelse
 
         {{-- pagination --}}
