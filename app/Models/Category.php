@@ -11,6 +11,14 @@ class Category extends Model
 
     protected $guarded = [];
 
+    public const COLORS = [
+        'blue',
+        'indigo',
+        'brown',
+        'black',
+        'yellow',
+    ];
+
     public function bets()
     {
         return $this->belongsToMany(Bet::class);

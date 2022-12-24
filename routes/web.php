@@ -3,6 +3,7 @@
 use App\Http\Controllers\BetCategoryController;
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -68,17 +69,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('stats', [BetController::class, 'stats'])
         ->name('bets.stats');
 
-    // create a category
-    Route::post('categories', [BetCategoryController::class, 'store'])
-        ->name('bets.categories.store');
-
-    // view categories
-    Route::get('categories', [BetCategoryController::class, 'index'])
-        ->name('bets.categories.index');
-
-    // update categories
-    Route::patch('categories/{category}', [BetCategoryController::class, 'update'])
-        ->name('bets.categories.update');
+    // Livewire categories 
+    Route::get('categories', BetCategory::class)
+        ->name('bets.categories');
 
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
