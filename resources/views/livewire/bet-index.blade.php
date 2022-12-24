@@ -87,7 +87,7 @@
 
     {{-- delete bet modal --}}
     <form wire:submit.prevent="deleteBet">
-        <x-delete-modal wire:model.defer="showDeleteModal">
+        <x-modal wire:model.defer="showDeleteModal" delete="{{ true }}">
 
             <x-slot name="title">
                 Are you sure?
@@ -111,7 +111,7 @@
                     Delete
                 </x-primary-button>
             </x-slot>
-        </x-delete-modal>
+        </x-modal>
     </form>
 
     {{-- tooltip --}}

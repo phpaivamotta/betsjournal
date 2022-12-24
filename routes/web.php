@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BetCategoryController;
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\BetCategory;

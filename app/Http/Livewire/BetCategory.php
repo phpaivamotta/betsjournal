@@ -12,6 +12,7 @@ class BetCategory extends Component
     public $colors = Category::COLORS;
     public Category $currentCategory;
     public $showDeleteModal = false;
+    public $showUpdateModal = false;
     
     public function mount()
     {
@@ -56,7 +57,7 @@ class BetCategory extends Component
             'color' => $this->color
         ]);
 
-        $this->name = '';
+        $this->resetAttributes();
     }
 
     public function confirmDelete(Category $category)
@@ -73,5 +74,36 @@ class BetCategory extends Component
         $this->showDeleteModal = false;
 
         session()->flash('success', 'Category deleted!');
+    }
+
+    public function selectCategoryToEdit(Category $category)
+    {
+        $this->currentCategory = $category;
+
+        $this->name = $this->currentCategory->name;
+        $this->color = $this->currentCategory->color;
+
+        $this->showUpdateModal = true;
+    }
+
+    public function updateCategory()
+    {
+        $this->validate();
+
+        $this->currentCategory->update([
+            'name' => $this->name,
+            'color' => $this->color
+        ]);
+
+        $this->resetAttributes();
+
+        session()->flash('success', 'Category updated!');
+    }
+
+    public function resetAttributes()
+    {
+        $this->name = '';
+        $this->color = 'blue';
+        $this->showUpdateModal = false;
     }
 }

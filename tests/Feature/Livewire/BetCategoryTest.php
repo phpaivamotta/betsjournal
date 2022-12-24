@@ -164,4 +164,28 @@ class BetCategoryTest extends TestCase
         $this->assertDatabaseMissing('categories', $category->toArray());
     }
 
+    public function test_a_user_update_a_category()
+    {
+        $this->signIn();
+
+        $category = auth()->user()->categories()->create([
+            'name' => 'category name',
+            'color' => 'category color'
+        ]);
+
+        Livewire::test(BetCategory::class)
+            ->call('selectCategoryToEdit', $category->id)
+            ->assertSee('Update')
+            ->assertSee($category->name)
+            ->set('name', 'new category name')
+            ->set('color', 'new category color')
+            ->call('updateCategory')
+            ->assertSee('Category updated!');
+
+        $this->assertDatabaseHas('categories', [
+            'name' => 'new category name',
+            'color' => 'new category color'
+        ]);
+    }
+
 }

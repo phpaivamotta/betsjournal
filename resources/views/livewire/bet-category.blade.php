@@ -49,9 +49,10 @@
                         <div class="flex items-center">
                             <span class="bg-[{{ $category->color }}] w-4 h-4 rounded-full mr-3"></span>
 
-                            <p class="font-semibold hover:text-blue-500">
+                            <button wire:click="selectCategoryToEdit({{ $category->id }})" type="button"
+                                class="font-semibold hover:text-blue-500">
                                 {{ $category->name }}
-                            </p>
+                            </button>
                         </div>
 
                         <button wire:click="confirmDelete({{ $category->id }})" type="button">
@@ -74,7 +75,7 @@
 
     {{-- delete category modal --}}
     <form wire:submit.prevent="deleteCategory">
-        <x-delete-modal wire:model.defer="showDeleteModal">
+        <x-modal wire:model.defer="showDeleteModal" delete="{{ true }}">
 
             <x-slot name="title">
                 Are you sure?
@@ -98,7 +99,52 @@
                     Delete
                 </x-primary-button>
             </x-slot>
-        </x-delete-modal>
+        </x-modal>
+    </form>
+
+    {{-- update category modal --}}
+    <form wire:submit.prevent="updateCategory">
+        <x-modal wire:model.defer="showUpdateModal" delete="{{ false }}">
+
+            <x-slot name="title">
+                Update
+            </x-slot>
+
+            <x-slot name="message">
+                
+                {{-- category name --}}
+                <div>
+                    <x-input-label for="name" :value="__('Category')" />
+
+                    <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text"
+                        autofocus />
+                </div>
+
+                {{-- color --}}
+                <div class="mt-4">
+                    <x-input-label for="color" :value="__('Color')" />
+
+                    <select wire:model="color" class="block mt-1 w-full rounded" id="colors">
+                        <option disabled>Select a color</option>
+                        @foreach ($colors as $color)
+                            <option class="ml-4" value="{{ $color }}">{{ $color }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </x-slot>
+
+            <x-slot name="buttons">
+                <x-primary-button 
+                wire:click="resetAttributes" type="button">
+                    Cancel
+                </x-primary-button>
+
+                <x-primary-button class="bg-red-900 hover:bg-red-800 ml-2">
+                    Update
+                </x-primary-button>
+            </x-slot>
+        </x-modal>
     </form>
 
 </div>
