@@ -35,8 +35,19 @@
         <form method="POST" action="{{ route('bets.store') }}">
             @csrf
 
-            <!-- match -->
+            <!-- categories -->
             <div>
+                <x-input-label for="categories" :value="__('Categories')" />
+
+                <select multiple name="categories[]" id="categories" class="block border-gray-300 h-20 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    @foreach (auth()->user()->categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- match -->
+            <div class="mt-4">
                 <x-input-label for="match" :value="__('Match')" />
 
                 <x-text-input id="match" class="block mt-1 w-full" type="text" name="match" :value="old('match')"

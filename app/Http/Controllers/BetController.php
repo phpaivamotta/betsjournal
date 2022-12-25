@@ -63,7 +63,10 @@ class BetController extends Controller
         $attributes['user_id'] = auth()->id();
 
         // persist
-        Bet::create($attributes);
+        $bet = Bet::create($attributes);
+
+        // attach categories
+        $bet->categories()->attach($request['categories']);
 
         // redirect
         return redirect('/bets')->with('success', "You've created a new bet!");
@@ -150,6 +153,9 @@ class BetController extends Controller
         }
 
         $bet->update($attributes);
+
+        // sync categories
+        $bet->categories()->sync($request['categories']);
 
         return redirect('/bets')->with('success', "Bet updated!");
     }

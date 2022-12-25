@@ -32,7 +32,7 @@
             <div class="mt-4">
                 <x-input-label for="color" :value="__('Color')" />
 
-                <select wire:model="color" class="block mt-1 w-full rounded" id="colors">
+                <select wire:model="color" class="shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2" id="colors">
                     <option disabled>Select a color</option>
                     @foreach ($colors as $color)
                         <option class="ml-4" value="{{ $color }}">{{ $color }}</option>
@@ -85,6 +85,7 @@
                 <p>
                     Do you really wish to delete this category?
                 </p>
+
                 <p class="font-bold mt-1">
                     {{ $currentCategory->name }}
                 </p>

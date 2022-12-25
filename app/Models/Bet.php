@@ -12,6 +12,7 @@ class Bet extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $with = ['categories'];
 
     public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
     {

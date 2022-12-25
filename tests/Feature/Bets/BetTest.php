@@ -4,6 +4,7 @@ namespace Tests\Feature\Bets;
 
 use App\Http\Livewire\BetIndex;
 use App\Models\Bet;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -175,6 +176,70 @@ class BetTest extends TestCase
 
         // post to route and confirm session has error
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match_time');
+    }
+
+    public function test_bet_can_have_categories()
+    {
+        $this->signIn();
+        
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => 2.20
+        ]);
+
+        $bet['categories'] = $categories->pluck('id')->toArray();
+
+        $this->post('/bets', $bet);
+
+        $this->assertDatabaseCount('bet_category', 2);
+    }
+
+    public function test_categories_can_be_seen()
+    {
+        $this->signIn();
+        
+        $category = Category::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+        
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet->categories()->attach($category->id);
+
+        $this->get('/bets')->assertSee($category->name);
+    }
+
+    public function test_bet_categories_can_be_edited()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+        
+        $categories = Category::factory(5)->create([
+            'user_id' => auth()->id()
+        ]);
+        
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet->categories()->attach($categories->first()->id);
+
+        $rawBet = $bet->toArray();
+
+        $rawBet['categories'] = $categories->last()->id;
+        $rawBet['odd'] = 2.20;
+
+        $this->patch("/bets/{$bet->id}", $rawBet);
+
+        $this->assertDatabaseHas('categories', ['name' => $categories->last()->name]);
+        $this->get('/bets')->assertSee($categories->last()->name);
     }
 
     public function test_sport_can_be_seen()

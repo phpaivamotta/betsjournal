@@ -29,7 +29,7 @@ class BetIndex extends Component
                 ->filter($this->search, $this->win, $this->loss, $this->na)
                 ->orderBy('match_date', 'desc')
                 ->orderBy('match_time', 'desc')
-                ->paginate(20)
+                ->paginate(20),
         ]);
     }
 
