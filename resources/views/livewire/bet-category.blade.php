@@ -65,7 +65,11 @@
                 @endforelse
             </div>
 
-            <div class="flex justify-end mt-4">
+            <div class="flex items-center justify-end mt-4">
+                <a href="{{ route('bets.index') }}" class="text-sm text-blue-500 mr-3">
+                    Back
+                </a>
+
                 <x-primary-button>
                     {{ __('Create') }}
                 </x-primary-button>

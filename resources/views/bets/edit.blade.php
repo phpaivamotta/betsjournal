@@ -9,27 +9,50 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />
 
+        {{-- bet links --}}
+        <div class="mb-10 mt-1">
+            <div class="flex items-center mb-4">
+
+                {{-- new bet link --}}
+                <a href="{{ route('bets.index') }}"
+                    class="bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2">
+                    <p class="text-sm">
+                        All
+                    </p>
+                </a>
+
+                {{-- stats link --}}
+                <a href="{{ route('bets.stats') }}"
+                    class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2">
+                    <p class="text-sm">
+                        Stats
+                    </p>
+                </a>
+            </div>
+        </div>
+
         <form method="POST" action="{{ route('bets.update', ['bet' => $bet]) }}">
             @method('PATCH')
             @csrf
 
             <!-- categories -->
-            <div>
-                <x-input-label for="categories" :value="__('Categories')" />
+            @if (auth()->user()->categories->count())
+                <div>
+                    <x-input-label for="categories" :value="__('Categories')" />
 
-                <select multiple name="categories[]" id="categories" class="block border-gray-300 h-20 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select multiple name="categories[]" id="categories"
+                        class="block border-gray-300 h-20 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                    @foreach (auth()->user()->categories as $category)
-                        <option 
-                        {{ $bet->categories->contains($category) ? 'selected' : '' }} 
-                        value="{{ $category->id }}"
-                        >
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
+                        @foreach (auth()->user()->categories as $category)
+                            <option {{ $bet->categories->contains($category) ? 'selected' : '' }}
+                                value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
 
-                </select>
-            </div>
+                    </select>
+                </div>
+            @endif
 
             <!-- match -->
             <div class="mt-4">
@@ -123,16 +146,16 @@
             <div class="mt-4">
                 <x-input-label for="bet_pick" :value="__('Bet Pick')" />
 
-                <x-text-input id="bet_pick" class="block mt-1 w-full" type="text" name="bet_pick" :value="old('bet_pick', $bet->bet_pick)"
-                    required />
+                <x-text-input id="bet_pick" class="block mt-1 w-full" type="text" name="bet_pick"
+                    :value="old('bet_pick', $bet->bet_pick)" required />
             </div>
 
             <!-- sport -->
             <div class="mt-4">
                 <x-input-label for="sport" :value="__('Sport')" />
 
-                <x-text-input id="sport" class="block mt-1 w-full" type="text" name="sport" :value="old('sport', $bet->sport)"
-                    required />
+                <x-text-input id="sport" class="block mt-1 w-full" type="text" name="sport"
+                    :value="old('sport', $bet->sport)" required />
             </div>
 
             {{-- date --}}
@@ -157,8 +180,8 @@
             <div class="mt-4">
                 <div class="flex items-center gap-2">
                     <x-input-label for="bet_description" :value="__('Description (optional)')" />
-                    
-                    <x-tooltip id="descriptionTooltip"/>
+
+                    <x-tooltip id="descriptionTooltip" />
                 </div>
 
                 <x-text-input id="bet_description" class="block mt-1 w-full" type="text" name="bet_description"

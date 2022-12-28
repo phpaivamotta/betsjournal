@@ -16,6 +16,7 @@ class BetIndex extends Component
     public $win;
     public $loss;
     public $na;
+    public $categories = [];
 
     public function mount()
     {
@@ -26,6 +27,7 @@ class BetIndex extends Component
     {
         return view('livewire.bet-index', [
             'bets' => Bet::where('user_id', '=', auth()->id() )
+                ->withCategories($this->categories)
                 ->filter($this->search, $this->win, $this->loss, $this->na)
                 ->orderBy('match_date', 'desc')
                 ->orderBy('match_time', 'desc')

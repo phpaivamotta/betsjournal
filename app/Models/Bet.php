@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use NumberFormatter;
 
 class Bet extends Model
@@ -42,6 +43,17 @@ class Bet extends Model
             });
 
         });
+    }
+
+    public function scopeWithCategories($query, array $categories = null)
+    {
+        if ($categories) {
+            return $query->whereHas('categories', function (Builder $query) use ($categories) {
+                $query->whereIn('id', $categories);
+            });
+        }
+
+        return $query;
     }
 
     public function payout()

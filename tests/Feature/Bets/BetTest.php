@@ -18,6 +18,8 @@ class BetTest extends TestCase
 
     public function test_the_component_can_render()
     {
+        $this->signIn();
+
         $component = Livewire::test(BetIndex::class);
  
         $component->assertStatus(200);
@@ -507,5 +509,33 @@ class BetTest extends TestCase
             ->assertSee($bet_na->match)
             ->set('search', '')
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match]);
+    }
+
+    public function test_categories_filter_works()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bets = Bet::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bets->first()->categories()->attach($categories->pluck('id')->toArray()[0]);
+
+        $bets->last()->categories()->attach($categories->pluck('id')->toArray()[1]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee($bets->pluck('match')->toArray())
+            ->set('categories', [$categories->first()->id])
+            ->assertSee($bets->first()->match)
+            ->assertDontSee($bets->last()->match)
+            ->set('categories', [$categories->last()->id])
+            ->assertSee($bets->last()->match)
+            ->assertDontSee($bets->first()->match);
     }
 }
