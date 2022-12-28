@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,10 @@ Route::middleware(['auth'])->group(function () {
     // view all bets stats
     Route::get('stats', [BetController::class, 'stats'])
         ->name('bets.stats');
+
+    // Livewire categories 
+    Route::get('categories', BetCategory::class)
+        ->name('bets.categories');
 
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');

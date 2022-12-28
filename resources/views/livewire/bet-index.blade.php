@@ -35,7 +35,7 @@
                     <div class="input-group relative flex items-stretch w-full rounded">
                         <input wire:model="search" type="search" name="search"
                             class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                            placeholder="Search..." aria-label="Search" aria-describedby="button-addon2">
                         <span
                             class="input-group-text hidden sm:flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded"
                             id="basic-addon2">
@@ -66,18 +66,51 @@
             <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
         </div>
 
+        <div class="flex items-center">
+
+            {{-- categories setting --}}
+            <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
+                class="bg-blue-900 font-semibold hover:opacity-75 p-4 rounded-lg text-center text-white">
+                <svg class="w-4 mx-auto" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g stroke="none" stroke-width="1" fill="#f3f3ed" fill-rule="evenodd">
+                        <g>
+                            <path
+                                d="M3.93830521,6.49683865 C3.63405147,7.02216933 3.39612833,7.5907092 3.23599205,8.19100199 L5.9747955e-16,9 L9.6487359e-16,11 L3.23599205,11.808998 C3.39612833,12.4092908 3.63405147,12.9778307 3.93830521,13.5031614 L2.22182541,16.363961 L3.63603897,17.7781746 L6.49683865,16.0616948 C7.02216933,16.3659485 7.5907092,16.6038717 8.19100199,16.7640079 L9,20 L11,20 L11.808998,16.7640079 C12.4092908,16.6038717 12.9778307,16.3659485 13.5031614,16.0616948 L16.363961,17.7781746 L17.7781746,16.363961 L16.0616948,13.5031614 C16.3659485,12.9778307 16.6038717,12.4092908 16.7640079,11.808998 L20,11 L20,9 L16.7640079,8.19100199 C16.6038717,7.5907092 16.3659485,7.02216933 16.0616948,6.49683865 L17.7781746,3.63603897 L16.363961,2.22182541 L13.5031614,3.93830521 C12.9778307,3.63405147 12.4092908,3.39612833 11.808998,3.23599205 L11,0 L9,0 L8.19100199,3.23599205 C7.5907092,3.39612833 7.02216933,3.63405147 6.49683865,3.93830521 L3.63603897,2.22182541 L2.22182541,3.63603897 L3.93830521,6.49683865 L3.93830521,6.49683865 Z M10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 L10,13 Z">
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+
+            <!-- categories -->
+            @if (auth()->user()->categories->count())
+                <div class="ml-4 w-full">
+                    <x-input-label for="categories" :value="__('Categories')" />
+
+                    <select wire:model="categories" multiple id="categories"
+                        class="block border-gray-300 h-20 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                        @foreach (auth()->user()->categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+            @endif
+
+        </div>
+
         {{-- success flash message --}}
         <x-flash />
 
         {{-- display bets --}}
         @forelse ($bets as $bet)
-
             <x-bet-card :bet="$bet" />
 
         @empty
 
             <p>You haven't logged any bets yet.</p>
-
         @endforelse
 
         {{-- pagination --}}
@@ -87,7 +120,7 @@
 
     {{-- delete bet modal --}}
     <form wire:submit.prevent="deleteBet">
-        <x-delete-modal wire:model.defer="showDeleteModal">
+        <x-modal wire:model.defer="showDeleteModal" delete="{{ true }}">
 
             <x-slot name="title">
                 Are you sure?
@@ -111,16 +144,13 @@
                     Delete
                 </x-primary-button>
             </x-slot>
-        </x-delete-modal>
+        </x-modal>
     </form>
 
     {{-- tooltip --}}
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
-        tippy('.trippy-tippy', {
-            content: 'Change odds type in Edit Profile',
-            trigger: 'mouseenter click',
-        });
+        tippy('[data-tippy-content]');
     </script>
 </div>

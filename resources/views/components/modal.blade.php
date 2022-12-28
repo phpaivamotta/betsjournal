@@ -1,3 +1,5 @@
+@props(['delete'])
+
 <div 
     x-data="{ show: @entangle($attributes->wire('model')) }" 
     x-show="show"
@@ -7,7 +9,8 @@
 
 <div @click="show = false" class="fixed inset-0 bg-gray-900 opacity-70"></div>
 
-    <div class="fixed bg-white shadow-md p-6 max-w-sm rounded-lg m-auto max-h-56 inset-0 overflow-auto" 
+    <div class="fixed bg-white shadow-md p-6 max-w-sm rounded-lg m-auto 
+    {{ $delete ? 'max-h-56' : 'max-h-72' }} inset-0 overflow-auto" 
     x-show="show"
     x-transition
     >

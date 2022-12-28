@@ -16,6 +16,24 @@ class BetIndex extends Component
     public $win;
     public $loss;
     public $na;
+    public $categories = [];
+
+    public function mount()
+    {
+        $this->currentBet = new Bet();
+    }
+
+    public function render()
+    {
+        return view('livewire.bet-index', [
+            'bets' => Bet::where('user_id', '=', auth()->id() )
+                ->withCategories($this->categories)
+                ->filter($this->search, $this->win, $this->loss, $this->na)
+                ->orderBy('match_date', 'desc')
+                ->orderBy('match_time', 'desc')
+                ->paginate(20),
+        ]);
+    }
 
     public function updatingSearch()
     {
@@ -35,22 +53,6 @@ class BetIndex extends Component
     public function updatingNa()
     {
         $this->resetPage();
-    }
-
-    public function mount()
-    {
-        $this->currentBet = new Bet();
-    }
-
-    public function render()
-    {
-        return view('livewire.bet-index', [
-            'bets' => Bet::where('user_id', '=', auth()->id() )
-                ->filter($this->search, $this->win, $this->loss, $this->na)
-                ->orderBy('match_date', 'desc')
-                ->orderBy('match_time', 'desc')
-                ->paginate(20)
-        ]);
     }
 
     public function confirmDelete(Bet $bet)

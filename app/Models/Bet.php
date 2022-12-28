@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use NumberFormatter;
 
 class Bet extends Model
@@ -12,6 +13,7 @@ class Bet extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $with = ['categories'];
 
     public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
     {
@@ -43,6 +45,17 @@ class Bet extends Model
         });
     }
 
+    public function scopeWithCategories($query, array $categories = null)
+    {
+        if ($categories) {
+            return $query->whereHas('categories', function (Builder $query) use ($categories) {
+                $query->whereIn('id', $categories);
+            });
+        }
+
+        return $query;
+    }
+
     public function payout()
     {
         return $this->decimal_odd * $this->bet_size;
@@ -59,5 +72,10 @@ class Bet extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }
