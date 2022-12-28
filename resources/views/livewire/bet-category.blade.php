@@ -32,7 +32,9 @@
             <div class="mt-4">
                 <x-input-label for="color" :value="__('Color')" />
 
-                <select wire:model="color" class="shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2" id="colors">
+                <select wire:model="color"
+                    class="h-10 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2"
+                    id="colors">
                     <option disabled>Select a color</option>
                     @foreach ($colors as $color)
                         <option class="ml-4" value="{{ $color }}">{{ $color }}</option>
@@ -50,7 +52,7 @@
                             <span class="bg-[{{ $category->color }}] w-4 h-4 rounded-full mr-3"></span>
 
                             <button wire:click="selectCategoryToEdit({{ $category->id }})" type="button"
-                                class="font-semibold hover:text-blue-500">
+                                class="font-semibold hover:text-blue-500 text-gray-700">
                                 {{ $category->name }}
                             </button>
                         </div>
@@ -116,20 +118,19 @@
             </x-slot>
 
             <x-slot name="message">
-                
+
                 {{-- category name --}}
                 <div>
                     <x-input-label for="name" :value="__('Category')" />
 
-                    <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text"
-                        autofocus />
+                    <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" autofocus />
                 </div>
 
                 {{-- color --}}
                 <div class="mt-4">
                     <x-input-label for="color" :value="__('Color')" />
 
-                    <select wire:model="color" class="block mt-1 w-full rounded" id="colors">
+                    <select wire:model="color" class="h-10 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2" id="colors">
                         <option disabled>Select a color</option>
                         @foreach ($colors as $color)
                             <option class="ml-4" value="{{ $color }}">{{ $color }}</option>
@@ -140,8 +141,7 @@
             </x-slot>
 
             <x-slot name="buttons">
-                <x-primary-button 
-                wire:click="resetAttributes" type="button">
+                <x-primary-button wire:click="resetAttributes" type="button">
                     Cancel
                 </x-primary-button>
 
