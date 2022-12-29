@@ -191,7 +191,11 @@
             {{-- page --}}
             <input type="hidden" name="page" value="{{ request('page') }}">
 
-            <div class="flex justify-end mt-4">
+            <div class="flex justify-end items-center mt-4">
+                <a href="{{ route('bets.index', ['page' => request('page')]) }}" class="text-sm text-blue-500 mr-4">
+                    Cancel
+                </a>
+
                 <x-primary-button>
                     {{ __('Edit') }}
                 </x-primary-button>

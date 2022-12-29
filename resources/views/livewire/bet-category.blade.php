@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('bets.index') }}" class="text-sm text-blue-500 mr-4">
+                <a href="{{ route('bets.index', ['page' => request('page')]) }}" class="text-sm text-blue-500 mr-4">
                     Back
                 </a>
 

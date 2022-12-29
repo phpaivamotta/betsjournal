@@ -79,7 +79,7 @@
             @endif
 
             {{-- categories setting --}}
-            <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
+            <a href="{{ route('bets.categories', ['page' => $this->page]) }}" data-tippy-content="Manage Categories"
                 class="bg-blue-900 font-semibold hover:opacity-75 p-[13px] rounded-lg text-center text-white">
                 <x-categories-icon />
             </a>
