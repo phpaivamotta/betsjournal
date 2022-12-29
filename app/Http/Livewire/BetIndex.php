@@ -13,6 +13,7 @@ class BetIndex extends Component
     public $showDeleteModal = false;
     public Bet $currentBet;
     public $search = '';
+    public $page = 1;
     public $win;
     public $loss;
     public $na;
@@ -35,6 +36,15 @@ class BetIndex extends Component
         ]);
     }
 
+    protected $queryString = [
+        'win' => ['except' => false],
+        'loss' => ['except' => false],
+        'na' => ['except' => false],
+        'categories',
+        'search' => ['except' => ''],
+        'page' => ['except' => 1],
+    ];
+
     public function updatingSearch()
     {
         $this->resetPage();
@@ -51,6 +61,11 @@ class BetIndex extends Component
     }
 
     public function updatingNa()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingCategories()
     {
         $this->resetPage();
     }
