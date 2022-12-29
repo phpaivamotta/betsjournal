@@ -41,7 +41,7 @@
                     <x-input-label for="categories" :value="__('Categories')" />
 
                     <select multiple name="categories[]" id="categories"
-                        class="text-gray-600 block border-gray-300 h-12 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        class="text-gray-600 block border-gray-300 h-[42px] mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         @foreach (auth()->user()->categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach

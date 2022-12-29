@@ -68,7 +68,7 @@
                 <div class="mr-4 w-full">
 
                     <select wire:model="categories" multiple id="categories"
-                        class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-12 rounded-md w-full">
+                        class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full">
 
                         @foreach (auth()->user()->categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -80,7 +80,7 @@
 
             {{-- categories setting --}}
             <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
-                class="bg-blue-900 font-semibold hover:opacity-75 p-4 rounded-lg text-center text-white">
+                class="bg-blue-900 font-semibold hover:opacity-75 p-[13px] rounded-lg text-center text-white">
                 <x-categories-icon />
             </a>
 
