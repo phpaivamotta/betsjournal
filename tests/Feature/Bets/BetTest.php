@@ -359,6 +359,33 @@ class BetTest extends TestCase
         $this->get('/bets')->assertSee("Bet updated!");
     }
 
+    public function test_edit_bet_redirects_to_paginated()
+    {
+        $this->signIn();
+
+        // create bets (since pagination is done in chunks of 20, 35 bets will place us on the second page)
+        $bets = Bet::factory(35)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        // transform last bet from object to array so that it can be posted to route
+        $bet_array = $bets->last()->toArray();
+
+        // edit specific attribute (match in this case)
+        $bet_array['match'] = "Flamengo vs. Barcelona";
+
+        // add odd to request attributes
+        $bet_array['odd'] = 2.2;
+
+        // add page to request attributes
+        $bet_array['page'] = '2';
+
+        $this->patch('bets/' . $bets->last()->id, $bet_array)
+            ->assertRedirect('/bets?page=2');
+
+        $this->get('bets?page=2')->assertSee("Bet updated!");
+    }
+
     public function test_user_can_delete_bet()
     {
         $this->actingAs(User::factory()->create());

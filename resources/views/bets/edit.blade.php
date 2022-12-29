@@ -188,6 +188,9 @@
                     :value="old('bet_description', $bet->bet_description)" />
             </div>
 
+            {{-- page --}}
+            <input type="hidden" name="page" value="{{ request('page') }}">
+
             <div class="flex justify-end mt-4">
                 <x-primary-button>
                     {{ __('Edit') }}

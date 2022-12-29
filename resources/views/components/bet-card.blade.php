@@ -45,7 +45,7 @@
 
             <div class="flex items-center ml-8 mt-2">
                 {{-- edit icon --}}
-                <a href="/bets/{{ $bet->id }}/edit">
+                <a href="{{ route('bets.edit', ['bet' => $bet->id, 'page' => request('page')]) }}">
                     <x-edit-icon />
                 </a>
 

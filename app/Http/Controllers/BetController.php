@@ -157,7 +157,9 @@ class BetController extends Controller
         // sync categories
         $bet->categories()->sync($request['categories']);
 
-        return redirect('/bets')->with('success', "Bet updated!");
+        return redirect()
+            ->route('bets.index', ['page' => request('page')])
+            ->with('success', "Bet updated!");
     }
 
     public function stats()
