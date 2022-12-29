@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
-            {{ __('Bets / Categories / New') }}
+            {{ __('Bets / Categories') }}
         </h2>
     </x-slot>
 
@@ -68,7 +68,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('bets.index') }}" class="text-sm text-blue-500 mr-3">
+                <a href="{{ route('bets.index') }}" class="text-sm text-blue-500 mr-4">
                     Back
                 </a>
 
