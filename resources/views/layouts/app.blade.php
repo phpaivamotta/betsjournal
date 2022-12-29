@@ -67,7 +67,7 @@
                     <img class="mx-auto mt-1" src="{{ asset('img/logo-oddspedia.svg') }}" alt="Oddspedia Logo">
                 </a>
                 
-                <p class="mt-3 text-xs text-white">
+                <p class="mt-3 mb-2 text-xs text-white">
                     © {{ now()->year }} <strong>Bets</strong>journal. All rights reserved.
                 </p>
             </div>

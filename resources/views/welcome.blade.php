@@ -4,7 +4,7 @@
     <x-flash />
 
     {{-- hero section --}}
-    <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80"
+    <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80 md:h-[28rem]"
         style="
         background-position: 50%;
         background-image: url({{ asset('img/hero.jpg') }});
@@ -16,7 +16,7 @@
                     <h1 class="text-3xl sm:text-4xl xl:text-6xl font-bold tracking-tight mb-4">
                         Track your bets <br />
                     </h1>
-                    <p class="text-gray-200 text-sm sm:text-lg mb-6">
+                    <p class="text-gray-100 text-sm sm:text-lg mb-6">
                         Easily stay on top of your bets from anywhere to gain better insight into your stategy.
                     </p>
                     <a href="{{ route('register') }}"
@@ -33,7 +33,7 @@
     <div class="md:flex md:items-center max-w-7xl mx-auto p-8">
 
         {{-- description div --}}
-        <div class="md:w-2/3">
+        <div class="md:w-2/3 lg:px-20">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
                 Know where you stand.
             </h2>
@@ -59,7 +59,7 @@
     <div class="bg-gray-300 md:flex md:items-center max-w-7xl mx-auto p-8">
 
         {{-- description div --}}
-        <div class="md:w-2/3">
+        <div class="md:w-2/3 lg:px-20">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
                 Get statistical analysis on your bets.
             </h2>
@@ -89,7 +89,7 @@
     <div class="md:flex md:items-center max-w-7xl mx-auto p-8">
 
         {{-- description div --}}
-        <div class="md:w-2/3">
+        <div class="md:w-2/3 lg:px-20">
             <h2 class="font-bold text-2xl sm:text-3xl mb-2">
                 Odds Comparison.
             </h2>
