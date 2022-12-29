@@ -33,7 +33,7 @@
                 <x-input-label for="color" :value="__('Color')" />
 
                 <select wire:model="color"
-                    class="h-10 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2"
+                    class="text-gray-900 h-10 shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2"
                     id="colors">
                     <option disabled>Select a color</option>
                     @foreach ($colors as $color)
@@ -45,7 +45,7 @@
             {{-- Categories list --}}
             <div class="my-4 space-y-1 border-gray-200 border-t-2 mt-6 pt-4">
                 @forelse ($categories as $category)
-                    <div class="border border-gray-900 flex items-center justify-between px-3 py-2 rounded text-sm hover:bg-gray-200"
+                    <div class="border border-gray-400 flex items-center justify-between px-3 py-2 rounded text-sm hover:bg-gray-200"
                         wire:key="item-{{ $category->id }}">
 
                         <div class="flex items-center">

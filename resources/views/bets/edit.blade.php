@@ -41,7 +41,7 @@
                     <x-input-label for="categories" :value="__('Categories')" />
 
                     <select multiple name="categories[]" id="categories"
-                        class="block border-gray-300 h-20 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        class="text-gray-600 block border-gray-300 h-12 mt-1 rounded-md w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                         @foreach (auth()->user()->categories as $category)
                             <option {{ $bet->categories->contains($category) ? 'selected' : '' }}

@@ -61,21 +61,14 @@
             <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
         </div>
 
-        <div class="flex items-start">
-
-            {{-- categories setting --}}
-            <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
-                class="bg-blue-900 font-semibold hover:opacity-75 p-4 rounded-lg text-center text-white mt-6">
-                <x-categories-icon />
-            </a>
+        <div class="flex items-center">
 
             <!-- categories -->
             @if (auth()->user()->categories->count())
-                <div class="ml-4 w-full">
-                    <x-input-label for="categories" :value="__('Categories')" />
+                <div class="mr-4 w-full">
 
                     <select wire:model="categories" multiple id="categories"
-                        class="block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-12 mt-1 rounded-md w-full">
+                        class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-12 rounded-md w-full">
 
                         @foreach (auth()->user()->categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -84,6 +77,12 @@
                     </select>
                 </div>
             @endif
+
+            {{-- categories setting --}}
+            <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
+                class="bg-blue-900 font-semibold hover:opacity-75 p-4 rounded-lg text-center text-white">
+                <x-categories-icon />
+            </a>
 
         </div>
 
