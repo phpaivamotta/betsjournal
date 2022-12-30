@@ -28,7 +28,11 @@ class BetTest extends TestCase
     public function test_bets_can_be_created()
     {
         // faking the form request that will be postested to the route
-        $attributes = Bet::factory()->raw(['odd' => 2.20]);
+        $attributes = Bet::factory()->raw([
+            'odd' => 2.20,
+            'result' => 1,
+            'cashout' => null
+        ]);
 
         $indexDecimalOdd = array_search('decimal_odd', $attributes);
         unset($attributes[$indexDecimalOdd]);
@@ -202,7 +206,8 @@ class BetTest extends TestCase
 
         $attributes = Bet::factory()->raw([
             'user_id' => auth()->id(),
-            'result' => 2 // this is the value for cash out
+            'result' => 2, // this is the value for cash out
+            'cashout' => ''
         ]);
 
         $attributes['odd'] = 2.2;
