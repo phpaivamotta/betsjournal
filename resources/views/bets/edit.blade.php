@@ -62,19 +62,33 @@
                     required autofocus />
             </div>
 
-            <!-- result -->
-            <div class="flex items-center mt-4">
-                <input class="mr-1" type="radio" name="result" id="win"
-                    {{ old('result', $bet->result) === 1 ? 'checked' : '' }} value=1>
-                <x-input-label for="win" :value="__('Win')" />
+            <div x-data="{ open: {{ $bet->result === 2 ? 1 : 0 }} }">
+                <!-- result -->
+                <div class="flex items-center mt-4">
+                    <input x-on:click="open = false" class="mr-1" type="radio" name="result" id="win"
+                        {{ old('result', $bet->result) === 1 ? 'checked' : '' }} value=1>
+                    <x-input-label for="win" :value="__('Win')" />
 
-                <input class="ml-4 mr-1" type="radio" name="result" id="loss"
-                    {{ old('result', $bet->result) === 0 ? 'checked' : '' }} value=0>
-                <x-input-label for="loss" :value="__('Loss')" />
+                    <input x-on:click="open = false" class="ml-4 mr-1" type="radio" name="result" id="loss"
+                        {{ old('result', $bet->result) === 0 ? 'checked' : '' }} value=0>
+                    <x-input-label for="loss" :value="__('Loss')" />
 
-                <input class="ml-4 mr-1" type="radio" name="result" id="na"
-                    {{ old('result', $bet->result) === null ? 'checked' : '' }} value=''>
-                <x-input-label for="na" :value="__('N/A')" />
+                    <input x-on:click="open = false" class="ml-4 mr-1" type="radio" name="result" id="na"
+                        {{ old('result', $bet->result) === null ? 'checked' : '' }} value=''>
+                    <x-input-label for="na" :value="__('N/A')" />
+
+                    <input x-on:click="open = true" class="ml-4 mr-1" type="radio" name="result" id="cashout"
+                        {{ old('result', $bet->result) === 2 ? 'checked' : '' }} value=2>
+                    <x-input-label for="cashout" :value="__('CO')" />
+                </div>
+
+                <!-- cashout -->
+                <div x-show="open" class="mt-4" style="display: none;">
+                    <x-input-label for="cashout" :value="__('Cashout')" />
+
+                    <x-text-input id="cashout" class="block mt-1 w-full" type="number" step="0.01" name="cashout"
+                        :value="old('cashout', $bet->cashout)" autofocus />
+                </div>
             </div>
 
             <!-- bookie -->
@@ -138,8 +152,8 @@
                     </span>
                 </div>
 
-                <x-text-input id="bet_type" class="block mt-1 w-full" type="text" name="bet_type" :value="old('bet_type', $bet->bet_type)"
-                    required />
+                <x-text-input id="bet_type" class="block mt-1 w-full" type="text" name="bet_type"
+                    :value="old('bet_type', $bet->bet_type)" required />
             </div>
 
             <!-- bet pick -->
@@ -191,7 +205,11 @@
             {{-- page --}}
             <input type="hidden" name="page" value="{{ request('page') }}">
 
-            <div class="flex justify-end mt-4">
+            <div class="flex justify-end items-center mt-4">
+                <a href="{{ route('bets.index', ['page' => request('page')]) }}" class="text-sm text-blue-500 mr-4">
+                    Cancel
+                </a>
+
                 <x-primary-button>
                     {{ __('Edit') }}
                 </x-primary-button>

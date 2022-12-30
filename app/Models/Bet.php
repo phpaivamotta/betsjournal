@@ -15,7 +15,7 @@ class Bet extends Model
     protected $guarded = [];
     protected $with = ['categories'];
 
-    public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
+    public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na, ?bool $cashout)
     {
         $query->where(function ($query) use($search) {
 
@@ -26,7 +26,7 @@ class Bet extends Model
                 ->orWhere('bet_pick', 'like', '%' . $search . '%')
                 ->orWhere('bet_description', 'like', '%' . $search . '%');
 
-        })->where(function ($query) use($win, $loss, $na) {
+        })->where(function ($query) use($win, $loss, $na, $cashout) {
 
             $query->when($win, function ($query) {
 
@@ -39,6 +39,10 @@ class Bet extends Model
             })->when($na, function ($query) {
                 
                 $query->orWhere('result', null);
+
+            })->when($cashout, function ($query) {
+                
+                $query->orWhere('result', 2);
 
             });
 

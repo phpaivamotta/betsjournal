@@ -59,6 +59,10 @@
             <input wire:model="na" type="checkbox" name="na" id="na"
                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
+
+            <input wire:model="cashout" type="checkbox" name="cashout" id="cashout"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="cashout" class="ml-1 sm:mr-6 text-sm text-gray-600">CO</label>
         </div>
 
         <div class="flex items-center">
@@ -79,7 +83,7 @@
             @endif
 
             {{-- categories setting --}}
-            <a href="{{ route('bets.categories') }}" data-tippy-content="Manage Categories"
+            <a href="{{ route('bets.categories', ['page' => $this->page]) }}" data-tippy-content="Manage Categories"
                 class="bg-blue-900 font-semibold hover:opacity-75 p-[13px] rounded-lg text-center text-white">
                 <x-categories-icon />
             </a>

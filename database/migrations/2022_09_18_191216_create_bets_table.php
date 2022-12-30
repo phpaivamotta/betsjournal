@@ -27,7 +27,8 @@ return new class extends Migration
             $table->unsignedDecimal('bet_size');
             $table->decimal('decimal_odd', 8, 3);
             $table->decimal('american_odd', 9, 3);
-            $table->boolean('result')->nullable();
+            $table->unsignedInteger('result')->nullable();
+            $table->unsignedDecimal('cashout')->nullable();
             $table->timestamps();
         });
     }
