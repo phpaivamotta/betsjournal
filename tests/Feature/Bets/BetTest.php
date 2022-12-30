@@ -198,8 +198,6 @@ class BetTest extends TestCase
 
     public function test_cashout_result_requires_value()
     {
-        $this->withExceptionHandling();
-
         $this->signIn();
 
         $attributes = Bet::factory()->raw([
@@ -210,6 +208,42 @@ class BetTest extends TestCase
         $attributes['odd'] = 2.2;
 
         $this->post('/bets', $attributes)->assertSessionHasErrors('cashout');
+    }
+
+    public function test_cashout_can_be_updated()
+    {
+        $this->withoutExceptionHandling();
+        
+        $this->signIn();
+
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->user(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $rawBet = $bet->toArray();
+
+        $rawBet['odd'] = 2.2;
+        $rawBet['cashout'] = 150;
+
+        $this->patch("/bets/{$bet->id}", $rawBet);
+
+        $this->get('/bets')->assertSee('Bet updated!');
+        $this->assertDatabaseHas('bets', ['cashout' => 150]);
+    }
+
+    public function test_cashout_can_be_seen()
+    {
+        $this->signIn();
+    
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $this->get('/bets')->assertSee($bet->cashout);
     }
 
     public function test_bet_can_have_categories()

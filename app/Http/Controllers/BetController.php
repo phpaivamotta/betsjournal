@@ -122,7 +122,8 @@ class BetController extends Controller
             'bet_type' => ['required', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
             'bet_pick' => ['required', 'string', 'max:255'],
-            'result' => ['nullable', Rule::in([0, 1, 2])]
+            'result' => ['nullable', Rule::in([0, 1, 2])],
+            'cashout' => ['exclude_unless:result,2', 'required', 'numeric', 'min:0']
         ]);
 
         // get user prefence for odd type (american or decimal),

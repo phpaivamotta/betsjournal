@@ -5,10 +5,12 @@
     
     if ($bet->result === null) {
         $class = $class . ' bg-white';
-    } elseif ($bet->result) {
+    } elseif ($bet->result === 1) {
         $class = $class . ' bg-emerald-200';
-    } elseif (!$bet->result) {
+    } elseif (!$bet->result === 0) {
         $class = $class . ' bg-red-200';
+    } elseif ($bet->result === 2) {
+        $class = $class . ' bg-gray-200';
     }
 @endphp
 
@@ -130,7 +132,7 @@
             {{-- display result if there is one --}}
             @if (isset($bet->result))
                 {{-- if win --}}
-                @if ($bet->result)
+                @if ($bet->result === 1)
                     {{-- bet payout --}}
                     <div>
                         <p>
@@ -140,6 +142,20 @@
                         <p>
                             <span
                                 class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
+                        </p>
+                    </div>
+
+                    {{-- if cashout --}}
+                @elseif ($bet->result === 2)
+                    {{-- bet payout --}}
+                    <div>
+                        <p>
+                            <span class="text-xs">Payout:</span>
+                        </p>
+
+                        <p>
+                            <span
+                                class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->cashout, 'USD') }}</span>
                         </p>
                     </div>
 

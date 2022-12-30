@@ -31,7 +31,7 @@ class BetFactory extends Factory
             'decimal_odd' => fake()->randomFloat(3, 2, 10),
             'american_odd' => fake()->randomFloat(3, -500, 500),
             'result' => fake()->randomElement([0, 1, 2, null]),
-            'bet_size' => fake()->randomFloat(2, 100, 300)
+            'cashout' => fake()->randomFloat(2, 100, 300)
         ];
     }
 }
