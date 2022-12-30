@@ -59,6 +59,10 @@
             <input wire:model="na" type="checkbox" name="na" id="na"
                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
             <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
+
+            <input wire:model="cashout" type="checkbox" name="cashout" id="cashout"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="cashout" class="ml-1 sm:mr-6 text-sm text-gray-600">CO</label>
         </div>
 
         <div class="flex items-center">

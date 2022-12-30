@@ -631,4 +631,29 @@ class BetTest extends TestCase
             ->assertSee($bets->last()->match)
             ->assertDontSee($bets->first()->match);
     }
+
+    public function test_cashout_filter_works()
+    {
+        $this->withoutExceptionHandling();
+    
+        $this->signIn();
+    
+        $betCashout = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $betWin = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 1
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee($betCashout->match)
+            ->assertSee($betWin->match)
+            ->set('cashout', true)
+            ->assertDontSee($betWin->match)
+            ->assertSee($betCashout->match);
+    }
 }
