@@ -7,7 +7,7 @@
         $class = $class . ' bg-white';
     } elseif ($bet->result === 1) {
         $class = $class . ' bg-emerald-200';
-    } elseif (!$bet->result === 0) {
+    } elseif ($bet->result === 0) {
         $class = $class . ' bg-red-200';
     } elseif ($bet->result === 2) {
         $class = $class . ' bg-gray-200';
