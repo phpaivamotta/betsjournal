@@ -113,7 +113,7 @@ class StatsTest extends TestCase
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
         $totalPayouts = $bets->map(function ($bet) {
-            if ($bet->result) {
+            if ($bet->result === 1) {
                 return $bet->payout() - $bet->bet_size;
             }
         })->sum();
@@ -123,13 +123,13 @@ class StatsTest extends TestCase
 
     public function test_total_losses()
     {
-        $user = User::factory()->create();
+        $this->signIn();
 
-        $bets = Bet::factory(5)->create(['user_id' => $user->id]);
+        $bets = Bet::factory(5)->create(['user_id' => auth()->id()]);
 
-        $totLosses = $bets->where('result', 0)->sum('bet_size');
+        $totLosses = $bets->where('result', '0')->pluck('bet_size')->sum();
 
-        $this->actingAs($user)->get('/stats')->assertViewHas('totalLosses', $totLosses);
+        $this->get('/stats')->assertViewHas('totalLosses', $totLosses);
     }
 
     public function test_biggest_bet()
@@ -164,7 +164,7 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
-        $biggestLoss = $bets->where('result', 0)->max('bet_size');
+        $biggestLoss = $bets->where('result', '0')->max('bet_size');
 
         $this->actingAs($user)->get('/stats')->assertViewHas('biggestLoss', $biggestLoss);
     }

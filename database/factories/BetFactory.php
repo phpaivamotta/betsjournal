@@ -30,7 +30,8 @@ class BetFactory extends Factory
             'bet_size' => fake()->randomFloat(2, 100, 300),
             'decimal_odd' => fake()->randomFloat(3, 2, 10),
             'american_odd' => fake()->randomFloat(3, -500, 500),
-            'result' => fake()->boolean(),
+            'result' => fake()->randomElement([0, 1, 2, null]),
+            'bet_size' => fake()->randomFloat(2, 100, 300)
         ];
     }
 }

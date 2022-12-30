@@ -104,15 +104,14 @@ class BetTest extends TestCase
 
     public function test_bet_form_post_requires_odd()
     {
-        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        // make sure to override the odd with an empty string
-        $attributes = Bet::factory()->raw(['odd' => '']);
+        $this->signIn();
+        
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => ''
+        ]);
 
-        // find the user created by the factory so that it can be used below to post data to an auth route
-        $user = User::find($attributes['user_id']);
-
-        // post to route and confirm session has error
-        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odd');
+        $this->post('/bets', $attributes)->assertSessionHasErrors('odd');
     }
 
     public function test_bet_requires_a_bet_type()
@@ -178,6 +177,39 @@ class BetTest extends TestCase
 
         // post to route and confirm session has error
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match_time');
+    }
+
+    public function test_bet_can_be_cashed_out()
+    {
+        $this->signIn();
+
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'result' => 2 // this is the value for cash out
+        ]);
+
+        $attributes['odd'] = 2.2;
+        $attributes['cashout'] = 100;
+
+        $this->post('/bets', $attributes);
+
+        $this->get('/bets')->assertSee("You've created a new bet!");
+    }
+
+    public function test_cashout_result_requires_value()
+    {
+        $this->withExceptionHandling();
+
+        $this->signIn();
+
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'result' => 2 // this is the value for cash out
+        ]);
+
+        $attributes['odd'] = 2.2;
+
+        $this->post('/bets', $attributes)->assertSessionHasErrors('cashout');
     }
 
     public function test_bet_can_have_categories()

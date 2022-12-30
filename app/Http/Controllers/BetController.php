@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bet;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BetController extends Controller
 {
@@ -27,7 +28,8 @@ class BetController extends Controller
             'bet_type' => ['required', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
             'bet_pick' => ['required', 'string', 'max:255'],
-            'result' => ['nullable', 'boolean']
+            'result' => ['nullable', Rule::in([0, 1, 2])],
+            'cashout' => ['exclude_unless:result,2', 'required', 'numeric', 'min:0']
         ]);
 
         // get user prefence for odd type (american or decimal),
@@ -120,7 +122,7 @@ class BetController extends Controller
             'bet_type' => ['required', 'string', 'max:255'],
             'bet_description' => ['nullable', 'string', 'max:255'],
             'bet_pick' => ['required', 'string', 'max:255'],
-            'result' => ['nullable', 'boolean']
+            'result' => ['nullable', Rule::in([0, 1, 2])]
         ]);
 
         // get user prefence for odd type (american or decimal),
