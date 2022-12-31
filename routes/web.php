@@ -28,9 +28,6 @@ Route::view('about', 'about')->name('about');
 // odds comparison page
 Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
 
-// world cup page
-Route::view('world-cup', 'betting-tools/world-cup')->name('world-cup');
-
 // odd converter page
 Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
 
