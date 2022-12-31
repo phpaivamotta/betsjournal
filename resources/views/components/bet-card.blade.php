@@ -115,76 +115,89 @@
 
         </main>
 
-        <footer class="flex items-center space-x-20 border-t border-gray-400 mt-4 pt-2">
-            {{-- bet size --}}
-            <div>
-                <p>
-                    <span class="text-xs">Stake</span>
-                </p>
+        <footer class="flex items-center justify-between border-t border-gray-400 mt-4 pt-2">
 
-                <p>
-                    <span
-                        class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->bet_size, 'USD') }}</span>
-                </p>
+            <div class="flex items-center justify-between w-1/2 lg:w-1/3">
+                {{-- bet size --}}
+                <div>
+                    <p>
+                        <span class="text-xs">Stake</span>
+                    </p>
 
-            </div>
+                    <p>
+                        <span
+                            class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->bet_size, 'USD') }}</span>
+                    </p>
 
-            {{-- display result if there is one --}}
-            @if (isset($bet->result))
-                {{-- if win --}}
-                @if ($bet->result === 1)
-                    {{-- bet payout --}}
-                    <div>
-                        <p>
-                            <span class="text-xs">Payout:</span>
-                        </p>
+                </div>
 
-                        <p>
-                            <span
-                                class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
-                        </p>
-                    </div>
+                {{-- display result if there is one --}}
+                @if (isset($bet->result))
+                    {{-- if win --}}
+                    @if ($bet->result === 1)
+                        {{-- bet payout --}}
+                        <div>
+                            <p>
+                                <span class="text-xs">Payout:</span>
+                            </p>
 
-                    {{-- if cashout --}}
-                @elseif ($bet->result === 2)
-                    {{-- bet payout --}}
-                    <div>
-                        <p>
-                            <span class="text-xs">Payout:</span>
-                        </p>
+                            <p>
+                                <span
+                                    class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
+                            </p>
+                        </div>
 
-                        <p>
-                            <span
-                                class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->cashout, 'USD') }}</span>
-                        </p>
-                    </div>
+                        {{-- if cashout --}}
+                    @elseif ($bet->result === 2)
+                        {{-- bet payout --}}
+                        <div>
+                            <p>
+                                <span class="text-xs">Payout:</span>
+                            </p>
 
-                    {{-- if loss --}}
+                            <p>
+                                <span
+                                    class="text-md  font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->cashout, 'USD') }}</span>
+                            </p>
+                        </div>
+
+                        {{-- if loss --}}
+                    @else
+                        {{-- bet payout --}}
+                        <div>
+                            <p>
+                                <span class="text-xs">Payout:</span>
+                            </p>
+                            <p>
+                                <span class="text-md font-semibold">$0</span>
+                            </p>
+                        </div>
+                    @endif
+
+                    {{-- if there is no result yet --}}
                 @else
-                    {{-- bet payout --}}
+                    {{-- potential bet payout --}}
                     <div>
                         <p>
-                            <span class="text-xs">Payout:</span>
+                            <span class="text-xs">Potential Payout:</span>
                         </p>
                         <p>
-                            <span class="text-md font-semibold">$0</span>
+                            <span
+                                class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
                         </p>
                     </div>
                 @endif
+            </div>
 
-                {{-- if there is no result yet --}}
-            @else
-                {{-- potential bet payout --}}
+            {{-- resolve button --}}
+            @if ($bet->result === null)
                 <div>
-                    <p>
-                        <span class="text-xs">Potential Payout:</span>
-                    </p>
-                    <p>
-                        <span
-                            class="text-md font-semibold">{{ (new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($bet->payout(), 'USD') }}</span>
-                    </p>
-                </div>
+                    <x-primary-button wire:click="confirmResolve({{ $bet->id }})" type="button">
+                        Resolve
+                    </x-primary-button>
+                </div>                
             @endif
+
         </footer>
 
     </div>

@@ -136,6 +136,66 @@
         </x-modal>
     </form>
 
+    {{-- resolve bet modal --}}
+    <form wire:submit.prevent="resolveBet">
+        <x-modal x-data="{ open: false }" wire:model.defer="showResolveModal" delete="{{ false }}">
+
+            <x-slot name="title">
+                Resolve
+            </x-slot>
+
+            <x-slot name="message">
+                <p class="mt-1">
+                    Resolve <span class="font-semibold">{{ $currentBet->match }}</span>:
+                </p>
+
+                <div>
+                    <!-- result -->
+                    <div class="flex items-center mt-4">
+                        <input wire:model="result" x-on:click="open = false" class="mr-1" type="radio"
+                            id="win" value=1>
+                        <x-input-label for="win" :value="__('Win')" />
+
+                        <input wire:model="result" x-on:click="open = false" class="ml-4 mr-1" type="radio"
+                            id="loss" value=0>
+                        <x-input-label for="loss" :value="__('Loss')" />
+
+                        <input wire:model="result" x-on:click="open = true" class="ml-4 mr-1" type="radio"
+                            id="cashout" value=2>
+                        <x-input-label for="cashout" :value="__('CO')" />
+                    </div>
+                    {{-- result error --}}
+                    @error('result')
+                        <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+
+                    <!-- cashout -->
+                    <div x-show="open" class="mt-4" style="display: none;">
+                        <x-input-label for="cashout" :value="__('Cashout')" />
+
+                        <x-text-input wire:model="cashoutAmount" id="cashout" class="block mt-1 w-full"
+                            type="number" step="0.01" name="cashout" autofocus />
+                    </div>
+                    {{-- cash amount error --}}
+                    @error('cashoutAmount')
+                        <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+            </x-slot>
+
+            <x-slot name="buttons">
+                <x-primary-button x-on:click="open = false" wire:click="resetAttributes" type="button"
+                    class="bg-red-900 hover:bg-red-800 mr-2">
+                    Cancel
+                </x-primary-button>
+
+                <x-primary-button>
+                    Resolve
+                </x-primary-button>
+            </x-slot>
+        </x-modal>
+    </form>
+
     {{-- tooltip --}}
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
