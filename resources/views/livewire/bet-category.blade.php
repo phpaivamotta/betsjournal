@@ -42,6 +42,17 @@
                 </select>
             </div>
 
+            {{-- categories' colors --}}
+            {{-- for some reason, vite needs to "see" them before they are dinamically --}}
+            {{-- compiled, otherwise the colors won't show --}}
+            <div style="display: none;">
+                <span class="bg-[blue]"></span>
+                <span class="bg-[indigo]"></span>
+                <span class="bg-[brown]"></span>
+                <span class="bg-[black]"></span>
+                <span class="bg-[yellow]"></span>
+            </div>
+
             {{-- Categories list --}}
             <div class="my-4 space-y-1 border-gray-200 border-t-2 mt-6 pt-4">
                 @forelse ($categories as $category)
@@ -130,7 +141,9 @@
                 <div class="mt-4">
                     <x-input-label for="color" :value="__('Color')" />
 
-                    <select wire:model="color" class="h-[42px] shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2" id="colors">
+                    <select wire:model="color"
+                        class="h-[42px] shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 rounded-md w-full px-2"
+                        id="colors">
                         <option disabled>Select a color</option>
                         @foreach ($colors as $color)
                             <option class="ml-4" value="{{ $color }}">{{ $color }}</option>
