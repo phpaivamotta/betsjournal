@@ -50,8 +50,8 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:ml-10">
-            <img src="{{ asset('img/computer-spreadsheet.jpg') }}"
-                alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
+            <img src="{{ asset('img/computer-spreadsheet.jpg') }}" alt="spread-sheet-illustration"
+                class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
 
@@ -66,7 +66,8 @@
 
             <p class="text-md">
                 Let us analyze your betting data for you! You don't need to touch MS Excel or Google Sheets to have the
-                most important information on your bets. We calculate your hit-rate, implied odds, average betting odds (and much more!) so that you can have better insights. We also provide charts for easy visualization!
+                most important information on your bets. We calculate your hit-rate, implied odds, average betting odds
+                (and much more!) so that you can have better insights. We also provide charts for easy visualization!
             </p>
 
             {{-- About website link --}}
@@ -80,8 +81,8 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:mr-10 md:order-first">
-            <img src="{{ asset('img/loose-graphs.png') }}"
-                alt="statistical-analysis-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
+            <img src="{{ asset('img/loose-graphs.png') }}" alt="statistical-analysis-illustration"
+                class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
     </div>
 
@@ -113,9 +114,77 @@
 
         {{-- image div --}}
         <div class="md:w-1/3 md:ml-10">
-            <img src="{{ asset('img/computer-stock-up.webp') }}"
-                alt="spread-sheet-illustration" class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
+            <img src="{{ asset('img/computer-stock-up.webp') }}" alt="spread-sheet-illustration"
+                class="w-full mt-6 md:mt-0 rounded m-auto md:m-0">
         </div>
+    </div>
+
+    {{-- features --}}
+    <div class="relative max-w-7xl mx-auto p-8 bg-[#4A90E2] text-white">
+        <h2 class="font-bold text-2xl sm:text-3xl mb-16 mt-6 text-center">
+            Features
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3">
+
+            {{-- tools feature --}}
+            <div class="items-center mb-16 px-10">
+                <x-calculator-icon />
+
+                <p class="text-center font-semibold text-xl mt-4">
+                    Tools
+                </p>
+
+                <p class="text-center text-md mt-2">
+                    Betting calculators for boring bet math
+                </p>
+            </div>
+
+            {{-- analysis feature --}}
+            <div class="items-center mb-16 px-10">
+                <x-analysis-icon />
+
+                <p class="text-center font-semibold text-xl mt-4">
+                    Analysis
+                </p>
+
+                <p class="text-center text-md mt-2">
+                    Statistical analysis of all your bets
+                </p>
+            </div>
+
+            <div class="items-center px-10">
+                <x-valuebets-icon />
+
+                <p class="text-center font-semibold text-xl mt-4">Value Bets</p>
+
+                <p class="text-center text-md mt-2">
+                    Find free value betting opportunities
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {{-- wave --}}
+    <div class="relative max-w-7xl mx-auto p-8 -mt-1 h-48">
+        <div class="custom-shape-divider-top-1672533867">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+
+    {{-- get started --}}
+    <div class="max-w-7xl mx-auto p-8 h-48 mt-10">
+        <p class="text-center">
+            <a href="{{ route('register') }}"
+                class="block md:inline-block text-center font-bold py-2 md:px-32 border rounded border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white">
+                Get started
+            </a>
+        </p>
     </div>
 
 </x-app-layout>
