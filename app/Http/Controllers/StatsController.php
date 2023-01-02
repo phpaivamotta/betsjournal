@@ -18,23 +18,23 @@ class StatsController extends Controller
         $stats = new StatsService($bets);
 
         return view('bets.stats', [
-            'totalBets' => $stats->bets->count(),
-            'totalWinBets' => $stats->bets->where('result', '1')->count(),
-            'totalLossBets' => $stats->bets->where('result', '0')->count(),
-            'totalNaBets' => $stats->bets->where('result', '')->count(),
+            'totalBets' => $bets->count(),
+            'totalWinBets' => $bets->where('result', '1')->count(),
+            'totalLossBets' => $bets->where('result', '0')->count(),
+            'totalNaBets' => $bets->where('result', '')->count(),
             'averageOdds' => $stats->averageOdds(auth()->user()->odd_type),
             'impliedProbability' => $stats->impliedProbability(),
-            'totalGains' =>  $stats->bets->where('result', '1')
+            'totalGains' =>  $bets->where('result', '1')
                 ->map(fn ($bet) => $bet->payout() - $bet->bet_size)
                 ->sum(),
-            'totalLosses' =>  $stats->bets->where('result', '0')
+            'totalLosses' =>  $bets->where('result', '0')
                 ->pluck('bet_size')
                 ->sum(),
-            'biggestBet' => $stats->bets->max('bet_size'),
-            'biggestPayout' => $stats->bets->where('result', '1')
+            'biggestBet' => $bets->max('bet_size'),
+            'biggestPayout' => $bets->where('result', '1')
                 ->map(fn ($bet) => $bet->payout())
                 ->max(),
-            'biggestLoss' => $stats->bets->where('result', '0')
+            'biggestLoss' => $bets->where('result', '0')
                 ->max('bet_size'),
 
             // charts
