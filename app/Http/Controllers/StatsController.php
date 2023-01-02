@@ -22,20 +22,14 @@ class StatsController extends Controller
             'totalWinBets' => $bets->where('result', '1')->count(),
             'totalLossBets' => $bets->where('result', '0')->count(),
             'totalNaBets' => $bets->where('result', '')->count(),
+            'totalCOBets' => $bets->where('result', '2')->count(),
             'averageOdds' => $stats->averageOdds(auth()->user()->odd_type),
             'impliedProbability' => $stats->impliedProbability(),
-            'totalGains' =>  $bets->where('result', '1')
-                ->map(fn ($bet) => $bet->payout() - $bet->bet_size)
-                ->sum(),
-            'totalLosses' =>  $bets->where('result', '0')
-                ->pluck('bet_size')
-                ->sum(),
+            'totalGains' =>  $stats->totalGains(),
+            'totalLosses' =>  $stats->totalLosses(),
             'biggestBet' => $bets->max('bet_size'),
-            'biggestPayout' => $bets->where('result', '1')
-                ->map(fn ($bet) => $bet->payout())
-                ->max(),
-            'biggestLoss' => $bets->where('result', '0')
-                ->max('bet_size'),
+            'biggestPayout' => $stats->biggestPayout(),
+            'biggestLoss' => $stats->biggestLoss(),
 
             // charts
             'betResultsSort' => $stats->resultsCount(),

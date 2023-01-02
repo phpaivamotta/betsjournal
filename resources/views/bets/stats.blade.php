@@ -43,6 +43,9 @@
             {{-- total NA bets --}}
             <x-stat-card name='Total N/A Bets' :value="$totalNaBets" />
 
+            {{-- total CO bets --}}
+            <x-stat-card name='Total CO Bets' :value="$totalCOBets" />
+
             {{-- average odds --}}
             <x-stat-card name="Average Odds ({{ auth()->user()->odd_type }})" :value="auth()->user()->odd_type === 'american' && $averageOdds > 0 ? '+' . $averageOdds : $averageOdds" />
 
@@ -101,11 +104,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Results chart 
-            var resultLabels = ["Wins", "Losses", "N/A"];
+            var resultLabels = ["Wins", "Losses", "N/A", "CO"];
             var resultData = {{ json_encode($betResultsSort) }};
             var barColors = [
                 "green",
                 "red",
+                "white",
                 "gray"
             ];
 
@@ -202,8 +206,13 @@
                     {
                         label: 'N/A',
                         data: {{ json_encode($resultCountProbRange['na']) }},
-                        backgroundColor: "gray",
+                        backgroundColor: "white",
                     },
+                    {
+                        label: 'CO',
+                        data: {{ json_encode($resultCountProbRange['co']) }},
+                        backgroundColor: "gray",
+                    }
                 ]
             };
 

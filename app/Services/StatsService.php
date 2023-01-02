@@ -49,18 +49,23 @@ class StatsService
         // calculate how much each bet won/lost
         $profitArray = [];
         foreach ($bets as $bet) {
-            // need to add cashout
             if ($bet->result === 1) {
                 // note: this is the profit of each winning bet
                 $profitArray[] = $bet->payout() - $bet->bet_size;
             } else if ($bet->result === 0) {
+                // note: this is the loss of each losing bet
                 $profitArray[] = - ((float) $bet->bet_size);
+            } else if ($bet->result === 2) {
+                // note: this is the profit/loss of each cashout bet
+                $profitArray[] = $bet->cashout - $bet->bet_size;
             }
         }
 
         // cummulatively sum the results
         // i.e., each array value will be the sum of all bets that came before it
-        // note: I added a 1 to the array index so that I could use them on the graph's x-axis
+        // e.g., if bet1 = $100, bet2 = $50, and bet3 = -$30
+        // then the $netProfitArr = [1 => 100, 2 => (100 + 50), 3 => (100 + 50 -30)]
+        // which gives an array with the total profit at a given bet number
         $netProfitArr = [];
         for ($i = 0; $i < count($profitArray); $i++) {
             if ($i > 0) {
@@ -92,18 +97,19 @@ class StatsService
             )->toArray();
 
         // get results that are present in the bets
-        // need to add cashout
         $resultOptions = [
             'wins' => isset($resultGroups[1]) ? $resultGroups[1] : null,
             'losses' => isset($resultGroups[0]) ? $resultGroups[0] : null,
-            'na' => isset($resultGroups[null]) ? $resultGroups[null] : null
+            'na' => isset($resultGroups[null]) ? $resultGroups[null] : null,
+            'co' => isset($resultGroups[2]) ? $resultGroups[2] : null,
         ];
 
         // this is the order in which the bet results are returned in $resultGroups
         $resultOrder = [
             'wins',
             'losses',
-            'na'
+            'na',
+            'co'
         ];
 
         $resultCountProbabilityRangeArray = [];
@@ -137,7 +143,7 @@ class StatsService
 
     /**
      * count results win/loss/na 
-     * need to add cashout
+     * 
      */
     public function resultsCount(): array
     {
@@ -151,7 +157,82 @@ class StatsService
         return [
             isset($betResults[1]) ? $betResults[1] : 0,
             isset($betResults[0]) ? $betResults[0] : 0,
-            isset($betResults[null]) ? $betResults[null] : 0
+            isset($betResults[null]) ? $betResults[null] : 0,
+            isset($betResults[2]) ? $betResults[2] : 0
         ];
+    }
+
+    /**
+     * calculate net gains, without discounting the losses 
+     */
+    public function totalGains(): float
+    {
+        $winningBetsGain = $this->bets
+            ->where('result', '1')
+            ->map(fn ($bet) => $bet->payout() - $bet->bet_size)
+            ->sum();
+
+        $coBetsGain = $this->bets
+            ->where('result', '2')
+            ->filter(function ($coBet) {
+                return $coBet->cashout > $coBet->bet_size;
+            })
+            ->sum(function ($coBet) {
+                return $coBet->cashout - $coBet->bet_size;
+            });
+
+        return round($winningBetsGain + $coBetsGain, 2);
+    }
+
+    /**
+     * calculate net losses, without adding the wins 
+     */
+    public function totalLosses(): float
+    {
+        $losingBetsLosses = $this->bets
+            ->where('result', '0')
+            ->pluck('bet_size')
+            ->sum();
+
+        $coBetsLosses = $this->bets
+            ->where('result', '2')
+            ->filter(function ($coBet) {
+                return $coBet->cashout < $coBet->bet_size;
+            })
+            ->sum(function ($coBet) {
+                return $coBet->cashout - $coBet->bet_size;
+            });
+
+        return $losingBetsLosses + $coBetsLosses;
+    }
+
+    public function biggestPayout(): ?float
+    {
+        $maxWinPayout = $this->bets->where('result', '1')
+            ->map(fn ($bet) => $bet->payout())
+            ->max();
+
+        $maxCOPayout = $this->bets
+            ->where('result', '2')
+            ->pluck('cashout')
+            ->max();
+
+        return max($maxWinPayout, $maxCOPayout);
+    }
+
+    public function biggestLoss(): ?float
+    {
+        $losingBetsBiggestLoss = $this->bets->where('result', '0')->max('bet_size');
+
+        $coBetsBiggestLoss = $this->bets
+            ->where('result', '2')
+            ->filter(function ($coBet) {
+                return $coBet->cashout < $coBet->bet_size;
+            })
+            ->max(function ($coBet) {
+                return abs($coBet->cashout - $coBet->bet_size);
+            });
+
+        return max($losingBetsBiggestLoss, $coBetsBiggestLoss);
     }
 }

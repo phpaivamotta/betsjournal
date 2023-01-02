@@ -73,6 +73,20 @@ class StatsTest extends TestCase
         $this->actingAs($user)->get('/stats')->assertViewHas('totalNaBets', 2);
     }
 
+    public function test_total_co_bets()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->get('/stats')->assertViewHas('totalCOBets', 0);
+
+        Bet::factory(2)->create([
+            'user_id' => $user->id,
+            'result' => 2
+        ]);
+
+        $this->actingAs($user)->get('/stats')->assertViewHas('totalCOBets', 2);
+    }
+
     public function test_average_decimal_odds()
     {
         $user = User::factory()->create(['odd_type' => 'decimal']);
@@ -115,10 +129,14 @@ class StatsTest extends TestCase
         $totalPayouts = $bets->map(function ($bet) {
             if ($bet->result === 1) {
                 return $bet->payout() - $bet->bet_size;
+            } elseif ($bet->result === 2 && $bet->cashout > $bet->bet_size) {
+                return $bet->cashout - $bet->bet_size;
             }
         })->sum();
 
-        $this->actingAs($user)->get('/stats')->assertViewHas('totalGains', $totalPayouts);
+        $this->actingAs($user)
+            ->get('/stats')
+            ->assertViewHas('totalGains', round($totalPayouts, 2));
     }
 
     public function test_total_losses()
@@ -127,7 +145,18 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(5)->create(['user_id' => auth()->id()]);
 
-        $totLosses = $bets->where('result', '0')->pluck('bet_size')->sum();
+        $losingBetsLosses = $bets->where('result', '0')->pluck('bet_size')->sum();
+
+        $coBetsLosses = $bets
+            ->where('result', '2')
+            ->filter(function ($coBet) {
+                return $coBet->cashout < $coBet->bet_size;
+            })
+            ->sum(function ($coBet) {
+                return $coBet->cashout - $coBet->bet_size;
+            });
+
+        $totLosses = $losingBetsLosses + $coBetsLosses;
 
         $this->get('/stats')->assertViewHas('totalLosses', $totLosses);
     }
@@ -149,11 +178,19 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
-        $biggestPayout = $bets->map(function ($bet) {
-            if ($bet->result === true) {
+        $biggestWinPayout = $bets->map(function ($bet) {
+            if ($bet->result === 1) {
                 return $bet->payout();
-            }
+            } 
         })->max();
+
+        $biggestCOPayout = $bets->map(function ($bet) {
+            if ($bet->result === 2) {
+                return $bet->cashout;
+            } 
+        })->max();
+
+        $biggestPayout = max($biggestWinPayout, $biggestCOPayout);
 
         $this->actingAs($user)->get('/stats')->assertViewHas('biggestPayout', $biggestPayout);
     }
@@ -164,7 +201,18 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(5)->create(['user_id' => $user->id]);
 
-        $biggestLoss = $bets->where('result', '0')->max('bet_size');
+        $losingBetsBiggestLoss = $bets->where('result', '0')->max('bet_size');
+
+        $coBetsBiggestLoss = $bets
+            ->where('result', '2')
+            ->filter(function ($coBet) {
+                return $coBet->cashout < $coBet->bet_size;
+            })
+            ->max(function ($coBet) {
+                return abs($coBet->cashout - $coBet->bet_size);
+            });
+
+        $biggestLoss = max($losingBetsBiggestLoss, $coBetsBiggestLoss);
 
         $this->actingAs($user)->get('/stats')->assertViewHas('biggestLoss', $biggestLoss);
     }
@@ -182,7 +230,8 @@ class StatsTest extends TestCase
         $betResultsSort = [
             isset($betResults[1]) ? $betResults[1] : 0,
             isset($betResults[0]) ? $betResults[0] : 0,
-            isset($betResults[null]) ? $betResults[null] : 0
+            isset($betResults[null]) ? $betResults[null] : 0,
+            isset($betResults[2]) ? $betResults[2] : 0
         ];
 
         $this->actingAs($user)->get('/stats')->assertViewHas('betResultsSort', $betResultsSort);
@@ -194,14 +243,16 @@ class StatsTest extends TestCase
 
         $bets = Bet::factory(15)->create(['user_id' => $user->id]);
 
-        $profitArray = [];
-
         // get loss or payout for every bet
+        $profitArray = [];
         foreach ($bets as $bet) {
             if ($bet->result === 1) {
                 $profitArray[] = $bet->payout();
             } else if ($bet->result === 0) {
                 $profitArray[] = - ((float) $bet->bet_size);
+            } else if ($bet->result === 2) {
+                // note: this is the profit/loss of each cashout bet
+                $profitArray[] = $bet->cashout - $bet->bet_size;
             }
         }
 
