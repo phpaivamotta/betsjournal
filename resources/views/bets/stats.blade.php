@@ -52,6 +52,9 @@
             {{-- implied probability --}}
             <x-stat-card name='Implied Probability' :value="$impliedProbability . '%'" />
 
+            {{-- actual probability --}}
+            <x-stat-card name='Actual Probability' :value="$actualProbability . '%'" />
+
             {{-- total gains --}}
             <x-stat-card name='Total Gains' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($totalGains, 'USD')" />
 

@@ -22,7 +22,7 @@ class StatsService
         }
     }
 
-    public function impliedProbability(): ?float
+    public function impliedProbability(): ?string
     {
         $avgDecimalOdds = $this->averageOdds('decimal');
 
@@ -33,6 +33,19 @@ class StatsService
         } else {
             return null;
         }
+    }
+
+    public function actualProbability(): ?string
+    {
+        $numWins = $this->bets->where('result', '1')->count();
+        $numLosses = $this->bets->where('result', '0')->count();
+        
+        // check if either exists to avoid division by zero
+        if ($numWins || $numLosses) {
+            $actualProb = $numWins / ($numWins + $numLosses);
+        }
+
+        return isset($actualProb) ? number_format(100 * $actualProb, 2): null;
     }
 
     /**

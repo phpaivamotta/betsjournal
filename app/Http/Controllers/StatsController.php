@@ -25,6 +25,7 @@ class StatsController extends Controller
             'totalCOBets' => $bets->where('result', '2')->count(),
             'averageOdds' => $stats->averageOdds(auth()->user()->odd_type),
             'impliedProbability' => $stats->impliedProbability(),
+            'actualProbability' => $stats->actualProbability(),
             'totalGains' =>  $stats->totalGains(),
             'totalLosses' =>  $stats->totalLosses(),
             'biggestBet' => $bets->max('bet_size'),

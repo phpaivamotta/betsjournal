@@ -120,6 +120,30 @@ class StatsTest extends TestCase
         $this->actingAs($user)->get('/stats')->assertViewHas('impliedProbability', $implied_prob);
     }
 
+    public function test_actual_probability()
+    {
+        $user = User::factory()->create();
+
+        $bet = Bet::factory()->create([
+            'user_id' => $user->id 
+        ]);
+
+        $numWins = $bet->where('result', '1')->count();
+        $numLosses = $bet->where('result', '0')->count();
+
+        // check if either exists to avoid division by zero
+        if ($numWins || $numLosses) {
+            $actualProb = $numWins / ($numWins + $numLosses);
+        } 
+
+        $this->actingAs($user)
+            ->get('/stats')
+            ->assertViewHas(
+                'actualProbability', 
+                isset($actualProb) ? number_format(100 * $actualProb, 2): null
+            );
+    }
+
     public function test_total_gains()
     {
         $user = User::factory()->create();
