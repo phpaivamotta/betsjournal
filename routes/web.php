@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatsController;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use Illuminate\Support\Facades\Route;
@@ -62,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('bets.destroy');
 
     // view all bets stats
-    Route::get('stats', [BetController::class, 'stats'])
+    Route::get('stats', StatsController::class)
         ->name('bets.stats');
 
     // Livewire categories 

@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class ResolveBetTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function test_resolve_modal_can_be_seen()
     {
         $this->withoutExceptionHandling();

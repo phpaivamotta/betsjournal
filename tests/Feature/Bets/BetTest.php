@@ -430,6 +430,24 @@ class BetTest extends TestCase
         $this->get('/bets')->assertSee("Bet updated!");
     }
 
+    public function test_user_cannot_update_other_user_bet()
+    {
+        $this->signIn();
+    
+        $otherUser = User::factory()->create();
+
+        $otherUserBet = Bet::factory()->create([
+            'user_id' => $otherUser->id
+        ]);
+
+        $editBet = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => 2.20
+        ]);
+
+        $this->patch('/bets/' . $otherUserBet->id, $editBet)->assertStatus(403);
+    }
+
     public function test_edit_bet_redirects_to_paginated()
     {
         $this->signIn();
