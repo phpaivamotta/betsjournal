@@ -46,7 +46,9 @@
             </div>
 
             <!-- Odd Type -->
-            <div class="flex items-center mt-4">
+            <x-input-label class="mt-4" for="password_confirmation" :value="__('Odd Format')" />
+
+            <div class="flex items-center mt-1">
 
                 <input class="mr-1" type="radio" name="odd_type" id="american" @checked(old('odd_type', auth()->user()->odd_type) === 'american')
                     value="american">

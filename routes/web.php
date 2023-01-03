@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatsController;
+use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use App\Http\Livewire\ValueBets;
 use Illuminate\Http\Request;
@@ -31,9 +33,6 @@ Route::view('about', 'about')->name('about');
 // betting tools
 // odds comparison page
 Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
-
-// world cup page
-Route::view('world-cup', 'betting-tools/world-cup')->name('world-cup');
 
 // odd converter page
 Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
@@ -84,8 +83,12 @@ Route::middleware(['auth'])->group(function () {
         ->name('bets.destroy');
 
     // view all bets stats
-    Route::get('stats', [BetController::class, 'stats'])
+    Route::get('stats', StatsController::class)
         ->name('bets.stats');
+
+    // Livewire categories 
+    Route::get('categories', BetCategory::class)
+        ->name('bets.categories');
 
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');

@@ -35,16 +35,11 @@
                     <div class="input-group relative flex items-stretch w-full rounded">
                         <input wire:model="search" type="search" name="search"
                             class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                            placeholder="Search..." aria-label="Search" aria-describedby="button-addon2">
                         <span
                             class="input-group-text hidden sm:flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded"
                             id="basic-addon2">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search"
-                                class="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path fill="currentColor"
-                                    d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
-                                </path>
-                            </svg>
+                            <x-search-icon />
                         </span>
                     </div>
                 </div>
@@ -62,8 +57,37 @@
             <label for="loss" class="ml-1 mr-4 text-sm text-gray-600">Loss</label>
 
             <input wire:model="na" type="checkbox" name="na" id="na"
-                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-            <label for="na" class="ml-1 sm:mr-6 text-sm text-gray-600">N/A</label>
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="na" class="ml-1 mr-4 text-sm text-gray-600">N/A</label>
+
+            <input wire:model="cashout" type="checkbox" name="cashout" id="cashout"
+                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <label for="cashout" class="ml-1 sm:mr-6 text-sm text-gray-600">CO</label>
+        </div>
+
+        <div class="flex items-center">
+
+            <!-- categories -->
+            @if (auth()->user()->categories->count())
+                <div class="mr-4 w-full">
+
+                    <select wire:model="categories" multiple id="categories"
+                        class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full">
+
+                        @foreach (auth()->user()->categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+            @endif
+
+            {{-- categories setting --}}
+            <a href="{{ route('bets.categories', ['page' => $this->page]) }}" data-tippy-content="Manage Categories"
+                class="bg-blue-900 font-semibold hover:opacity-75 p-[13px] rounded-lg text-center text-white">
+                <x-categories-icon />
+            </a>
+
         </div>
 
         {{-- success flash message --}}
@@ -85,7 +109,7 @@
 
     {{-- delete bet modal --}}
     <form wire:submit.prevent="deleteBet">
-        <x-delete-modal wire:model.defer="showDeleteModal">
+        <x-modal wire:model.defer="showDeleteModal" delete="{{ true }}">
 
             <x-slot name="title">
                 Are you sure?
@@ -109,16 +133,73 @@
                     Delete
                 </x-primary-button>
             </x-slot>
-        </x-delete-modal>
+        </x-modal>
+    </form>
+
+    {{-- resolve bet modal --}}
+    <form wire:submit.prevent="resolveBet">
+        <x-modal x-data="{ open: false }" wire:model.defer="showResolveModal" delete="{{ false }}">
+
+            <x-slot name="title">
+                Resolve
+            </x-slot>
+
+            <x-slot name="message">
+                <p class="mt-1">
+                    Resolve <span class="font-semibold">{{ $currentBet->match }}</span>:
+                </p>
+
+                <div>
+                    <!-- result -->
+                    <div class="flex items-center mt-4">
+                        <input wire:model="result" x-on:click="open = false" class="mr-1" type="radio"
+                            id="win" value=1>
+                        <x-input-label for="win" :value="__('Win')" />
+
+                        <input wire:model="result" x-on:click="open = false" class="ml-4 mr-1" type="radio"
+                            id="loss" value=0>
+                        <x-input-label for="loss" :value="__('Loss')" />
+
+                        <input wire:model="result" x-on:click="open = true" class="ml-4 mr-1" type="radio"
+                            id="cashout" value=2>
+                        <x-input-label for="cashout" :value="__('CO')" />
+                    </div>
+                    {{-- result error --}}
+                    @error('result')
+                        <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+
+                    <!-- cashout -->
+                    <div x-show="open" class="mt-4" style="display: none;">
+                        <x-input-label for="cashout" :value="__('Cashout')" />
+
+                        <x-text-input wire:model="cashoutAmount" id="cashout" class="block mt-1 w-full"
+                            type="number" step="0.01" name="cashout" autofocus />
+                    </div>
+                    {{-- cash amount error --}}
+                    @error('cashoutAmount')
+                        <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+            </x-slot>
+
+            <x-slot name="buttons">
+                <x-primary-button x-on:click="open = false" wire:click="resetAttributes" type="button"
+                    class="bg-red-900 hover:bg-red-800 mr-2">
+                    Cancel
+                </x-primary-button>
+
+                <x-primary-button>
+                    Resolve
+                </x-primary-button>
+            </x-slot>
+        </x-modal>
     </form>
 
     {{-- tooltip --}}
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
-        tippy('.trippy-tippy', {
-            content: 'Change odds type in Edit Profile',
-            trigger: 'mouseenter click',
-        });
+        tippy('[data-tippy-content]');
     </script>
 </div>

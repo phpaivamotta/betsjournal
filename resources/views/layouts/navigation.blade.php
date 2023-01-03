@@ -8,16 +8,7 @@
                     <a href="{{ route('home') }}" class="flex items-center">
 
                         {{-- journal icon --}}
-                        <svg class="w-5" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="white" fill-rule="evenodd">
-                                <g id="icon-shape">
-                                    <path
-                                        d="M2,1.99079514 C2,0.891309342 2.89706013,0 4.00585866,0 L14.9931545,0 C15.5492199,0 16,0.443864822 16,1 L16,2 L5.00247329,2 C4.44882258,2 4,2.44386482 4,3 C4,3.55228475 4.44994876,4 5.00684547,4 L16.9931545,4 C17.5492199,4 18,4.44463086 18,5.00087166 L18,18.0059397 C18,19.1072288 17.1054862,20 16.0059397,20 L3.99406028,20 C2.8927712,20 2,19.1017876 2,18.0092049 L2,1.99079514 Z M6,4 L10,4 L10,12 L8,10 L6,12 L6,4 Z"
-                                        id="Combined-Shape"></path>
-                                </g>
-                            </g>
-                        </svg>
+                        <x-journal-icon />
 
                         {{-- website/brand name --}}
                         <div>
@@ -40,7 +31,7 @@
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-dropdown align="right" width="48">
 
-                        {{-- username button to dropdown --}}
+                        {{-- betting tools button to dropdown --}}
                         <x-slot name="trigger">
                             <button :class="{ 'outline-none text-gray-400 border-gray-300': open }"
                                 class="flex items-center text-sm font-medium text-white hover:text-gray-300 hover:border-gray-300 transition duration-150 ease-in-out pt-0.5">
@@ -63,11 +54,6 @@
                             {{-- odds comparison --}}
                             <x-dropdown-link :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                                 {{ __('Odds Comparison') }}
-                            </x-dropdown-link>
-
-                            {{-- world cup --}}
-                            <x-dropdown-link :href="route('world-cup')" :active="request()->routeIs('world-cup')">
-                                {{ __('World Cup') }}
                             </x-dropdown-link>
 
                             {{-- odd converter --}}
@@ -121,7 +107,6 @@
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
 
-                            {{--  --}}
                             <div x-data="{ open: false }">
 
                                 {{-- bets index --}}
@@ -158,7 +143,6 @@
                                 </div>
 
                             </div>
-                            {{--  --}}
 
                             {{-- logout --}}
                             <form method="POST" action="{{ route('logout') }}">
@@ -222,7 +206,7 @@
 
                 <div x-data="{ open: false }">
 
-                    {{-- bets index --}}
+                    {{-- betting tools button to dropdown --}}
                     <div @click="open = ! open" class="flex items-center">
 
                         <p
@@ -244,11 +228,6 @@
                         {{-- odds comparison page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                             {{ __('Odds Comparison') }}
-                        </x-responsive-nav-link>
-
-                        {{-- world cup page link --}}
-                        <x-responsive-nav-link class="pl-6" :href="route('world-cup')" :active="request()->routeIs('world-cup')">
-                            {{ __('World Cup') }}
                         </x-responsive-nav-link>
 
                         {{-- odd converter page link --}}
@@ -345,7 +324,7 @@
 
                 <div x-data="{ open: false }">
 
-                    {{-- betting tools --}}
+                    {{-- betting tools button to dropdown --}}
                     <div @click="open = ! open" class="flex items-center">
 
                         <p
@@ -367,11 +346,6 @@
                         {{-- odds comparison page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                             {{ __('Odds Comparison') }}
-                        </x-responsive-nav-link>
-
-                        {{-- world cup page link --}}
-                        <x-responsive-nav-link class="pl-6" :href="route('world-cup')" :active="request()->routeIs('world-cup')">
-                            {{ __('World Cup') }}
                         </x-responsive-nav-link>
 
                         {{-- odd converter page link --}}

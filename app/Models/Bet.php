@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use NumberFormatter;
 
 class Bet extends Model
@@ -12,8 +13,9 @@ class Bet extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $with = ['categories'];
 
-    public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na)
+    public function scopeFilter($query, string $search, ?bool $win, ?bool $loss, ?bool $na, ?bool $cashout)
     {
         $query->where(function ($query) use($search) {
 
@@ -24,7 +26,7 @@ class Bet extends Model
                 ->orWhere('bet_pick', 'like', '%' . $search . '%')
                 ->orWhere('bet_description', 'like', '%' . $search . '%');
 
-        })->where(function ($query) use($win, $loss, $na) {
+        })->where(function ($query) use($win, $loss, $na, $cashout) {
 
             $query->when($win, function ($query) {
 
@@ -38,9 +40,24 @@ class Bet extends Model
                 
                 $query->orWhere('result', null);
 
+            })->when($cashout, function ($query) {
+                
+                $query->orWhere('result', 2);
+
             });
 
         });
+    }
+
+    public function scopeWithCategories($query, array $categories = null)
+    {
+        if ($categories) {
+            return $query->whereHas('categories', function (Builder $query) use ($categories) {
+                $query->whereIn('id', $categories);
+            });
+        }
+
+        return $query;
     }
 
     public function payout()
@@ -59,5 +76,10 @@ class Bet extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

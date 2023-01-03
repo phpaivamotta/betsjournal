@@ -9,6 +9,7 @@
 
         {{-- bet links --}}
         <div class="sm:flex sm:items-center sm:justify-between mb-14 mt-1">
+
             <div class="flex items-center mb-4 sm:mb-0">
 
                 {{-- new bet link --}}
@@ -26,6 +27,36 @@
                         All
                     </p>
                 </a>
+
+            </div>
+
+            {{-- categories selector --}}
+            <div>
+
+                    <form class="flex items-center" action="/stats" method="GET">
+
+                        <!-- categories -->
+                        @if (auth()->user()->categories->count())
+                                <select multiple name="categories[]" id="categories"
+                                    class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full sm:w-48"
+                                    >
+
+                                    @foreach (auth()->user()->categories as $category)
+                                        <option {{ in_array($category->id, request('categories') ?? []) ? 'selected' : '' }} value="{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                        @endif
+
+                        <button type="submit"
+                            class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-20">
+                            <p class="text-sm">
+                                Filter
+                            </p>
+                        </button>
+                    </form>
+
             </div>
         </div>
 
@@ -43,11 +74,17 @@
             {{-- total NA bets --}}
             <x-stat-card name='Total N/A Bets' :value="$totalNaBets" />
 
+            {{-- total CO bets --}}
+            <x-stat-card name='Total CO Bets' :value="$totalCOBets" />
+
             {{-- average odds --}}
             <x-stat-card name="Average Odds ({{ auth()->user()->odd_type }})" :value="auth()->user()->odd_type === 'american' && $averageOdds > 0 ? '+' . $averageOdds : $averageOdds" />
 
             {{-- implied probability --}}
             <x-stat-card name='Implied Probability' :value="$impliedProbability . '%'" />
+
+            {{-- actual probability --}}
+            <x-stat-card name='Actual Probability' :value="$actualProbability . '%'" />
 
             {{-- total gains --}}
             <x-stat-card name='Total Gains' :value="(new NumberFormatter('en_US', NumberFormatter::CURRENCY))->formatCurrency($totalGains, 'USD')" />
@@ -101,11 +138,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Results chart 
-            var resultLabels = ["Wins", "Losses", "N/A"];
+            var resultLabels = ["Wins", "Losses", "N/A", "CO"];
             var resultData = {{ json_encode($betResultsSort) }};
             var barColors = [
                 "green",
                 "red",
+                "white",
                 "gray"
             ];
 
@@ -202,8 +240,13 @@
                     {
                         label: 'N/A',
                         data: {{ json_encode($resultCountProbRange['na']) }},
-                        backgroundColor: "gray",
+                        backgroundColor: "white",
                     },
+                    {
+                        label: 'CO',
+                        data: {{ json_encode($resultCountProbRange['co']) }},
+                        backgroundColor: "gray",
+                    }
                 ]
             };
 

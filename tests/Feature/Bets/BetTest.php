@@ -4,6 +4,7 @@ namespace Tests\Feature\Bets;
 
 use App\Http\Livewire\BetIndex;
 use App\Models\Bet;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,6 +18,8 @@ class BetTest extends TestCase
 
     public function test_the_component_can_render()
     {
+        $this->signIn();
+
         $component = Livewire::test(BetIndex::class);
  
         $component->assertStatus(200);
@@ -25,7 +28,11 @@ class BetTest extends TestCase
     public function test_bets_can_be_created()
     {
         // faking the form request that will be postested to the route
-        $attributes = Bet::factory()->raw(['odd' => 2.20]);
+        $attributes = Bet::factory()->raw([
+            'odd' => 2.20,
+            'result' => 1,
+            'cashout' => null
+        ]);
 
         $indexDecimalOdd = array_search('decimal_odd', $attributes);
         unset($attributes[$indexDecimalOdd]);
@@ -101,15 +108,14 @@ class BetTest extends TestCase
 
     public function test_bet_form_post_requires_odd()
     {
-        // create a bet, but have it "raw()" so that it is not persisted to the DB before posting and it is an array instead of an object
-        // make sure to override the odd with an empty string
-        $attributes = Bet::factory()->raw(['odd' => '']);
+        $this->signIn();
+        
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => ''
+        ]);
 
-        // find the user created by the factory so that it can be used below to post data to an auth route
-        $user = User::find($attributes['user_id']);
-
-        // post to route and confirm session has error
-        $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('odd');
+        $this->post('/bets', $attributes)->assertSessionHasErrors('odd');
     }
 
     public function test_bet_requires_a_bet_type()
@@ -175,6 +181,138 @@ class BetTest extends TestCase
 
         // post to route and confirm session has error
         $this->actingAs($user)->post('/bets', $attributes)->assertSessionHasErrors('match_time');
+    }
+
+    public function test_bet_can_be_cashed_out()
+    {
+        $this->signIn();
+
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'result' => 2 // this is the value for cash out
+        ]);
+
+        $attributes['odd'] = 2.2;
+        $attributes['cashout'] = 100;
+
+        $this->post('/bets', $attributes);
+
+        $this->get('/bets')->assertSee("You've created a new bet!");
+    }
+
+    public function test_cashout_result_requires_value()
+    {
+        $this->signIn();
+
+        $attributes = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'result' => 2, // this is the value for cash out
+            'cashout' => ''
+        ]);
+
+        $attributes['odd'] = 2.2;
+
+        $this->post('/bets', $attributes)->assertSessionHasErrors('cashout');
+    }
+
+    public function test_cashout_can_be_updated()
+    {
+        $this->withoutExceptionHandling();
+        
+        $this->signIn();
+
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->user(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $rawBet = $bet->toArray();
+
+        $rawBet['odd'] = 2.2;
+        $rawBet['cashout'] = 150;
+
+        $this->patch("/bets/{$bet->id}", $rawBet);
+
+        $this->get('/bets')->assertSee('Bet updated!');
+        $this->assertDatabaseHas('bets', ['cashout' => 150]);
+    }
+
+    public function test_cashout_can_be_seen()
+    {
+        $this->signIn();
+    
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $this->get('/bets')->assertSee($bet->cashout);
+    }
+
+    public function test_bet_can_have_categories()
+    {
+        $this->signIn();
+        
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => 2.20
+        ]);
+
+        $bet['categories'] = $categories->pluck('id')->toArray();
+
+        $this->post('/bets', $bet);
+
+        $this->assertDatabaseCount('bet_category', 2);
+    }
+
+    public function test_categories_can_be_seen()
+    {
+        $this->signIn();
+        
+        $category = Category::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+        
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet->categories()->attach($category->id);
+
+        $this->get('/bets')->assertSee($category->name);
+    }
+
+    public function test_bet_categories_can_be_edited()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+        
+        $categories = Category::factory(5)->create([
+            'user_id' => auth()->id()
+        ]);
+        
+        $bet = Bet::factory()->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bet->categories()->attach($categories->first()->id);
+
+        $rawBet = $bet->toArray();
+
+        $rawBet['categories'] = $categories->last()->id;
+        $rawBet['odd'] = 2.20;
+
+        $this->patch("/bets/{$bet->id}", $rawBet);
+
+        $this->assertDatabaseHas('categories', ['name' => $categories->last()->name]);
+        $this->get('/bets')->assertSee($categories->last()->name);
     }
 
     public function test_sport_can_be_seen()
@@ -290,6 +428,51 @@ class BetTest extends TestCase
         $this->assertDatabaseHas('bets', $bet_array);
 
         $this->get('/bets')->assertSee("Bet updated!");
+    }
+
+    public function test_user_cannot_update_other_user_bet()
+    {
+        $this->signIn();
+    
+        $otherUser = User::factory()->create();
+
+        $otherUserBet = Bet::factory()->create([
+            'user_id' => $otherUser->id
+        ]);
+
+        $editBet = Bet::factory()->raw([
+            'user_id' => auth()->id(),
+            'odd' => 2.20
+        ]);
+
+        $this->patch('/bets/' . $otherUserBet->id, $editBet)->assertStatus(403);
+    }
+
+    public function test_edit_bet_redirects_to_paginated()
+    {
+        $this->signIn();
+
+        // create bets (since pagination is done in chunks of 20, 35 bets will place us on the second page)
+        $bets = Bet::factory(35)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        // transform last bet from object to array so that it can be posted to route
+        $bet_array = $bets->last()->toArray();
+
+        // edit specific attribute (match in this case)
+        $bet_array['match'] = "Flamengo vs. Barcelona";
+
+        // add odd to request attributes
+        $bet_array['odd'] = 2.2;
+
+        // add page to request attributes
+        $bet_array['page'] = '2';
+
+        $this->patch('bets/' . $bets->last()->id, $bet_array)
+            ->assertRedirect('/bets?page=2');
+
+        $this->get('bets?page=2')->assertSee("Bet updated!");
     }
 
     public function test_user_can_delete_bet()
@@ -442,5 +625,58 @@ class BetTest extends TestCase
             ->assertSee($bet_na->match)
             ->set('search', '')
             ->assertSee([$bet_win->match, $bet_loss->match, $bet_na->match]);
+    }
+
+    public function test_categories_filter_works()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->signIn();
+
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bets = Bet::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bets->first()->categories()->attach($categories->pluck('id')->toArray()[0]);
+
+        $bets->last()->categories()->attach($categories->pluck('id')->toArray()[1]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee($bets->pluck('match')->toArray())
+            ->set('categories', [$categories->first()->id])
+            ->assertSee($bets->first()->match)
+            ->assertDontSee($bets->last()->match)
+            ->set('categories', [$categories->last()->id])
+            ->assertSee($bets->last()->match)
+            ->assertDontSee($bets->first()->match);
+    }
+
+    public function test_cashout_filter_works()
+    {
+        $this->withoutExceptionHandling();
+    
+        $this->signIn();
+    
+        $betCashout = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 2,
+            'cashout' => 100
+        ]);
+
+        $betWin = Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'result' => 1
+        ]);
+
+        Livewire::test(BetIndex::class)
+            ->assertSee($betCashout->match)
+            ->assertSee($betWin->match)
+            ->set('cashout', true)
+            ->assertDontSee($betWin->match)
+            ->assertSee($betCashout->match);
     }
 }
