@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Bet;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -125,7 +126,7 @@ class StatsTest extends TestCase
         $user = User::factory()->create();
 
         $bet = Bet::factory()->create([
-            'user_id' => $user->id 
+            'user_id' => $user->id
         ]);
 
         $numWins = $bet->where('result', '1')->count();
@@ -134,13 +135,13 @@ class StatsTest extends TestCase
         // check if either exists to avoid division by zero
         if ($numWins || $numLosses) {
             $actualProb = $numWins / ($numWins + $numLosses);
-        } 
+        }
 
         $this->actingAs($user)
             ->get('/stats')
             ->assertViewHas(
-                'actualProbability', 
-                isset($actualProb) ? number_format(100 * $actualProb, 2): null
+                'actualProbability',
+                isset($actualProb) ? number_format(100 * $actualProb, 2) : null
             );
     }
 
@@ -205,13 +206,13 @@ class StatsTest extends TestCase
         $biggestWinPayout = $bets->map(function ($bet) {
             if ($bet->result === 1) {
                 return $bet->payout();
-            } 
+            }
         })->max();
 
         $biggestCOPayout = $bets->map(function ($bet) {
             if ($bet->result === 2) {
                 return $bet->cashout;
-            } 
+            }
         })->max();
 
         $biggestPayout = max($biggestWinPayout, $biggestCOPayout);
@@ -299,5 +300,31 @@ class StatsTest extends TestCase
         }, $netProfitArr);
 
         $this->actingAs($user)->get('/stats')->assertSee('netProfit', $netProfitArr);
+    }
+
+    public function test_bets_stats_can_be_filtered_by_category()
+    {
+        $this->signIn();
+    
+        $bets = Bet::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $categories = Category::factory(2)->create();
+
+        $bets[0]->categories()->attach($categories[0]->id);
+        $bets[1]->categories()->attach($categories[1]->id);
+
+        $this->get('/stats')
+            ->assertViewHas('totalBets', 2);
+
+        $this->get("/stats?categories[]={$categories[0]->id}")
+            ->assertViewHas('totalBets', 1);
+
+        $this->get("/stats?categories[]={$categories[1]->id}")
+            ->assertViewHas('totalBets', 1);
+
+        $this->get("/stats?categories[]={$categories[0]->id}&categories[]={$categories[1]->id}")
+            ->assertViewHas('totalBets', 2);
     }
 }

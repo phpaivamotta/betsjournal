@@ -9,6 +9,7 @@
 
         {{-- bet links --}}
         <div class="sm:flex sm:items-center sm:justify-between mb-14 mt-1">
+
             <div class="flex items-center mb-4 sm:mb-0">
 
                 {{-- new bet link --}}
@@ -26,6 +27,41 @@
                         All
                     </p>
                 </a>
+
+            </div>
+
+            {{-- categories selector --}}
+            <div class="flex sm:justify-center">
+                <div class="xl:w-96 w-full">
+
+                    <form class="input-group relative flex items-stretch w-full rounded" action="/stats" method="GET">
+
+                        <!-- categories -->
+                        @if (auth()->user()->categories->count())
+                            <div class="mr-4 w-full">
+                                <select multiple name="categories[]" id="categories"
+                                    class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full"
+                                    >
+
+                                    @foreach (auth()->user()->categories as $category)
+                                        <option {{ in_array($category->id, request('categories') ?? []) ? 'selected' : '' }} value="{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        @endif
+
+                        <button type="submit"
+                            class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                            <p class="text-sm">
+                                Filter
+                            </p>
+                        </button>
+                    </form>
+
+                </div>
             </div>
         </div>
 
