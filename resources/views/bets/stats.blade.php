@@ -31,16 +31,14 @@
             </div>
 
             {{-- categories selector --}}
-            <div class="flex sm:justify-center">
-                <div class="xl:w-96 w-full">
+            <div>
 
-                    <form class="input-group relative flex items-stretch w-full rounded" action="/stats" method="GET">
+                    <form class="flex items-center" action="/stats" method="GET">
 
                         <!-- categories -->
                         @if (auth()->user()->categories->count())
-                            <div class="mr-4 w-full">
                                 <select multiple name="categories[]" id="categories"
-                                    class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full"
+                                    class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full sm:w-48"
                                     >
 
                                     @foreach (auth()->user()->categories as $category)
@@ -48,20 +46,17 @@
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
-
                                 </select>
-                            </div>
                         @endif
 
                         <button type="submit"
-                            class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-1/2 sm:w-20">
+                            class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-20">
                             <p class="text-sm">
                                 Filter
                             </p>
                         </button>
                     </form>
 
-                </div>
             </div>
         </div>
 
