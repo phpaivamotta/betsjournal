@@ -69,7 +69,34 @@
                 <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
             @enderror
 
-            {{-- <x-primary-button class="mt-4" id="btn">Calculate</x-primary-button> --}}
+            {{-- slider --}}
+            <div class="mt-5 mb-1 font-medium text-sm">
+                <label for="sports">Min. Over Value:</label>
+
+                <div 
+                    x-data="{ overvalue: @entangle('overValue').defer }" 
+                    class="flex items-center"
+                >
+                    <input 
+                        x-model="overvalue" 
+                        type="range" 
+                        min="1" 
+                        max="100" 
+                        id="myRange"
+                        class="w-1/2"
+                    >
+
+                    <div class="ml-4 text-sm">
+                        <span x-text="overvalue"></span> %
+                    </div>
+                </div>
+            </div>
+
+            {{-- over value error --}}
+            @error('overValue')
+                <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+            @enderror
+
             <button
                 class="inline-flex items-center px-4 py-2 bg-blue-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 active:bg-blue-700 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 mt-4">
                 <svg wire:loading wire:target="getValueBets" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -94,29 +121,6 @@
             <p>Tool Info</p>
         </div>
 
-        <p class="mt-3 text-gray-700 text-sm">
-            Being able to calculate the returns for any single bet is an essential part of betting.
-            This might be one of the simplest calculations done in betting, but it is nonetheless essential. Our
-            <span class="italic">Payout Calculator</span> makes this calculation even simpler!
-        </p>
-
-        <p class="text-gray-700 text-sm mt-3">
-            Every bet can essentially be broken down into three elements: the <strong>stake</strong>, the
-            <strong>payout</strong>, and the <strong>profit</strong>.
-            The stake is the amount being wagered on the bet, this is the amount you risk losing whenever you place
-            a
-            bet. On the other hand, the payout is the amount you can win. This consistis of the stake plus the
-            <strong>profit</strong>, which is how much money the bookies are giving you for winning the bet.
-        </p>
-
-        <p class="text-gray-700 text-sm mt-3">
-            For instance, lets suppose Barcelona and Real Madrid are competing in the Champions League Final. A
-            bookie
-            has the odds of Real Madrid winning the match at 2.3, in decimal format. This means that, if you stake a
-            100
-            dollars on Real Madrid to win the match, then your potential payout is of 230 dollars and your potential
-            profit is of 130 dollars.
-        </p>
     </x-auth-card>
 
 
@@ -127,25 +131,19 @@
 
             {{-- loop through each match --}}
             @forelse ($matches as $match)
-
                 {{-- loop through each bookie offering value bets for the match --}}
                 @foreach ($match['valueBets'] as $bookieName => $bookie)
-
                     {{-- loop through each bookie's value bet offerings (e.g., Home and Draw) --}}
                     @foreach ($bookie as $valueBetOffering => $valueBetStats)
-
                         {{-- pass necessary data to value bets card --}}
                         <x-value-bet-card class="mt-2 mb-2" :bookie-name="$bookieName" :match="$match" :value-bet-offering="$valueBetOffering"
                             :value-bet-stats="$valueBetStats" :odd-format="$oddFormat" />
-                            
                     @endforeach
-
                 @endforeach
 
             @empty
 
                 <p>No value bets found for this sport/region.</p>
-
             @endforelse
 
         </div>
