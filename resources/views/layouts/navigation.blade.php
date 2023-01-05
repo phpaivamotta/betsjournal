@@ -56,6 +56,11 @@
                                 {{ __('Odds Comparison') }}
                             </x-dropdown-link>
 
+                            {{-- value bets --}}
+                            <x-dropdown-link :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                                {{ __('Value Bets') }}
+                            </x-dropdown-link>
+
                             {{-- odd converter --}}
                             <x-dropdown-link :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
                                 {{ __('Odd Converter') }}
@@ -230,6 +235,11 @@
                             {{ __('Odds Comparison') }}
                         </x-responsive-nav-link>
 
+                        {{-- value bets --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                            {{ __('Value Bets') }}
+                        </x-responsive-nav-link>
+
                         {{-- odd converter page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odd-converter')" :active="request()->routeIs('odd-converter')">
                             {{ __('Odd Converter') }}
@@ -346,6 +356,11 @@
                         {{-- odds comparison page link --}}
                         <x-responsive-nav-link class="pl-6" :href="route('odds-comparison')" :active="request()->routeIs('odds-comparison')">
                             {{ __('Odds Comparison') }}
+                        </x-responsive-nav-link>
+
+                        {{-- value bets --}}
+                        <x-responsive-nav-link class="pl-6" :href="route('value-bets')" :active="request()->routeIs('value-bets')">
+                            {{ __('Value Bets') }}
                         </x-responsive-nav-link>
 
                         {{-- odd converter page link --}}

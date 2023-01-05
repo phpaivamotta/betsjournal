@@ -34,6 +34,9 @@ Route::view('about', 'about')->name('about');
 // odds comparison page
 Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
 
+// Livewire valuebets
+Route::get('value-bets', ValueBets::class)->name('value-bets');
+
 // odd converter page
 Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
 
@@ -42,21 +45,6 @@ Route::view('payout-calculator', 'betting-tools/payout-calculator')->name('payou
 
 // margin calculator
 Route::view('margin-calculator', 'betting-tools/margin-calculator')->name('margin-calculator');
-
-// Livewire valuebets
-Route::get('value-bets', ValueBets::class);
-
-// value bets
-// Route::get('value-bets', function () {
-//     return view('betting-tools/value-bets', [
-//         'sports' => Http::retry(3, 50)->get(
-//             'https://api.the-odds-api.com/v4/sports/?apiKey=' . config('services.the-odds-api.key')
-//         )->json()
-//     ]);
-// })->name('value-bets');
-
-// value bets params
-
 
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
