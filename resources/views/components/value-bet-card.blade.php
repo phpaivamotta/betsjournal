@@ -3,8 +3,6 @@
 <div class="flex items-start justify-between p-4 rounded-lg shadow-md hover:shadow-lg bg-white mb-4">
     <div class="w-full">
 
-        {{-- @dd($match) --}}
-
         <header class="flex items-start justify-between mb-4 border-b border-gray-400 pb-2">
 
             <div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Services\ValueBetsService;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class ValueBets extends Component
@@ -25,22 +26,32 @@ class ValueBets extends Component
     // value bets array
     public $matches;
 
-    // validation rules
-    protected $rules = [
-        'oddFormat' => 'required',
-        'regions' => 'required',
-        'overValue' => ['required', 'min:1', 'max:100'],
-    ];
-
     public function mount()
     {
         $this->sports = (new ValueBetsService())->getSports();
+        $this->sport = $this->sports[0];
     }
 
     public function render()
     {
         return view('livewire.value-bets');
     }
+
+    protected function rules()
+    {
+        return [
+            'oddFormat' => ['required', Rule::in(['american', 'decimal'])],
+            'sport' => ['required', Rule::in($this->sports)],
+            'regions' => ['required', 'array', 'max:4'],
+            'regions.*' => [Rule::in(['us', 'uk', 'eu', 'au']), 'distinct'],
+            'overValue' => ['required', 'numeric', 'between:1,100'],
+        ];
+    }
+
+    protected $messages = [
+        'regions.*.in' => 'A region is invalid.',
+        'regions.*.distinct' => 'The regions must be distinct.'
+    ];
 
     // get value bets opportunities for each bet
     public function getValueBets()
@@ -49,20 +60,14 @@ class ValueBets extends Component
         $this->validate();
 
         // transform over value to decimal percent
-        $this->overValue = $this->overValue / 100;
-
-        // check if user has not selected a sport
-        if (!$this->sport) {
-            // if not, then set the first sport as the one selected
-            $this->sport = $this->sports[0]['key'];
-        }
+        $overValueTransformed = $this->overValue / 100;
 
         $valueBets = (new ValueBetsService())
             ->getValueBets(
                 $this->sports,
                 $this->regions,
                 $this->sport,
-                $this->overValue
+                $overValueTransformed
             );
 
         $this->matches = $valueBets;

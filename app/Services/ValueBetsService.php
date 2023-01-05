@@ -10,11 +10,16 @@ class ValueBetsService
     public function getSports()
     {
         // cache in season sports for a day (86,400 seconds)
-        return Cache::remember('sports', 86400, function () {
+        $sports = Cache::remember('sports', 86400, function () {
             return Http::retry(3, 10)->get(
                 'https://api.the-odds-api.com/v4/sports/?apiKey=' . config('services.the-odds-api.key')
             )->throw()->json();
         });
+
+        // return array with just the sports names
+        return array_map(function ($sport) {
+            return $sport['key'];
+        }, $sports);
     }
 
     // get the odds from the-odds-api
@@ -67,24 +72,30 @@ class ValueBetsService
 
         $allMatches = []; // all matches
         $matchStats = []; // individual match
+        $count = 0; // counts the number of matches that do not have a bookmaker
         foreach ($matches as $match) {
-            $bookies = [];
             $matchStats['matchId'] = $match['id'];
             $matchStats['sport'] = $match['sport_key'];
             $matchStats['dateTime'] = $match['commence_time'];
             $matchStats['homeTeam'] = $match['home_team'];
             $matchStats['awayTeam'] = $match['away_team'];
+            $bookies = [];
 
-            // loop through each bookmaker    
-            foreach ($match['bookmakers'] as $bookmaker) {
-                // get the bookmaker name
-                $bookmakerName = $bookmaker['key'];
-                // get the outcomes array for this bookmaker
-                $outcomes = $bookmaker['markets'][0]['outcomes'];
-                // store the price of each outcome in an associative array
-                $bookies[$bookmakerName] = array_map(function ($outcome) {
-                    return $outcome['price'];
-                }, $outcomes);
+            // only perform if there the match has any bookmakers
+            if (empty($match['bookmakers'])) {
+                $count++;
+            } else {
+                // loop through each bookmaker
+                foreach ($match['bookmakers'] as $bookmaker) {
+                    // get the bookmaker name
+                    $bookmakerName = $bookmaker['key'];
+                    // get the outcomes array for this bookmaker
+                    $outcomes = $bookmaker['markets'][0]['outcomes'];
+                    // store the price of each outcome in an associative array
+                    $bookies[$bookmakerName] = array_map(function ($outcome) {
+                        return $outcome['price'];
+                    }, $outcomes);
+                }
             }
 
             // put the bookies array into matchStats
@@ -92,10 +103,14 @@ class ValueBetsService
 
             // push it to array with all matchStats
             array_push($allMatches, $matchStats);
-
-            // return array with all matches
-            return $allMatches;
         }
+
+        // return false if all matches do not have a bookmaker
+        if (count($allMatches) === $count) {
+            return false;
+        }
+
+        return $allMatches;
     }
 
     // get the average odds for each match money-line outcome
@@ -103,27 +118,32 @@ class ValueBetsService
     {
         // This function builds the array below
         /*
-                0 => [
-                    "Darren Till" => [
-                    "averageOdds" => 2.5392857142857,
-                    "numBookies" => 14
-                    ],
-                    "Dricus Du Plessis" => [
-                    "averageOdds" => 1.5364285714286,
-                    "numBookies" => 14
-                    ],
-                    "draw" => [
-                    "averageOdds" => null,
-                    "numBookies" => 0
-                    ]
+            0 => [
+                "Darren Till" => [
+                "averageOdds" => 2.5392857142857,
+                "numBookies" => 14
+                ],
+                "Dricus Du Plessis" => [
+                "averageOdds" => 1.5364285714286,
+                "numBookies" => 14
+                ],
+                "draw" => [
+                "averageOdds" => null,
+                "numBookies" => 0
                 ]
-            */
+            ]
+        */
 
         $averageOdds = [];
         foreach ($allMatches as $match) {
             $homeTeamOdds = [];
             $awayTeamOdds = [];
             $drawOdds = [];
+
+            // if there are no bookmakers for this match, skip to the next iteration
+            if (!$match['bookies']) {
+                continue;
+            }
 
             foreach ($match['bookies'] as $bookie) {
                 array_push($homeTeamOdds, $bookie[0]);
@@ -150,10 +170,9 @@ class ValueBetsService
             ];
 
             array_push($averageOdds, $oddsArr);
-
-            // return array with all average odds for each match line
-            return $averageOdds;
         }
+
+        return $averageOdds;
     }
 
     // get value bets opportunities for each bet
@@ -206,8 +225,13 @@ class ValueBetsService
         // get the odds for the chosen API parameters
         $response = $this->requestOdds($sports, $regions, $sport);
 
-        // perform operations
         $allMatches = $this->buildMatchesArray($response);
+
+        // if none of the matches have a bookmaker, return an empty array
+        if (!$allMatches) {
+            return [];
+        }
+
         $averageOdds = $this->averageOddsArray($allMatches);
 
         // loop through every match, get the stats and find the value bets
