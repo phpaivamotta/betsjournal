@@ -34,4 +34,8 @@ return [
     'oddspedia' => [
         'token' => env('ODDSPEDIA_API_TOKEN'),
     ],
+
+    'the-odds-api' => [
+        'key' => env('THE_ODDS_API_KEY'),
+    ],
 ];

@@ -5,7 +5,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatsController;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
+use App\Http\Livewire\ValueBets;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+
+use function PHPUnit\Framework\isEmpty;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +33,9 @@ Route::view('about', 'about')->name('about');
 // betting tools
 // odds comparison page
 Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
+
+// Livewire valuebets
+Route::get('value-bets', ValueBets::class)->name('value-bets');
 
 // odd converter page
 Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
