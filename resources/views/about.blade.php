@@ -41,6 +41,14 @@
         </div>
 
         <div class="mb-10 w-full">
+            <h3 class="font-bold text-lg">Value Bets</h3>
+
+            <p class="text-sm">
+                Our <a href="{{ route('value-bets') }}"><span class="text-blue-500 font-semibold">Value Bets Finder</span></a> feature uses advanced algorithms to analyze odds from various bookmakers and identify betting opportunities where the odds being offered are higher than the probability of the event occurring. This can help you find value bets that have a higher potential return on investment. Simply select the event you want to bet on and let our Value Bet Finder do the work for you. With just a few clicks, you can place your bet with confidence knowing that you're getting the best value for your money.
+            </p>
+        </div>
+
+        <div class="mb-10 w-full">
             <h3 class="font-bold text-lg">Odd Converter</h3>
 
             <p class="text-sm">
