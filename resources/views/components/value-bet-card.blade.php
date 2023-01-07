@@ -27,7 +27,6 @@
                 <div>
                     {{-- away --}}
                     @if ($valueBetOffering === 'awayOdds')
-
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">{{ $match['away'] }}</span>
@@ -45,10 +44,8 @@
                             $overvalue = $valueBetStats['overvalue'];
                             $numBookies = $match['awayAvg']['numBookies'];
                         @endphp
-
                     @elseif ($valueBetOffering === 'homeOdds')
-
-                    {{-- home --}}
+                        {{-- home --}}
 
                         {{-- bet pick --}}
                         <p>
@@ -63,15 +60,12 @@
                         {{-- get the moneyline odd and overvalue % here --}}
                         @php
                             $odd = $valueBetStats['moneyline'];
-                            // ddd($odd);
                             $overvalue = $valueBetStats['overvalue'];
-                            $numBookies = $match['awayAvg']['numBookies']
+                            $numBookies = $match['awayAvg']['numBookies'];
                         @endphp
-
                     @elseif ($valueBetOffering === 'drawOdds')
+                        {{-- draw --}}
 
-                    {{-- draw --}}
-                    
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">Draw</span>
@@ -85,11 +79,9 @@
                         {{-- get the moneyline odd and overvalue % here --}}
                         @php
                             $odd = $valueBetStats['moneyline'];
-                            // ddd($odd);
                             $overvalue = $valueBetStats['overvalue'];
-                            $numBookies = $match['awayAvg']['numBookies']
+                            $numBookies = $match['awayAvg']['numBookies'];
                         @endphp
-
                     @endif
                 </div>
 
@@ -100,26 +92,19 @@
                         <p class="font-semibold">
                             @if ($oddFormat === 'american')
                                 <span class="text-sm">
-                                    @php
-                                        // ddd($odd);
-                                        // convert decimal to american odds
-                                        if ($odd > 0) {
-                                            $americanOdd = $odd / 100 + 1;
-                                        } else {
-                                            $americanOdd = 100 / abs($odd) + 1;
-                                        }
-                                    @endphp
-                                    @ {{ number_format($americanOdd, 0) }}
+                                    @ {{ number_format(\App\Services\ConvertOddsService::decimalToAmerican($odd), 0) }}
                                 </span>
                             @elseif ($oddFormat === 'decimal')
-                                <span class="text-sm">@ {{ number_format($odd, 2) }}</span>
+                                <span class="text-sm">
+                                    @ {{ number_format($odd, 2) }}
+                                </span>
                             @endif
                         </p>
                     </div>
 
                     {{-- implied probability --}}
                     <p class="text-xs text-right">
-                        {{ number_format( ((1 / $odd) * 100), 0) . '%' }}
+                        {{ number_format((1 / $odd) * 100, 0) . '%' }}
                     </p>
 
                 </div>
@@ -143,9 +128,8 @@
                     <span class="text-xs">Overvalue</span>
                 </p>
 
-                <p> 
-                    <span
-                        class="text-md font-semibold">{{ number_format($overvalue * 100, 2) . '%' }}</span>
+                <p>
+                    <span class="text-md font-semibold">{{ number_format($overvalue * 100, 2) . '%' }}</span>
                 </p>
             </div>
 
@@ -155,9 +139,8 @@
                     <span class="text-xs">#Bookies Analyzed</span>
                 </p>
 
-                <p> 
-                    <span
-                        class="text-md font-semibold">{{ $numBookies }}</span>
+                <p>
+                    <span class="text-md font-semibold">{{ $numBookies }}</span>
                 </p>
             </div>
         </footer>
