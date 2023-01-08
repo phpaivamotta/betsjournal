@@ -64,7 +64,6 @@ class ValueBets extends Component
 
         $valueBets = (new ValueBetsService())
             ->getValueBets(
-                $this->sports,
                 $this->regions,
                 $this->sport,
                 $overValueTransformed
