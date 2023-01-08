@@ -27,6 +27,12 @@
                 <div>
                     {{-- away --}}
                     @if ($valueBetOffering === 'awayOdds')
+
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = $match['away'];
+                        @endphp
+
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">{{ $match['away'] }}</span>
@@ -47,6 +53,11 @@
                     @elseif ($valueBetOffering === 'homeOdds')
                         {{-- home --}}
 
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = $match['home'];
+                        @endphp
+
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">{{ $match['home'] }}</span>
@@ -65,6 +76,11 @@
                         @endphp
                     @elseif ($valueBetOffering === 'drawOdds')
                         {{-- draw --}}
+
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = 'draw';
+                        @endphp
 
                         {{-- bet pick --}}
                         <p>
@@ -133,7 +149,7 @@
                 </p>
             </div>
 
-            {{--  --}}
+            {{-- #bookies --}}
             <div>
                 <p>
                     <span class="text-xs">#Bookies Analyzed</span>
@@ -142,6 +158,22 @@
                 <p>
                     <span class="text-md font-semibold">{{ $numBookies }}</span>
                 </p>
+            </div>
+
+            <div>
+                <a href="{{ route('value-bets.record', [
+                    'match' => $match['home'] . ' vs ' . $match['away'],
+                    'bookie' => $bookieName,
+                    'odd' => number_format($odd, 2),
+                    'betPick' => $betPick,
+                    'sport' => $match['sport'],
+                    'date' => \Carbon\Carbon::create($match['dateTime'])->toDateString(),
+                    'time' => \Carbon\Carbon::create($match['dateTime'])->format('H:i'),
+                    ]) }}">
+                    <x-primary-button  type="button">
+                        Record
+                    </x-primary-button>
+                </a>
             </div>
         </footer>
 
