@@ -23,7 +23,7 @@ class ValueBetsService
     }
 
     // get the odds from the-odds-api
-    public function requestOdds(array $sports, array $regions, string $sport)
+    public function requestOdds(array $regions, string $sport)
     {
         // join selected regions in coma separated string
         $regionsQStr = join(',', $regions);
@@ -176,7 +176,7 @@ class ValueBetsService
     }
 
     // get value bets opportunities for each bet
-    public function getValueBets(array $sports, array $regions, string $sport, float $overValue)
+    public function getValueBets(array $regions, string $sport, float $overValue)
     {
         // This function returns an array like the one below
         /*
@@ -223,7 +223,7 @@ class ValueBetsService
             */
 
         // get the odds for the chosen API parameters
-        $response = $this->requestOdds($sports, $regions, $sport);
+        $response = $this->requestOdds($regions, $sport);
 
         $allMatches = $this->buildMatchesArray($response);
 
