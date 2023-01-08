@@ -79,9 +79,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('bets.categories');
 
     // record value bet
-    Route::get('value-bets/record', function () {
-        return view('bets.value-bets.record');
-    })->name('value-bets.record');
+    Route::view('value-bets/record', 'bets.value-bets.record')
+        ->name('value-bets.record');
 
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
