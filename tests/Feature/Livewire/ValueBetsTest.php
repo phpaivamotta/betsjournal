@@ -129,7 +129,8 @@ class ValueBetsTest extends TestCase
             ->assertSee('AIK vs BIK Karlskoga')
             ->assertSee('Money Line')
             ->assertSee('Overvalue')
-            ->assertSee('#Bookies Analyzed');
+            ->assertSee('#Bookies Analyzed')
+            ->assertSee('Record');
     }
 
     public function test_can_see_no_value_bets_found_message()
@@ -149,6 +150,21 @@ class ValueBetsTest extends TestCase
             ->set('overValue', 100) // set over value to 100% to guarantee no value bets
             ->call('getValueBets')
             ->assertSee('No value bets found for this sport/region.');
+    }
+
+    public function test_can_record_value_bets()
+    {
+        $this->signIn();
+    
+        $this->get('value-bets/record', [
+            'match' => 'Real Madrid vs Barcelona',
+            'bookie' => 'bet365',
+            'odd' => 2.35,
+            'betPick' => 'Real Madrid',
+            'sport' => 'Soccer',
+            'date' => \Carbon\Carbon::create(1975, 12, 25, 14, 15, 16)->toDateString(),
+            'time' => \Carbon\Carbon::create(1975, 12, 25, 14, 15, 16)->format('H:i'),
+        ])->assertStatus(200);
     }
 
     public function test_value_bets_accuracy()

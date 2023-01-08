@@ -78,6 +78,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('categories', BetCategory::class)
         ->name('bets.categories');
 
+    // record value bet
+    Route::view('value-bets/record', 'bets.value-bets.record')
+        ->name('value-bets.record');
+
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
     Route::patch('update-profile', [ProfileController::class, 'update'])->name('update-profile');

@@ -96,9 +96,7 @@
         {{-- display bets --}}
         @forelse ($bets as $bet)
             <x-bet-card :bet="$bet" />
-
         @empty
-
             <p>You haven't logged any bets yet.</p>
         @endforelse
 

@@ -5,7 +5,6 @@ namespace Tests\Feature\Livewire;
 use App\Http\Livewire\BetIndex;
 use App\Models\Bet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 

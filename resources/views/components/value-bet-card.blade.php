@@ -27,6 +27,11 @@
                 <div>
                     {{-- away --}}
                     @if ($valueBetOffering === 'awayOdds')
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = $match['away'];
+                        @endphp
+
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">{{ $match['away'] }}</span>
@@ -47,6 +52,11 @@
                     @elseif ($valueBetOffering === 'homeOdds')
                         {{-- home --}}
 
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = $match['home'];
+                        @endphp
+
                         {{-- bet pick --}}
                         <p>
                             <span class="text-md font-bold">{{ $match['home'] }}</span>
@@ -65,6 +75,11 @@
                         @endphp
                     @elseif ($valueBetOffering === 'drawOdds')
                         {{-- draw --}}
+
+                        {{-- set bet pick --}}
+                        @php
+                            $betPick = 'draw';
+                        @endphp
 
                         {{-- bet pick --}}
                         <p>
@@ -121,28 +136,51 @@
 
         </main>
 
-        <footer class="flex items-center space-x-20 border-t border-gray-400 mt-4 pt-2">
-            {{-- bet overvalue --}}
-            <div>
-                <p>
-                    <span class="text-xs">Overvalue</span>
-                </p>
+        <footer class="flex items-center justify-between border-t border-gray-400 mt-4 pt-2">
 
-                <p>
-                    <span class="text-md font-semibold">{{ number_format($overvalue * 100, 2) . '%' }}</span>
-                </p>
+            <div class="flex items-center justify-between w-3/5 lg:w-1/2">
+
+                {{-- bet overvalue --}}
+                <div>
+                    <p>
+                        <span class="text-xs">Overvalue</span>
+                    </p>
+
+                    <p>
+                        <span class="text-md font-semibold">{{ number_format($overvalue * 100, 2) . '%' }}</span>
+                    </p>
+                </div>
+
+                {{-- #bookies --}}
+                <div>
+                    <p>
+                        <span class="text-xs">#Bookies Analyzed</span>
+                    </p>
+
+                    <p>
+                        <span class="text-md font-semibold">{{ $numBookies }}</span>
+                    </p>
+                </div>
+
             </div>
 
-            {{--  --}}
             <div>
-                <p>
-                    <span class="text-xs">#Bookies Analyzed</span>
-                </p>
-
-                <p>
-                    <span class="text-md font-semibold">{{ $numBookies }}</span>
-                </p>
+                <a
+                    href="{{ route('value-bets.record', [
+                        'match' => $match['home'] . ' vs ' . $match['away'],
+                        'bookie' => $bookieName,
+                        'odd' => number_format($odd, 2),
+                        'betPick' => $betPick,
+                        'sport' => $match['sport'],
+                        'date' => \Carbon\Carbon::create($match['dateTime'])->toDateString(),
+                        'time' => \Carbon\Carbon::create($match['dateTime'])->format('H:i'),
+                    ]) }}">
+                    <x-primary-button type="button">
+                        Record
+                    </x-primary-button>
+                </a>
             </div>
+
         </footer>
 
     </div>
