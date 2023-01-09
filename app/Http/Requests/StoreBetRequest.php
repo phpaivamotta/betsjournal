@@ -41,7 +41,12 @@ class StoreBetRequest extends FormRequest
             'bet_description' => ['nullable', 'string', 'max:255'],
             'bet_pick' => ['required', 'string', 'max:255'],
             'result' => ['nullable', Rule::in([0, 1, 2])],
-            'cashout' => ['exclude_unless:result,2', 'required', 'numeric', 'min:0']
+            'cashout' => ['exclude_unless:result,2', 'required', 'numeric', 'min:0'],
+            'categories' => ['nullable', 'array'],
+            'categories.*' => [
+                Rule::in($this->user()->categories->pluck('id')->toArray()),
+                'distinct'
+            ]
         ];
     }
 }

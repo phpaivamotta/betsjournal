@@ -52,6 +52,13 @@ class BetController extends Controller
         // remove odd field since it has already been transformed into american and decimal odds
         unset($attributes['odd']);
 
+        // since the categories field is being validated in the Form Request, it should be unset
+        // before the bet is created 
+        if ($request->has('categories')) {
+            $categories = $attributes['categories'];
+            unset($attributes['categories']);
+        }
+
         // get user id from auth instead of request
         $attributes['user_id'] = auth()->id();
 
@@ -59,10 +66,12 @@ class BetController extends Controller
         $bet = Bet::create($attributes);
 
         // attach categories if any
-        $bet->categories()->attach($request['categories']);
+        if (isset($categories)) {
+            $bet->categories()->attach($categories);
+        }
 
-        // return bet
-        return $bet;
+        // to return the bet with its categories, need to load with eloquent use ::find()
+        return Bet::find($bet->id);
     }
 
     /**
@@ -109,12 +118,25 @@ class BetController extends Controller
         // remove odd field since it has already been transformed into american and decimal odds
         unset($attributes['odd']);
 
+        // since the categories field is being validated in the Form Request, it should be unset
+        // before the bet is created 
+        if ($request->has('categories')) {
+            $categories = $attributes['categories'];
+            unset($attributes['categories']);
+        }
+
         $bet->update($attributes);
 
         // sync categories
-        $bet->categories()->sync($request['categories']);
+        // if no categories were passed in the request, then "erase" any category present by syncing an empty array
+        if (isset($categories)) {
+            $bet->categories()->sync($categories);
+        } else {
+            $bet->categories()->sync([]);
+        }
 
-        return $bet;
+        // the ::find() method avoids loading the user with the bet
+        return Bet::find($bet->id);
     }
 
     /**
@@ -126,7 +148,7 @@ class BetController extends Controller
     public function destroy(Bet $bet)
     {
         abort_if($bet->user_id !== auth()->id(), 403);
-        
+
         $bet->delete();
 
         return response()->json('Bet deleted!', 204);
