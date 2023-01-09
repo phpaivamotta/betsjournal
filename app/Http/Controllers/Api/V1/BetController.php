@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBetRequest;
 use App\Http\Requests\UpdateBetRequest;
+use App\Http\Resources\BetResource;
 use App\Models\Bet;
 use App\Services\ConvertOddsService;
-use Illuminate\Http\Request;
 
 class BetController extends Controller
 {
@@ -18,7 +18,7 @@ class BetController extends Controller
      */
     public function index()
     {
-        return auth()->user()->bets;
+        return BetResource::collection(Bet::where('user_id', auth()->id())->paginate(20));
     }
 
     /**
@@ -70,8 +70,7 @@ class BetController extends Controller
             $bet->categories()->attach($categories);
         }
 
-        // to return the bet with its categories, need to load with eloquent use ::find()
-        return Bet::find($bet->id);
+        return new BetResource(Bet::find($bet->id));
     }
 
     /**
@@ -84,7 +83,7 @@ class BetController extends Controller
     {
         abort_if($bet->user_id !== auth()->id(), 403);
 
-        return $bet;
+        return new BetResource(Bet::find($bet->id));
     }
 
     /**
@@ -135,8 +134,7 @@ class BetController extends Controller
             $bet->categories()->sync([]);
         }
 
-        // the ::find() method avoids loading the user with the bet
-        return Bet::find($bet->id);
+        return new BetResource(Bet::find($bet->id));
     }
 
     /**

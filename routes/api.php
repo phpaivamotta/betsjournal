@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\BetController;
+use App\Http\Controllers\Api\V1\BetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
+    // get auth user
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
-Route::apiResource('bets', BetController::class)->middleware('auth:sanctum');
+    // Bet model
+    Route::apiResource('bets', BetController::class)->middleware('auth:sanctum');
+});
