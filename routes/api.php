@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\BetController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\StatsController;
+use App\Http\Controllers\Api\V1\ValueBets;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     // Category resources
     Route::apiResource('categories', CategoryController::class);
+
+    // value bets
+    Route::get('value-bets', ValueBets::class);
 });
