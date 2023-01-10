@@ -137,6 +137,11 @@
                     <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" autofocus />
                 </div>
 
+                {{-- category name error --}}
+                @error('name')
+                    <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                @enderror
+
                 {{-- color --}}
                 <div class="mt-4">
                     <x-input-label for="color" :value="__('Color')" />
