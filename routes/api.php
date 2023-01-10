@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     // Bet stats
     Route::get('bets/stats', StatsController::class);
-    
+
     // Bet resources
     Route::apiResource('bets', BetController::class);
 

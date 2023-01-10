@@ -9,9 +9,22 @@ class StatsController extends Controller
 {
     public function __invoke()
     {
+        $categories = request('categories');
+
+        // validate categories exist/belong to user
+        if (isset($categories)) {
+            $userCategories = auth()->user()->categories->pluck('id')->toArray();
+
+            foreach ($categories as $category) {
+                if (!in_array($category, $userCategories)) {
+                    abort(422, 'The category is invalid.');
+                }
+            }
+        }
+
         // Query user's bets filtering by category
         $bets = Bet::where('user_id', auth()->user()->id)
-            ->withCategories(request('categories'))
+            ->withCategories($categories)
             ->get();
 
         // initialize service class

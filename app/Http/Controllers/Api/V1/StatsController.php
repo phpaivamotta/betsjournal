@@ -12,6 +12,17 @@ class StatsController extends Controller
     {
         $categories = request()->has('categories') ? explode(',', request('categories')) : null;
 
+        // validate categories exist/belong to user
+        if (isset($categories)) {
+            $userCategories = auth()->user()->categories->pluck('id')->toArray();
+
+            foreach ($categories as $category) {
+                if (!in_array($category, $userCategories)) {
+                    abort(422, 'The category is invalid.');
+                }
+            }
+        }
+
         // Query user's bets filtering by category
         $bets = Bet::where('user_id', auth()->user()->id)
             ->withCategories($categories)
@@ -31,6 +42,7 @@ class StatsController extends Controller
             'actualProbability' => $stats->actualProbability(),
             'totalGains' =>  $stats->totalGains(),
             'totalLosses' =>  $stats->totalLosses(),
+            'netProfit' =>  $stats->totalGains() - $stats->totalLosses(),
             'biggestBet' => $bets->max('bet_size'),
             'biggestPayout' => $stats->biggestPayout(),
             'biggestLoss' => $stats->biggestLoss(),
