@@ -149,6 +149,11 @@
 
                             </div>
 
+                            {{-- API Tokens --}}
+                            <x-dropdown-link :href="route('api-tokens')" :active="request()->routeIs('api-tokens')">
+                                {{ __('API Tokens') }}
+                            </x-dropdown-link>
+
                             {{-- logout --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -158,8 +163,8 @@
                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
-
                             </form>
+
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -290,7 +295,6 @@
                     </div>
 
                     <div x-show="open" style="display: none">
-                        {{-- betting tools --}}
                         <x-responsive-nav-link class="pl-6" :href="route('bets.index')" :active="request()->routeIs('bets.index')">
                             {{ __('All') }}
                         </x-responsive-nav-link>
@@ -307,6 +311,10 @@
                     </div>
 
                 </div>
+
+                <x-responsive-nav-link :href="route('api-tokens')" :active="request()->routeIs('api-tokens')">
+                    {{ __('API Tokens') }}
+                </x-responsive-nav-link>
 
                 <div>
                     {{-- logout --}}

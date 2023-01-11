@@ -18,6 +18,12 @@
             <x-flash-category class="bg-green-300" status="success" />
         @endif
 
+        <p class="text-xl font-semibold">Categories</p>
+
+        <p class="font-medium text-sm text-gray-700 mb-10">
+            Manage your bet categories.
+        </p>
+
         <form wire:submit.prevent="create">
 
             <!-- categories -->
