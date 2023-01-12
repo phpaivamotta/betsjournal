@@ -70,7 +70,7 @@ class BetController extends Controller
             $bet->categories()->attach($categories);
         }
 
-        return new BetResource(Bet::find($bet->id));
+        return response(new BetResource(Bet::find($bet->id)), 201);
     }
 
     /**
