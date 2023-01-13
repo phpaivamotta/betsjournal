@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'color' => $request['color']
         ]);
 
-        return new CategoryResource(Category::find($category->id));
+        return response(new CategoryResource(Category::find($category->id)), 201);
     }
 
     /**
