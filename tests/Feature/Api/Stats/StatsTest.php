@@ -93,10 +93,35 @@ class StatsTest extends TestCase
                 ->etc()
         );
 
+        // filter bets by both bets
         $response = $this->getJson('/api/v1/bets/stats?categories=1,2');
         $response->assertJson(fn (AssertableJson $json) =>
             $json->where('totalBets', 4)
                 ->etc()
         );
+    }
+
+    public function test_cannnot_filter_by_wrong_category()
+    {
+        $this->signIn();
+
+        $bets = Bet::factory(4)->create([
+            'user_id' => auth()->id(),
+            'decimal_odd' => 2.00,
+            'american_odd' => 500,
+            'result' => 1
+        ]);
+
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $bets[0]->categories()->attach($categories[0]->id);
+        $bets[1]->categories()->attach($categories[0]->id);
+        $bets[2]->categories()->attach($categories[1]->id);
+        $bets[3]->categories()->attach($categories[1]->id);
+
+        $this->getJson('/api/v1/bets/stats?categories=3')
+            ->assertStatus(422);
     }
 }
