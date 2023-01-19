@@ -73,35 +73,35 @@ class StatsTest extends TestCase
         $bets[1]->categories()->attach($categories[0]->id);
         $bets[2]->categories()->attach($categories[1]->id);
         $bets[3]->categories()->attach($categories[1]->id);
-    
+
         $this->getJson('/api/v1/bets/stats')
             ->assertJson([
                 'totalBets' => 4
             ]);
 
-        // filter bets by first category 
-        $response = $this->getJson('/api/v1/bets/stats?categories=1');
+        // filter bets by first category
+        $response = $this->getJson("/api/v1/bets/stats?categories={$categories[0]->id}");
         $response->assertJson(fn (AssertableJson $json) =>
             $json->where('totalBets', 2)
                 ->etc()
         );
 
         // filter bets by second category 
-        $response = $this->getJson('/api/v1/bets/stats?categories=2');
+        $response = $this->getJson("/api/v1/bets/stats?categories={$categories[1]->id}");
         $response->assertJson(fn (AssertableJson $json) =>
             $json->where('totalBets', 2)
                 ->etc()
         );
 
         // filter bets by both bets
-        $response = $this->getJson('/api/v1/bets/stats?categories=1,2');
+        $response = $this->getJson("/api/v1/bets/stats?categories={$categories[0]->id},{$categories[1]->id}");
         $response->assertJson(fn (AssertableJson $json) =>
             $json->where('totalBets', 4)
                 ->etc()
         );
     }
 
-    public function test_cannnot_filter_by_wrong_category()
+    public function test_cannot_filter_by_wrong_category()
     {
         $this->signIn();
 
@@ -121,7 +121,7 @@ class StatsTest extends TestCase
         $bets[2]->categories()->attach($categories[1]->id);
         $bets[3]->categories()->attach($categories[1]->id);
 
-        $this->getJson('/api/v1/bets/stats?categories=3')
+        $this->getJson('/api/v1/bets/stats?categories=43')
             ->assertStatus(422);
     }
 }

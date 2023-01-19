@@ -187,43 +187,75 @@ class ValueBetsTest extends TestCase
         // number of matches 
         $this->assertEquals(2, count($valueBets));
 
-        // home team odds average
-        $this->assertEquals(2.02, number_format($valueBets[0]['homeAvg']['averageOdds'], 2));
-        $this->assertEquals(4, $valueBets[0]['homeAvg']['numBookies']);
+        // home team num bookies
+        $this->assertEquals(4, $valueBets[0]['num_bookies_analyzed']['home_team']);
         
-        // away team odds average
-        $this->assertEquals(2.28, number_format($valueBets[0]['awayAvg']['averageOdds'], 2));
-        $this->assertEquals(4, $valueBets[0]['awayAvg']['numBookies']);
+        // away team num bookies
+        $this->assertEquals(4, $valueBets[0]['num_bookies_analyzed']['away_team']);
 
-        // draw odds average
-        $this->assertEquals(4.15, number_format($valueBets[0]['drawAvg']['averageOdds'], 2));
-        $this->assertEquals(2, $valueBets[0]['drawAvg']['numBookies']);
+        // draw team num bookies
+        $this->assertEquals(2, $valueBets[0]['num_bookies_analyzed']['draw']);
 
         // value bets
-
         // AIK vs BIK Karlskoga
-        $this->assertEquals(2, count($valueBets[0]['valueBets']));
-        // unibet_eu
-        $this->assertEquals(3, count($valueBets[0]['valueBets']['unibet_eu']));
-        $this->assertEquals(0.0706, number_format($valueBets[0]['valueBets']['unibet_eu']['homeOdds']['overvalue'], 4));
-        $this->assertEquals(0.1829, number_format($valueBets[0]['valueBets']['unibet_eu']['awayOdds']['overvalue'], 4));
-        $this->assertEquals(0.0361, number_format($valueBets[0]['valueBets']['unibet_eu']['drawOdds']['overvalue'], 4));
-        // betclic
-        $this->assertEquals(2, count($valueBets[0]['valueBets']['betclic']));
-        $this->assertEquals(0.1400, number_format($valueBets[0]['valueBets']['betclic']['homeOdds']['overvalue'], 4));
-        $this->assertEquals(0.0953, number_format($valueBets[0]['valueBets']['betclic']['awayOdds']['overvalue'], 4));
 
-        // Kristianstads IK vs Södertälje SK
-        $this->assertEquals(2, count($valueBets[1]['valueBets']));
-        // unibet_eu
-        $this->assertEquals(3, count($valueBets[1]['valueBets']['unibet_eu']));
-        $this->assertEquals(0.1111, number_format($valueBets[1]['valueBets']['unibet_eu']['homeOdds']['overvalue'], 4));
-        $this->assertEquals(0.1450, number_format($valueBets[1]['valueBets']['unibet_eu']['awayOdds']['overvalue'], 4));
-        $this->assertEquals(0.0361, number_format($valueBets[1]['valueBets']['unibet_eu']['drawOdds']['overvalue'], 4));
-        // betclic
-        $this->assertEquals(2, count($valueBets[1]['valueBets']['betclic']));
-        $this->assertEquals(0.1325, number_format($valueBets[1]['valueBets']['betclic']['homeOdds']['overvalue'], 4));
-        $this->assertEquals(0.0941, number_format($valueBets[1]['valueBets']['betclic']['awayOdds']['overvalue'], 4));
+        // home team
+        // number of value bets offered
+        $this->assertEquals(1, count($valueBets[0]['value_bets']['home_team']));
+        // bookie offering value bet
+        $this->assertEquals(['Betclic'], array_keys($valueBets[0]['value_bets']['home_team']));
+        // over value
+        $this->assertEquals(0.8182, $valueBets[0]['value_bets']['home_team']['Betclic']['over_value']);
+        // money line odds
+        $this->assertEquals(5, $valueBets[0]['value_bets']['home_team']['Betclic']['money_line']);
+
+        // away team
+        // number of value bets offered
+        $this->assertEquals(1, count($valueBets[0]['value_bets']['away_team']));
+        // bookie offering value bet
+        $this->assertEquals(['Pinnacle'], array_keys($valueBets[0]['value_bets']['away_team']));
+        // over value
+        $this->assertEquals(0.6, $valueBets[0]['value_bets']['away_team']['Pinnacle']['over_value']);
+        // money line odds
+        $this->assertEquals(4, $valueBets[0]['value_bets']['away_team']['Pinnacle']['money_line']);
+
+        // draw
+        // number of value bets offered
+        $this->assertEquals(1, count($valueBets[0]['value_bets']['draw']));
+        // bookie offering value bet
+        $this->assertEquals(['Unibet'], array_keys($valueBets[0]['value_bets']['draw']));
+        // over value
+        $this->assertEquals(0.5, $valueBets[0]['value_bets']['draw']['Unibet']['over_value']);
+        // money line odds
+        $this->assertEquals(6, $valueBets[0]['value_bets']['draw']['Unibet']['money_line']);
+    }
+
+    public function test_switching_home_and_away_teams_position_does_not_break_algo()
+    {
+        $url = 'https://api.the-odds-api.com/v4/sports/icehockey_sweden_allsvenskan/odds/?apiKey='
+            . config('services.the-odds-api.key') .
+            '&regions=eu&oddsFormat=decimal';
+
+        Http::fake([
+            $url => $this->fakeSportOddsApiResponse()
+        ]);
+
+        $valueBets = (new ValueBetsService())
+            ->getValueBets(
+                ['eu'],
+                'icehockey_sweden_allsvenskan',
+                0.01
+            );
+
+        // check team names
+        $this->assertEquals('Kristianstads IK', $valueBets[1]['home_team']);
+        $this->assertEquals('Södertälje SK', $valueBets[1]['away_team']);
+
+        // see if away team is only one offering value bet
+        $this->assertEquals(['away_team'], array_keys($valueBets[1]['value_bets']));
+        // check if over value is correct
+        $this->assertEquals(0.6, $valueBets[1]['value_bets']['away_team']['Unibet']['over_value']);
+        $this->assertEquals(6, $valueBets[1]['value_bets']['away_team']['Unibet']['money_line']);
     }
 
     private function fakeSportOddsApiResponse()
@@ -249,15 +281,15 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "AIK",
-                                        "price" => 2.16,
+                                        "price" => 2.0,
                                     ],
                                     [
                                         "name" => "BIK Karlskoga",
-                                        "price" => 2.7,
+                                        "price" => 2.0,
                                     ],
                                     [
                                         "name" => "Draw",
-                                        "price" => 4.3,
+                                        "price" => 6.0,
                                     ]
                                 ]
                             ]
@@ -274,15 +306,15 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "AIK",
-                                        "price" => 2.3,
+                                        "price" => 5.0,
                                     ],
                                     [
                                         "name" => "BIK Karlskoga",
-                                        "price" => 2.5,
+                                        "price" => 2.0,
                                     ],
                                     [
                                         "name" => "Draw",
-                                        "price" => 4.0,
+                                        "price" => 2.0,
                                     ]
                                 ]
                             ]
@@ -299,7 +331,7 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "AIK",
-                                        "price" => 1.8,
+                                        "price" => 2.0,
                                     ],
                                     [
                                         "name" => "BIK Karlskoga",
@@ -320,11 +352,11 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "AIK",
-                                        "price" => 1.81,
+                                        "price" => 2.0,
                                     ],
                                     [
                                         "name" => "BIK Karlskoga",
-                                        "price" => 1.93,
+                                        "price" => 4.0,
                                     ]
                                 ]
                             ]
@@ -350,16 +382,16 @@ class ValueBetsTest extends TestCase
                                 "last_update" => "2023-01-05T02:31:57Z",
                                 "outcomes" => [
                                     [
-                                        "name" => "Kristianstads IK",
-                                        "price" => 2.6,
+                                        "name" => "Södertälje SK",
+                                        "price" => 6.0,
                                     ],
                                     [
-                                        "name" => "Södertälje SK",
-                                        "price" => 2.25,
+                                        "name" => "Kristianstads IK",
+                                        "price" => 3.0,
                                     ],
                                     [
                                         "name" => "Draw",
-                                        "price" => 4.3,
+                                        "price" => 3.0,
                                     ]
                                 ]
                             ]
@@ -376,15 +408,15 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "Kristianstads IK",
-                                        "price" => 2.65,
+                                        "price" => 3.0,
                                     ],
                                     [
                                         "name" => "Södertälje SK",
-                                        "price" => 2.15,
+                                        "price" => 3.0,
                                     ],
                                     [
                                         "name" => "Draw",
-                                        "price" => 4.0,
+                                        "price" => 3.0,
                                     ]
                                 ]
                             ]
@@ -401,11 +433,11 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "Kristianstads IK",
-                                        "price" => 2.05,
+                                        "price" => 3.0,
                                     ],
                                     [
                                         "name" => "Södertälje SK",
-                                        "price" => 1.75,
+                                        "price" => 3.0,
                                     ]
                                 ]
                             ]
@@ -422,11 +454,11 @@ class ValueBetsTest extends TestCase
                                 "outcomes" => [
                                     [
                                         "name" => "Kristianstads IK",
-                                        "price" => 2.06,
+                                        "price" => 3.0,
                                     ],
                                     [
                                         "name" => "Södertälje SK",
-                                        "price" => 1.71,
+                                        "price" => 3.0,
                                     ]
                                 ]
                             ]

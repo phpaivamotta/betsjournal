@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
+Route::middleware('auth:sanctum')->prefix('v1')->group( function () {
     // get auth user
     Route::get('/user', function (Request $request) {
         return $request->user();

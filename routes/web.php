@@ -4,15 +4,10 @@ use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatsController;
 use App\Http\Livewire\Api\ApiTokens;
-use App\Http\Livewire\Api\ApiTokensController;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use App\Http\Livewire\ValueBets;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
-use function PHPUnit\Framework\isEmpty;
 
 /*
 |--------------------------------------------------------------------------
