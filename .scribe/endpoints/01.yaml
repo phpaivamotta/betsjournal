@@ -1,0 +1,70 @@
+name: Stats
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/bets/stats
+    metadata:
+      groupName: Stats
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Get the stats for all your bets.
+
+        See your bet's analysis, done for you so that you don't have to open excel.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      categories:
+        name: categories
+        description: 'Comma-separated list of categories to filter by.'
+        required: false
+        example: '1,2'
+        type: string
+        custom: []
+    cleanQueryParameters:
+      categories: '1,2'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "totalBets": 76,
+              "totalWinBets": 39,
+              "totalLossBets": 17,
+              "totalNaBets": 5,
+              "totalCOBets": 15,
+              "averageOdds": 4.398,
+              "impliedProbability": "22.74",
+              "actualProbability": "69.64",
+              "totalGains": 8214.45,
+              "totalLosses": -43.630000000000564,
+              "netProfit": 8258.080000000002,
+              "biggestBet": "299.90",
+              "biggestPayout": 1363.8203600000002,
+              "biggestLoss": 286.28
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []

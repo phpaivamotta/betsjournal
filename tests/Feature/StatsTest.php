@@ -310,7 +310,9 @@ class StatsTest extends TestCase
             'user_id' => auth()->id()
         ]);
 
-        $categories = Category::factory(2)->create();
+        $categories = Category::factory(2)->create([
+            'user_id' => auth()->id()
+        ]);
 
         $bets[0]->categories()->attach($categories[0]->id);
         $bets[1]->categories()->attach($categories[1]->id);

@@ -15,3 +15,4 @@ yarn-error.log
 /.idea
 /.vscode
 odds-api-response.json
+odds.json

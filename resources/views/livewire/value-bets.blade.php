@@ -125,15 +125,11 @@
         {{-- since $matches is null before calling getValueBets() --}}
         @if (isset($matches))
             <div class="mb-16 mx-auto sm:max-w-md w-11/12">
-                {{-- loop through each match --}}
                 @forelse ($matches as $match)
-                    {{-- loop through each bookie offering value bets for the match --}}
-                    @foreach ($match['valueBets'] as $bookieName => $bookie)
-                        {{-- loop through each bookie's value bet offerings (e.g., Home and Draw) --}}
-                        @foreach ($bookie as $valueBetOffering => $valueBetStats)
-                            {{-- pass necessary data to value bets card --}}
-                            <x-value-bet-card class="mt-2 mb-2" :bookie-name="$bookieName" :match="$match" :value-bet-offering="$valueBetOffering"
-                                :value-bet-stats="$valueBetStats" :odd-format="$oddFormat" />
+                    @foreach ($match['value_bets'] as $outcome => $valueBets)
+                        @foreach ($valueBets as $bookie => $stats)
+                            <x-value-bet-card :match="$match" :outcome="$outcome" odd-format="decimal"
+                                :stats="$stats" :bookie="$bookie" />
                         @endforeach
                     @endforeach
                 @empty

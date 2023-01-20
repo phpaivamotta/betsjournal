@@ -306,7 +306,7 @@ class BetTest extends TestCase
 
         $rawBet = $bet->toArray();
 
-        $rawBet['categories'] = $categories->last()->id;
+        $rawBet['categories'] = [$categories->last()->id];
         $rawBet['odd'] = 2.20;
 
         $this->patch("/bets/{$bet->id}", $rawBet);

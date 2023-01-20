@@ -1,0 +1,1449 @@
+openapi: 3.0.3
+info:
+  title: 'Betsjournal API'
+  description: 'Manage and analyze your bets from anywhere with Betsjournal.'
+  version: 1.0.0
+servers:
+  -
+    url: 'https://betsjournal.io'
+paths:
+  /api/v1/bets:
+    get:
+      summary: 'Display all bets.'
+      operationId: displayAllBets
+      description: 'Get all of your recorded bets.'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Page to view.'
+          example: 13
+          required: false
+          schema:
+            type: integer
+            description: 'Page to view.'
+            example: 13
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 141
+                      sport: est
+                      match: 'Laudantium consequuntur iste eum dolore non.'
+                      match_date: '2012-01-12'
+                      match_time: '03:17'
+                      bookie: aut
+                      bet_type: tempore
+                      bet_description: 'Omnis dicta illum dolores quia.'
+                      bet_pick: suscipit
+                      bet_size: 129.12
+                      decimal_odd: 8.943
+                      american_odd: 409.193
+                      result: 2
+                      cashout: 224.86
+                      created_at: '2023-01-20T19:02:29.000000Z'
+                      updated_at: '2023-01-20T19:02:29.000000Z'
+                      categories: []
+                    -
+                      id: 142
+                      sport: quis
+                      match: 'Cupiditate cumque quod debitis ut.'
+                      match_date: '1999-09-06'
+                      match_time: '08:55'
+                      bookie: repudiandae
+                      bet_type: temporibus
+                      bet_description: 'Non minima quidem et.'
+                      bet_pick: amet
+                      bet_size: 191.15
+                      decimal_odd: 2.928
+                      american_odd: 116.463
+                      result: null
+                      cashout: 220.48
+                      created_at: '2023-01-20T19:02:29.000000Z'
+                      updated_at: '2023-01-20T19:02:29.000000Z'
+                      categories: []
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 141
+                        sport: est
+                        match: 'Laudantium consequuntur iste eum dolore non.'
+                        match_date: '2012-01-12'
+                        match_time: '03:17'
+                        bookie: aut
+                        bet_type: tempore
+                        bet_description: 'Omnis dicta illum dolores quia.'
+                        bet_pick: suscipit
+                        bet_size: 129.12
+                        decimal_odd: 8.943
+                        american_odd: 409.193
+                        result: 2
+                        cashout: 224.86
+                        created_at: '2023-01-20T19:02:29.000000Z'
+                        updated_at: '2023-01-20T19:02:29.000000Z'
+                        categories: []
+                      -
+                        id: 142
+                        sport: quis
+                        match: 'Cupiditate cumque quod debitis ut.'
+                        match_date: '1999-09-06'
+                        match_time: '08:55'
+                        bookie: repudiandae
+                        bet_type: temporibus
+                        bet_description: 'Non minima quidem et.'
+                        bet_pick: amet
+                        bet_size: 191.15
+                        decimal_odd: 2.928
+                        american_odd: 116.463
+                        result: null
+                        cashout: 220.48
+                        created_at: '2023-01-20T19:02:29.000000Z'
+                        updated_at: '2023-01-20T19:02:29.000000Z'
+                        categories: []
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 141
+                        sport:
+                          type: string
+                          example: est
+                        match:
+                          type: string
+                          example: 'Laudantium consequuntur iste eum dolore non.'
+                        match_date:
+                          type: string
+                          example: '2012-01-12'
+                        match_time:
+                          type: string
+                          example: '03:17'
+                        bookie:
+                          type: string
+                          example: aut
+                        bet_type:
+                          type: string
+                          example: tempore
+                        bet_description:
+                          type: string
+                          example: 'Omnis dicta illum dolores quia.'
+                        bet_pick:
+                          type: string
+                          example: suscipit
+                        bet_size:
+                          type: number
+                          example: 129.12
+                        decimal_odd:
+                          type: number
+                          example: 8.943
+                        american_odd:
+                          type: number
+                          example: 409.193
+                        result:
+                          type: integer
+                          example: 2
+                        cashout:
+                          type: number
+                          example: 224.86
+                        created_at:
+                          type: string
+                          example: '2023-01-20T19:02:29.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-01-20T19:02:29.000000Z'
+                        categories:
+                          type: array
+                          example: []
+      tags:
+        - Bets
+    post:
+      summary: 'Store a newly created bet.'
+      operationId: storeANewlyCreatedBet
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 143
+                    sport: laudantium
+                    match: 'Velit aut quasi repellendus quo.'
+                    match_date: '1992-03-31'
+                    match_time: '04:39'
+                    bookie: facilis
+                    bet_type: consequatur
+                    bet_description: 'Eum architecto ut aspernatur laborum et.'
+                    bet_pick: harum
+                    bet_size: 269.81
+                    decimal_odd: 6.784
+                    american_odd: 352.139
+                    result: 2
+                    cashout: 189.58
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                    categories: []
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 143
+                      sport:
+                        type: string
+                        example: laudantium
+                      match:
+                        type: string
+                        example: 'Velit aut quasi repellendus quo.'
+                      match_date:
+                        type: string
+                        example: '1992-03-31'
+                      match_time:
+                        type: string
+                        example: '04:39'
+                      bookie:
+                        type: string
+                        example: facilis
+                      bet_type:
+                        type: string
+                        example: consequatur
+                      bet_description:
+                        type: string
+                        example: 'Eum architecto ut aspernatur laborum et.'
+                      bet_pick:
+                        type: string
+                        example: harum
+                      bet_size:
+                        type: number
+                        example: 269.81
+                      decimal_odd:
+                        type: number
+                        example: 6.784
+                      american_odd:
+                        type: number
+                        example: 352.139
+                      result:
+                        type: integer
+                        example: 2
+                      cashout:
+                        type: number
+                        example: 189.58
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      categories:
+                        type: array
+                        example: []
+      tags:
+        - Bets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: 'The name of the match.'
+                  example: 'Real Madrid vs Barcelona'
+                bet_size:
+                  type: number
+                  description: 'The amount staked on the bet.'
+                  example: 100.0
+                odd:
+                  type: float|int
+                  description: 'The odd of the bet being offered.'
+                  example: '2.5'
+                sport:
+                  type: string
+                  description: 'The name of the sport.'
+                  example: Soccer
+                match_date:
+                  type: string
+                  description: 'The date of the match.'
+                  example: '2023-1-25'
+                match_time:
+                  type: string
+                  description: 'The time of the match.'
+                  example: '21:00'
+                bookie:
+                  type: string
+                  description: 'The name of bookie offering the bet.'
+                  example: bet365
+                bet_type:
+                  type: string
+                  description: 'The type of bet.'
+                  example: 'Money Line'
+                bet_description:
+                  type: string
+                  description: 'Brief description of the bet being placed.'
+                  example: 'Champions League Final'
+                bet_pick:
+                  type: string
+                  description: 'The name of the team being bet on.'
+                  example: 'Real Madrid'
+                result:
+                  type: integer
+                  description: 'The result of the bet being recorded, ranging from 0 to 2:'
+                  example: 1
+                cashout:
+                  type: int|float
+                  description: 'The amount for which the bet was cashed out.'
+                  example: '50.0'
+                categories:
+                  type: array
+                  description: ''
+                  example: null
+                  items:
+                    type: string
+                'categories[]':
+                  type: integer
+                  description: 'An array of categories for which the bet belogs to.'
+                  example: 2
+              required:
+                - match
+                - bet_size
+                - odd
+                - sport
+                - match_date
+                - match_time
+                - bookie
+                - bet_type
+                - bet_pick
+  '/api/v1/bets/{id}':
+    get:
+      summary: 'Show a single, specific bet.'
+      operationId: showASingleSpecificBet
+      description: 'See the details for a specific bet.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 144
+                    sport: quae
+                    match: 'Ut aliquam consequuntur natus est in ea.'
+                    match_date: '1999-08-28'
+                    match_time: '04:31'
+                    bookie: sapiente
+                    bet_type: saepe
+                    bet_description: 'Expedita incidunt quos optio fugit maxime sapiente soluta iure.'
+                    bet_pick: atque
+                    bet_size: 142.73
+                    decimal_odd: 8.053
+                    american_odd: -350.01
+                    result: null
+                    cashout: 178.87
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                    categories: []
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 144
+                      sport:
+                        type: string
+                        example: quae
+                      match:
+                        type: string
+                        example: 'Ut aliquam consequuntur natus est in ea.'
+                      match_date:
+                        type: string
+                        example: '1999-08-28'
+                      match_time:
+                        type: string
+                        example: '04:31'
+                      bookie:
+                        type: string
+                        example: sapiente
+                      bet_type:
+                        type: string
+                        example: saepe
+                      bet_description:
+                        type: string
+                        example: 'Expedita incidunt quos optio fugit maxime sapiente soluta iure.'
+                      bet_pick:
+                        type: string
+                        example: atque
+                      bet_size:
+                        type: number
+                        example: 142.73
+                      decimal_odd:
+                        type: number
+                        example: 8.053
+                      american_odd:
+                        type: number
+                        example: -350.01
+                      result:
+                        type: string
+                        example: null
+                      cashout:
+                        type: number
+                        example: 178.87
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      categories:
+                        type: array
+                        example: []
+      tags:
+        - Bets
+    put:
+      summary: 'Update a bet.'
+      operationId: updateABet
+      description: 'Modify a previously recorded bet.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 145
+                    sport: aliquam
+                    match: 'Et ipsam nobis aut assumenda omnis dolor aut eos.'
+                    match_date: '2000-11-01'
+                    match_time: '12:58'
+                    bookie: expedita
+                    bet_type: dolor
+                    bet_description: 'Rerum aliquam fugit nam esse.'
+                    bet_pick: qui
+                    bet_size: 291.22
+                    decimal_odd: 8.423
+                    american_odd: -487.958
+                    result: 0
+                    cashout: 175.88
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                    categories: []
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 145
+                      sport:
+                        type: string
+                        example: aliquam
+                      match:
+                        type: string
+                        example: 'Et ipsam nobis aut assumenda omnis dolor aut eos.'
+                      match_date:
+                        type: string
+                        example: '2000-11-01'
+                      match_time:
+                        type: string
+                        example: '12:58'
+                      bookie:
+                        type: string
+                        example: expedita
+                      bet_type:
+                        type: string
+                        example: dolor
+                      bet_description:
+                        type: string
+                        example: 'Rerum aliquam fugit nam esse.'
+                      bet_pick:
+                        type: string
+                        example: qui
+                      bet_size:
+                        type: number
+                        example: 291.22
+                      decimal_odd:
+                        type: number
+                        example: 8.423
+                      american_odd:
+                        type: number
+                        example: -487.958
+                      result:
+                        type: integer
+                        example: 0
+                      cashout:
+                        type: number
+                        example: 175.88
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      categories:
+                        type: array
+                        example: []
+      tags:
+        - Bets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: 'The name of the match.'
+                  example: 'Real Madrid vs Barcelona'
+                bet_size:
+                  type: number
+                  description: 'The amount staked on the bet.'
+                  example: 100.0
+                odd:
+                  type: float|int
+                  description: 'The odd of the bet being offered.'
+                  example: '2.5'
+                sport:
+                  type: string
+                  description: 'The name of the sport.'
+                  example: Soccer
+                match_date:
+                  type: string
+                  description: 'The date of the match.'
+                  example: '2023-1-25'
+                match_time:
+                  type: string
+                  description: 'The time of the match.'
+                  example: '21:00'
+                bookie:
+                  type: string
+                  description: 'The name of bookie offering the bet.'
+                  example: bet365
+                bet_type:
+                  type: string
+                  description: 'The type of bet.'
+                  example: 'Money Line'
+                bet_description:
+                  type: string
+                  description: 'Brief description of the bet being placed.'
+                  example: 'Champions League Final'
+                bet_pick:
+                  type: string
+                  description: 'The name of the team being bet on.'
+                  example: 'Real Madrid'
+                result:
+                  type: integer
+                  description: 'The result of the bet being recorded, ranging from 0 to 2:'
+                  example: 1
+                cashout:
+                  type: int|float
+                  description: 'The amount for which the bet was cashed out.'
+                  example: '50.0'
+                categories:
+                  type: array
+                  description: ''
+                  example: null
+                  items:
+                    type: string
+                'categories[]':
+                  type: integer
+                  description: 'An array of categories for which the bet belogs to.'
+                  example: 2
+              required:
+                - match
+                - bet_size
+                - odd
+                - sport
+                - match_date
+                - match_time
+                - bookie
+                - bet_type
+                - bet_pick
+    delete:
+      summary: 'Delete bet.'
+      operationId: deleteBet
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Bet deleted!'
+                properties:
+                  message:
+                    type: string
+                    example: 'Bet deleted!'
+      tags:
+        - Bets
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the bet.'
+        example: 6
+        required: true
+        schema:
+          type: integer
+  /api/v1/categories/colors:
+    get:
+      summary: 'returns list of available category colors.'
+      operationId: returnsListOfAvailableCategoryColors
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - blue
+                  - indigo
+                  - brown
+                  - black
+                  - yellow
+      tags:
+        - Category
+  /api/v1/categories:
+    get:
+      summary: 'Display all categories.'
+      operationId: displayAllCategories
+      description: 'Get all of your created categories.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 42
+                      name: 'Tempore voluptates.'
+                      color: indigo
+                      created_at: '2023-01-20T19:02:29.000000Z'
+                      updated_at: '2023-01-20T19:02:29.000000Z'
+                    -
+                      id: 43
+                      name: 'A et labore.'
+                      color: black
+                      created_at: '2023-01-20T19:02:29.000000Z'
+                      updated_at: '2023-01-20T19:02:29.000000Z'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 42
+                        name: 'Tempore voluptates.'
+                        color: indigo
+                        created_at: '2023-01-20T19:02:29.000000Z'
+                        updated_at: '2023-01-20T19:02:29.000000Z'
+                      -
+                        id: 43
+                        name: 'A et labore.'
+                        color: black
+                        created_at: '2023-01-20T19:02:29.000000Z'
+                        updated_at: '2023-01-20T19:02:29.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 42
+                        name:
+                          type: string
+                          example: 'Tempore voluptates.'
+                        color:
+                          type: string
+                          example: indigo
+                        created_at:
+                          type: string
+                          example: '2023-01-20T19:02:29.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-01-20T19:02:29.000000Z'
+      tags:
+        - Category
+    post:
+      summary: 'Store a newly created category.'
+      operationId: storeANewlyCreatedCategory
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 44
+                    name: 'Alias natus.'
+                    color: black
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 44
+                      name:
+                        type: string
+                        example: 'Alias natus.'
+                      color:
+                        type: string
+                        example: black
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+      tags:
+        - Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: 'Value Bets'
+                color:
+                  type: string
+                  description: "The category's color."
+                  example: indigo
+              required:
+                - name
+                - color
+  '/api/v1/categories/{id}':
+    get:
+      summary: 'Show a single, specific category.'
+      operationId: showASingleSpecificCategory
+      description: 'See the details for a specific category.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 45
+                    name: 'Ab perspiciatis porro.'
+                    color: blue
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 45
+                      name:
+                        type: string
+                        example: 'Ab perspiciatis porro.'
+                      color:
+                        type: string
+                        example: blue
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+      tags:
+        - Category
+    put:
+      summary: 'Update a bet.'
+      operationId: updateABet
+      description: 'Modify a previously created category.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 46
+                    name: 'Consectetur et eum.'
+                    color: brown
+                    created_at: '2023-01-20T19:02:29.000000Z'
+                    updated_at: '2023-01-20T19:02:29.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 46
+                      name:
+                        type: string
+                        example: 'Consectetur et eum.'
+                      color:
+                        type: string
+                        example: brown
+                      created_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-20T19:02:29.000000Z'
+      tags:
+        - Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: MMA
+                color:
+                  type: string
+                  description: "The category's color."
+                  example: blue
+              required:
+                - name
+                - color
+    delete:
+      summary: 'Delete category.'
+      operationId: deleteCategory
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Category deleted!'
+                properties:
+                  message:
+                    type: string
+                    example: 'Category deleted!'
+      tags:
+        - Category
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the category.'
+        example: 12
+        required: true
+        schema:
+          type: integer
+  /api/v1/bets/stats:
+    get:
+      summary: "Get the stats for all your bets.\n\nSee your bet's analysis, done for you so that you don't have to open excel."
+      operationId: getTheStatsForAllYourBetsSeeYourBetsAnalysisDoneForYouSoThatYouDontHaveToOpenExcel
+      description: ''
+      parameters:
+        -
+          in: query
+          name: categories
+          description: 'Comma-separated list of categories to filter by.'
+          example: '1,2'
+          required: false
+          schema:
+            type: string
+            description: 'Comma-separated list of categories to filter by.'
+            example: '1,2'
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  totalBets: 76
+                  totalWinBets: 39
+                  totalLossBets: 17
+                  totalNaBets: 5
+                  totalCOBets: 15
+                  averageOdds: 4.398
+                  impliedProbability: '22.74'
+                  actualProbability: '69.64'
+                  totalGains: 8214.45
+                  totalLosses: -43.630000000001
+                  netProfit: 8258.08
+                  biggestBet: '299.90'
+                  biggestPayout: 1363.82036
+                  biggestLoss: 286.28
+                properties:
+                  totalBets:
+                    type: integer
+                    example: 76
+                  totalWinBets:
+                    type: integer
+                    example: 39
+                  totalLossBets:
+                    type: integer
+                    example: 17
+                  totalNaBets:
+                    type: integer
+                    example: 5
+                  totalCOBets:
+                    type: integer
+                    example: 15
+                  averageOdds:
+                    type: number
+                    example: 4.398
+                  impliedProbability:
+                    type: string
+                    example: '22.74'
+                  actualProbability:
+                    type: string
+                    example: '69.64'
+                  totalGains:
+                    type: number
+                    example: 8214.45
+                  totalLosses:
+                    type: number
+                    example: -43.630000000001
+                  netProfit:
+                    type: number
+                    example: 8258.08
+                  biggestBet:
+                    type: string
+                    example: '299.90'
+                  biggestPayout:
+                    type: number
+                    example: 1363.82036
+                  biggestLoss:
+                    type: number
+                    example: 286.28
+      tags:
+        - Stats
+  /api/v1/user:
+    get:
+      summary: 'Get your account information.'
+      operationId: getYourAccountInformation
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Pedro Motta'
+                  email: phpaivamotta@gmail.com
+                  email_verified_at: null
+                  odd_type: decimal
+                  created_at: '2022-12-30T01:07:15.000000Z'
+                  updated_at: '2023-01-09T03:38:15.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Pedro Motta'
+                  email:
+                    type: string
+                    example: phpaivamotta@gmail.com
+                  email_verified_at:
+                    type: string
+                    example: null
+                  odd_type:
+                    type: string
+                    example: decimal
+                  created_at:
+                    type: string
+                    example: '2022-12-30T01:07:15.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-01-09T03:38:15.000000Z'
+      tags:
+        - User
+  /api/v1/value-bets:
+    get:
+      summary: 'Get value bets.'
+      operationId: getValueBets
+      description: 'Get a list of value bets for your selected bookie region and min. over value.'
+      parameters:
+        -
+          in: query
+          name: sport
+          description: 'The selected sport market from list of available sports which can be obtained from the /value-bets/sports endpoint.'
+          example: soccer_italy_serie_a
+          required: true
+          schema:
+            type: string
+            description: 'The selected sport market from list of available sports which can be obtained from the /value-bets/sports endpoint.'
+            example: soccer_italy_serie_a
+        -
+          in: query
+          name: regions
+          description: 'Comma-separated list of regions to filter by.'
+          example: 'us,uk'
+          required: true
+          schema:
+            type: string
+            description: 'Comma-separated list of regions to filter by.'
+            example: 'us,uk'
+        -
+          in: query
+          name: overValue
+          description: 'float|int required Min. over value percentage to filter value bets by.'
+          example: '20'
+          required: false
+          schema:
+            type: string
+            description: 'float|int required Min. over value percentage to filter value bets by.'
+            example: '20'
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    home_team: 'Hellas Verona FC'
+                    away_team: Lecce
+                    sport: 'Serie A - Italy'
+                    num_bookies_analyzed:
+                      home_team: 32
+                      away_team: 32
+                      draw: 32
+                    commence_time: '2023-01-21T14:00:00Z'
+                    value_bets:
+                      home_team:
+                        Matchbook:
+                          over_value: 0.0576
+                          money_line: 2.52
+                      away_team:
+                        Bovada:
+                          over_value: 0.07
+                          money_line: 3.5
+                        Betfair:
+                          over_value: 0.0547
+                          money_line: 3.45
+                        Matchbook:
+                          over_value: 0.0547
+                          money_line: 3.45
+                  -
+                    home_team: Salernitana
+                    away_team: Napoli
+                    sport: 'Serie A - Italy'
+                    num_bookies_analyzed:
+                      home_team: 33
+                      away_team: 33
+                      draw: 33
+                    commence_time: '2023-01-21T17:00:00Z'
+                    value_bets:
+                      home_team:
+                        Ladbrokes:
+                          over_value: 0.066
+                          money_line: 10.5
+                        Coral:
+                          over_value: 0.1168
+                          money_line: 11
+                        'Bet Victor':
+                          over_value: 0.1168
+                          money_line: 11
+                        'Sky Bet':
+                          over_value: 0.1168
+                          money_line: 11
+                        Betfair:
+                          over_value: 0.1168
+                          money_line: 11
+                        'William Hill (US)':
+                          over_value: 0.066
+                          money_line: 10.5
+                        Matchbook:
+                          over_value: 0.1168
+                          money_line: 11
+                      draw:
+                        Betfair:
+                          over_value: 0.0901
+                          money_line: 6.4
+                        SugarHouse:
+                          over_value: 0.0645
+                          money_line: 6.25
+                        Matchbook:
+                          over_value: 0.0901
+                          money_line: 6.4
+                        LowVig.ag:
+                          over_value: 0.0815
+                          money_line: 6.35
+                        BetOnline.ag:
+                          over_value: 0.0815
+                          money_line: 6.35
+      tags:
+        - 'Value Bets'
+tags:
+  -
+    name: Bets
+    description: "\nManage your bet resources."
+  -
+    name: Category
+    description: "\nManage your category resources."
+  -
+    name: Stats
+    description: ''
+  -
+    name: User
+    description: ''
+  -
+    name: 'Value Bets'
+    description: "\nGet value bet opportunities."
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

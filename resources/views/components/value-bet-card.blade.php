@@ -1,4 +1,4 @@
-@props(['match', 'bookieName', 'valueBetOffering', 'valueBetStats', 'oddFormat'])
+@props(['match', 'bookie', 'stats', 'oddFormat', 'outcome'])
 
 <div class="flex items-start justify-between p-4 rounded-lg shadow-md hover:shadow-lg bg-white mb-4">
     <div class="w-full">
@@ -8,13 +8,13 @@
             <div>
                 {{-- match --}}
                 <h2 class="text-blue-900 text-lg font-bold">
-                    {{ $match['home'] . ' vs ' . $match['away'] }}
+                    {{ $match['home_team'] . ' vs ' . $match['away_team'] }}
                 </h2>
 
                 <div class="flex items center">
                     {{-- dateTime --}}
                     <p class="text-xs">
-                        {{ \Carbon\Carbon::create($match['dateTime'])->toDayDateTimeString() }}
+                        {{ \Carbon\Carbon::create($match['commence_time'])->toDayDateTimeString() }}
                     </p>
                 </div>
 
@@ -25,79 +25,19 @@
             <div class="flex items-center justify-between">
 
                 <div>
-                    {{-- away --}}
-                    @if ($valueBetOffering === 'awayOdds')
-                        {{-- set bet pick --}}
-                        @php
-                            $betPick = $match['away'];
-                        @endphp
-
-                        {{-- bet pick --}}
-                        <p>
-                            <span class="text-md font-bold">{{ $match['away'] }}</span>
-                        </p>
-
-                        {{-- market type --}}
-                        <p class="text-xs">
-                            Money Line
-                        </p>
-
-                        {{-- get the moneyline odd and overvalue here --}}
-                        @php
-                            $odd = $valueBetStats['moneyline'];
-                            // ddd($odd);
-                            $overvalue = $valueBetStats['overvalue'];
-                            $numBookies = $match['awayAvg']['numBookies'];
-                        @endphp
-                    @elseif ($valueBetOffering === 'homeOdds')
-                        {{-- home --}}
-
-                        {{-- set bet pick --}}
-                        @php
-                            $betPick = $match['home'];
-                        @endphp
-
-                        {{-- bet pick --}}
-                        <p>
-                            <span class="text-md font-bold">{{ $match['home'] }}</span>
-                        </p>
-
-                        {{-- market type --}}
-                        <p class="text-xs">
-                            Money Line
-                        </p>
-
-                        {{-- get the moneyline odd and overvalue % here --}}
-                        @php
-                            $odd = $valueBetStats['moneyline'];
-                            $overvalue = $valueBetStats['overvalue'];
-                            $numBookies = $match['awayAvg']['numBookies'];
-                        @endphp
-                    @elseif ($valueBetOffering === 'drawOdds')
-                        {{-- draw --}}
-
-                        {{-- set bet pick --}}
-                        @php
-                            $betPick = 'draw';
-                        @endphp
-
-                        {{-- bet pick --}}
-                        <p>
+                    {{-- bet pick --}}
+                    <p>
+                        @if ($outcome === 'draw')
                             <span class="text-md font-bold">Draw</span>
-                        </p>
+                        @else
+                            <span class="text-md font-bold">{{ $match[$outcome] }}</span>
+                        @endif
+                    </p>
 
-                        {{-- market type --}}
-                        <p class="text-xs">
-                            Money Line
-                        </p>
-
-                        {{-- get the moneyline odd and overvalue % here --}}
-                        @php
-                            $odd = $valueBetStats['moneyline'];
-                            $overvalue = $valueBetStats['overvalue'];
-                            $numBookies = $match['awayAvg']['numBookies'];
-                        @endphp
-                    @endif
+                    {{-- market type --}}
+                    <p class="text-xs">
+                        Money Line
+                    </p>
                 </div>
 
                 <div>
@@ -107,11 +47,12 @@
                         <p class="font-semibold">
                             @if ($oddFormat === 'american')
                                 <span class="text-sm">
-                                    @ {{ number_format(\App\Services\ConvertOddsService::decimalToAmerican($odd), 0) }}
+                                    @
+                                    {{ number_format(\App\Services\ConvertOddsService::decimalToAmerican($stats['money_line']), 0) }}
                                 </span>
                             @elseif ($oddFormat === 'decimal')
                                 <span class="text-sm">
-                                    @ {{ number_format($odd, 2) }}
+                                    @ {{ number_format($stats['money_line'], 2) }}
                                 </span>
                             @endif
                         </p>
@@ -119,7 +60,7 @@
 
                     {{-- implied probability --}}
                     <p class="text-xs text-right">
-                        {{ number_format((1 / $odd) * 100, 0) . '%' }}
+                        {{ number_format((1 / $stats['money_line']) * 100, 0) . '%' }}
                     </p>
 
                 </div>
@@ -127,13 +68,12 @@
             </div>
 
             <p class="text-sm mt-4">
-                {{ ucwords(str_replace('_', ' ', $bookieName)) }}
+                {{ ucwords(str_replace('_', ' ', $bookie)) }}
             </p>
 
             <p class="text-sm">
                 {{ ucwords(str_replace('_', ' ', $match['sport'])) }}
             </p>
-
         </main>
 
         <footer class="flex items-center justify-between border-t border-gray-400 mt-4 pt-2">
@@ -147,7 +87,8 @@
                     </p>
 
                     <p>
-                        <span class="text-md font-semibold">{{ number_format($overvalue * 100, 2) . '%' }}</span>
+                        <span
+                            class="text-md font-semibold">{{ number_format($stats['over_value'] * 100, 2) . '%' }}</span>
                     </p>
                 </div>
 
@@ -158,22 +99,23 @@
                     </p>
 
                     <p>
-                        <span class="text-md font-semibold">{{ $numBookies }}</span>
+                        <span class="text-md font-semibold">{{ $match['num_bookies_analyzed'][$outcome] }}</span>
                     </p>
                 </div>
 
             </div>
 
+            {{-- record bet --}}
             <div>
                 <a
                     href="{{ route('value-bets.record', [
-                        'match' => $match['home'] . ' vs ' . $match['away'],
-                        'bookie' => $bookieName,
-                        'odd' => number_format($odd, 2),
-                        'betPick' => $betPick,
+                        'match' => $match['home_team'] . ' vs ' . $match['away_team'],
+                        'bookie' => $bookie,
+                        'odd' => number_format($stats['money_line'], 2),
+                        'betPick' => $outcome === 'draw' ? 'Draw'  : $match[$outcome],
                         'sport' => $match['sport'],
-                        'date' => \Carbon\Carbon::create($match['dateTime'])->toDateString(),
-                        'time' => \Carbon\Carbon::create($match['dateTime'])->format('H:i'),
+                        'date' => \Carbon\Carbon::create($match['commence_time'])->toDateString(),
+                        'time' => \Carbon\Carbon::create($match['commence_time'])->format('H:i'),
                     ]) }}">
                     <x-primary-button type="button">
                         Record

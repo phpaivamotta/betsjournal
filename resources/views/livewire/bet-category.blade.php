@@ -18,6 +18,12 @@
             <x-flash-category class="bg-green-300" status="success" />
         @endif
 
+        <p class="text-xl font-semibold">Categories</p>
+
+        <p class="font-medium text-sm text-gray-700 mb-10">
+            Manage your bet categories.
+        </p>
+
         <form wire:submit.prevent="create">
 
             <!-- categories -->
@@ -136,6 +142,11 @@
 
                     <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" autofocus />
                 </div>
+
+                {{-- category name error --}}
+                @error('name')
+                    <span class="block mt-1 text-red-500 text-xs">{{ $message }}</span>
+                @enderror
 
                 {{-- color --}}
                 <div class="mt-4">

@@ -3,14 +3,11 @@
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatsController;
+use App\Http\Livewire\Api\ApiTokens;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
 use App\Http\Livewire\ValueBets;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
-use function PHPUnit\Framework\isEmpty;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +78,10 @@ Route::middleware(['auth'])->group(function () {
     // record value bet
     Route::view('value-bets/record', 'bets.value-bets.record')
         ->name('value-bets.record');
+
+    // manage API tokens 
+    Route::get('api-tokens', ApiTokens::class)
+        ->name('api-tokens');
 
     // edit profile
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');

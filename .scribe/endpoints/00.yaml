@@ -1,0 +1,52 @@
+name: User
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/user
+    metadata:
+      groupName: User
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get your account information.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "id": 1,
+           "name": "Pedro Motta",
+           "email": "phpaivamotta@gmail.com",
+           "email_verified_at": null,
+           "odd_type": "decimal",
+           "created_at": "2022-12-30T01:07:15.000000Z",
+           "updated_at": "2023-01-09T03:38:15.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []

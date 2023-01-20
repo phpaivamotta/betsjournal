@@ -170,7 +170,7 @@ class BetCategoryTest extends TestCase
 
         $category = auth()->user()->categories()->create([
             'name' => 'category name',
-            'color' => 'category color'
+            'color' => 'blue'
         ]);
 
         Livewire::test(BetCategory::class)
@@ -178,13 +178,13 @@ class BetCategoryTest extends TestCase
             ->assertSee('Update')
             ->assertSee($category->name)
             ->set('name', 'new category name')
-            ->set('color', 'new category color')
+            ->set('color', 'indigo')
             ->call('updateCategory')
             ->assertSee('Category updated!');
 
         $this->assertDatabaseHas('categories', [
             'name' => 'new category name',
-            'color' => 'new category color'
+            'color' => 'indigo'
         ]);
     }
 
