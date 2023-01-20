@@ -16,9 +16,15 @@
 
         <p class="text-xl font-semibold">API Tokens</p>
 
-        <p class="font-medium text-sm text-gray-700 mb-10">
+        <p class="font-medium text-sm text-gray-700">
             Manage your personal access tokens.
         </p>
+
+        <div class="mt-2 mb-6">
+            <a href="/docs" target="_blank" class="text-sm text-blue-400">
+                See API docs &rarr;
+            </a>
+        </div>
 
         <form wire:submit.prevent="createToken">
 

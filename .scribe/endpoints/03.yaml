@@ -1,0 +1,322 @@
+name: Category
+description: |-
+
+  Manage your category resources.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/categories/colors
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'returns list of available category colors.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [
+              "blue",
+              "indigo",
+              "brown",
+              "black",
+              "yellow"
+          ]
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/categories
+    metadata:
+      groupName: Category
+      groupDescription: |-
+
+        Manage your category resources.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display all categories.'
+      description: 'Get all of your created categories.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":42,"name":"Tempore voluptates.","color":"indigo","created_at":"2023-01-20T19:02:29.000000Z","updated_at":"2023-01-20T19:02:29.000000Z"},{"id":43,"name":"A et labore.","color":"black","created_at":"2023-01-20T19:02:29.000000Z","updated_at":"2023-01-20T19:02:29.000000Z"}]}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/categories
+    metadata:
+      groupName: Category
+      groupDescription: |-
+
+        Manage your category resources.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created category.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: true
+        example: 'Value Bets'
+        type: string
+        custom: []
+      color:
+        name: color
+        description: "The category's color."
+        required: true
+        example: indigo
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: 'Value Bets'
+      color: indigo
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: '{"data":{"id":44,"name":"Alias natus.","color":"black","created_at":"2023-01-20T19:02:29.000000Z","updated_at":"2023-01-20T19:02:29.000000Z"}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: |-
+
+        Manage your category resources.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a single, specific category.'
+      description: 'See the details for a specific category.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 12
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 12
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":45,"name":"Ab perspiciatis porro.","color":"blue","created_at":"2023-01-20T19:02:29.000000Z","updated_at":"2023-01-20T19:02:29.000000Z"}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: |-
+
+        Manage your category resources.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a bet.'
+      description: 'Modify a previously created category.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category to be updated.'
+        required: true
+        example: 4
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 4
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: true
+        example: MMA
+        type: string
+        custom: []
+      color:
+        name: color
+        description: "The category's color."
+        required: true
+        example: blue
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: MMA
+      color: blue
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":46,"name":"Consectetur et eum.","color":"brown","created_at":"2023-01-20T19:02:29.000000Z","updated_at":"2023-01-20T19:02:29.000000Z"}}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: |-
+
+        Manage your category resources.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete category.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category to be deleted.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "message": "Category deleted!"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []

@@ -159,7 +159,7 @@ class BetTest extends TestCase
         ]);
 
         $this->deleteJson("/api/v1/bets/{$bet->id}")
-            ->assertStatus(204);
+            ->assertStatus(200);
     }
 
     public function test_user_cannot_delete_another_users_bet()

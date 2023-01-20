@@ -20,7 +20,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->prefix('v1')->group( function () {
-    // get auth user
+    /**
+     * @group User
+     * 
+     * Get your account information.
+     * 
+     * @response {
+	 *  "id": 1,
+	 *  "name": "Pedro Motta",
+	 *  "email": "phpaivamotta@gmail.com",
+	 *  "email_verified_at": null,
+	 *  "odd_type": "decimal",
+	 *  "created_at": "2022-12-30T01:07:15.000000Z",
+	 *  "updated_at": "2023-01-09T03:38:15.000000Z"
+     * }
+     */
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -31,9 +45,21 @@ Route::middleware('auth:sanctum')->prefix('v1')->group( function () {
     // Bet resources
     Route::apiResource('bets', BetController::class);
 
-    // returns list of available category colors
+    /**
+     * @group Category
+     * 
+     * returns list of available category colors.
+     * 
+     * @response [
+	 *     "blue",
+	 *     "indigo",
+	 *     "brown",
+	 *     "black",
+	 *     "yellow"
+     * ]
+     */
     Route::get('categories/colors', function () {
-        return response()->json(Category::COLORS);
+        return response()->json(Category::COLORS, 200);
     });
 
     // Category resources

@@ -8,13 +8,25 @@ use App\Http\Requests\UpdateBetRequest;
 use App\Http\Resources\BetResource;
 use App\Models\Bet;
 use App\Services\ConvertOddsService;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
+/**
+ * @group Bets
+ * 
+ * Manage your bet resources.
+ */
 class BetController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all bets.
+     * 
+     * Get all of your recorded bets.
+     * 
+     * @apiResourceCollection App\Http\Resources\BetResource
+     * @apiResourceModel App\Models\Bet
+     * @queryParam page int Page to view.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -22,10 +34,24 @@ class BetController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created bet.
      *
-     * @param  App\Http\Requests\StoreBetRequest  $request
-     * @return \Illuminate\Http\Response
+     * @bodyParam match string required The name of the match. Example: Real Madrid vs Barcelona
+     * @bodyParam bet_size float required The amount staked on the bet. Example: 100.0
+     * @bodyParam odd float|int required The odd of the bet being offered. Example: 2.5
+     * @bodyParam sport string required The name of the sport. Example: Soccer
+     * @bodyParam match_date string required The date of the match. Example: 2023-1-25 
+     * @bodyParam match_time string required The time of the match. Example: 21:00
+     * @bodyParam bookie string required The name of bookie offering the bet. Example: bet365
+     * @bodyParam bet_type string required The type of bet. Example: Money Line
+     * @bodyParam bet_pick string required The name of the team being bet on. Example: Real Madrid
+     * @bodyParam bet_description string Brief description of the bet being placed. Example: Champions League Final
+     * @bodyParam result int The result of the bet being recorded, ranging from 0 to 2: Example: 1
+     * @bodyParam cashout int|float The amount for which the bet was cashed out. Example: 50.0
+     * @bodyParam categories[] int An array of categories for which the bet belogs to. Example:2
+     * 
+     * @apiResource 201 App\Http\Resources\BetResource
+     * @apiResourceModel App\Models\Bet
      */
     public function store(StoreBetRequest $request)
     {
@@ -74,10 +100,14 @@ class BetController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bet  $bet
-     * @return \Illuminate\Http\Response
+     * Show a single, specific bet.
+     * 
+     * See the details for a specific bet.
+     * 
+     * @urlParam id int required The ID of the bet.
+     * 
+     * @apiResource App\Http\Resources\BetResource
+     * @apiResourceModel App\Models\Bet
      */
     public function show(Bet $bet)
     {
@@ -87,11 +117,28 @@ class BetController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Requests\UpdateBetRequest  $request
-     * @param  \App\Models\Bet  $bet
-     * @return \Illuminate\Http\Response
+     * Update a bet.
+     * 
+     * Modify a previously recorded bet.
+     * 
+     * @urlParam id int required The ID of the bet to be updated.
+     * 
+     * @bodyParam match string required The name of the match. Example: Real Madrid vs Barcelona
+     * @bodyParam bet_size float required The amount staked on the bet. Example: 100.0
+     * @bodyParam odd float|int required The odd of the bet being offered. Example: 2.5
+     * @bodyParam sport string required The name of the sport. Example: Soccer
+     * @bodyParam match_date string required The date of the match. Example: 2023-1-25 
+     * @bodyParam match_time string required The time of the match. Example: 21:00
+     * @bodyParam bookie string required The name of bookie offering the bet. Example: bet365
+     * @bodyParam bet_type string required The type of bet. Example: Money Line
+     * @bodyParam bet_pick string required The name of the team being bet on. Example: Real Madrid
+     * @bodyParam bet_description string Brief description of the bet being placed. Example: Champions League Final
+     * @bodyParam result int The result of the bet being recorded, ranging from 0 to 2: Example: 1
+     * @bodyParam cashout int|float The amount for which the bet was cashed out. Example: 50.0
+     * @bodyParam categories[] int An array of categories for which the bet belogs to. Example:2
+     * 
+     * @apiResource App\Http\Resources\BetResource
+     * @apiResourceModel App\Models\Bet
      */
     public function update(UpdateBetRequest $request, Bet $bet)
     {
@@ -138,10 +185,13 @@ class BetController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bet  $bet
-     * @return \Illuminate\Http\Response
+     * Delete bet.
+     * 
+     * @urlParam id int required The ID of the bet to be deleted.
+     * 
+     * @response {
+     *     "message": "Bet deleted!"
+     * }
      */
     public function destroy(Bet $bet)
     {
@@ -149,6 +199,6 @@ class BetController extends Controller
 
         $bet->delete();
 
-        return response()->json('Bet deleted!', 204);
+        return response()->json(['message' => 'Bet deleted!'], 200);
     }
 }

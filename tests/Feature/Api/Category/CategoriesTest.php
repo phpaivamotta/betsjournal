@@ -146,7 +146,7 @@ class CategoriesTest extends TestCase
         ]);
 
         $this->deleteJson("/api/v1/categories/{$category->id}")
-            ->assertStatus(204);
+            ->assertStatus(200);
 
         $this->assertDatabaseMissing('categories', $category->toArray());
     }

@@ -8,12 +8,21 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+/**
+ * @group Category
+ * 
+ * Manage your category resources.
+ */
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all categories.
+     * 
+     * Get all of your created categories.
+     * 
+     * @apiResourceCollection App\Http\Resources\CategoryResource
+     * @apiResourceModel App\Models\Category
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,10 +30,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @bodyParam name string required The name of the category. Example: Value Bets
+     * @bodyParam color string required The category's color. Example: indigo
+     * 
+     * @apiResource 201 App\Http\Resources\CategoryResource
+     * @apiResourceModel App\Models\Category
      */
     public function store(Request $request)
     {
@@ -47,10 +59,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Show a single, specific category.
+     * 
+     * See the details for a specific category.
+     * 
+     * @urlParam id int required The ID of the category.
+     * 
+     * @apiResource App\Http\Resources\CategoryResource
+     * @apiResourceModel App\Models\Category
      */
     public function show(Category $category)
     {
@@ -60,11 +76,17 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Update a bet.
+     * 
+     * Modify a previously created category.
+     * 
+     * @urlParam id int required The ID of the category to be updated.
+     * 
+     * @bodyParam name string required The name of the category. Example: MMA
+     * @bodyParam color string required The category's color. Example: blue
+     * 
+     * @apiResource App\Http\Resources\CategoryResource
+     * @apiResourceModel App\Models\Category
      */
     public function update(Request $request, Category $category)
     {
@@ -89,10 +111,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * Delete category.
+     * 
+     * @urlParam id int required The ID of the category to be deleted.
+     * 
+     * @response {
+     *     "message": "Category deleted!"
+     * }
      */
     public function destroy(Category $category)
     {
@@ -100,6 +125,6 @@ class CategoryController extends Controller
         
         $category->delete();
 
-        return response()->json('Category deleted!', 204);
+        return response()->json('Category deleted!', 200);
     }
 }

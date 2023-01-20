@@ -8,6 +8,33 @@ use App\Services\StatsService;
 
 class StatsController extends Controller
 {
+
+    /**
+     * @group Stats
+     * 
+     * Get the stats for all your bets.
+     * 
+     * See your bet's analysis, done for you so that you don't have to open excel.
+     * 
+     * @queryParam categories Comma-separated list of categories to filter by. Example: 1,2
+     * 
+     * @response {
+     *     "totalBets": 76,
+     *     "totalWinBets": 39,
+     *     "totalLossBets": 17,
+     *     "totalNaBets": 5,
+     *     "totalCOBets": 15,
+     *     "averageOdds": 4.398,
+     *     "impliedProbability": "22.74",
+     *     "actualProbability": "69.64",
+     *     "totalGains": 8214.45,
+     *     "totalLosses": -43.630000000000564,
+     *     "netProfit": 8258.080000000002,
+     *     "biggestBet": "299.90",
+     *     "biggestPayout": 1363.8203600000002,
+     *     "biggestLoss": 286.28
+     * }
+     */
     public function __invoke()
     {
         $categories = request()->has('categories') ? explode(',', request('categories')) : null;
