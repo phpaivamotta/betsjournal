@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Betsjournal API",
-        "_postman_id": "15d3321a-8088-46b9-9452-9e4c540945bb",
+        "_postman_id": "6f92509b-e0da-4e1b-bce7-2c99960fcffc",
         "description": "Manage and analyze your bets from anywhere with Betsjournal.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -28,12 +28,12 @@
                             "query": [
                                 {
                                     "key": "page",
-                                    "value": "13",
+                                    "value": "14",
                                     "description": "Page to view.",
                                     "disabled": false
                                 }
                             ],
-                            "raw": "{{baseUrl}}\/api\/v1\/bets?page=13"
+                            "raw": "{{baseUrl}}\/api\/v1\/bets?page=14"
                         },
                         "method": "GET",
                         "header": [
@@ -53,7 +53,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[{\"id\":141,\"sport\":\"est\",\"match\":\"Laudantium consequuntur iste eum dolore non.\",\"match_date\":\"2012-01-12\",\"match_time\":\"03:17\",\"bookie\":\"aut\",\"bet_type\":\"tempore\",\"bet_description\":\"Omnis dicta illum dolores quia.\",\"bet_pick\":\"suscipit\",\"bet_size\":129.12,\"decimal_odd\":8.943,\"american_odd\":409.193,\"result\":2,\"cashout\":224.86,\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\",\"categories\":[]},{\"id\":142,\"sport\":\"quis\",\"match\":\"Cupiditate cumque quod debitis ut.\",\"match_date\":\"1999-09-06\",\"match_time\":\"08:55\",\"bookie\":\"repudiandae\",\"bet_type\":\"temporibus\",\"bet_description\":\"Non minima quidem et.\",\"bet_pick\":\"amet\",\"bet_size\":191.15,\"decimal_odd\":2.928,\"american_odd\":116.463,\"result\":null,\"cashout\":220.48,\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\",\"categories\":[]}]}",
+                            "body": "{\"data\":[{\"id\":158,\"sport\":\"quibusdam\",\"match\":\"Sit sunt asperiores voluptatem.\",\"match_date\":\"2010-04-15\",\"match_time\":\"17:57\",\"bookie\":\"ut\",\"bet_type\":\"voluptas\",\"bet_description\":\"Odio sit enim dolorum vitae esse.\",\"bet_pick\":\"velit\",\"bet_size\":282.69,\"decimal_odd\":7.209,\"american_odd\":83.364,\"result\":0,\"cashout\":162.29,\"created_at\":\"2023-01-22T06:31:45.000000Z\",\"updated_at\":\"2023-01-22T06:31:45.000000Z\",\"categories\":[]},{\"id\":159,\"sport\":\"et\",\"match\":\"Est aut quis rerum sunt.\",\"match_date\":\"1982-04-12\",\"match_time\":\"05:43\",\"bookie\":\"dolorem\",\"bet_type\":\"excepturi\",\"bet_description\":\"Cumque voluptas in corporis id.\",\"bet_pick\":\"cumque\",\"bet_size\":216.97,\"decimal_odd\":8.291,\"american_odd\":-73.358,\"result\":0,\"cashout\":120.26,\"created_at\":\"2023-01-22T06:31:45.000000Z\",\"updated_at\":\"2023-01-22T06:31:45.000000Z\",\"categories\":[]}]}",
                             "name": ""
                         }
                     ]
@@ -88,7 +88,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":143,\"sport\":\"laudantium\",\"match\":\"Velit aut quasi repellendus quo.\",\"match_date\":\"1992-03-31\",\"match_time\":\"04:39\",\"bookie\":\"facilis\",\"bet_type\":\"consequatur\",\"bet_description\":\"Eum architecto ut aspernatur laborum et.\",\"bet_pick\":\"harum\",\"bet_size\":269.81,\"decimal_odd\":6.784,\"american_odd\":352.139,\"result\":2,\"cashout\":189.58,\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":160,\"sport\":\"sint\",\"match\":\"Enim tempore odio rerum minima.\",\"match_date\":\"1971-07-27\",\"match_time\":\"14:03\",\"bookie\":\"quia\",\"bet_type\":\"eaque\",\"bet_description\":\"Debitis ut veniam totam qui quod quos.\",\"bet_pick\":\"quas\",\"bet_size\":210.39,\"decimal_odd\":3.043,\"american_odd\":1.966,\"result\":1,\"cashout\":211.83,\"created_at\":\"2023-01-22T06:31:46.000000Z\",\"updated_at\":\"2023-01-22T06:31:46.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -105,7 +105,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "2",
                                     "description": "The ID of the bet."
                                 }
                             ]
@@ -128,7 +128,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":144,\"sport\":\"quae\",\"match\":\"Ut aliquam consequuntur natus est in ea.\",\"match_date\":\"1999-08-28\",\"match_time\":\"04:31\",\"bookie\":\"sapiente\",\"bet_type\":\"saepe\",\"bet_description\":\"Expedita incidunt quos optio fugit maxime sapiente soluta iure.\",\"bet_pick\":\"atque\",\"bet_size\":142.73,\"decimal_odd\":8.053,\"american_odd\":-350.01,\"result\":null,\"cashout\":178.87,\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":161,\"sport\":\"dolorem\",\"match\":\"Quis ut omnis inventore nemo ea eos et illum.\",\"match_date\":\"1989-05-14\",\"match_time\":\"02:55\",\"bookie\":\"itaque\",\"bet_type\":\"voluptas\",\"bet_description\":\"Maxime architecto vitae molestiae alias nemo hic neque.\",\"bet_pick\":\"et\",\"bet_size\":241.83,\"decimal_odd\":3.544,\"american_odd\":-441.673,\"result\":null,\"cashout\":115.96,\"created_at\":\"2023-01-22T06:31:46.000000Z\",\"updated_at\":\"2023-01-22T06:31:46.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -145,7 +145,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "17",
+                                    "value": "1",
                                     "description": "The ID of the bet to be updated."
                                 }
                             ]
@@ -171,7 +171,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":145,\"sport\":\"aliquam\",\"match\":\"Et ipsam nobis aut assumenda omnis dolor aut eos.\",\"match_date\":\"2000-11-01\",\"match_time\":\"12:58\",\"bookie\":\"expedita\",\"bet_type\":\"dolor\",\"bet_description\":\"Rerum aliquam fugit nam esse.\",\"bet_pick\":\"qui\",\"bet_size\":291.22,\"decimal_odd\":8.423,\"american_odd\":-487.958,\"result\":0,\"cashout\":175.88,\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":162,\"sport\":\"quam\",\"match\":\"Provident rerum et facere voluptatem autem ducimus et.\",\"match_date\":\"2010-08-29\",\"match_time\":\"22:17\",\"bookie\":\"animi\",\"bet_type\":\"ex\",\"bet_description\":\"Pariatur accusamus optio nihil dolorum.\",\"bet_pick\":\"qui\",\"bet_size\":239.58,\"decimal_odd\":5.202,\"american_odd\":53.598,\"result\":2,\"cashout\":138.56,\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -219,7 +219,7 @@
             ]
         },
         {
-            "name": "Category",
+            "name": "Categories",
             "description": "\nManage your category resources.",
             "item": [
                 {
@@ -281,7 +281,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[{\"id\":42,\"name\":\"Tempore voluptates.\",\"color\":\"indigo\",\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\"},{\"id\":43,\"name\":\"A et labore.\",\"color\":\"black\",\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\"}]}",
+                            "body": "{\"data\":[{\"id\":67,\"name\":\"Perspiciatis totam.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"},{\"id\":68,\"name\":\"Repudiandae illum molestias.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}]}",
                             "name": ""
                         }
                     ]
@@ -316,7 +316,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":44,\"name\":\"Alias natus.\",\"color\":\"black\",\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":69,\"name\":\"Odit beatae.\",\"color\":\"yellow\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -333,7 +333,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "12",
+                                    "value": "1",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -356,7 +356,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":45,\"name\":\"Ab perspiciatis porro.\",\"color\":\"blue\",\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":70,\"name\":\"Delectus consequatur et.\",\"color\":\"indigo\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -373,7 +373,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "4",
+                                    "value": "5",
                                     "description": "The ID of the category to be updated."
                                 }
                             ]
@@ -399,7 +399,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":46,\"name\":\"Consectetur et eum.\",\"color\":\"brown\",\"created_at\":\"2023-01-20T19:02:29.000000Z\",\"updated_at\":\"2023-01-20T19:02:29.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":71,\"name\":\"Ea non earum.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:48.000000Z\",\"updated_at\":\"2023-01-22T06:31:48.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -416,7 +416,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "3",
                                     "description": "The ID of the category to be deleted."
                                 }
                             ]

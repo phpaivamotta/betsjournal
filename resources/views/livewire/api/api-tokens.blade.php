@@ -21,7 +21,7 @@
         </p>
 
         <div class="mt-2 mb-6">
-            <a href="/docs" target="_blank" class="text-sm text-blue-400">
+            <a href="/docs/index.html" target="_blank" class="text-sm text-blue-400">
                 See API docs &rarr;
             </a>
         </div>

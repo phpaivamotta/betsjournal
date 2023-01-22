@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 /**
- * @group Category
+ * @group Categories
  * 
  * Manage your category resources.
  */

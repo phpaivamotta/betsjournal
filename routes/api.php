@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group( function () {
     Route::apiResource('bets', BetController::class);
 
     /**
-     * @group Category
+     * @group Categories
      * 
      * returns list of available category colors.
      * 
