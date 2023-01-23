@@ -31,18 +31,18 @@ endpoints:
         name: page
         description: 'Page to view.'
         required: false
-        example: 14
+        example: 8
         type: integer
         custom: []
     cleanQueryParameters:
-      page: 14
+      page: 8
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":[{"id":158,"sport":"quibusdam","match":"Sit sunt asperiores voluptatem.","match_date":"2010-04-15","match_time":"17:57","bookie":"ut","bet_type":"voluptas","bet_description":"Odio sit enim dolorum vitae esse.","bet_pick":"velit","bet_size":282.69,"decimal_odd":7.209,"american_odd":83.364,"result":0,"cashout":162.29,"created_at":"2023-01-22T06:31:45.000000Z","updated_at":"2023-01-22T06:31:45.000000Z","categories":[]},{"id":159,"sport":"et","match":"Est aut quis rerum sunt.","match_date":"1982-04-12","match_time":"05:43","bookie":"dolorem","bet_type":"excepturi","bet_description":"Cumque voluptas in corporis id.","bet_pick":"cumque","bet_size":216.97,"decimal_odd":8.291,"american_odd":-73.358,"result":0,"cashout":120.26,"created_at":"2023-01-22T06:31:45.000000Z","updated_at":"2023-01-22T06:31:45.000000Z","categories":[]}]}'
+        content: '{"data":[{"id":181,"sport":"eos","match":"Odio blanditiis esse architecto ipsa ut labore aliquid.","match_date":"1988-07-25","match_time":"09:22","bookie":"voluptas","bet_type":"necessitatibus","bet_description":"Illum aut ea quis.","bet_pick":"ut","bet_size":149.08,"decimal_odd":5.411,"american_odd":133.261,"result":2,"cashout":285.1,"created_at":"2023-01-23T20:00:18.000000Z","updated_at":"2023-01-23T20:00:18.000000Z","categories":[]},{"id":182,"sport":"voluptatem","match":"Rerum velit voluptate illum autem.","match_date":"1974-10-13","match_time":"18:21","bookie":"voluptas","bet_type":"tempore","bet_description":"Sit consectetur ut consequatur est.","bet_pick":"laborum","bet_size":211.48,"decimal_odd":9.796,"american_odd":-242.391,"result":null,"cashout":108.07,"created_at":"2023-01-23T20:00:18.000000Z","updated_at":"2023-01-23T20:00:18.000000Z","categories":[]}]}'
         headers: []
         description: ''
         custom: []
@@ -195,7 +195,7 @@ endpoints:
     responses:
       -
         status: 201
-        content: '{"data":{"id":160,"sport":"sint","match":"Enim tempore odio rerum minima.","match_date":"1971-07-27","match_time":"14:03","bookie":"quia","bet_type":"eaque","bet_description":"Debitis ut veniam totam qui quod quos.","bet_pick":"quas","bet_size":210.39,"decimal_odd":3.043,"american_odd":1.966,"result":1,"cashout":211.83,"created_at":"2023-01-22T06:31:46.000000Z","updated_at":"2023-01-22T06:31:46.000000Z","categories":[]}}'
+        content: '{"data":{"id":183,"sport":"numquam","match":"Sequi quam quo inventore asperiores voluptatibus enim.","match_date":"1980-09-01","match_time":"15:49","bookie":"voluptatem","bet_type":"inventore","bet_description":"Soluta aliquid qui recusandae laudantium sequi nobis.","bet_pick":"consectetur","bet_size":113.56,"decimal_odd":5.995,"american_odd":177.946,"result":1,"cashout":196.69,"created_at":"2023-01-23T20:00:18.000000Z","updated_at":"2023-01-23T20:00:18.000000Z","categories":[]}}'
         headers: []
         description: ''
         custom: []
@@ -232,11 +232,11 @@ endpoints:
         name: id
         description: 'The ID of the bet.'
         required: true
-        example: 2
+        example: 19
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 2
+      id: 19
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -245,7 +245,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":161,"sport":"dolorem","match":"Quis ut omnis inventore nemo ea eos et illum.","match_date":"1989-05-14","match_time":"02:55","bookie":"itaque","bet_type":"voluptas","bet_description":"Maxime architecto vitae molestiae alias nemo hic neque.","bet_pick":"et","bet_size":241.83,"decimal_odd":3.544,"american_odd":-441.673,"result":null,"cashout":115.96,"created_at":"2023-01-22T06:31:46.000000Z","updated_at":"2023-01-22T06:31:46.000000Z","categories":[]}}'
+        content: '{"data":{"id":184,"sport":"nisi","match":"Voluptas debitis quia voluptas modi.","match_date":"1976-05-18","match_time":"09:47","bookie":"nihil","bet_type":"est","bet_description":"Magnam quae ut illo ut alias.","bet_pick":"explicabo","bet_size":105.12,"decimal_odd":5.627,"american_odd":32.841,"result":2,"cashout":155.05,"created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z","categories":[]}}'
         headers: []
         description: ''
         custom: []
@@ -283,11 +283,11 @@ endpoints:
         name: id
         description: 'The ID of the bet to be updated.'
         required: true
-        example: 1
+        example: 19
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 19
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -407,7 +407,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":162,"sport":"quam","match":"Provident rerum et facere voluptatem autem ducimus et.","match_date":"2010-08-29","match_time":"22:17","bookie":"animi","bet_type":"ex","bet_description":"Pariatur accusamus optio nihil dolorum.","bet_pick":"qui","bet_size":239.58,"decimal_odd":5.202,"american_odd":53.598,"result":2,"cashout":138.56,"created_at":"2023-01-22T06:31:47.000000Z","updated_at":"2023-01-22T06:31:47.000000Z","categories":[]}}'
+        content: '{"data":{"id":185,"sport":"inventore","match":"Voluptas tempora provident laborum quidem tempore aut iusto.","match_date":"1992-03-30","match_time":"19:01","bookie":"accusantium","bet_type":"iure","bet_description":"Laboriosam nihil laudantium deleniti temporibus.","bet_pick":"est","bet_size":190.87,"decimal_odd":5.075,"american_odd":479.285,"result":0,"cashout":167.06,"created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z","categories":[]}}'
         headers: []
         description: ''
         custom: []
@@ -444,11 +444,11 @@ endpoints:
         name: id
         description: 'The ID of the bet to be deleted.'
         required: true
-        example: 18
+        example: 12
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 18
+      id: 12
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

@@ -17,12 +17,12 @@ paths:
           in: query
           name: page
           description: 'Page to view.'
-          example: 14
+          example: 8
           required: false
           schema:
             type: integer
             description: 'Page to view.'
-            example: 14
+            example: 8
         -
           in: header
           name: Authorization
@@ -54,132 +54,132 @@ paths:
                 example:
                   data:
                     -
-                      id: 158
-                      sport: quibusdam
-                      match: 'Sit sunt asperiores voluptatem.'
-                      match_date: '2010-04-15'
-                      match_time: '17:57'
-                      bookie: ut
-                      bet_type: voluptas
-                      bet_description: 'Odio sit enim dolorum vitae esse.'
-                      bet_pick: velit
-                      bet_size: 282.69
-                      decimal_odd: 7.209
-                      american_odd: 83.364
-                      result: 0
-                      cashout: 162.29
-                      created_at: '2023-01-22T06:31:45.000000Z'
-                      updated_at: '2023-01-22T06:31:45.000000Z'
+                      id: 181
+                      sport: eos
+                      match: 'Odio blanditiis esse architecto ipsa ut labore aliquid.'
+                      match_date: '1988-07-25'
+                      match_time: '09:22'
+                      bookie: voluptas
+                      bet_type: necessitatibus
+                      bet_description: 'Illum aut ea quis.'
+                      bet_pick: ut
+                      bet_size: 149.08
+                      decimal_odd: 5.411
+                      american_odd: 133.261
+                      result: 2
+                      cashout: 285.1
+                      created_at: '2023-01-23T20:00:18.000000Z'
+                      updated_at: '2023-01-23T20:00:18.000000Z'
                       categories: []
                     -
-                      id: 159
-                      sport: et
-                      match: 'Est aut quis rerum sunt.'
-                      match_date: '1982-04-12'
-                      match_time: '05:43'
-                      bookie: dolorem
-                      bet_type: excepturi
-                      bet_description: 'Cumque voluptas in corporis id.'
-                      bet_pick: cumque
-                      bet_size: 216.97
-                      decimal_odd: 8.291
-                      american_odd: -73.358
-                      result: 0
-                      cashout: 120.26
-                      created_at: '2023-01-22T06:31:45.000000Z'
-                      updated_at: '2023-01-22T06:31:45.000000Z'
+                      id: 182
+                      sport: voluptatem
+                      match: 'Rerum velit voluptate illum autem.'
+                      match_date: '1974-10-13'
+                      match_time: '18:21'
+                      bookie: voluptas
+                      bet_type: tempore
+                      bet_description: 'Sit consectetur ut consequatur est.'
+                      bet_pick: laborum
+                      bet_size: 211.48
+                      decimal_odd: 9.796
+                      american_odd: -242.391
+                      result: null
+                      cashout: 108.07
+                      created_at: '2023-01-23T20:00:18.000000Z'
+                      updated_at: '2023-01-23T20:00:18.000000Z'
                       categories: []
                 properties:
                   data:
                     type: array
                     example:
                       -
-                        id: 158
-                        sport: quibusdam
-                        match: 'Sit sunt asperiores voluptatem.'
-                        match_date: '2010-04-15'
-                        match_time: '17:57'
-                        bookie: ut
-                        bet_type: voluptas
-                        bet_description: 'Odio sit enim dolorum vitae esse.'
-                        bet_pick: velit
-                        bet_size: 282.69
-                        decimal_odd: 7.209
-                        american_odd: 83.364
-                        result: 0
-                        cashout: 162.29
-                        created_at: '2023-01-22T06:31:45.000000Z'
-                        updated_at: '2023-01-22T06:31:45.000000Z'
+                        id: 181
+                        sport: eos
+                        match: 'Odio blanditiis esse architecto ipsa ut labore aliquid.'
+                        match_date: '1988-07-25'
+                        match_time: '09:22'
+                        bookie: voluptas
+                        bet_type: necessitatibus
+                        bet_description: 'Illum aut ea quis.'
+                        bet_pick: ut
+                        bet_size: 149.08
+                        decimal_odd: 5.411
+                        american_odd: 133.261
+                        result: 2
+                        cashout: 285.1
+                        created_at: '2023-01-23T20:00:18.000000Z'
+                        updated_at: '2023-01-23T20:00:18.000000Z'
                         categories: []
                       -
-                        id: 159
-                        sport: et
-                        match: 'Est aut quis rerum sunt.'
-                        match_date: '1982-04-12'
-                        match_time: '05:43'
-                        bookie: dolorem
-                        bet_type: excepturi
-                        bet_description: 'Cumque voluptas in corporis id.'
-                        bet_pick: cumque
-                        bet_size: 216.97
-                        decimal_odd: 8.291
-                        american_odd: -73.358
-                        result: 0
-                        cashout: 120.26
-                        created_at: '2023-01-22T06:31:45.000000Z'
-                        updated_at: '2023-01-22T06:31:45.000000Z'
+                        id: 182
+                        sport: voluptatem
+                        match: 'Rerum velit voluptate illum autem.'
+                        match_date: '1974-10-13'
+                        match_time: '18:21'
+                        bookie: voluptas
+                        bet_type: tempore
+                        bet_description: 'Sit consectetur ut consequatur est.'
+                        bet_pick: laborum
+                        bet_size: 211.48
+                        decimal_odd: 9.796
+                        american_odd: -242.391
+                        result: null
+                        cashout: 108.07
+                        created_at: '2023-01-23T20:00:18.000000Z'
+                        updated_at: '2023-01-23T20:00:18.000000Z'
                         categories: []
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                          example: 158
+                          example: 181
                         sport:
                           type: string
-                          example: quibusdam
+                          example: eos
                         match:
                           type: string
-                          example: 'Sit sunt asperiores voluptatem.'
+                          example: 'Odio blanditiis esse architecto ipsa ut labore aliquid.'
                         match_date:
                           type: string
-                          example: '2010-04-15'
+                          example: '1988-07-25'
                         match_time:
                           type: string
-                          example: '17:57'
+                          example: '09:22'
                         bookie:
                           type: string
-                          example: ut
+                          example: voluptas
                         bet_type:
                           type: string
-                          example: voluptas
+                          example: necessitatibus
                         bet_description:
                           type: string
-                          example: 'Odio sit enim dolorum vitae esse.'
+                          example: 'Illum aut ea quis.'
                         bet_pick:
                           type: string
-                          example: velit
+                          example: ut
                         bet_size:
                           type: number
-                          example: 282.69
+                          example: 149.08
                         decimal_odd:
                           type: number
-                          example: 7.209
+                          example: 5.411
                         american_odd:
                           type: number
-                          example: 83.364
+                          example: 133.261
                         result:
                           type: integer
-                          example: 0
+                          example: 2
                         cashout:
                           type: number
-                          example: 162.29
+                          example: 285.1
                         created_at:
                           type: string
-                          example: '2023-01-22T06:31:45.000000Z'
+                          example: '2023-01-23T20:00:18.000000Z'
                         updated_at:
                           type: string
-                          example: '2023-01-22T06:31:45.000000Z'
+                          example: '2023-01-23T20:00:18.000000Z'
                         categories:
                           type: array
                           example: []
@@ -220,22 +220,22 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 160
-                    sport: sint
-                    match: 'Enim tempore odio rerum minima.'
-                    match_date: '1971-07-27'
-                    match_time: '14:03'
-                    bookie: quia
-                    bet_type: eaque
-                    bet_description: 'Debitis ut veniam totam qui quod quos.'
-                    bet_pick: quas
-                    bet_size: 210.39
-                    decimal_odd: 3.043
-                    american_odd: 1.966
+                    id: 183
+                    sport: numquam
+                    match: 'Sequi quam quo inventore asperiores voluptatibus enim.'
+                    match_date: '1980-09-01'
+                    match_time: '15:49'
+                    bookie: voluptatem
+                    bet_type: inventore
+                    bet_description: 'Soluta aliquid qui recusandae laudantium sequi nobis.'
+                    bet_pick: consectetur
+                    bet_size: 113.56
+                    decimal_odd: 5.995
+                    american_odd: 177.946
                     result: 1
-                    cashout: 211.83
-                    created_at: '2023-01-22T06:31:46.000000Z'
-                    updated_at: '2023-01-22T06:31:46.000000Z'
+                    cashout: 196.69
+                    created_at: '2023-01-23T20:00:18.000000Z'
+                    updated_at: '2023-01-23T20:00:18.000000Z'
                     categories: []
                 properties:
                   data:
@@ -243,52 +243,52 @@ paths:
                     properties:
                       id:
                         type: integer
-                        example: 160
+                        example: 183
                       sport:
                         type: string
-                        example: sint
+                        example: numquam
                       match:
                         type: string
-                        example: 'Enim tempore odio rerum minima.'
+                        example: 'Sequi quam quo inventore asperiores voluptatibus enim.'
                       match_date:
                         type: string
-                        example: '1971-07-27'
+                        example: '1980-09-01'
                       match_time:
                         type: string
-                        example: '14:03'
+                        example: '15:49'
                       bookie:
                         type: string
-                        example: quia
+                        example: voluptatem
                       bet_type:
                         type: string
-                        example: eaque
+                        example: inventore
                       bet_description:
                         type: string
-                        example: 'Debitis ut veniam totam qui quod quos.'
+                        example: 'Soluta aliquid qui recusandae laudantium sequi nobis.'
                       bet_pick:
                         type: string
-                        example: quas
+                        example: consectetur
                       bet_size:
                         type: number
-                        example: 210.39
+                        example: 113.56
                       decimal_odd:
                         type: number
-                        example: 3.043
+                        example: 5.995
                       american_odd:
                         type: number
-                        example: 1.966
+                        example: 177.946
                       result:
                         type: integer
                         example: 1
                       cashout:
                         type: number
-                        example: 211.83
+                        example: 196.69
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:46.000000Z'
+                        example: '2023-01-23T20:00:18.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:46.000000Z'
+                        example: '2023-01-23T20:00:18.000000Z'
                       categories:
                         type: array
                         example: []
@@ -405,22 +405,22 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 161
-                    sport: dolorem
-                    match: 'Quis ut omnis inventore nemo ea eos et illum.'
-                    match_date: '1989-05-14'
-                    match_time: '02:55'
-                    bookie: itaque
-                    bet_type: voluptas
-                    bet_description: 'Maxime architecto vitae molestiae alias nemo hic neque.'
-                    bet_pick: et
-                    bet_size: 241.83
-                    decimal_odd: 3.544
-                    american_odd: -441.673
-                    result: null
-                    cashout: 115.96
-                    created_at: '2023-01-22T06:31:46.000000Z'
-                    updated_at: '2023-01-22T06:31:46.000000Z'
+                    id: 184
+                    sport: nisi
+                    match: 'Voluptas debitis quia voluptas modi.'
+                    match_date: '1976-05-18'
+                    match_time: '09:47'
+                    bookie: nihil
+                    bet_type: est
+                    bet_description: 'Magnam quae ut illo ut alias.'
+                    bet_pick: explicabo
+                    bet_size: 105.12
+                    decimal_odd: 5.627
+                    american_odd: 32.841
+                    result: 2
+                    cashout: 155.05
+                    created_at: '2023-01-23T20:00:19.000000Z'
+                    updated_at: '2023-01-23T20:00:19.000000Z'
                     categories: []
                 properties:
                   data:
@@ -428,52 +428,52 @@ paths:
                     properties:
                       id:
                         type: integer
-                        example: 161
+                        example: 184
                       sport:
                         type: string
-                        example: dolorem
+                        example: nisi
                       match:
                         type: string
-                        example: 'Quis ut omnis inventore nemo ea eos et illum.'
+                        example: 'Voluptas debitis quia voluptas modi.'
                       match_date:
                         type: string
-                        example: '1989-05-14'
+                        example: '1976-05-18'
                       match_time:
                         type: string
-                        example: '02:55'
+                        example: '09:47'
                       bookie:
                         type: string
-                        example: itaque
+                        example: nihil
                       bet_type:
                         type: string
-                        example: voluptas
+                        example: est
                       bet_description:
                         type: string
-                        example: 'Maxime architecto vitae molestiae alias nemo hic neque.'
+                        example: 'Magnam quae ut illo ut alias.'
                       bet_pick:
                         type: string
-                        example: et
+                        example: explicabo
                       bet_size:
                         type: number
-                        example: 241.83
+                        example: 105.12
                       decimal_odd:
                         type: number
-                        example: 3.544
+                        example: 5.627
                       american_odd:
                         type: number
-                        example: -441.673
+                        example: 32.841
                       result:
-                        type: string
-                        example: null
+                        type: integer
+                        example: 2
                       cashout:
                         type: number
-                        example: 115.96
+                        example: 155.05
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:46.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:46.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       categories:
                         type: array
                         example: []
@@ -514,22 +514,22 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 162
-                    sport: quam
-                    match: 'Provident rerum et facere voluptatem autem ducimus et.'
-                    match_date: '2010-08-29'
-                    match_time: '22:17'
-                    bookie: animi
-                    bet_type: ex
-                    bet_description: 'Pariatur accusamus optio nihil dolorum.'
-                    bet_pick: qui
-                    bet_size: 239.58
-                    decimal_odd: 5.202
-                    american_odd: 53.598
-                    result: 2
-                    cashout: 138.56
-                    created_at: '2023-01-22T06:31:47.000000Z'
-                    updated_at: '2023-01-22T06:31:47.000000Z'
+                    id: 185
+                    sport: inventore
+                    match: 'Voluptas tempora provident laborum quidem tempore aut iusto.'
+                    match_date: '1992-03-30'
+                    match_time: '19:01'
+                    bookie: accusantium
+                    bet_type: iure
+                    bet_description: 'Laboriosam nihil laudantium deleniti temporibus.'
+                    bet_pick: est
+                    bet_size: 190.87
+                    decimal_odd: 5.075
+                    american_odd: 479.285
+                    result: 0
+                    cashout: 167.06
+                    created_at: '2023-01-23T20:00:19.000000Z'
+                    updated_at: '2023-01-23T20:00:19.000000Z'
                     categories: []
                 properties:
                   data:
@@ -537,52 +537,52 @@ paths:
                     properties:
                       id:
                         type: integer
-                        example: 162
+                        example: 185
                       sport:
                         type: string
-                        example: quam
+                        example: inventore
                       match:
                         type: string
-                        example: 'Provident rerum et facere voluptatem autem ducimus et.'
+                        example: 'Voluptas tempora provident laborum quidem tempore aut iusto.'
                       match_date:
                         type: string
-                        example: '2010-08-29'
+                        example: '1992-03-30'
                       match_time:
                         type: string
-                        example: '22:17'
+                        example: '19:01'
                       bookie:
                         type: string
-                        example: animi
+                        example: accusantium
                       bet_type:
                         type: string
-                        example: ex
+                        example: iure
                       bet_description:
                         type: string
-                        example: 'Pariatur accusamus optio nihil dolorum.'
+                        example: 'Laboriosam nihil laudantium deleniti temporibus.'
                       bet_pick:
                         type: string
-                        example: qui
+                        example: est
                       bet_size:
                         type: number
-                        example: 239.58
+                        example: 190.87
                       decimal_odd:
                         type: number
-                        example: 5.202
+                        example: 5.075
                       american_odd:
                         type: number
-                        example: 53.598
+                        example: 479.285
                       result:
                         type: integer
-                        example: 2
+                        example: 0
                       cashout:
                         type: number
-                        example: 138.56
+                        example: 167.06
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       categories:
                         type: array
                         example: []
@@ -709,7 +709,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the bet.'
-        example: 2
+        example: 19
         required: true
         schema:
           type: integer
@@ -794,51 +794,51 @@ paths:
                 example:
                   data:
                     -
-                      id: 67
-                      name: 'Perspiciatis totam.'
-                      color: black
-                      created_at: '2023-01-22T06:31:47.000000Z'
-                      updated_at: '2023-01-22T06:31:47.000000Z'
+                      id: 92
+                      name: 'Inventore soluta.'
+                      color: yellow
+                      created_at: '2023-01-23T20:00:19.000000Z'
+                      updated_at: '2023-01-23T20:00:19.000000Z'
                     -
-                      id: 68
-                      name: 'Repudiandae illum molestias.'
-                      color: black
-                      created_at: '2023-01-22T06:31:47.000000Z'
-                      updated_at: '2023-01-22T06:31:47.000000Z'
+                      id: 93
+                      name: 'Sed est.'
+                      color: yellow
+                      created_at: '2023-01-23T20:00:19.000000Z'
+                      updated_at: '2023-01-23T20:00:19.000000Z'
                 properties:
                   data:
                     type: array
                     example:
                       -
-                        id: 67
-                        name: 'Perspiciatis totam.'
-                        color: black
-                        created_at: '2023-01-22T06:31:47.000000Z'
-                        updated_at: '2023-01-22T06:31:47.000000Z'
+                        id: 92
+                        name: 'Inventore soluta.'
+                        color: yellow
+                        created_at: '2023-01-23T20:00:19.000000Z'
+                        updated_at: '2023-01-23T20:00:19.000000Z'
                       -
-                        id: 68
-                        name: 'Repudiandae illum molestias.'
-                        color: black
-                        created_at: '2023-01-22T06:31:47.000000Z'
-                        updated_at: '2023-01-22T06:31:47.000000Z'
+                        id: 93
+                        name: 'Sed est.'
+                        color: yellow
+                        created_at: '2023-01-23T20:00:19.000000Z'
+                        updated_at: '2023-01-23T20:00:19.000000Z'
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                          example: 67
+                          example: 92
                         name:
                           type: string
-                          example: 'Perspiciatis totam.'
+                          example: 'Inventore soluta.'
                         color:
                           type: string
-                          example: black
+                          example: yellow
                         created_at:
                           type: string
-                          example: '2023-01-22T06:31:47.000000Z'
+                          example: '2023-01-23T20:00:19.000000Z'
                         updated_at:
                           type: string
-                          example: '2023-01-22T06:31:47.000000Z'
+                          example: '2023-01-23T20:00:19.000000Z'
       tags:
         - Categories
     post:
@@ -876,30 +876,30 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 69
-                    name: 'Odit beatae.'
-                    color: yellow
-                    created_at: '2023-01-22T06:31:47.000000Z'
-                    updated_at: '2023-01-22T06:31:47.000000Z'
+                    id: 94
+                    name: 'Iusto voluptas.'
+                    color: black
+                    created_at: '2023-01-23T20:00:19.000000Z'
+                    updated_at: '2023-01-23T20:00:19.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 69
+                        example: 94
                       name:
                         type: string
-                        example: 'Odit beatae.'
+                        example: 'Iusto voluptas.'
                       color:
                         type: string
-                        example: yellow
+                        example: black
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
       tags:
         - Categories
       requestBody:
@@ -956,30 +956,30 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 70
-                    name: 'Delectus consequatur et.'
-                    color: indigo
-                    created_at: '2023-01-22T06:31:47.000000Z'
-                    updated_at: '2023-01-22T06:31:47.000000Z'
+                    id: 95
+                    name: 'Aperiam nam dolor.'
+                    color: blue
+                    created_at: '2023-01-23T20:00:19.000000Z'
+                    updated_at: '2023-01-23T20:00:19.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 70
+                        example: 95
                       name:
                         type: string
-                        example: 'Delectus consequatur et.'
+                        example: 'Aperiam nam dolor.'
                       color:
                         type: string
-                        example: indigo
+                        example: blue
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:47.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
       tags:
         - Categories
     put:
@@ -1017,30 +1017,30 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 71
-                    name: 'Ea non earum.'
-                    color: black
-                    created_at: '2023-01-22T06:31:48.000000Z'
-                    updated_at: '2023-01-22T06:31:48.000000Z'
+                    id: 96
+                    name: 'Doloribus facilis quaerat.'
+                    color: blue
+                    created_at: '2023-01-23T20:00:19.000000Z'
+                    updated_at: '2023-01-23T20:00:19.000000Z'
                 properties:
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
-                        example: 71
+                        example: 96
                       name:
                         type: string
-                        example: 'Ea non earum.'
+                        example: 'Doloribus facilis quaerat.'
                       color:
                         type: string
-                        example: black
+                        example: blue
                       created_at:
                         type: string
-                        example: '2023-01-22T06:31:48.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
                       updated_at:
                         type: string
-                        example: '2023-01-22T06:31:48.000000Z'
+                        example: '2023-01-23T20:00:19.000000Z'
       tags:
         - Categories
       requestBody:
@@ -1107,7 +1107,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the category.'
-        example: 1
+        example: 11
         required: true
         schema:
           type: integer
@@ -1281,6 +1281,100 @@ paths:
                     example: '2023-01-09T03:38:15.000000Z'
       tags:
         - User
+  /api/v1/value-bets/sports:
+    get:
+      summary: 'Sports list'
+      operationId: sportsList
+      description: 'Get list of available sports for which there are value bets.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - americanfootball_nfl
+                  - americanfootball_nfl_super_bowl_winner
+                  - aussierules_afl
+                  - baseball_mlb_world_series_winner
+                  - basketball_euroleague
+                  - basketball_nba
+                  - basketball_nba_championship_winner
+                  - basketball_ncaab
+                  - cricket_big_bash
+                  - cricket_odi
+                  - golf_masters_tournament_winner
+                  - golf_pga_championship_winner
+                  - golf_the_open_championship_winner
+                  - golf_us_open_winner
+                  - icehockey_nhl
+                  - icehockey_nhl_championship_winner
+                  - icehockey_sweden_allsvenskan
+                  - icehockey_sweden_hockey_league
+                  - mma_mixed_martial_arts
+                  - rugbyleague_nrl
+                  - soccer_argentina_primera_division
+                  - soccer_australia_aleague
+                  - soccer_belgium_first_div
+                  - soccer_chile_campeonato
+                  - soccer_denmark_superliga
+                  - soccer_efl_champ
+                  - soccer_england_efl_cup
+                  - soccer_england_league1
+                  - soccer_england_league2
+                  - soccer_epl
+                  - soccer_fa_cup
+                  - soccer_france_ligue_one
+                  - soccer_france_ligue_two
+                  - soccer_germany_bundesliga
+                  - soccer_germany_bundesliga2
+                  - soccer_italy_serie_a
+                  - soccer_italy_serie_b
+                  - soccer_league_of_ireland
+                  - soccer_mexico_ligamx
+                  - soccer_netherlands_eredivisie
+                  - soccer_norway_eliteserien
+                  - soccer_poland_ekstraklasa
+                  - soccer_portugal_primeira_liga
+                  - soccer_spain_la_liga
+                  - soccer_spain_segunda_division
+                  - soccer_spl
+                  - soccer_sweden_allsvenskan
+                  - soccer_sweden_superettan
+                  - soccer_switzerland_superleague
+                  - soccer_turkey_super_league
+                  - soccer_uefa_champs_league
+                  - soccer_uefa_europa_conference_league
+                  - soccer_uefa_europa_league
+                  - tennis_atp_aus_open_singles
+                  - tennis_wta_aus_open_singles
+      tags:
+        - 'Value Bets'
   /api/v1/value-bets:
     get:
       summary: 'Get value bets.'
@@ -1300,23 +1394,23 @@ paths:
         -
           in: query
           name: regions
-          description: 'Comma-separated list of regions to filter by.'
+          description: 'Comma-separated list of bookie regions to filter by.'
           example: 'us,uk'
           required: true
           schema:
             type: string
-            description: 'Comma-separated list of regions to filter by.'
+            description: 'Comma-separated list of bookie regions to filter by.'
             example: 'us,uk'
         -
           in: query
           name: overValue
-          description: 'float|int required Min. over value percentage to filter value bets by.'
-          example: '20'
-          required: false
+          description: 'Min. over value percentage to filter value bets by.'
+          example: 20.0
+          required: true
           schema:
-            type: string
-            description: 'float|int required Min. over value percentage to filter value bets by.'
-            example: '20'
+            type: number
+            description: 'Min. over value percentage to filter value bets by.'
+            example: 20.0
         -
           in: header
           name: Authorization

@@ -8,6 +8,105 @@ endpoints:
   -
     httpMethods:
       - GET
+    uri: api/v1/value-bets/sports
+    metadata:
+      groupName: 'Value Bets'
+      groupDescription: |-
+
+        Get value bet opportunities.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Sports list'
+      description: 'Get list of available sports for which there are value bets.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [
+              "americanfootball_nfl",
+              "americanfootball_nfl_super_bowl_winner",
+              "aussierules_afl",
+              "baseball_mlb_world_series_winner",
+              "basketball_euroleague",
+              "basketball_nba",
+              "basketball_nba_championship_winner",
+              "basketball_ncaab",
+              "cricket_big_bash",
+              "cricket_odi",
+              "golf_masters_tournament_winner",
+              "golf_pga_championship_winner",
+              "golf_the_open_championship_winner",
+              "golf_us_open_winner",
+              "icehockey_nhl",
+              "icehockey_nhl_championship_winner",
+              "icehockey_sweden_allsvenskan",
+              "icehockey_sweden_hockey_league",
+              "mma_mixed_martial_arts",
+              "rugbyleague_nrl",
+              "soccer_argentina_primera_division",
+              "soccer_australia_aleague",
+              "soccer_belgium_first_div",
+              "soccer_chile_campeonato",
+              "soccer_denmark_superliga",
+              "soccer_efl_champ",
+              "soccer_england_efl_cup",
+              "soccer_england_league1",
+              "soccer_england_league2",
+              "soccer_epl",
+              "soccer_fa_cup",
+              "soccer_france_ligue_one",
+              "soccer_france_ligue_two",
+              "soccer_germany_bundesliga",
+              "soccer_germany_bundesliga2",
+              "soccer_italy_serie_a",
+              "soccer_italy_serie_b",
+              "soccer_league_of_ireland",
+              "soccer_mexico_ligamx",
+              "soccer_netherlands_eredivisie",
+              "soccer_norway_eliteserien",
+              "soccer_poland_ekstraklasa",
+              "soccer_portugal_primeira_liga",
+              "soccer_spain_la_liga",
+              "soccer_spain_segunda_division",
+              "soccer_spl",
+              "soccer_sweden_allsvenskan",
+              "soccer_sweden_superettan",
+              "soccer_switzerland_superleague",
+              "soccer_turkey_super_league",
+              "soccer_uefa_champs_league",
+              "soccer_uefa_europa_conference_league",
+              "soccer_uefa_europa_league",
+              "tennis_atp_aus_open_singles",
+              "tennis_wta_aus_open_singles"
+          ]
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|gkcreJR0w6yTZ3JTVB28XicxArpylnFUTHej90Ao'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
     uri: api/v1/value-bets
     metadata:
       groupName: 'Value Bets'
@@ -36,22 +135,22 @@ endpoints:
         custom: []
       regions:
         name: regions
-        description: 'Comma-separated list of regions to filter by.'
+        description: 'Comma-separated list of bookie regions to filter by.'
         required: true
         example: 'us,uk'
         type: string
         custom: []
       overValue:
         name: overValue
-        description: 'float|int required Min. over value percentage to filter value bets by.'
-        required: false
-        example: '20'
-        type: string
+        description: 'Min. over value percentage to filter value bets by.'
+        required: true
+        example: 20.0
+        type: number
         custom: []
     cleanQueryParameters:
       sport: soccer_italy_serie_a
       regions: 'us,uk'
-      overValue: '20'
+      overValue: 20.0
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []

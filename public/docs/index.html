@@ -138,7 +138,10 @@ See your bet's analysis, done for you so that you don't have to open excel.</a>
                     <a href="#value-bets">Value Bets</a>
                 </li>
                                     <ul id="tocify-subheader-value-bets" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="value-bets-GETapi-v1-value-bets">
+                                                    <li class="tocify-item level-2" data-unique="value-bets-GETapi-v1-value-bets-sports">
+                                <a href="#value-bets-GETapi-v1-value-bets-sports">Sports list</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="value-bets-GETapi-v1-value-bets">
                                 <a href="#value-bets-GETapi-v1-value-bets">Get value bets.</a>
                             </li>
                                                                         </ul>
@@ -152,7 +155,7 @@ See your bet's analysis, done for you so that you don't have to open excel.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 22, 2023</li>
+        <li>Last updated: January 23, 2023</li>
     </ul>
 </div>
 
@@ -191,7 +194,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://betsjournal.io/api/v1/bets?page=14" \
+    --get "https://betsjournal.io/api/v1/bets?page=8" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -203,7 +206,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 );
 
 const params = {
-    "page": "14",
+    "page": "8",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -231,7 +234,7 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'query' =&gt; [
-            'page' =&gt; '14',
+            'page' =&gt; '8',
         ],
     ]
 );
@@ -245,7 +248,7 @@ import json
 
 url = 'https://betsjournal.io/api/v1/bets'
 params = {
-  'page': '14',
+  'page': '8',
 }
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
@@ -267,41 +270,41 @@ response.json()</code></pre></div>
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 158,
-            &quot;sport&quot;: &quot;quibusdam&quot;,
-            &quot;match&quot;: &quot;Sit sunt asperiores voluptatem.&quot;,
-            &quot;match_date&quot;: &quot;2010-04-15&quot;,
-            &quot;match_time&quot;: &quot;17:57&quot;,
-            &quot;bookie&quot;: &quot;ut&quot;,
-            &quot;bet_type&quot;: &quot;voluptas&quot;,
-            &quot;bet_description&quot;: &quot;Odio sit enim dolorum vitae esse.&quot;,
-            &quot;bet_pick&quot;: &quot;velit&quot;,
-            &quot;bet_size&quot;: 282.69,
-            &quot;decimal_odd&quot;: 7.209,
-            &quot;american_odd&quot;: 83.364,
-            &quot;result&quot;: 0,
-            &quot;cashout&quot;: 162.29,
-            &quot;created_at&quot;: &quot;2023-01-22T06:31:45.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2023-01-22T06:31:45.000000Z&quot;,
+            &quot;id&quot;: 181,
+            &quot;sport&quot;: &quot;eos&quot;,
+            &quot;match&quot;: &quot;Odio blanditiis esse architecto ipsa ut labore aliquid.&quot;,
+            &quot;match_date&quot;: &quot;1988-07-25&quot;,
+            &quot;match_time&quot;: &quot;09:22&quot;,
+            &quot;bookie&quot;: &quot;voluptas&quot;,
+            &quot;bet_type&quot;: &quot;necessitatibus&quot;,
+            &quot;bet_description&quot;: &quot;Illum aut ea quis.&quot;,
+            &quot;bet_pick&quot;: &quot;ut&quot;,
+            &quot;bet_size&quot;: 149.08,
+            &quot;decimal_odd&quot;: 5.411,
+            &quot;american_odd&quot;: 133.261,
+            &quot;result&quot;: 2,
+            &quot;cashout&quot;: 285.1,
+            &quot;created_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
             &quot;categories&quot;: []
         },
         {
-            &quot;id&quot;: 159,
-            &quot;sport&quot;: &quot;et&quot;,
-            &quot;match&quot;: &quot;Est aut quis rerum sunt.&quot;,
-            &quot;match_date&quot;: &quot;1982-04-12&quot;,
-            &quot;match_time&quot;: &quot;05:43&quot;,
-            &quot;bookie&quot;: &quot;dolorem&quot;,
-            &quot;bet_type&quot;: &quot;excepturi&quot;,
-            &quot;bet_description&quot;: &quot;Cumque voluptas in corporis id.&quot;,
-            &quot;bet_pick&quot;: &quot;cumque&quot;,
-            &quot;bet_size&quot;: 216.97,
-            &quot;decimal_odd&quot;: 8.291,
-            &quot;american_odd&quot;: -73.358,
-            &quot;result&quot;: 0,
-            &quot;cashout&quot;: 120.26,
-            &quot;created_at&quot;: &quot;2023-01-22T06:31:45.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2023-01-22T06:31:45.000000Z&quot;,
+            &quot;id&quot;: 182,
+            &quot;sport&quot;: &quot;voluptatem&quot;,
+            &quot;match&quot;: &quot;Rerum velit voluptate illum autem.&quot;,
+            &quot;match_date&quot;: &quot;1974-10-13&quot;,
+            &quot;match_time&quot;: &quot;18:21&quot;,
+            &quot;bookie&quot;: &quot;voluptas&quot;,
+            &quot;bet_type&quot;: &quot;tempore&quot;,
+            &quot;bet_description&quot;: &quot;Sit consectetur ut consequatur est.&quot;,
+            &quot;bet_pick&quot;: &quot;laborum&quot;,
+            &quot;bet_size&quot;: 211.48,
+            &quot;decimal_odd&quot;: 9.796,
+            &quot;american_odd&quot;: -242.391,
+            &quot;result&quot;: null,
+            &quot;cashout&quot;: 108.07,
+            &quot;created_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
             &quot;categories&quot;: []
         }
     ]
@@ -373,10 +376,10 @@ response.json()</code></pre></div>
 <i>optional</i> &nbsp;
                 <input type="number" style="display: none"
                name="page"                data-endpoint="GETapi-v1-bets"
-               value="14"
+               value="8"
                data-component="query">
     <br>
-<p>Page to view. Example: <code>14</code></p>
+<p>Page to view. Example: <code>8</code></p>
             </div>
                 </form>
 
@@ -520,22 +523,22 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 160,
-        &quot;sport&quot;: &quot;sint&quot;,
-        &quot;match&quot;: &quot;Enim tempore odio rerum minima.&quot;,
-        &quot;match_date&quot;: &quot;1971-07-27&quot;,
-        &quot;match_time&quot;: &quot;14:03&quot;,
-        &quot;bookie&quot;: &quot;quia&quot;,
-        &quot;bet_type&quot;: &quot;eaque&quot;,
-        &quot;bet_description&quot;: &quot;Debitis ut veniam totam qui quod quos.&quot;,
-        &quot;bet_pick&quot;: &quot;quas&quot;,
-        &quot;bet_size&quot;: 210.39,
-        &quot;decimal_odd&quot;: 3.043,
-        &quot;american_odd&quot;: 1.966,
+        &quot;id&quot;: 183,
+        &quot;sport&quot;: &quot;numquam&quot;,
+        &quot;match&quot;: &quot;Sequi quam quo inventore asperiores voluptatibus enim.&quot;,
+        &quot;match_date&quot;: &quot;1980-09-01&quot;,
+        &quot;match_time&quot;: &quot;15:49&quot;,
+        &quot;bookie&quot;: &quot;voluptatem&quot;,
+        &quot;bet_type&quot;: &quot;inventore&quot;,
+        &quot;bet_description&quot;: &quot;Soluta aliquid qui recusandae laudantium sequi nobis.&quot;,
+        &quot;bet_pick&quot;: &quot;consectetur&quot;,
+        &quot;bet_size&quot;: 113.56,
+        &quot;decimal_odd&quot;: 5.995,
+        &quot;american_odd&quot;: 177.946,
         &quot;result&quot;: 1,
-        &quot;cashout&quot;: 211.83,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:46.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:46.000000Z&quot;,
+        &quot;cashout&quot;: 196.69,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:18.000000Z&quot;,
         &quot;categories&quot;: []
     }
 }</code>
@@ -772,7 +775,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://betsjournal.io/api/v1/bets/2" \
+    --get "https://betsjournal.io/api/v1/bets/19" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -780,7 +783,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/bets/2"
+    "https://betsjournal.io/api/v1/bets/19"
 );
 
 const headers = {
@@ -798,7 +801,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'https://betsjournal.io/api/v1/bets/2',
+    'https://betsjournal.io/api/v1/bets/19',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -815,7 +818,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/bets/2'
+url = 'https://betsjournal.io/api/v1/bets/19'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
@@ -835,22 +838,22 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 161,
-        &quot;sport&quot;: &quot;dolorem&quot;,
-        &quot;match&quot;: &quot;Quis ut omnis inventore nemo ea eos et illum.&quot;,
-        &quot;match_date&quot;: &quot;1989-05-14&quot;,
-        &quot;match_time&quot;: &quot;02:55&quot;,
-        &quot;bookie&quot;: &quot;itaque&quot;,
-        &quot;bet_type&quot;: &quot;voluptas&quot;,
-        &quot;bet_description&quot;: &quot;Maxime architecto vitae molestiae alias nemo hic neque.&quot;,
-        &quot;bet_pick&quot;: &quot;et&quot;,
-        &quot;bet_size&quot;: 241.83,
-        &quot;decimal_odd&quot;: 3.544,
-        &quot;american_odd&quot;: -441.673,
-        &quot;result&quot;: null,
-        &quot;cashout&quot;: 115.96,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:46.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:46.000000Z&quot;,
+        &quot;id&quot;: 184,
+        &quot;sport&quot;: &quot;nisi&quot;,
+        &quot;match&quot;: &quot;Voluptas debitis quia voluptas modi.&quot;,
+        &quot;match_date&quot;: &quot;1976-05-18&quot;,
+        &quot;match_time&quot;: &quot;09:47&quot;,
+        &quot;bookie&quot;: &quot;nihil&quot;,
+        &quot;bet_type&quot;: &quot;est&quot;,
+        &quot;bet_description&quot;: &quot;Magnam quae ut illo ut alias.&quot;,
+        &quot;bet_pick&quot;: &quot;explicabo&quot;,
+        &quot;bet_size&quot;: 105.12,
+        &quot;decimal_odd&quot;: 5.627,
+        &quot;american_odd&quot;: 32.841,
+        &quot;result&quot;: 2,
+        &quot;cashout&quot;: 155.05,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
         &quot;categories&quot;: []
     }
 }</code>
@@ -921,10 +924,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="GETapi-v1-bets--id-"
-               value="2"
+               value="19"
                data-component="url">
     <br>
-<p>The ID of the bet. Example: <code>2</code></p>
+<p>The ID of the bet. Example: <code>19</code></p>
             </div>
                     </form>
 
@@ -942,7 +945,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://betsjournal.io/api/v1/bets/1" \
+    "https://betsjournal.io/api/v1/bets/19" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -966,7 +969,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/bets/1"
+    "https://betsjournal.io/api/v1/bets/19"
 );
 
 const headers = {
@@ -1001,7 +1004,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'https://betsjournal.io/api/v1/bets/1',
+    'https://betsjournal.io/api/v1/bets/19',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1033,7 +1036,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/bets/1'
+url = 'https://betsjournal.io/api/v1/bets/19'
 payload = {
     "match": "Real Madrid vs Barcelona",
     "bet_size": 100,
@@ -1068,22 +1071,22 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 162,
-        &quot;sport&quot;: &quot;quam&quot;,
-        &quot;match&quot;: &quot;Provident rerum et facere voluptatem autem ducimus et.&quot;,
-        &quot;match_date&quot;: &quot;2010-08-29&quot;,
-        &quot;match_time&quot;: &quot;22:17&quot;,
-        &quot;bookie&quot;: &quot;animi&quot;,
-        &quot;bet_type&quot;: &quot;ex&quot;,
-        &quot;bet_description&quot;: &quot;Pariatur accusamus optio nihil dolorum.&quot;,
-        &quot;bet_pick&quot;: &quot;qui&quot;,
-        &quot;bet_size&quot;: 239.58,
-        &quot;decimal_odd&quot;: 5.202,
-        &quot;american_odd&quot;: 53.598,
-        &quot;result&quot;: 2,
-        &quot;cashout&quot;: 138.56,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
+        &quot;id&quot;: 185,
+        &quot;sport&quot;: &quot;inventore&quot;,
+        &quot;match&quot;: &quot;Voluptas tempora provident laborum quidem tempore aut iusto.&quot;,
+        &quot;match_date&quot;: &quot;1992-03-30&quot;,
+        &quot;match_time&quot;: &quot;19:01&quot;,
+        &quot;bookie&quot;: &quot;accusantium&quot;,
+        &quot;bet_type&quot;: &quot;iure&quot;,
+        &quot;bet_description&quot;: &quot;Laboriosam nihil laudantium deleniti temporibus.&quot;,
+        &quot;bet_pick&quot;: &quot;est&quot;,
+        &quot;bet_size&quot;: 190.87,
+        &quot;decimal_odd&quot;: 5.075,
+        &quot;american_odd&quot;: 479.285,
+        &quot;result&quot;: 0,
+        &quot;cashout&quot;: 167.06,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
         &quot;categories&quot;: []
     }
 }</code>
@@ -1158,10 +1161,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="PUTapi-v1-bets--id-"
-               value="1"
+               value="19"
                data-component="url">
     <br>
-<p>The ID of the bet to be updated. Example: <code>1</code></p>
+<p>The ID of the bet to be updated. Example: <code>19</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1336,7 +1339,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://betsjournal.io/api/v1/bets/18" \
+    "https://betsjournal.io/api/v1/bets/12" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1344,7 +1347,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/bets/18"
+    "https://betsjournal.io/api/v1/bets/12"
 );
 
 const headers = {
@@ -1362,7 +1365,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'https://betsjournal.io/api/v1/bets/18',
+    'https://betsjournal.io/api/v1/bets/12',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1379,7 +1382,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/bets/18'
+url = 'https://betsjournal.io/api/v1/bets/12'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
@@ -1467,10 +1470,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="DELETEapi-v1-bets--id-"
-               value="18"
+               value="12"
                data-component="url">
     <br>
-<p>The ID of the bet to be deleted. Example: <code>18</code></p>
+<p>The ID of the bet to be deleted. Example: <code>12</code></p>
             </div>
                     </form>
 
@@ -1700,18 +1703,18 @@ response.json()</code></pre></div>
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 67,
-            &quot;name&quot;: &quot;Perspiciatis totam.&quot;,
-            &quot;color&quot;: &quot;black&quot;,
-            &quot;created_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;
+            &quot;id&quot;: 92,
+            &quot;name&quot;: &quot;Inventore soluta.&quot;,
+            &quot;color&quot;: &quot;yellow&quot;,
+            &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;
         },
         {
-            &quot;id&quot;: 68,
-            &quot;name&quot;: &quot;Repudiandae illum molestias.&quot;,
-            &quot;color&quot;: &quot;black&quot;,
-            &quot;created_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;
+            &quot;id&quot;: 93,
+            &quot;name&quot;: &quot;Sed est.&quot;,
+            &quot;color&quot;: &quot;yellow&quot;,
+            &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;
         }
     ]
 }</code>
@@ -1873,11 +1876,11 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 69,
-        &quot;name&quot;: &quot;Odit beatae.&quot;,
-        &quot;color&quot;: &quot;yellow&quot;,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;
+        &quot;id&quot;: 94,
+        &quot;name&quot;: &quot;Iusto voluptas.&quot;,
+        &quot;color&quot;: &quot;black&quot;,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;
     }
 }</code>
  </pre>
@@ -1979,7 +1982,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://betsjournal.io/api/v1/categories/1" \
+    --get "https://betsjournal.io/api/v1/categories/11" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1987,7 +1990,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/categories/1"
+    "https://betsjournal.io/api/v1/categories/11"
 );
 
 const headers = {
@@ -2005,7 +2008,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'https://betsjournal.io/api/v1/categories/1',
+    'https://betsjournal.io/api/v1/categories/11',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2022,7 +2025,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/categories/1'
+url = 'https://betsjournal.io/api/v1/categories/11'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
@@ -2042,11 +2045,11 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 70,
-        &quot;name&quot;: &quot;Delectus consequatur et.&quot;,
-        &quot;color&quot;: &quot;indigo&quot;,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:47.000000Z&quot;
+        &quot;id&quot;: 95,
+        &quot;name&quot;: &quot;Aperiam nam dolor.&quot;,
+        &quot;color&quot;: &quot;blue&quot;,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;
     }
 }</code>
  </pre>
@@ -2116,10 +2119,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="GETapi-v1-categories--id-"
-               value="1"
+               value="11"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>11</code></p>
             </div>
                     </form>
 
@@ -2137,7 +2140,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "https://betsjournal.io/api/v1/categories/5" \
+    "https://betsjournal.io/api/v1/categories/3" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2150,7 +2153,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/categories/5"
+    "https://betsjournal.io/api/v1/categories/3"
 );
 
 const headers = {
@@ -2174,7 +2177,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'https://betsjournal.io/api/v1/categories/5',
+    'https://betsjournal.io/api/v1/categories/3',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2195,7 +2198,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/categories/5'
+url = 'https://betsjournal.io/api/v1/categories/3'
 payload = {
     "name": "MMA",
     "color": "blue"
@@ -2219,11 +2222,11 @@ response.json()</code></pre></div>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: 71,
-        &quot;name&quot;: &quot;Ea non earum.&quot;,
-        &quot;color&quot;: &quot;black&quot;,
-        &quot;created_at&quot;: &quot;2023-01-22T06:31:48.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-01-22T06:31:48.000000Z&quot;
+        &quot;id&quot;: 96,
+        &quot;name&quot;: &quot;Doloribus facilis quaerat.&quot;,
+        &quot;color&quot;: &quot;blue&quot;,
+        &quot;created_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2023-01-23T20:00:19.000000Z&quot;
     }
 }</code>
  </pre>
@@ -2297,10 +2300,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="PUTapi-v1-categories--id-"
-               value="5"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the category to be updated. Example: <code>5</code></p>
+<p>The ID of the category to be updated. Example: <code>3</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2341,7 +2344,7 @@ response.json()</code></pre></div>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://betsjournal.io/api/v1/categories/3" \
+    "https://betsjournal.io/api/v1/categories/18" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2349,7 +2352,7 @@ response.json()</code></pre></div>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://betsjournal.io/api/v1/categories/3"
+    "https://betsjournal.io/api/v1/categories/18"
 );
 
 const headers = {
@@ -2367,7 +2370,7 @@ fetch(url, {
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'https://betsjournal.io/api/v1/categories/3',
+    'https://betsjournal.io/api/v1/categories/18',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2384,7 +2387,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     <pre><code class="language-python">import requests
 import json
 
-url = 'https://betsjournal.io/api/v1/categories/3'
+url = 'https://betsjournal.io/api/v1/categories/18'
 headers = {
   'Authorization': 'Bearer {YOUR_AUTH_KEY}',
   'Content-Type': 'application/json',
@@ -2472,10 +2475,10 @@ response.json()</code></pre></div>
  &nbsp;
                 <input type="number" style="display: none"
                name="id"                data-endpoint="DELETEapi-v1-categories--id-"
-               value="3"
+               value="18"
                data-component="url">
     <br>
-<p>The ID of the category to be deleted. Example: <code>3</code></p>
+<p>The ID of the category to be deleted. Example: <code>18</code></p>
             </div>
                     </form>
 
@@ -2816,7 +2819,201 @@ response.json()</code></pre></div>
 
     <p>Get value bet opportunities.</p>
 
-                                <h2 id="value-bets-GETapi-v1-value-bets">Get value bets.</h2>
+                                <h2 id="value-bets-GETapi-v1-value-bets-sports">Sports list</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get list of available sports for which there are value bets.</p>
+
+<span id="example-requests-GETapi-v1-value-bets-sports">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://betsjournal.io/api/v1/value-bets/sports" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://betsjournal.io/api/v1/value-bets/sports"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'https://betsjournal.io/api/v1/value-bets/sports',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'https://betsjournal.io/api/v1/value-bets/sports'
+headers = {
+  'Authorization': 'Bearer {YOUR_AUTH_KEY}',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-value-bets-sports">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    &quot;americanfootball_nfl&quot;,
+    &quot;americanfootball_nfl_super_bowl_winner&quot;,
+    &quot;aussierules_afl&quot;,
+    &quot;baseball_mlb_world_series_winner&quot;,
+    &quot;basketball_euroleague&quot;,
+    &quot;basketball_nba&quot;,
+    &quot;basketball_nba_championship_winner&quot;,
+    &quot;basketball_ncaab&quot;,
+    &quot;cricket_big_bash&quot;,
+    &quot;cricket_odi&quot;,
+    &quot;golf_masters_tournament_winner&quot;,
+    &quot;golf_pga_championship_winner&quot;,
+    &quot;golf_the_open_championship_winner&quot;,
+    &quot;golf_us_open_winner&quot;,
+    &quot;icehockey_nhl&quot;,
+    &quot;icehockey_nhl_championship_winner&quot;,
+    &quot;icehockey_sweden_allsvenskan&quot;,
+    &quot;icehockey_sweden_hockey_league&quot;,
+    &quot;mma_mixed_martial_arts&quot;,
+    &quot;rugbyleague_nrl&quot;,
+    &quot;soccer_argentina_primera_division&quot;,
+    &quot;soccer_australia_aleague&quot;,
+    &quot;soccer_belgium_first_div&quot;,
+    &quot;soccer_chile_campeonato&quot;,
+    &quot;soccer_denmark_superliga&quot;,
+    &quot;soccer_efl_champ&quot;,
+    &quot;soccer_england_efl_cup&quot;,
+    &quot;soccer_england_league1&quot;,
+    &quot;soccer_england_league2&quot;,
+    &quot;soccer_epl&quot;,
+    &quot;soccer_fa_cup&quot;,
+    &quot;soccer_france_ligue_one&quot;,
+    &quot;soccer_france_ligue_two&quot;,
+    &quot;soccer_germany_bundesliga&quot;,
+    &quot;soccer_germany_bundesliga2&quot;,
+    &quot;soccer_italy_serie_a&quot;,
+    &quot;soccer_italy_serie_b&quot;,
+    &quot;soccer_league_of_ireland&quot;,
+    &quot;soccer_mexico_ligamx&quot;,
+    &quot;soccer_netherlands_eredivisie&quot;,
+    &quot;soccer_norway_eliteserien&quot;,
+    &quot;soccer_poland_ekstraklasa&quot;,
+    &quot;soccer_portugal_primeira_liga&quot;,
+    &quot;soccer_spain_la_liga&quot;,
+    &quot;soccer_spain_segunda_division&quot;,
+    &quot;soccer_spl&quot;,
+    &quot;soccer_sweden_allsvenskan&quot;,
+    &quot;soccer_sweden_superettan&quot;,
+    &quot;soccer_switzerland_superleague&quot;,
+    &quot;soccer_turkey_super_league&quot;,
+    &quot;soccer_uefa_champs_league&quot;,
+    &quot;soccer_uefa_europa_conference_league&quot;,
+    &quot;soccer_uefa_europa_league&quot;,
+    &quot;tennis_atp_aus_open_singles&quot;,
+    &quot;tennis_wta_aus_open_singles&quot;
+]</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-value-bets-sports" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-value-bets-sports"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-value-bets-sports" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-value-bets-sports" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-value-bets-sports"></code></pre>
+</span>
+<form id="form-GETapi-v1-value-bets-sports" data-method="GET"
+      data-path="api/v1/value-bets/sports"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-value-bets-sports', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/value-bets/sports</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-value-bets-sports"
+               value="Bearer {YOUR_AUTH_KEY}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_KEY}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Content-Type"                data-endpoint="GETapi-v1-value-bets-sports"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+               name="Accept"                data-endpoint="GETapi-v1-value-bets-sports"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="value-bets-GETapi-v1-value-bets">Get value bets.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -3090,18 +3287,18 @@ response.json()</code></pre></div>
                value="us,uk"
                data-component="query">
     <br>
-<p>Comma-separated list of regions to filter by. Example: <code>us,uk</code></p>
+<p>Comma-separated list of bookie regions to filter by. Example: <code>us,uk</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>overValue</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
+<small>number</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
                name="overValue"                data-endpoint="GETapi-v1-value-bets"
                value="20"
                data-component="query">
     <br>
-<p>float|int required Min. over value percentage to filter value bets by. Example: <code>20</code></p>
+<p>Min. over value percentage to filter value bets by. Example: <code>20</code></p>
             </div>
                 </form>
 

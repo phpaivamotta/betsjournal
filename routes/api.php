@@ -65,6 +65,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group( function () {
     // Category resources
     Route::apiResource('categories', CategoryController::class);
 
+    // available sports for value bets
+    Route::get('value-bets/sports', [ValueBets::class, 'sports']);
+
     // value bets
-    Route::get('value-bets', ValueBets::class);
+    Route::get('value-bets', [ValueBets::class, 'index']);
 });

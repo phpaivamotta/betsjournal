@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Betsjournal API",
-        "_postman_id": "6f92509b-e0da-4e1b-bce7-2c99960fcffc",
+        "_postman_id": "8d0974f9-7c95-4313-bcd0-85e97de1846c",
         "description": "Manage and analyze your bets from anywhere with Betsjournal.",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -28,12 +28,12 @@
                             "query": [
                                 {
                                     "key": "page",
-                                    "value": "14",
+                                    "value": "8",
                                     "description": "Page to view.",
                                     "disabled": false
                                 }
                             ],
-                            "raw": "{{baseUrl}}\/api\/v1\/bets?page=14"
+                            "raw": "{{baseUrl}}\/api\/v1\/bets?page=8"
                         },
                         "method": "GET",
                         "header": [
@@ -53,7 +53,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[{\"id\":158,\"sport\":\"quibusdam\",\"match\":\"Sit sunt asperiores voluptatem.\",\"match_date\":\"2010-04-15\",\"match_time\":\"17:57\",\"bookie\":\"ut\",\"bet_type\":\"voluptas\",\"bet_description\":\"Odio sit enim dolorum vitae esse.\",\"bet_pick\":\"velit\",\"bet_size\":282.69,\"decimal_odd\":7.209,\"american_odd\":83.364,\"result\":0,\"cashout\":162.29,\"created_at\":\"2023-01-22T06:31:45.000000Z\",\"updated_at\":\"2023-01-22T06:31:45.000000Z\",\"categories\":[]},{\"id\":159,\"sport\":\"et\",\"match\":\"Est aut quis rerum sunt.\",\"match_date\":\"1982-04-12\",\"match_time\":\"05:43\",\"bookie\":\"dolorem\",\"bet_type\":\"excepturi\",\"bet_description\":\"Cumque voluptas in corporis id.\",\"bet_pick\":\"cumque\",\"bet_size\":216.97,\"decimal_odd\":8.291,\"american_odd\":-73.358,\"result\":0,\"cashout\":120.26,\"created_at\":\"2023-01-22T06:31:45.000000Z\",\"updated_at\":\"2023-01-22T06:31:45.000000Z\",\"categories\":[]}]}",
+                            "body": "{\"data\":[{\"id\":181,\"sport\":\"eos\",\"match\":\"Odio blanditiis esse architecto ipsa ut labore aliquid.\",\"match_date\":\"1988-07-25\",\"match_time\":\"09:22\",\"bookie\":\"voluptas\",\"bet_type\":\"necessitatibus\",\"bet_description\":\"Illum aut ea quis.\",\"bet_pick\":\"ut\",\"bet_size\":149.08,\"decimal_odd\":5.411,\"american_odd\":133.261,\"result\":2,\"cashout\":285.1,\"created_at\":\"2023-01-23T20:00:18.000000Z\",\"updated_at\":\"2023-01-23T20:00:18.000000Z\",\"categories\":[]},{\"id\":182,\"sport\":\"voluptatem\",\"match\":\"Rerum velit voluptate illum autem.\",\"match_date\":\"1974-10-13\",\"match_time\":\"18:21\",\"bookie\":\"voluptas\",\"bet_type\":\"tempore\",\"bet_description\":\"Sit consectetur ut consequatur est.\",\"bet_pick\":\"laborum\",\"bet_size\":211.48,\"decimal_odd\":9.796,\"american_odd\":-242.391,\"result\":null,\"cashout\":108.07,\"created_at\":\"2023-01-23T20:00:18.000000Z\",\"updated_at\":\"2023-01-23T20:00:18.000000Z\",\"categories\":[]}]}",
                             "name": ""
                         }
                     ]
@@ -88,7 +88,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":160,\"sport\":\"sint\",\"match\":\"Enim tempore odio rerum minima.\",\"match_date\":\"1971-07-27\",\"match_time\":\"14:03\",\"bookie\":\"quia\",\"bet_type\":\"eaque\",\"bet_description\":\"Debitis ut veniam totam qui quod quos.\",\"bet_pick\":\"quas\",\"bet_size\":210.39,\"decimal_odd\":3.043,\"american_odd\":1.966,\"result\":1,\"cashout\":211.83,\"created_at\":\"2023-01-22T06:31:46.000000Z\",\"updated_at\":\"2023-01-22T06:31:46.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":183,\"sport\":\"numquam\",\"match\":\"Sequi quam quo inventore asperiores voluptatibus enim.\",\"match_date\":\"1980-09-01\",\"match_time\":\"15:49\",\"bookie\":\"voluptatem\",\"bet_type\":\"inventore\",\"bet_description\":\"Soluta aliquid qui recusandae laudantium sequi nobis.\",\"bet_pick\":\"consectetur\",\"bet_size\":113.56,\"decimal_odd\":5.995,\"american_odd\":177.946,\"result\":1,\"cashout\":196.69,\"created_at\":\"2023-01-23T20:00:18.000000Z\",\"updated_at\":\"2023-01-23T20:00:18.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -105,7 +105,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "2",
+                                    "value": "19",
                                     "description": "The ID of the bet."
                                 }
                             ]
@@ -128,7 +128,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":161,\"sport\":\"dolorem\",\"match\":\"Quis ut omnis inventore nemo ea eos et illum.\",\"match_date\":\"1989-05-14\",\"match_time\":\"02:55\",\"bookie\":\"itaque\",\"bet_type\":\"voluptas\",\"bet_description\":\"Maxime architecto vitae molestiae alias nemo hic neque.\",\"bet_pick\":\"et\",\"bet_size\":241.83,\"decimal_odd\":3.544,\"american_odd\":-441.673,\"result\":null,\"cashout\":115.96,\"created_at\":\"2023-01-22T06:31:46.000000Z\",\"updated_at\":\"2023-01-22T06:31:46.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":184,\"sport\":\"nisi\",\"match\":\"Voluptas debitis quia voluptas modi.\",\"match_date\":\"1976-05-18\",\"match_time\":\"09:47\",\"bookie\":\"nihil\",\"bet_type\":\"est\",\"bet_description\":\"Magnam quae ut illo ut alias.\",\"bet_pick\":\"explicabo\",\"bet_size\":105.12,\"decimal_odd\":5.627,\"american_odd\":32.841,\"result\":2,\"cashout\":155.05,\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -145,7 +145,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "19",
                                     "description": "The ID of the bet to be updated."
                                 }
                             ]
@@ -171,7 +171,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":162,\"sport\":\"quam\",\"match\":\"Provident rerum et facere voluptatem autem ducimus et.\",\"match_date\":\"2010-08-29\",\"match_time\":\"22:17\",\"bookie\":\"animi\",\"bet_type\":\"ex\",\"bet_description\":\"Pariatur accusamus optio nihil dolorum.\",\"bet_pick\":\"qui\",\"bet_size\":239.58,\"decimal_odd\":5.202,\"american_odd\":53.598,\"result\":2,\"cashout\":138.56,\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\",\"categories\":[]}}",
+                            "body": "{\"data\":{\"id\":185,\"sport\":\"inventore\",\"match\":\"Voluptas tempora provident laborum quidem tempore aut iusto.\",\"match_date\":\"1992-03-30\",\"match_time\":\"19:01\",\"bookie\":\"accusantium\",\"bet_type\":\"iure\",\"bet_description\":\"Laboriosam nihil laudantium deleniti temporibus.\",\"bet_pick\":\"est\",\"bet_size\":190.87,\"decimal_odd\":5.075,\"american_odd\":479.285,\"result\":0,\"cashout\":167.06,\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\",\"categories\":[]}}",
                             "name": ""
                         }
                     ]
@@ -188,7 +188,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "12",
                                     "description": "The ID of the bet to be deleted."
                                 }
                             ]
@@ -281,7 +281,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[{\"id\":67,\"name\":\"Perspiciatis totam.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"},{\"id\":68,\"name\":\"Repudiandae illum molestias.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}]}",
+                            "body": "{\"data\":[{\"id\":92,\"name\":\"Inventore soluta.\",\"color\":\"yellow\",\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\"},{\"id\":93,\"name\":\"Sed est.\",\"color\":\"yellow\",\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\"}]}",
                             "name": ""
                         }
                     ]
@@ -316,7 +316,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":69,\"name\":\"Odit beatae.\",\"color\":\"yellow\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":94,\"name\":\"Iusto voluptas.\",\"color\":\"black\",\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -333,7 +333,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "1",
+                                    "value": "11",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -356,7 +356,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":70,\"name\":\"Delectus consequatur et.\",\"color\":\"indigo\",\"created_at\":\"2023-01-22T06:31:47.000000Z\",\"updated_at\":\"2023-01-22T06:31:47.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":95,\"name\":\"Aperiam nam dolor.\",\"color\":\"blue\",\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -373,7 +373,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "5",
+                                    "value": "3",
                                     "description": "The ID of the category to be updated."
                                 }
                             ]
@@ -399,7 +399,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":71,\"name\":\"Ea non earum.\",\"color\":\"black\",\"created_at\":\"2023-01-22T06:31:48.000000Z\",\"updated_at\":\"2023-01-22T06:31:48.000000Z\"}}",
+                            "body": "{\"data\":{\"id\":96,\"name\":\"Doloribus facilis quaerat.\",\"color\":\"blue\",\"created_at\":\"2023-01-23T20:00:19.000000Z\",\"updated_at\":\"2023-01-23T20:00:19.000000Z\"}}",
                             "name": ""
                         }
                     ]
@@ -416,7 +416,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "3",
+                                    "value": "18",
                                     "description": "The ID of the category to be deleted."
                                 }
                             ]
@@ -534,6 +534,38 @@
             "description": "\nGet value bet opportunities.",
             "item": [
                 {
+                    "name": "Sports list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/value-bets\/sports",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/value-bets\/sports"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of available sports for which there are value bets."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[\n    \"americanfootball_nfl\",\n    \"americanfootball_nfl_super_bowl_winner\",\n    \"aussierules_afl\",\n    \"baseball_mlb_world_series_winner\",\n    \"basketball_euroleague\",\n    \"basketball_nba\",\n    \"basketball_nba_championship_winner\",\n    \"basketball_ncaab\",\n    \"cricket_big_bash\",\n    \"cricket_odi\",\n    \"golf_masters_tournament_winner\",\n    \"golf_pga_championship_winner\",\n    \"golf_the_open_championship_winner\",\n    \"golf_us_open_winner\",\n    \"icehockey_nhl\",\n    \"icehockey_nhl_championship_winner\",\n    \"icehockey_sweden_allsvenskan\",\n    \"icehockey_sweden_hockey_league\",\n    \"mma_mixed_martial_arts\",\n    \"rugbyleague_nrl\",\n    \"soccer_argentina_primera_division\",\n    \"soccer_australia_aleague\",\n    \"soccer_belgium_first_div\",\n    \"soccer_chile_campeonato\",\n    \"soccer_denmark_superliga\",\n    \"soccer_efl_champ\",\n    \"soccer_england_efl_cup\",\n    \"soccer_england_league1\",\n    \"soccer_england_league2\",\n    \"soccer_epl\",\n    \"soccer_fa_cup\",\n    \"soccer_france_ligue_one\",\n    \"soccer_france_ligue_two\",\n    \"soccer_germany_bundesliga\",\n    \"soccer_germany_bundesliga2\",\n    \"soccer_italy_serie_a\",\n    \"soccer_italy_serie_b\",\n    \"soccer_league_of_ireland\",\n    \"soccer_mexico_ligamx\",\n    \"soccer_netherlands_eredivisie\",\n    \"soccer_norway_eliteserien\",\n    \"soccer_poland_ekstraklasa\",\n    \"soccer_portugal_primeira_liga\",\n    \"soccer_spain_la_liga\",\n    \"soccer_spain_segunda_division\",\n    \"soccer_spl\",\n    \"soccer_sweden_allsvenskan\",\n    \"soccer_sweden_superettan\",\n    \"soccer_switzerland_superleague\",\n    \"soccer_turkey_super_league\",\n    \"soccer_uefa_champs_league\",\n    \"soccer_uefa_europa_conference_league\",\n    \"soccer_uefa_europa_league\",\n    \"tennis_atp_aus_open_singles\",\n    \"tennis_wta_aus_open_singles\"\n]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
                     "name": "Get value bets.",
                     "request": {
                         "url": {
@@ -549,13 +581,13 @@
                                 {
                                     "key": "regions",
                                     "value": "us%2Cuk",
-                                    "description": "Comma-separated list of regions to filter by.",
+                                    "description": "Comma-separated list of bookie regions to filter by.",
                                     "disabled": false
                                 },
                                 {
                                     "key": "overValue",
                                     "value": "20",
-                                    "description": "float|int required Min. over value percentage to filter value bets by.",
+                                    "description": "Min. over value percentage to filter value bets by.",
                                     "disabled": false
                                 }
                             ],

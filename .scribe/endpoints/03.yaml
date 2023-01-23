@@ -79,7 +79,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":67,"name":"Perspiciatis totam.","color":"black","created_at":"2023-01-22T06:31:47.000000Z","updated_at":"2023-01-22T06:31:47.000000Z"},{"id":68,"name":"Repudiandae illum molestias.","color":"black","created_at":"2023-01-22T06:31:47.000000Z","updated_at":"2023-01-22T06:31:47.000000Z"}]}'
+        content: '{"data":[{"id":92,"name":"Inventore soluta.","color":"yellow","created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z"},{"id":93,"name":"Sed est.","color":"yellow","created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z"}]}'
         headers: []
         description: ''
         custom: []
@@ -137,7 +137,7 @@ endpoints:
     responses:
       -
         status: 201
-        content: '{"data":{"id":69,"name":"Odit beatae.","color":"yellow","created_at":"2023-01-22T06:31:47.000000Z","updated_at":"2023-01-22T06:31:47.000000Z"}}'
+        content: '{"data":{"id":94,"name":"Iusto voluptas.","color":"black","created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -174,11 +174,11 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 11
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: 11
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -187,7 +187,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":70,"name":"Delectus consequatur et.","color":"indigo","created_at":"2023-01-22T06:31:47.000000Z","updated_at":"2023-01-22T06:31:47.000000Z"}}'
+        content: '{"data":{"id":95,"name":"Aperiam nam dolor.","color":"blue","created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -225,11 +225,11 @@ endpoints:
         name: id
         description: 'The ID of the category to be updated.'
         required: true
-        example: 5
+        example: 3
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 5
+      id: 3
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -254,7 +254,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":71,"name":"Ea non earum.","color":"black","created_at":"2023-01-22T06:31:48.000000Z","updated_at":"2023-01-22T06:31:48.000000Z"}}'
+        content: '{"data":{"id":96,"name":"Doloribus facilis quaerat.","color":"blue","created_at":"2023-01-23T20:00:19.000000Z","updated_at":"2023-01-23T20:00:19.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -291,11 +291,11 @@ endpoints:
         name: id
         description: 'The ID of the category to be deleted.'
         required: true
-        example: 3
+        example: 18
         type: integer
         custom: []
     cleanUrlParameters:
-      id: 3
+      id: 18
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
