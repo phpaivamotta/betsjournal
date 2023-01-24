@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BetController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\ManageProfile;
 use App\Http\Controllers\StatsController;
 use App\Http\Livewire\Api\ApiTokens;
 use App\Http\Livewire\BetCategory;
@@ -83,9 +83,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('api-tokens', ApiTokens::class)
         ->name('api-tokens');
 
-    // edit profile
-    Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
-    Route::patch('update-profile', [ProfileController::class, 'update'])->name('update-profile');
+    // manage profile user (Livewire)
+    Route::get('profile', ManageProfile::class)
+        ->name('edit-profile');
 });
 
 require __DIR__ . '/auth.php';
