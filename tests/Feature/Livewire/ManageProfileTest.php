@@ -38,7 +38,8 @@ class ManageProfileTest extends TestCase
             ->call('confirmDeleteProfile')
             ->assertSee('Are you sure?')
             ->assertSee('Once your account is deleted, you can no longer recover it.')
-            ->call('deleteProfile');
+            ->call('deleteProfile')
+            ->assertRedirect('/');
 
         $this->get('/')->assertSee('Your profile has been deleted.');
 
@@ -91,5 +92,16 @@ class ManageProfileTest extends TestCase
             ->set('email', '')
             ->call('updateProfile')
             ->assertSee('The email field is required.');
+    }
+
+    public function test_password_confirmation_is_required()
+    {
+        $this->signIn();
+    
+        Livewire::test(ManageProfile::class)
+            ->set('password', 'password')
+            ->set('password', 'incorrectpassword')
+            ->call('updateProfile')
+            ->assertSee('The password confirmation does not match.');
     }
 }
