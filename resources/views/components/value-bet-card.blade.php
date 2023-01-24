@@ -67,9 +67,10 @@
 
             </div>
 
-            <p class="text-sm mt-4">
-                {{ ucwords(str_replace('_', ' ', $bookie)) }}
-            </p>
+            <a href="{{ App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['link'] ?? '#' }}" target="_blank"
+                class="text-sm text-blue-400 hover:underline mt-4 inline-block">
+                {{ App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['name'] ?? '--'}}
+            </a>
 
             <p class="text-sm">
                 {{ ucwords(str_replace('_', ' ', $match['sport'])) }}
@@ -112,7 +113,7 @@
                         'match' => $match['home_team'] . ' vs ' . $match['away_team'],
                         'bookie' => $bookie,
                         'odd' => number_format($stats['money_line'], 2),
-                        'betPick' => $outcome === 'draw' ? 'Draw'  : $match[$outcome],
+                        'betPick' => $outcome === 'draw' ? 'Draw' : $match[$outcome],
                         'sport' => $match['sport'],
                         'date' => \Carbon\Carbon::create($match['commence_time'])->toDateString(),
                         'time' => \Carbon\Carbon::create($match['commence_time'])->format('H:i'),
