@@ -108,8 +108,8 @@
                         <x-slot name="content">
 
                             {{-- user profile --}}
-                            <x-dropdown-link :href="route('edit-profile')" :active="request()->routeIs('edit-profile')">
-                                {{ __('Edit Profile') }}
+                            <x-dropdown-link :href="route('manage-profile')" :active="request()->routeIs('manage-profile')">
+                                {{ __('Manage Profile') }}
                             </x-dropdown-link>
 
                             <div x-data="{ open: false }">
@@ -270,7 +270,7 @@
             <div class="pt-3 pb-1 border-t border-gray-200">
 
                 {{-- user info --}}
-                <x-responsive-nav-link :href="route('edit-profile')" :active="request()->routeIs('edit-profile')">
+                <x-responsive-nav-link :href="route('manage-profile')" :active="request()->routeIs('manage-profile')">
                     <div class="text-xs">{{ Auth::user()->name }}</div>
                     <div class="text-[10px] text-gray-400">{{ Auth::user()->email }}</div>
                 </x-responsive-nav-link>

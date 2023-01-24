@@ -63,7 +63,7 @@ class ManageProfile extends Component
 
         $this->showDeleteProfileModal = false;
 
-        return redirect(RouteServiceProvider::HOME)
+        return redirect('/')
             ->with('success', 'Your profile has been deleted.');
     }
 

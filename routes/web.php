@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
 
     // manage profile user (Livewire)
     Route::get('profile', ManageProfile::class)
-        ->name('edit-profile');
+        ->name('manage-profile');
 });
 
 require __DIR__ . '/auth.php';
