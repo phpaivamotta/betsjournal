@@ -128,7 +128,7 @@
                 @forelse ($matches as $match)
                     @foreach ($match['value_bets'] as $outcome => $valueBets)
                         @foreach ($valueBets as $bookie => $stats)
-                            <x-value-bet-card :match="$match" :outcome="$outcome" odd-format="decimal"
+                            <x-value-bet-card :match="$match" :outcome="$outcome" :odd-format="$oddFormat"
                                 :stats="$stats" :bookie="$bookie" />
                         @endforeach
                     @endforeach
