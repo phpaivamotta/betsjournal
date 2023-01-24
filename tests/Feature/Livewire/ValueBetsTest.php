@@ -203,31 +203,31 @@ class ValueBetsTest extends TestCase
         // number of value bets offered
         $this->assertEquals(1, count($valueBets[0]['value_bets']['home_team']));
         // bookie offering value bet
-        $this->assertEquals(['Betclic'], array_keys($valueBets[0]['value_bets']['home_team']));
+        $this->assertEquals(['betclic'], array_keys($valueBets[0]['value_bets']['home_team']));
         // over value
-        $this->assertEquals(0.8182, $valueBets[0]['value_bets']['home_team']['Betclic']['over_value']);
+        $this->assertEquals(0.8182, $valueBets[0]['value_bets']['home_team']['betclic']['over_value']);
         // money line odds
-        $this->assertEquals(5, $valueBets[0]['value_bets']['home_team']['Betclic']['money_line']);
+        $this->assertEquals(5, $valueBets[0]['value_bets']['home_team']['betclic']['money_line']);
 
         // away team
         // number of value bets offered
         $this->assertEquals(1, count($valueBets[0]['value_bets']['away_team']));
         // bookie offering value bet
-        $this->assertEquals(['Pinnacle'], array_keys($valueBets[0]['value_bets']['away_team']));
+        $this->assertEquals(['pinnacle'], array_keys($valueBets[0]['value_bets']['away_team']));
         // over value
-        $this->assertEquals(0.6, $valueBets[0]['value_bets']['away_team']['Pinnacle']['over_value']);
+        $this->assertEquals(0.6, $valueBets[0]['value_bets']['away_team']['pinnacle']['over_value']);
         // money line odds
-        $this->assertEquals(4, $valueBets[0]['value_bets']['away_team']['Pinnacle']['money_line']);
+        $this->assertEquals(4, $valueBets[0]['value_bets']['away_team']['pinnacle']['money_line']);
 
         // draw
         // number of value bets offered
         $this->assertEquals(1, count($valueBets[0]['value_bets']['draw']));
         // bookie offering value bet
-        $this->assertEquals(['Unibet'], array_keys($valueBets[0]['value_bets']['draw']));
+        $this->assertEquals(['unibet_eu'], array_keys($valueBets[0]['value_bets']['draw']));
         // over value
-        $this->assertEquals(0.5, $valueBets[0]['value_bets']['draw']['Unibet']['over_value']);
+        $this->assertEquals(0.5, $valueBets[0]['value_bets']['draw']['unibet_eu']['over_value']);
         // money line odds
-        $this->assertEquals(6, $valueBets[0]['value_bets']['draw']['Unibet']['money_line']);
+        $this->assertEquals(6, $valueBets[0]['value_bets']['draw']['unibet_eu']['money_line']);
     }
 
     public function test_switching_home_and_away_teams_position_does_not_break_algo()
@@ -254,8 +254,8 @@ class ValueBetsTest extends TestCase
         // see if away team is only one offering value bet
         $this->assertEquals(['away_team'], array_keys($valueBets[1]['value_bets']));
         // check if over value is correct
-        $this->assertEquals(0.6, $valueBets[1]['value_bets']['away_team']['Unibet']['over_value']);
-        $this->assertEquals(6, $valueBets[1]['value_bets']['away_team']['Unibet']['money_line']);
+        $this->assertEquals(0.6, $valueBets[1]['value_bets']['away_team']['unibet_eu']['over_value']);
+        $this->assertEquals(6, $valueBets[1]['value_bets']['away_team']['unibet_eu']['money_line']);
     }
 
     private function fakeSportOddsApiResponse()
