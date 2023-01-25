@@ -33,29 +33,29 @@
             {{-- categories selector --}}
             <div>
 
-                    <form class="flex items-center" action="/stats" method="GET">
+                <form class="flex items-center" action="/stats" method="GET">
 
-                        <!-- categories -->
-                        @if (auth()->user()->categories->count())
-                                <select multiple name="categories[]" id="categories"
-                                    class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full sm:w-48"
-                                    >
+                    <!-- categories -->
+                    @if (auth()->user()->categories->count())
+                        <select multiple name="categories[]" id="categories"
+                            class="text-gray-600 block border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-[42px] rounded-md w-full sm:w-48">
 
-                                    @foreach (auth()->user()->categories as $category)
-                                        <option {{ in_array($category->id, request('categories') ?? []) ? 'selected' : '' }} value="{{ $category->id }}">
-                                            {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                        @endif
+                            @foreach (auth()->user()->categories as $category)
+                                <option {{ in_array($category->id, request('categories') ?? []) ? 'selected' : '' }}
+                                    value="{{ $category->id }}">
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    @endif
 
-                        <button type="submit"
-                            class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-20">
-                            <p class="text-sm">
-                                Filter
-                            </p>
-                        </button>
-                    </form>
+                    <button type="submit"
+                        class="ml-4 bg-blue-900 font-semibold hover:opacity-75 py-2 rounded-lg text-center text-white w-20">
+                        <p class="text-sm">
+                            Filter
+                        </p>
+                    </button>
+                </form>
 
             </div>
         </div>
@@ -111,21 +111,20 @@
 
         {{-- charts html --}}
         @if ($totalBets)
-            <div>
+            <div class="border-t-2 border-gray-300 mt-10 pt-10">
                 {{-- results chart --}}
-                <div class="max-w-md mx-auto mt-6 w-full">
+                <div class="bg-white h-96 max-w-2xl mx-auto p-4 rounded-lg shadow-md w-full">
                     <canvas id="resultChart"></canvas>
                 </div>
 
                 {{-- net profit chart --}}
-                <div class="max-w-2xl mx-auto mt-8 w-full">
-                    <canvas id="netProfit" style="width: 100%; height: 100%; width: 400px; height: 290px;"></canvas>
+                <div class="bg-white h-96 max-w-2xl mt-12 mx-auto p-4 rounded-lg shadow-md w-full">
+                    <canvas id="netProfit"></canvas>
                 </div>
 
                 {{-- Odds/results stacked bar chart --}}
-                <div class="max-w-2xl mx-auto mt-8 w-full">
-                    <canvas id="oddsResultsDist"
-                        style="width: 100%; height: 100%; width: 400px; height: 340px;"></canvas>
+                <div class="bg-white h-96 max-w-2xl mb-20 mt-12 mx-auto p-4 rounded-lg shadow-md w-full">
+                    <canvas id="oddsResultsDist"></canvas>
                 </div>
             </div>
         @endif
@@ -143,7 +142,7 @@
             var barColors = [
                 "green",
                 "red",
-                "white",
+                "purple",
                 "gray"
             ];
 
@@ -157,6 +156,7 @@
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     plugins: {
                         title: {
                             display: true,
@@ -181,6 +181,7 @@
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             display: false
@@ -240,7 +241,7 @@
                     {
                         label: 'N/A',
                         data: {{ json_encode($resultCountProbRange['na']) }},
-                        backgroundColor: "white",
+                        backgroundColor: "purple",
                     },
                     {
                         label: 'CO',
@@ -254,13 +255,13 @@
                 type: 'bar',
                 data: data,
                 options: {
+                    maintainAspectRatio: false,
                     plugins: {
                         title: {
                             display: true,
                             text: 'Implied Probability of Bet Results'
                         },
                     },
-                    responsive: true,
                     scales: {
                         x: {
                             title: {
