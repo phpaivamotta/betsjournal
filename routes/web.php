@@ -3,6 +3,7 @@
 use App\Http\Controllers\BetController;
 use App\Http\Livewire\ManageProfile;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Livewire\Api\ApiTokens;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
@@ -20,28 +21,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// mailable
+Route::get('/mail', function () {
+    $matches = json_decode(file_get_contents(__DIR__.'/../json-responses/value-bets.json'), true);
+
+    return new App\Mail\ValueBetsMail($matches);
+});
+
 // routes for all users
 // landing page
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'welcome')
+    ->name('home');
 
 // about page
-Route::view('about', 'about')->name('about');
+Route::view('about', 'about')
+    ->name('about');
 
 // betting tools
 // odds comparison page
-Route::view('odds-comparison', 'betting-tools/odds-comparison')->name('odds-comparison');
+Route::view('odds-comparison', 'betting-tools/odds-comparison')
+    ->name('odds-comparison');
 
 // Livewire valuebets
-Route::get('value-bets', ValueBets::class)->name('value-bets');
+Route::get('value-bets', ValueBets::class)
+    ->name('value-bets');
 
 // odd converter page
-Route::view('odd-converter', 'betting-tools/odd-converter')->name('odd-converter');
+Route::view('odd-converter', 'betting-tools/odd-converter')
+    ->name('odd-converter');
 
 // payout calculator
-Route::view('payout-calculator', 'betting-tools/payout-calculator')->name('payout-calculator');
+Route::view('payout-calculator', 'betting-tools/payout-calculator')
+    ->name('payout-calculator');
 
 // margin calculator
-Route::view('margin-calculator', 'betting-tools/margin-calculator')->name('margin-calculator');
+Route::view('margin-calculator', 'betting-tools/margin-calculator')
+    ->name('margin-calculator');
+
+// subscribe
+Route::post('subscribers', [SubscriberController::class, 'store'])
+    ->name('subscribers.store');
 
 // routes for registered users
 Route::middleware(['auth'])->group(function () {

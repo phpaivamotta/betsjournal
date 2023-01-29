@@ -154,7 +154,7 @@
             </div>
 
             <div class="items-center px-10">
-                <x-valuebets-icon />
+                <x-valuebets-icon class="w-20 mx-auto" />
 
                 <p class="text-center font-semibold text-xl mt-4">Value Bets</p>
 
