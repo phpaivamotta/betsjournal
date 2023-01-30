@@ -22,7 +22,7 @@
                 {{-- larger screen links for all visitors (registered or not) --}}
 
                 {{-- about page link --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-2my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-nav-link>
@@ -172,14 +172,14 @@
                 {{-- larger screen un-registered user links --}}
                 <div class="flex">
                     {{-- login --}}
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-2my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Log In') }}
                         </x-nav-link>
                     </div>
 
                     {{-- register --}}
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-2my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                             {{ __('Register') }}
                         </x-nav-link>

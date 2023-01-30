@@ -4,7 +4,7 @@
     <x-flash />
 
     {{-- hero section --}}
-    <div class="-mt-1 relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80 md:h-[28rem]"
+    <div class="-mt-px relative overflow-hidden bg-no-repeat bg-cover bg-bottom h-80 md:h-[28rem]"
         style="
         background-position: 50%;
         background-image: url({{ asset('img/hero.jpg') }});

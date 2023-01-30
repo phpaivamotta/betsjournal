@@ -60,19 +60,19 @@
         <footer class="relative mt-auto h-96 bg-blue-900">
             <div class="absolute bottom-1 w-full text-center">
 
-                <x-journal-icon class="w-12 mx-auto mb-12" />
+                <x-journal-icon class="w-10 mx-auto mb-12" />
 
                 <form method="POST" action="/subscribers">
                     @csrf
 
-                    <label for="subscriber-email" class="block text-white font-medium mb-6">
+                    <label for="subscriber-email" class="block text-white text-md font-medium mb-6 px-2">
                         Subscribe to receive free value bets in your inbox.
                     </label>
 
                     <div class="flex items-center justify-center mb-4 mx-auto h-8">
                         <input type="email" name="subscriber-email" id="subscriber-email"
                             placeholder="Your email address"
-                            class="placeholder:text-gray-400 border-none w-72 rounded-md" required
+                            class="placeholder:text-gray-400 border-none focus:border-indigo-300 focus:ring focus:ring-indigo-400 focus:ring-opacity-50 w-56 sm:w-72 rounded-md" required
                             value="{{ old('subscriber-email') }}">
 
                         <button type="submit" class="ml-2 bg-blue-500 text-white rounded-md p-2">
@@ -103,7 +103,7 @@
             </div>
         </footer>
 
-        <x-subscriber-flash />
+        <x-flash-subscriber />
     </div>
 
     @stack('scripts')

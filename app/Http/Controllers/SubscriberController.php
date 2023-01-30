@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubscriberRequest;
 use App\Models\Subscriber;
+use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
@@ -13,6 +14,17 @@ class SubscriberController extends Controller
 
         Subscriber::create($attributes);
 
-        return back()->with('subscription-added', "Sweet! Now just check your inbox for free value bets!");
+        return back()->with('subscription-added', "Sweet! You're subscribed");
+    }
+
+    public function destroy(Request $request, Subscriber $subscriber)
+    {
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+
+        $subscriber->delete();
+
+        return redirect('/')->with('success', "You were successfully unsubscribed.");
     }
 }

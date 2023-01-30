@@ -15,15 +15,17 @@ class ValueBetsMail extends Mailable
     use Queueable, SerializesModels;
 
     public $matches;
+    public $subscriberId;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(array $matches)
+    public function __construct(array $matches, int $subscriberId)
     {
         $this->matches = $matches;
+        $this->subscriberId = $subscriberId;
     }
 
     /**

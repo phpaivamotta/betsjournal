@@ -79,7 +79,9 @@ class EmailValueBetsService
             $subscribers = Subscriber::where('subscribed', true)->get();
 
             foreach ($subscribers as $subscriber) {
-                Mail::to($subscriber->email)->send(new ValueBetsMail($matchesArr));
+                Mail::to($subscriber->email)->send(
+                    new ValueBetsMail($matchesArr, $subscriber->id)
+                );
             }
 
         } else {

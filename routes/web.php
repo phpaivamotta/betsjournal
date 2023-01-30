@@ -21,13 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// mailable
-Route::get('/mail', function () {
-    $matches = json_decode(file_get_contents(__DIR__.'/../json-responses/value-bets.json'), true);
-
-    return new App\Mail\ValueBetsMail($matches);
-});
-
 // routes for all users
 // landing page
 Route::view('/', 'welcome')
@@ -58,9 +51,14 @@ Route::view('payout-calculator', 'betting-tools/payout-calculator')
 Route::view('margin-calculator', 'betting-tools/margin-calculator')
     ->name('margin-calculator');
 
+// value bets email subscription 
 // subscribe
 Route::post('subscribers', [SubscriberController::class, 'store'])
     ->name('subscribers.store');
+
+// unsubscribe
+Route::get('unsubscribe/{subscriber}', [SubscriberController::class, 'destroy'])
+    ->name('subscribers.destroy');
 
 // routes for registered users
 Route::middleware(['auth'])->group(function () {
