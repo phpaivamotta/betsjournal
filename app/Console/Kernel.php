@@ -18,8 +18,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // send value bets emails
-        // $schedule->command('valuebetsemails:send')->dailyAt('10:30');
-        $schedule->command('valuebetsemails:send')->everyMinute();
+        $schedule->command('valuebetsemails:send')->dailyAt('10:30');
     }
 
     /**
