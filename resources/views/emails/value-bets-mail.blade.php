@@ -17,8 +17,6 @@
         }
     </style>
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100 items-center justify-center pt-10">
