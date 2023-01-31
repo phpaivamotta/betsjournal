@@ -14,7 +14,7 @@ return [
     */
 
     'css-files' => [
-        glob(public_path('build/assets').'/*.css')[0]
+        glob(public_path('build/assets').'/*.css')[0] ?? resource_path('css/app.css')
     ],
 
 ];

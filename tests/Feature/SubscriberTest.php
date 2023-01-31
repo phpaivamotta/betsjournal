@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Subscriber;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class SubscriberTest extends TestCase
@@ -44,5 +46,21 @@ class SubscriberTest extends TestCase
         $response->assertSessionHasErrors([
             'subscriber-email' => 'The subscriber-email has already been taken.'
         ]);
+    }
+
+    public function test_subscriber_can_unsubscribe()
+    {
+        $subscriber = Subscriber::factory()->create();
+
+        $unsubUrl = URL::signedRoute('subscribers.destroy', [
+            'subscriber' => $subscriber->id
+        ]);
+
+        $uri = Str::after($unsubUrl, 'localhost');
+
+        $this->get($uri)->assertRedirect('/');
+        $this->get('/')->assertSee('You were successfully unsubscribed.');
+
+        $this->assertDatabaseCount('subscribers', 0);
     }
 }
