@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Bet Stats | Betsjournal
+    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
             {{ __('Bets / Stats') }}

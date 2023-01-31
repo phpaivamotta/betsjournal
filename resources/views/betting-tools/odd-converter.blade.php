@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Odd Converter | Betsjournal
+    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
             {{ __('Odd Converter') }}

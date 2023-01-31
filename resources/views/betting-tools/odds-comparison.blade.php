@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Odds Comparison | Betsjournal
+    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
             {{ __('Odds Comparison') }}

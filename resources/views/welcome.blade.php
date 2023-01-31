@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot:title>
+        Home | Betsjournal
+    </x-slot>
 
     {{-- success flash message --}}
     <x-flash />

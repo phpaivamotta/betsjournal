@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Confirm Password | Betsjournal
+    </x-slot>
+
     <x-auth-card>
         <div class="mb-4 text-sm text-gray-600">
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}

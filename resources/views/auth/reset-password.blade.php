@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Reset Password | Betsjournal
+    </x-slot>
+
     <x-auth-card>
         <!-- Validation Errors -->
         <x-auth-validation-errors :errors="$errors" />

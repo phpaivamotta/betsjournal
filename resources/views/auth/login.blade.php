@@ -1,4 +1,8 @@
 <x-app-layout>
+    <x-slot:title>
+        Login | Betsjournal
+    </x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-sm text-white leading-tight">
             {{ __('Log In') }}
