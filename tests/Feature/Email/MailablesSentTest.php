@@ -16,8 +16,6 @@ class MailablesSentTest extends TestCase
 
     public function test_value_bets_mail_sent()
     {
-        $this->withoutExceptionHandling();
-
         Mail::fake();
 
         $url = 'https://api.the-odds-api.com/v4/sports/*/odds/*';
@@ -29,6 +27,23 @@ class MailablesSentTest extends TestCase
         Subscriber::factory()->create();
 
         (new EmailValueBetsService)->sendValueBetsEmail();
+
+        Mail::assertSent(ValueBetsMail::class);
+    }
+
+    public function test_value_bets_mail_sent_to_new_subscriber()
+    {
+        Mail::fake();
+
+        $url = 'https://api.the-odds-api.com/v4/sports/*/odds/*';
+
+        Http::fake([
+            $url => $this->fakeSportOddsApiResponse()
+        ]);
+
+        $this->post('/subscribers', [
+            'subscriber-email' => 'test@email.com'
+        ]);
 
         Mail::assertSent(ValueBetsMail::class);
     }

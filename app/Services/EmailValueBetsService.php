@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailValueBetsService
 {
-    public function sendValueBetsEmail()
+    public function sendValueBetsEmail(Subscriber $subscriber = null)
     {
         $valueBetsService = new ValueBetsService;
 
@@ -76,14 +76,19 @@ class EmailValueBetsService
                 array_push($matchesArr, $matchArr);
             }
 
-            $subscribers = Subscriber::where('subscribed', true)->get();
-
-            foreach ($subscribers as $subscriber) {
+            if (isset($subscriber)) {
                 Mail::to($subscriber->email)->send(
                     new ValueBetsMail($matchesArr, $subscriber->id)
                 );
+            } else {
+                $subscribers = Subscriber::where('subscribed', true)->get();
+                foreach ($subscribers as $subscriber) {
+                    Mail::to($subscriber->email)->send(
+                        new ValueBetsMail($matchesArr, $subscriber->id)
+                    );
+                }
             }
-
+            
         } else {
             Log::info('No value bets found at ' . now('America/sao_paulo'));
         }

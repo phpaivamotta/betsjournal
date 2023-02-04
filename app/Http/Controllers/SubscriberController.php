@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewSubscriber;
 use App\Http\Requests\StoreSubscriberRequest;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
@@ -12,7 +13,10 @@ class SubscriberController extends Controller
     {
         $attributes['email'] = $request->validated('subscriber-email');
 
-        Subscriber::create($attributes);
+        $subscriber = Subscriber::create($attributes);
+
+        // send first value bets email to subscriber
+        NewSubscriber::dispatch($subscriber);
 
         return back()->with('subscription-added', "Sweet! You're subscribed");
     }
