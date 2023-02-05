@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class StatsService
@@ -39,13 +40,13 @@ class StatsService
     {
         $numWins = $this->bets->where('result', '1')->count();
         $numLosses = $this->bets->where('result', '0')->count();
-        
+
         // check if either exists to avoid division by zero
         if ($numWins || $numLosses) {
             $actualProb = $numWins / ($numWins + $numLosses);
         }
 
-        return isset($actualProb) ? number_format(100 * $actualProb, 2): null;
+        return isset($actualProb) ? number_format(100 * $actualProb, 2) : null;
     }
 
     /**
@@ -173,6 +174,37 @@ class StatsService
             isset($betResults[null]) ? $betResults[null] : 0,
             isset($betResults[2]) ? $betResults[2] : 0
         ];
+    }
+
+    public function monthlyProfit(): array
+    {
+        // groups bets by year > month
+        $userBetsByYearMonth = $this->bets->groupBy(function ($bet) {
+            return Carbon::parse($bet->match_date)->format('Y');
+        })->sortKeysDesc()->map(function ($betsByYear) {
+            return $betsByYear->groupBy(function ($bet) {
+                return Carbon::parse($bet->match_date)->format('F');
+            })->sortKeysDesc();
+        });
+
+        $netProfitByYearMonth = [];
+        foreach ($userBetsByYearMonth as $year => $betsYear) {
+            foreach ($betsYear as $month => $betsMonth) {
+                $profit = 0;
+                foreach ($betsMonth as $bet) {
+                    if ($bet->result === 1) {
+                        $profit += $bet->payout() - $bet->bet_size;
+                    } else if ($bet->result === 0) {
+                        $profit += -$bet->bet_size;
+                    } else if ($bet->result === 2) {
+                        $profit += $bet->cashout - $bet->bet_size;
+                    }
+                }
+                $netProfitByYearMonth[$year][$month] = $profit;
+            }
+        }
+
+        return $netProfitByYearMonth;
     }
 
     /**

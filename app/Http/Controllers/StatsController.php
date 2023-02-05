@@ -48,7 +48,8 @@ class StatsController extends Controller
             // charts
             'betResultsSort' => $stats->resultsCount(),
             'netProfit' => $stats->netProfit(),
-            'resultCountProbRange' => $stats->resultCountProbabilityRange()
+            'resultCountProbRange' => $stats->resultCountProbabilityRange(),
+            'monthlyProfit' => $stats->monthlyProfit()
         ]);
     }
 }

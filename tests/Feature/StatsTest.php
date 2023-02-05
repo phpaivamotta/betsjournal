@@ -302,6 +302,54 @@ class StatsTest extends TestCase
         $this->actingAs($user)->get('/stats')->assertSee('netProfit', $netProfitArr);
     }
 
+    public function test_monthly_profit()
+    {
+        $user = User::factory()->create();
+
+        Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 1,
+            'bet_size' => 100,
+            'decimal_odd' => 2.0,
+            'match_date' => '2023-01-01'
+        ]);
+
+        Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 0,
+            'bet_size' => 100,
+            'decimal_odd' => 2.0,
+            'match_date' => '2023-01-10'
+        ]);
+
+        Bet::factory()->create([
+            'user_id' => $user->id,
+            'result' => 2,
+            'bet_size' => 100,
+            'decimal_odd' => 2.0,
+            'cashout' => 50,
+            'match_date' => '2023-01-10'
+        ]);
+
+        Bet::factory(2)->create([
+            'user_id' => $user->id,
+            'result' => 1,
+            'bet_size' => 100,
+            'decimal_odd' => 2.0,
+            'cashout' => 50,
+            'match_date' => '2022-11-10'
+        ]);
+
+        $this->actingAs($user)->get('/stats')->assertViewHas('monthlyProfit', [
+            2023 => [
+                "January" => -50.0
+            ],
+            2022 => [
+                "November" => 200
+            ]
+        ]);
+    }
+
     public function test_bets_stats_can_be_filtered_by_category()
     {
         $this->signIn();
