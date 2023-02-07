@@ -4,6 +4,7 @@ use App\Http\Controllers\BetController;
 use App\Http\Livewire\ManageProfile;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\UserBetsExportController;
 use App\Http\Livewire\Api\ApiTokens;
 use App\Http\Livewire\BetCategory;
 use App\Http\Livewire\BetIndex;
@@ -103,6 +104,10 @@ Route::middleware(['auth'])->group(function () {
     // manage profile user (Livewire)
     Route::get('profile', ManageProfile::class)
         ->name('manage-profile');
+
+    // export user bets to xlsx file 
+    Route::get('bets/export', UserBetsExportController::class)
+        ->name('bets-export');
 });
 
 require __DIR__ . '/auth.php';

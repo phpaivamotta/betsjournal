@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Bets;
 
+use App\Exports\UserBetsExport;
 use App\Http\Livewire\BetIndex;
 use App\Models\Bet;
 use App\Models\Category;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 use \Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BetTest extends TestCase
 {
@@ -21,7 +23,7 @@ class BetTest extends TestCase
         $this->signIn();
 
         $component = Livewire::test(BetIndex::class);
- 
+
         $component->assertStatus(200);
     }
 
@@ -109,7 +111,7 @@ class BetTest extends TestCase
     public function test_bet_form_post_requires_odd()
     {
         $this->signIn();
-        
+
         $attributes = Bet::factory()->raw([
             'user_id' => auth()->id(),
             'odd' => ''
@@ -218,7 +220,7 @@ class BetTest extends TestCase
     public function test_cashout_can_be_updated()
     {
         $this->withoutExceptionHandling();
-        
+
         $this->signIn();
 
         $bet = Bet::factory()->create([
@@ -241,7 +243,7 @@ class BetTest extends TestCase
     public function test_cashout_can_be_seen()
     {
         $this->signIn();
-    
+
         $bet = Bet::factory()->create([
             'user_id' => auth()->id(),
             'result' => 2,
@@ -254,7 +256,7 @@ class BetTest extends TestCase
     public function test_bet_can_have_categories()
     {
         $this->signIn();
-        
+
         $categories = Category::factory(2)->create([
             'user_id' => auth()->id()
         ]);
@@ -274,11 +276,11 @@ class BetTest extends TestCase
     public function test_categories_can_be_seen()
     {
         $this->signIn();
-        
+
         $category = Category::factory()->create([
             'user_id' => auth()->id()
         ]);
-        
+
         $bet = Bet::factory()->create([
             'user_id' => auth()->id()
         ]);
@@ -293,11 +295,11 @@ class BetTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->signIn();
-        
+
         $categories = Category::factory(5)->create([
             'user_id' => auth()->id()
         ]);
-        
+
         $bet = Bet::factory()->create([
             'user_id' => auth()->id()
         ]);
@@ -375,7 +377,7 @@ class BetTest extends TestCase
 
         $user = User::find($bet->user_id);
 
-        $this->actingAs($user)->get('/bets')->assertSee( ucwords($bet->bet_pick) );
+        $this->actingAs($user)->get('/bets')->assertSee(ucwords($bet->bet_pick));
     }
 
     public function test_match_can_be_seen()
@@ -433,7 +435,7 @@ class BetTest extends TestCase
     public function test_user_cannot_update_other_user_bet()
     {
         $this->signIn();
-    
+
         $otherUser = User::factory()->create();
 
         $otherUserBet = Bet::factory()->create([
@@ -658,9 +660,9 @@ class BetTest extends TestCase
     public function test_cashout_filter_works()
     {
         $this->withoutExceptionHandling();
-    
+
         $this->signIn();
-    
+
         $betCashout = Bet::factory()->create([
             'user_id' => auth()->id(),
             'result' => 2,
@@ -678,5 +680,21 @@ class BetTest extends TestCase
             ->set('cashout', true)
             ->assertDontSee($betWin->match)
             ->assertSee($betCashout->match);
+    }
+
+    public function test_user_can_download_bets_export()
+    {
+        $this->signIn();
+
+        Bet::factory()->create([
+            'user_id' => auth()->id(),
+            'match' => 'Test Match'
+        ]);
+
+        Excel::fake();
+
+        $this->get('/bets/export/');
+
+        Excel::assertDownloaded('bets.xlsx');
     }
 }

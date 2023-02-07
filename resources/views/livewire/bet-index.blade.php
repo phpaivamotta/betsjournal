@@ -94,6 +94,12 @@
 
         </div>
 
+        @if (count(auth()->user()->bets))
+            <a href="/bets/export" class="inline-block text-blue-400 text-sm hover:underline">
+                Download bets as Excel file
+            </a>            
+        @endif
+
         {{-- success flash message --}}
         <x-flash />
 
