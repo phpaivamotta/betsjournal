@@ -407,5 +407,9 @@ class ValueBetsService
             'name' => 'William Hill',
             'link' => 'https://www.williamhill.com/'
         ],
+        'nordicbet' => [
+            'name' => 'NordicBet',
+            'link' => 'https://www.nordicbet.com/'
+        ],
     ];
 }

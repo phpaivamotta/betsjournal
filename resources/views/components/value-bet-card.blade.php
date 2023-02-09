@@ -67,9 +67,9 @@
 
             </div>
 
-            <a href="{{ \App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['link'] ?? '#' }}" target="_blank"
-                class="text-sm text-blue-400 hover:underline mt-4 inline-block">
-                {{ \App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['name'] ?? '--'}}
+            <a href="{{ $link = \App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['link'] ?? '#' }}" target="_blank"
+                class="text-sm {{ $link === '#' ? '' : 'text-blue-400 hover:underline' }} mt-4 inline-block">
+                {{ \App\Services\ValueBetsService::BOOKIE_LINKS[$bookie]['name'] ?? $bookie }}
             </a>
 
             <p class="text-sm">
