@@ -3,9 +3,9 @@
 www.betsjournal.io
 
 This is a web app where users can log their bets, find good bets to place, and have access to the most common betting tools - all in one place.  
-Want to check it out? Just log in with the dummie account:
-- email: dummie@email.com
-- password: dummie1234
+Want to check it out? Just log in with the dummy account:
+- email: dummy@email.com
+- password: dummy1234
 
 ## About
 This app was made with the intent of making it easier for users to manage their bets, create and improve on their betting strategy, and provide essential tools
