@@ -89,6 +89,11 @@ class StatsService
             }
         }
 
+        // add starting value
+        $netProfitArr[0] = 0;
+        // sort in ascending order
+        ksort($netProfitArr);
+
         // round to 2 decimal places and return
         return array_map(function ($profit) {
             return round($profit, 2);
